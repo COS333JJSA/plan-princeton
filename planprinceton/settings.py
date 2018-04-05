@@ -82,13 +82,14 @@ WSGI_APPLICATION = 'planprinceton.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': 'planprincetondb',
+        'USER': 'ppuser',
+        'PASSWORD': '333',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
