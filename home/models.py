@@ -32,21 +32,21 @@ class Req_List(models.Model):
 	max_common_with_major = models.IntegerField()
 	pdfs_allowed = models.BooleanField()
 	completed_by_semester = models.IntegerField()
-	req_list_inside = models.ManyToManyField('self')
+	req_lists_inside = models.ManyToManyField('self')
 
 	def __str__(self):
 		return "{0}: max: {1}, min: {2}, double?: {3}, common: {4}, pdfs?: {5}, semester: {6}, inside_req_list: {7}".format(self.name, 
 			self.max_counted, self.min_needed, self.double_counting_allowed, self.max_common_with_major, self.pdfs_allowed, self.req_list_inside)
 
-class Requirement(models.Model):
+class Concentration(models.Model):
 	tipe = models.CharField(max_length=15)
 	name = models.CharField(max_length=200)
 	code = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
 	degree = models.CharField(max_length=3)
 	year = models.IntegerField()
 	urls = models.ManyToManyField(URL)
-	#array!!
 	contacts = models.ManyToManyField(Contact)
+	req_lists = models.ManyToManyField(Req_List)
 
 	def __str__(self):
 		return "{0}: {1}, {2}, {3}, {4}, {5}, {6}".format(self.name, self.tipe, self.code, self.degree, self.year, self.urls, 
@@ -62,6 +62,7 @@ class Professor(models.Model):
 class Listing(models.Model):
 	department = models.ForeignKey(Department, on_delete=models.CASCADE)
 	number = models.IntegerField()
+	x = models.ForeignKey(Course)
 
 	def __str__(self):
 		return self.department
@@ -91,10 +92,8 @@ class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
 	title = models.CharField(max_length=200)
 	courseid = models.IntegerField()
-	#array!!
-	listing = models.ManyToManyField(Listing)
+	listings = models.ManyToManyField(Listing)
 	area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True)
-	#array!!
 	prereqs = models.ManyToManyField('self')
 	descrip = models.TextField()
 
@@ -105,3 +104,4 @@ class Course(models.Model):
 
 #users
 #enrollment
+#save templates
