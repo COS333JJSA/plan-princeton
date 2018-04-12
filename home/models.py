@@ -33,6 +33,7 @@ class Req_List(models.Model):
 	pdfs_allowed = models.BooleanField()
 	completed_by_semester = models.IntegerField()
 	req_lists_inside = models.ManyToManyField('self')
+	course_list = models.ManyToManyField("Course")
 
 	def __str__(self):
 		return "{0}: max: {1}, min: {2}, double?: {3}, common: {4}, pdfs?: {5}, semester: {6}, inside_req_list: {7}".format(self.name, 
