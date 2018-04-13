@@ -62,7 +62,7 @@ class Professor(models.Model):
 class Listing(models.Model):
 	department = models.ForeignKey(Department, on_delete=models.CASCADE)
 	number = models.IntegerField()
-	x = models.ForeignKey(Course)
+	x = models.ForeignKey('Course', on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.department
