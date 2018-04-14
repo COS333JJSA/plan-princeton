@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'planprinceton'
 ]
 
 MIDDLEWARE = [

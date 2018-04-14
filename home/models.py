@@ -42,12 +42,11 @@ class Req_List(models.Model):
 class Concentration(models.Model):
 	tipe = models.CharField(max_length=15)
 	name = models.CharField(max_length=200)
-	code = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
+	code = models.CharField(max_length=3)
 	degree = models.CharField(max_length=3)
 	year = models.IntegerField()
 	urls = models.ManyToManyField(URL)
 	contacts = models.ManyToManyField(Contact)
-	req_lists = models.ManyToManyField(Req_List)
 
 	def __str__(self):
 		return "{0}: {1}, {2}, {3}, {4}, {5}, {6}".format(self.name, self.tipe, self.code, self.degree, self.year, self.urls, 
