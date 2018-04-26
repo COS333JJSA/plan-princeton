@@ -13,6 +13,7 @@ import os
 import dj_database_url
 import django_heroku
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +42,17 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    'planprinceton'
+    'planprinceton',
+    'django_cas_ng',
+]
+
+MIDDLEWARE_CLASSES = [
+    'django_cas_ng.middleware.CASMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +64,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_cas_ng.middleware.CASMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'planprinceton.urls'
 
@@ -75,7 +89,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'planprinceton.wsgi.application'
-
+CAS_IGNORE_REFERER = True
+CAS_REDIRECT_URL = '/home/login'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -115,6 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
+CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/New_York'
