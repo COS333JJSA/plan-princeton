@@ -35,6 +35,7 @@ class Req_List(models.Model):
 	req_lists_inside = models.ManyToManyField('self', blank=True)
 	course_list = models.ManyToManyField("Course")
 
+
 	def __str__(self):
 		return str(self.name)
 
@@ -47,6 +48,7 @@ class Concentration(models.Model):
 	urls = models.ManyToManyField(URL)
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
+
 
 	def __str__(self):
 		return str(self.name)
