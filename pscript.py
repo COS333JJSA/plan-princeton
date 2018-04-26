@@ -59,7 +59,7 @@ for d in depts:
 	outpd += "{{'model':'home.department', 'pk': {0}, 'fields': {{'name': '{1}', 'code': '{2}'}}}}, ".format(dcounter, d, depts[d])
 	dcounter += 1
 
-courses = json.load(open("courses.json"))
+courses = json.load(open("abbrv.json"))
 
 for i in range(0, len(courses)):
 	course = courses[i]
@@ -83,5 +83,5 @@ for i in range(0, len(courses)):
 	outp += """{{'model': 'home.course', 'pk': {0}, 'fields': {{'title': '{1}', 'courseid': '{2}', 'area': '{3}', 'descrip': '{4}', 'professor': {5}, 'listings': {6}, 'prereqs': [], 'classes': {7}}}}}, """.format(i, 
 		course["title"], course["courseid"], course["area"], course["descrip"], pcurr, lcurr, ccurr)
 
-print(outp)
+print("[" + outp + outpp + outpd + outpl + outpc[:len(outpc) - 2] + "]")
 
