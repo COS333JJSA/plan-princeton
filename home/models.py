@@ -74,7 +74,7 @@ class Class(models.Model):
 	starttime = models.TimeField()
 	section = models.CharField(max_length=4)
 	endtime = models.TimeField()
-	roomnum = models.IntegerField(null=True)
+	roomnum = models.CharField(max_length = 15, null=True, blank=True)
 	days = models.CharField(max_length=9)
 	bldg = models.CharField(max_length=50)
 

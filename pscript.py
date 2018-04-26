@@ -6,7 +6,9 @@ def timeConverter(time):
 	temp = time.split(" ")
 	slots = temp[0].split(":")
 	if temp[1] == "pm":
-		if slots[0][0] == "0":
+		if slots[0] == "12":
+			hour = str(slots[0])
+		elif slots[0][0] == "0":
 			hour = str(int(slots[0][1]) + 12)
 		else:
 			hour = str(int(slots[0]) + 12)
@@ -28,7 +30,7 @@ def escape(s):
 			char.append('"')
 		else:
 			char.append(c)
-	return char
+	return ''.join(char)
 
 def req_recursion(req, myid, parentid):
 	global r
@@ -51,6 +53,7 @@ def req_recursion(req, myid, parentid):
 
 
 def make_req_list(req, myid, curr):
+	global outp
 	c_pks = []
 	#course list
 	if "course_list" in req.keys():
@@ -64,11 +67,11 @@ def make_req_list(req, myid, curr):
 		req["explanation"] = ""
 	#double_counting_allowed default false
 	if "double_counting_allowed" not in req.keys():
-		req["double_counting_allowed"] = False
+		req["double_counting_allowed"] = "false"
 	elif req["double_counting_allowed"] == "True" or req["double_counting_allowed"] == "true":
-		req["double_counting_allowed"] = True
+		req["double_counting_allowed"] = "true"
 	else:
-		req["double_counting_allowed"] = False
+		req["double_counting_allowed"] = "false"
 	#max common
 	if "max_common_with_major" not in req.keys():
 		req["max_common_with_major"] = "null"
@@ -83,7 +86,7 @@ def make_req_list(req, myid, curr):
 	if "completed_by_semester" not in req.keys():
 		req["completed_by_semester"] = 8
 
-	return """{{"model": "home.req_list", "pk": {0}, "fields": {{"name": "{1}", "max_counted": {2}, "min_needed": {3}, "description": "{4}", "explanation": "{5}", "double_counting_allowed": {6}, "max_common_with_major": {7}, "pdfs_allowed": {8}, "completed_by_semester": {9}, "req_lists_inside": {10}, "course_list": {11}}}}}""".format(
+	outp += """{{"model": "home.req_list", "pk": {0}, "fields": {{"name": "{1}", "max_counted": {2}, "min_needed": {3}, "description": "{4}", "explanation": "{5}", "double_counting_allowed": {6}, "max_common_with_major": {7}, "pdfs_allowed": {8}, "completed_by_semester": {9}, "req_lists_inside": {10}, "course_list": {11}}}}}, """.format(
 		myid, req["name"], req["max_counted"], req["min_needed"], escape(req["description"]), escape(req["explanation"]), req["double_counting_allowed"], req["max_common_with_major"], req["pdfs_allowed"], req["completed_by_semester"], curr, c_pks)
 
 
@@ -130,7 +133,7 @@ depts = OrderedDict({"AAS": "African American Studies", "ANT": "Anthropology", "
 	})
 
 for d in depts:
-	outp += """{{"model":"home.department", "pk": {0}, "fields": {{"name": "{1}", "code": "{2}"}}}}, """.format(dcounter, d, depts[d])
+	outp += """{{"model":"home.department", "pk": {0}, "fields": {{"name": "{2}", "code": "{1}"}}}}, """.format(dcounter, d, depts[d])
 	dcounter += 1
 
 for a in areas:
@@ -160,7 +163,7 @@ for i in range(0, len(courses)):
 		lcurr.append(lcounter)
 		lcounter += 1
 	for c in course["classes"]:
-		outp += """{{"model": "home.class", "pk": {0}, "fields": {{"classnum": "{1}", "enroll": {2}, "limit": {3}, "starttime": "{4}", "section": "{5}", "endtime": "{6}", "roomnum": {7}, "days": "{8}", "bldg": "{9}"}}}}, """.format(lcounter, 
+		outp += """{{"model": "home.class", "pk": {0}, "fields": {{"classnum": "{1}", "enroll": {2}, "limit": {3}, "starttime": "{4}", "section": "{5}", "endtime": "{6}", "roomnum": "{7}", "days": "{8}", "bldg": "{9}"}}}}, """.format(ccounter, 
 			c["classnum"], c["enroll"], c["limit"], timeConverter(c["starttime"]), c["section"], timeConverter(c["endtime"]), c["roomnum"], c["days"], c["bldg"])
 		ccurr.append(ccounter)
 		ccounter += 1
@@ -169,8 +172,8 @@ for i in range(0, len(courses)):
 		area = "null"
 	else:
 		area = list(areas.keys()).index(course["area"])
-	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": "{3}", "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}}}}}, """.format(i, 
-		course["title"], course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
+	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}}}}}, """.format(i, 
+		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
 
 
 concs = json.load(open("reqs_abbrv"))
@@ -190,12 +193,13 @@ for k in range(0, len(concs)):
 	#preprocess req_lists
 	for re in conc["req_list"]:
 		r += 1
-		req_recursion(re, r, 0)
 		rcurr.append(r)
+		req_recursion(re, r, 0)
+		
 
 	#add urls
 	for u in conc["urls"]:
-		outp += """{{"model": "home.url", "pk": {0}, "fields": {{"url": "{1}""}}}}, """.format(ucounter, u)
+		outp += """{{"model": "home.url", "pk": {0}, "fields": {{"url": "{1}"}}}}, """.format(ucounter, u)
 		ucurr.append(ucounter)
 		ucounter += 1
 	#add contacts
@@ -207,7 +211,7 @@ for k in range(0, len(concs)):
 	if "degree" not in conc.keys():
 		conc["degree"] = "AB"
 	#add req
-	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": {4}, "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}""".format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
+	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
 
 
 print("[" + outp[:len(outp) - 2] + "]")
