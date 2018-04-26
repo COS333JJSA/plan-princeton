@@ -17,7 +17,7 @@ class URL(models.Model):
 
 class Department(models.Model):
 	name = models.CharField(max_length=200)
-	code = models.CharField(max_length=3)
+	code = models.CharField(max_length=9)
 
 	def __str__(self):
 		return str(self.name)
@@ -26,14 +26,14 @@ class Req_List(models.Model):
 	name = models.CharField(max_length=100)
 	max_counted = models.IntegerField(default=1)
 	min_needed = models.IntegerField(default=0)
-	description = models.CharField(max_length=200, blank=True)
-	explanation = models.TextField()
+	description = models.CharField(max_length=200, blank=True, null=True)
+	explanation = models.TextField(blank=True, null=True)
 	double_counting_allowed = models.BooleanField(default=False)
 	max_common_with_major = models.IntegerField(null=True, blank=True)
 	pdfs_allowed = models.IntegerField(null=True, blank=True)
 	completed_by_semester = models.IntegerField(default=8)
 	req_lists_inside = models.ManyToManyField('self', blank=True)
-	course_list = models.ManyToManyField("Course")
+	course_list = models.ManyToManyField("Course", blank=True)
 
 
 	def __str__(self):

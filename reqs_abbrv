@@ -1,0 +1,362 @@
+[
+{
+  "type": "Major",
+  "name": "African American Studies",
+  "code": "AAS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-african-american-studies#",
+    "http://aas.princeton.edu/programs/undergraduate/aas-concentration/",
+    "http://aas.princeton.edu/courses/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Manager",
+      "name": "April Peters",
+      "email": "aprilp@princeton.edu"
+    },
+    {
+      "type": "Department Chair",
+      "name": "Dr. Eddie S. Glaude, Jr.",
+      "email": "esglaude@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Students take the departmental survey course, AAS 201 Introduction to the Study of African American Cultural Practices\nAt this point, students may notify the Department of their intention to complete the concentration (or, a certificate). Early concentration is open to spring semester sophomores who have completed the prerequisite for entry into the department by the end of the fall semester of sophomore year.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "AAS 201"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Anthropology",
+  "code": "ANT",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-department-anthropology#",
+    "https://anthropology.princeton.edu/undergraduate/majoring-anthropology"
+  ],
+  "contacts": [
+    {
+      "type": "Department Manager",
+      "name": "Carol Zanca",
+      "email": "czanca@princeton.edu"
+    },
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Mo Lin Yee",
+      "email": "myee @princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Students who wish to concentrate in anthropology must take one anthropology course (any level) prior to junior year or have permission from the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "ANT 232"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Architecture",
+  "code": "ARC",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/school-architecture#",
+    "http://soa.princeton.edu/courses-undergraduate"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Mario I. Gandelsonas",
+      "email": "mgndlsns@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 2,
+      "min_needed": 2,
+      "explanation": "Students who wish to concentrate in anthropology must take one anthropology course (any level) prior to junior year or have permission from the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "ARC 203",
+        "ARC 350"
+      ]    
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Art and Archaeology",
+  "code": "ART",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-art-and-archaeology#",
+    "http://arts.princeton.edu/academics/"
+  ],
+  "contacts": [
+    {
+      "type": "Executive Director",
+      "name": "Marion Friedman Young",
+      "email": "youngmf@princeton.edu"
+    },
+    {
+      "type": "Academic Administrator",
+      "name": "Crystal Henderson-Napoli",
+      "email": "crystalh@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students who wish to concentrate in anthropology must take one anthropology course (any level) prior to junior year or have permission from the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Courses in Program in Visual Arts",
+          "max_counted": 2,
+          "min_needed": 2,
+          "explanation": "Prospective ART students need two courses from the Program in Visual Arts.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "VIS 348"
+          ]
+        },
+        {
+          "name": "Course in Department of Art and Archaeology",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Prospective ART students need two courses from the Department of Art and Archaeology.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "ART 380",
+            "ARC 593"
+          ]
+        }
+      ]  
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Astrophysical Sciences",
+  "code": "AST",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-astrophysical-sciences#",
+    "https://web.astro.princeton.edu/academic/undergraduate-program/major-requirements"
+  ],
+  "contacts": [
+    {
+      "type": "Academic Program Administrator",
+      "name": "Polly Strauss",
+      "email": "pstrauss@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Susan Duncan",
+      "email": "sdawson@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students who wish to major in astrophysical sciences must. have the necessary math and physics requirements.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Math Requirement: Calculus",
+          "max_counted": 2,
+          "min_needed": 2,
+          "explanation": "Students must take MAT 103 and 104",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 103",
+            "MAT 104"
+          ]
+        },
+        {
+          "name": "Math Requirement: Advanced Multivariable Calculus",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take MAT 201, 203, or 218",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 201",
+            "MAT 203",
+            "MAT 391"
+          ]
+        },
+        {
+          "name": "Math Requirement: Linear Algebra",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take MAT 202, 204, or 217",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 202",
+            "MAT 391"
+          ]
+        }
+      ]         
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Chemistry",
+  "code": "CHM",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-chemistry#"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Dr. Robert P. L'Esperance",
+      "email": "rpl@princeton.edu"
+    },
+    {
+      "type": "Departmental Representative",
+      "name": "Dr. Tom W. Muir",
+      "email": "muir@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "1. one year of general chemistry: CHM 201/203/207 and 202/204, or one unit of advanced placement in chemistry and CHM 202 or CHM 215, or the equivalent (such as two units of advanced placement in chemistry)\n2. differential and integral calculus: MAT 103 and 104, or the equivalent advanced placement\n3. one year of general physics: PHY 101 and 102, or 103 and 104, or 105 and 106, or equivalent credit\nPrerequisite courses may not be taken using the P/D/F grading option.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "General Chemistry",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "One Year of General Chemistry",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "Fall Semester Chemistry Choices",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Choose one from three possible classes.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHM 201",
+                "CHM 207"
+              ]
+            },
+            {
+              "name": "Spring Semester Chemistry Choices",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Choose one from two possible classes.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHM 527"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Differential and Integral Calculus",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "One year of differential and integral calculus, or the equivalent placement.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 103",
+            "MAT 104"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Classics",
+  "code": "CLA",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-classics#",
+    "https://classics.princeton.edu/programs/undergraduate/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Chair",
+      "name": "Andrew Feldherr",
+      "email": "feldherr@princeton.edu"
+    },
+    {
+      "type": "Program Coordinator",
+      "name": "Brittany Masterson",
+      "email": "brittany.masterson@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "To enter this program, a student normally should have completed CLG 108 or LAT 108 or demonstrated intermediate proficiency in Greek or Latin through test scores (SAT, AP), a placement exam, or coursework. A strongly motivated student who has completed CLG 102 or LAT 102 (or CLG 103 or LAT 103) may concentrate, with permission of the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Introductory Greek/Latin Courses",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must have commpleted CLG 102 or LAT 102 (or CLG 103 or LAT 103).",
+          "double_counting_allowed": false,
+          "course_list": [
+            "LAT 105"
+          ]
+        },
+        {
+          "name": "Intermediate Greek/Latin Courses",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must have commpleted CLG 108 or LAT 108 or demonstrated intermediate proficiency in Greek or Latin.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "LAT 105"
+          ]
+        }
+      ]  
+    }
+  ]
+}
+]
