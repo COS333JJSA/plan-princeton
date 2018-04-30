@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+      <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Plan Princeton</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom fonts for this template -->
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+        <!-- Custom styles for this template -->
+        <link href="sample.css" rel="stylesheet">
+
+        <style type="text/css">
+            #boxA, #boxB {
+                float:left;padding:10px;margin:10px; -moz-user-select:none;
+            }
+         
+            #boxA { background-color: #6633FF; width:75px; height:75px;  }
+            #boxB { background-color: #FF6699; width:150px; height:150px; }
+        </style>
+      
+        <script type="text/javascript">
+            function dragStart(ev) {
+                ev.dataTransfer.effectAllowed='move';
+                ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+                ev.dataTransfer.setDragImage(ev.target,0,0);
+                return true;
+            }
+            function dragEnter(ev) {
+                event.preventDefault();
+                return true;
+            }
+         
+            function dragOver(ev) {
+                return false;
+            }
+         
+            function dragDrop(ev) {
+                var src = ev.dataTransfer.getData("Text");
+                ev.target.appendChild(document.getElementById(src));
+                ev.stopPropagation();
+                return false;
+            }
+
+            function openPlan(evt, name) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace("active", "");
+                }
+                document.getElementById(name).style.display = "block";
+                evt.currentTarget.className += "active";
+            } 
+
+            function configureDegreeLists(ddl1,ddl2) {
+                var select = ['Select Concentration'];
+                var ab = ['Select Concentration:', 
+                    'AAS (African American Studies)', 
+                    'ANT (Anthropology)',
+                    'ARC (Architecture)',
+                    'ART (Art and Archaeology)',
+                    'AST (Astrophysical Sciences)',
+                    'CHM (Chemistry)',
+                    'CLA (CLassics)',
+                    'COM (Comparative Literature', 
+                    'COS (Computer Science)', 
+                    'EAS (East Asian Studies)',
+                    'EEB (Ecology and Evolutionary Biology)',
+                    'ECO (Economics)',
+                    'FIT (French and Italian)',
+                    'GEO (Geosciences)',
+                    'GER (German)',
+                    'HIS (History)',
+                    'MAT (Mathematics)',
+                    'MOL (Molecular Biology)',
+                    'MUS (Music)',
+                    'NES (Near Eastern Studies)', 
+                    'NEU (Neuroscience)',
+                    'PHI (Philosophy)',
+                    'PSY (Psychology)',
+                    'REL (Religion)',
+                    'SLA (Slavic Languages and Literatures)',
+                    'SOC (Sociology)',
+                    'SPO (Spanish and Portuguese)',
+                    'WWS (The Woodrow Wilson School)'];
+                var bse = ['Select Concentration:', 
+                    'CBE (Chemical and Biological Engineering)', 
+                    'CEE (Civil and Environmental Engineering)', 
+                    'COS (Computer Science)', 
+                    'ELE (Electrical Engineering)', 
+                    'MAE (Mechanical and Aerospace Engineering)', 
+                    'ORF (Operations Research and Financial Engineering)'];
+
+                switch (ddl1.value) {
+                    case 'select': 
+                        ddl2.options.length = 0;
+                        for (i = 0; i < select.length; i++) {
+                            createOption(ddl2, select[i]);
+                        }
+                        break;
+                    case 'ab':
+                        ddl2.options.length = 0;
+                        for (i = 0; i < ab.length; i++) {
+                            createOption(ddl2, ab[i]);
+                        }
+                        break;
+                    case 'bse':
+                        ddl2.options.length = 0; 
+                        for (i = 0; i < bse.length; i++) {
+                            createOption(ddl2, bse[i]);
+                        }
+                        break;
+                    default:
+                        ddl2.options.length = 0;
+                        break;
+                }
+            }
+
+            function createOption(ddl, text, value) {
+                var opt = document.createElement('option');
+                opt.value = value;
+                opt.text = text;
+                ddl.options.add(opt);
+            }
+
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            function filterFunction() {
+                var input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                div = document.getElementById("myDropdown");
+                a = div.getElementsByTagName("a");
+                for (i = 0; i < a.length; i++) {
+                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } 
+                    else {
+                        a[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+
+      </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="http://plan-princeton.herokuapp.com/home/" target="_blank">Plan Princeton</a>
+            </div>
+        </nav>
+
+        <!--Top Navigation Tabs -->
+        <div class="tab">
+          <button class="plan-1 tablinks btn btn-primary btn-xl" onclick="openPlan(event, 'Plan 1')">Plan 1</button>
+        </div>
+        
+        <div id="Plan 1" class="tabcontent">
+            <!-- Drag and Drop Menu for Concentration and Certificates-->
+            
+            <div class="selectDegree">
+                <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'))">                
+                    <option value="select">Select Degree:</option>
+                    <option value="ab">A.B.</option>
+                    <option value="bse">B.S.E.</option>
+                </select>
+                
+                <select id="ddl2">
+                    <option>Select Concentration:</option>
+                </select>
+            </div>          
+
+            <!--Search Courses-->
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
+                    <a href="#AAS201">AAS 201: Introduction to the Study of African American Cultural Practices</a>
+                    <a href="#AAS230/ENG231">AAS 230/ENG 231: Topics in African American Studies: The Fire This Time - Reading James Baldwin</a>
+                    <a href="#AAS245/ART245">AAS 245/ART 245: Harlem Renaissance and Black Arts Movements</a>
+                    <a href="#AAS300">AAS 300: Junior Seminar: Research and Writing in African American Studies</a>
+                    <a href="#AAS305/REL391/MUS354/AMS355"> AAS 305/REL 391/MUS 354/AMS 355: The History of Black Gospel Music</a>
+                </div>
+            </div>
+
+            <!--Remaining requirements-->
+            <div class="requirements">
+                <h2>Remaining Requirements</h2>
+            </div>
+
+            <!--Schedule-->
+            <div class="schedule">
+                <h1>Freshman Fall</h1>
+            </div>
+            <div class="schedule">
+                <h1>Freshman Spring</h1>
+            </div>
+            <div class="schedule">
+                <h1>Sophomore Fall</h1>
+            </div>
+            <div class="schedule">
+                <h1>Sophomore Spring</h1>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
