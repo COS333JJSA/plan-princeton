@@ -22,6 +22,13 @@ class Department(models.Model):
 	def __str__(self):
 		return str(self.name)
 
+class Req_ListManager(models.Manager):
+	def get_queryset(self):
+		return super(ConcentrationManager, self).get_queryset()
+
+	def get_concentration(self, conc):
+		return super(ConcentrationManager, self).get_queryset().get(name = conc)
+
 class Req_List(models.Model):
 	name = models.CharField(max_length=100)
 	max_counted = models.IntegerField(default=1)
@@ -34,11 +41,30 @@ class Req_List(models.Model):
 	completed_by_semester = models.IntegerField(default=8)
 	req_lists_inside = models.ManyToManyField('self', blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
-
+	objects = Req_ListManager
 
 	def __str__(self):
 		return str(self.name)
 
+class ConcentrationManager(models.Manager):
+	def get_queryset(self):
+		return super(ConcentrationManager, self).get_queryset()
+
+	def get_BSE(self, conc):
+		reqs = {}
+		for req in super(ConcentrationManager, self).get_queryset().get(name=conc).req_lists.get(name='Prerequisites').req_lists_inside.all():
+			courses = []
+			courses.append(req.min_needed)
+			for course in req.course_list.all():
+				courses.append(course)
+			reqs[req] = courses
+			#print (req)
+			#for c in req.:
+				#print (course)
+				#print subreq.course_list
+		print (reqs)
+			
+#Concentration.objects.get(name = 'African American Studies').req_lists.get(name='Prerequisite ').explanation
 class Concentration(models.Model):
 	tipe = models.CharField(max_length=15)
 	name = models.CharField(max_length=200)
@@ -48,10 +74,18 @@ class Concentration(models.Model):
 	urls = models.ManyToManyField(URL)
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
-
+	objects = ConcentrationManager()
 
 	def __str__(self):
 		return str(self.name)
+
+	def get_description(self):
+		return self.req_lists
+
+	# def get_reqs(self):
+	# 	fields = []
+	# 	for f in self.meta.fields:
+	# 		print (f)
 
 class Professor(models.Model):
 	uid = models.CharField(max_length=9)
