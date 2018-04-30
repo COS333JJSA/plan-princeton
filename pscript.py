@@ -1,11 +1,14 @@
 from collections import OrderedDict
 import json
+import sys
 
 def timeConverter(time):
-	temp = time.split(' ')
-	slots = temp[0].split(':')
+	temp = time.split(" ")
+	slots = temp[0].split(":")
 	if temp[1] == "pm":
-		if slots[0][0] == '0':
+		if slots[0] == "12":
+			hour = str(slots[0])
+		elif slots[0][0] == "0":
 			hour = str(int(slots[0][1]) + 12)
 		else:
 			hour = str(int(slots[0]) + 12)
@@ -14,18 +17,92 @@ def timeConverter(time):
 
 	return str(hour + ":" + slots[1] + ":" + slots[2])
 
+def stringify(listing):
+	return(listing["dept"] + " " + listing["number"])
+
+def escape(s):
+	char = []
+	if s == None:
+		return ""
+	for c in s:
+		if c == '"':
+			char.append('\\')
+			char.append('"')
+		else:
+			char.append(c)
+	return ''.join(char)
+
+def req_recursion(req, myid, parentid):
+	global r
+	global req_lists
+	req["myid"] = myid
+	req["parentid"] = parentid
+	req_lists.append(req)
+
+	if "req_list" in req.keys():
+		for re in req["req_list"]:
+			r += 1
+			req_recursion(re, r, myid)
+
+	curr = []
+	for re in req_lists:
+		if re["parentid"] == myid:
+			curr.append(re["myid"])
+
+	make_req_list(req, myid, curr)
+
+
+def make_req_list(req, myid, curr):
+	global outp
+	c_pks = []
+	#course list
+	if "course_list" in req.keys():
+		for c in req["course_list"]:
+			c_pks.append(course_pks[c[0:7]])
+	#description
+	if "description" not in req.keys():
+		req["description"] = ""
+	#explanation
+	if "explanation" not in req.keys():
+		req["explanation"] = ""
+	#double_counting_allowed default false
+	if "double_counting_allowed" not in req.keys():
+		req["double_counting_allowed"] = "false"
+	elif req["double_counting_allowed"] == "True" or req["double_counting_allowed"] == "true":
+		req["double_counting_allowed"] = "true"
+	else:
+		req["double_counting_allowed"] = "false"
+	#max common
+	if "max_common_with_major" not in req.keys():
+		req["max_common_with_major"] = "null"
+	elif req["max_common_with_major"] == "":
+		req["max_common_with_major"] = "null"
+	#pdfs allowed
+	if "pdfs_allowed" not in req.keys():
+		req["pdfs_allowed"] = "null"
+	elif req["pdfs_allowed"] == "":
+		req["pdfs_allowed"] = "null"
+	#completed_by_semester
+	if "completed_by_semester" not in req.keys():
+		req["completed_by_semester"] = 8
+
+	outp += """{{"model": "home.req_list", "pk": {0}, "fields": {{"name": "{1}", "max_counted": {2}, "min_needed": {3}, "description": "{4}", "explanation": "{5}", "double_counting_allowed": {6}, "max_common_with_major": {7}, "pdfs_allowed": {8}, "completed_by_semester": {9}, "req_lists_inside": {10}, "course_list": {11}}}}}, """.format(
+		myid, req["name"], req["max_counted"], req["min_needed"], escape(req["description"]), escape(req["explanation"]), req["double_counting_allowed"], req["max_common_with_major"], req["pdfs_allowed"], req["completed_by_semester"], curr, c_pks)
+
+
 outp = ""
-outpp = ""
-outpl = ""
-outpc = ""
-outpd = ""
 pcounter = 0
 lcounter = 0
 ccounter = 0
 dcounter = 0
+acounter = 0
 pcurr = []
 lcurr = []
 ccurr = []
+course_pks = {}
+areas = OrderedDict({"EC": "Epistemology and Cognition", "EM": "Ethical Thought and Moral Values", "HA": "Historical Analysis", "LA": 
+	"Literature and the Arts", "SA": "Social Analysis", "QR": "Quantitative Reasoning", "STN": "Science and Technology - no lab",
+	"STL": "Science and Technology = lab"})
 depts = OrderedDict({"AAS": "African American Studies", "ANT": "Anthropology", "ARC": "Architecture", "ART": "Art and Archaeology",
 	"AST": "Astrophysical Sciences", "CHM": "Chemistry", "CLA": "Classics", "COM": "Comparative Literature",
 	"COS": "Computer Science", "EAS": "East Asian Studies", "EEB": "Ecology and Evolutionary Biology", "ECO": "Economics",
@@ -56,10 +133,20 @@ depts = OrderedDict({"AAS": "African American Studies", "ANT": "Anthropology", "
 	})
 
 for d in depts:
-	outpd += "{{'model':'home.department', 'pk': {0}, 'fields': {{'name': '{1}', 'code': '{2}'}}}}, ".format(dcounter, d, depts[d])
+	outp += """{{"model":"home.department", "pk": {0}, "fields": {{"name": "{2}", "code": "{1}"}}}}, """.format(dcounter, d, depts[d])
 	dcounter += 1
 
-courses = json.load(open("abbrv.json"))
+for a in areas:
+	outp += """{{"model": "home.area", "pk": {0}, "fields": {{"code": "{1}", "name": "{2}"}}}}, """.format(acounter, a, areas[a])
+	acounter += 1
+
+courses = json.load(open("coursesnew.json"))
+
+#serialize courses
+for i in range(0, len(courses)):
+	course = courses[i]
+	for l in course["listings"]:
+		course_pks[stringify(l)] = i
 
 for i in range(0, len(courses)):
 	course = courses[i]
@@ -68,20 +155,65 @@ for i in range(0, len(courses)):
 	ccurr.clear()
 
 	for p in course["profs"]:
-		outpp += """{{'model': 'home.professor', 'pk': {0}, 'fields': {{'uid': '{1}', 'name': '{2}'}}}}, """.format(pcounter, p["uid"], p["name"])
+		outp += """{{"model": "home.professor", "pk": {0}, "fields": {{"uid": "{1}", "name": "{2}"}}}}, """.format(pcounter, p["uid"], p["name"])
 		pcurr.append(pcounter)
 		pcounter += 1
 	for l in course["listings"]:
-		outpl += """{{'model': 'home.listing', 'pk': {0}, 'fields': {{'department': {1}, 'number': {2}}}}}, """.format(lcounter, list(depts.keys()).index(l["dept"]), l["number"])
+		outp += """{{"model": "home.listing", "pk": {0}, "fields": {{"department": {1}, "number": {2}}}}}, """.format(lcounter, list(depts.keys()).index(l["dept"]), l["number"])
 		lcurr.append(lcounter)
 		lcounter += 1
 	for c in course["classes"]:
-		outpc += """{{'model': 'home.listing', 'pk': {0}, 'fields': {{'classnum': '{1}', 'enroll': {2}, 'limit': {3}, 'starttime': '{4}', 'section': '{5}', 'endtime': '{6}', 'roomnum': {7}, 'days': '{8}', 'bldg': '{9}'}}}}, """.format(lcounter, 
+		outp += """{{"model": "home.class", "pk": {0}, "fields": {{"classnum": "{1}", "enroll": {2}, "limit": {3}, "starttime": "{4}", "section": "{5}", "endtime": "{6}", "roomnum": "{7}", "days": "{8}", "bldg": "{9}"}}}}, """.format(ccounter, 
 			c["classnum"], c["enroll"], c["limit"], timeConverter(c["starttime"]), c["section"], timeConverter(c["endtime"]), c["roomnum"], c["days"], c["bldg"])
 		ccurr.append(ccounter)
 		ccounter += 1
-	outp += """{{'model': 'home.course', 'pk': {0}, 'fields': {{'title': '{1}', 'courseid': '{2}', 'area': '{3}', 'descrip': '{4}', 'professor': {5}, 'listings': {6}, 'prereqs': [], 'classes': {7}}}}}, """.format(i, 
-		course["title"], course["courseid"], course["area"], course["descrip"], pcurr, lcurr, ccurr)
+	#check for area
+	if course["area"] == "":
+		area = "null"
+	else:
+		area = list(areas.keys()).index(course["area"])
+	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}}}}}, """.format(i, 
+		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
 
-print("[" + outp + outpp + outpd + outpl + outpc[:len(outpc) - 2] + "]")
+
+concs = json.load(open("reqs_abbrv"))
+r = 0
+ucounter = 0
+ccounter = 0
+req_lists = []
+rcurr = []
+ucurr = []
+ccurr = []
+
+for k in range(0, len(concs)):
+	conc = concs[k]
+	rcurr.clear()
+	ucurr.clear()
+	ccurr.clear()
+	#preprocess req_lists
+	for re in conc["req_list"]:
+		r += 1
+		rcurr.append(r)
+		req_recursion(re, r, 0)
+		
+
+	#add urls
+	for u in conc["urls"]:
+		outp += """{{"model": "home.url", "pk": {0}, "fields": {{"url": "{1}"}}}}, """.format(ucounter, u)
+		ucurr.append(ucounter)
+		ucounter += 1
+	#add contacts
+	for c in conc["contacts"]:
+		outp += """{{"model": "home.contact", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "email": "{3}"}}}}, """.format(ccounter, c["type"], c["name"], c["email"])
+		ccurr.append(ccounter)
+		ccounter += 1
+
+	if "degree" not in conc.keys():
+		conc["degree"] = "AB"
+	#add req
+	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
+
+
+print("[" + outp[:len(outp) - 2] + "]")
+
 
