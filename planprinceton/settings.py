@@ -43,12 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'planprinceton',
-    'django_cas_ng',
+    #'django_cas_ng',
 ]
 
-MIDDLEWARE_CLASSES = [
-    'django_cas_ng.middleware.CASMiddleware',
-]
+#MIDDLEWARE_CLASSES = [
+    #'django_cas_ng.middleware.CASMiddleware',
+#]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_cas_ng.middleware.CASMiddleware',
+    #'django_cas_ng.middleware.CASMiddleware',
 ]
 
 
@@ -89,8 +89,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'planprinceton.wsgi.application'
-CAS_IGNORE_REFERER = True
-CAS_REDIRECT_URL = '/home/login'
+# CAS_IGNORE_REFERER = True
+# CAS_REDIRECT_URL = '/home/login'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -130,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
-CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
+# CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/New_York'
