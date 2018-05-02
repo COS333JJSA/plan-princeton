@@ -137,16 +137,16 @@ class Course(models.Model):
 	def __str__(self):
 		return str(self.title)
 
+class UserManager(models.Manager):
+	def create_user(self, ni):
+		user = self.create(netid=ni)
+		return user
+		
 class User(models.Model):
- 	netid = models.CharField(max_length = 100)
- 	plans = models.ManyToManyField('Plan')
+	netid = models.CharField(max_length = 100)
+	plans = models.ManyToManyField('Plan')
 
-#  	objects = models.UserManager()
-
-# class UserManager(models.User):
-# 	def create_user(self, ni):
-# 		user = self.create(netid=ni)
-# 		return user
+	objects = UserManager()
 
 class Plan(models.Model):
  	saved_courses = models.ManyToManyField('SavedCourse')

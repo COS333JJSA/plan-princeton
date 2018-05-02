@@ -12,7 +12,6 @@ def index(request):
 	return render(
    	    request,
         'index.html',
-         instance,
     )
 
 def login(request):
@@ -30,11 +29,11 @@ def logout(request):
 
 @login_required
 def scheduler(request):
-	# cnetid = request.user.username
-	# #if no current user object, make one
-	# if len(User.objects.filter(netid=cnetid)) > 0:
-	# 	plans = User.objects.filter(netid=cnetid).values('plans')
-	# #retreive user plans
+	cnetid = request.user.username
+	#if no current user object, make one
+	if len(User.objects.filter(netid=cnetid)) > 0:
+		plans = User.objects.filter(netid=cnetid).values('plans')
+	#retreive user plans
 	# else:
 
 	return render(
