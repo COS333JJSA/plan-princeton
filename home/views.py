@@ -14,5 +14,11 @@ def login(request):
 		request,
 		'login.html',
 	)
+# @login_required
+# def logout(request):
+# 	return render(
+# 		request,
+# 		'logout.html',
+# 	)
 
 
