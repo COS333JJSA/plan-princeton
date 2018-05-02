@@ -21,10 +21,13 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
+import django_cas_ng.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')),
     path('', RedirectView.as_view(url='/home/')),
+    url(r'accounts/login/$', django_cas_ng.views.login),
+    url(r'accounts/logout/$', django_cas_ng.views.logout)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
