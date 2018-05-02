@@ -1,0 +1,1654 @@
+[
+  {
+  "type": "Major",
+  "name": "African American Studies",
+  "code": "AAS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-african-american-studies#",
+    "http://aas.princeton.edu/programs/undergraduate/aas-concentration/",
+    "http://aas.princeton.edu/courses/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Manager",
+      "name": "April Peters",
+      "email": "aprilp@princeton.edu"
+    },
+    {
+      "type": "Department Chair",
+      "name": "Dr. Eddie S. Glaude, Jr.",
+      "email": "esglaude@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Students take the departmental survey course, AAS 201 Introduction to the Study of African American Cultural Practices\nAt this point, students may notify the Department of their intention to complete the concentration (or, a certificate). Early concentration is open to spring semester sophomores who have completed the prerequisite for entry into the department by the end of the fall semester of sophomore year.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "AAS 201"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Anthropology",
+  "code": "ANT",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-department-anthropology#",
+    "https://anthropology.princeton.edu/undergraduate/majoring-anthropology"
+  ],
+  "contacts": [
+    {
+      "type": "Department Manager",
+      "name": "Carol Zanca",
+      "email": "czanca@princeton.edu"
+    },
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Mo Lin Yee",
+      "email": "myee @princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Students who wish to concentrate in anthropology must take one anthropology course (any level) prior to junior year or have permission from the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "ANT ***"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Architecture",
+  "code": "ARC",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/school-architecture#",
+    "http://soa.princeton.edu/courses-undergraduate"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Mario I. Gandelsonas",
+      "email": "mgndlsns@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 2,
+      "min_needed": 2,
+      "explanation": "Students who wish to concentrate in anthropology must take one anthropology course (any level) prior to junior year or have permission from the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "ARC 203",
+        "ARC 204"
+      ]    
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Art and Archaeology",
+  "code": "ART",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-art-and-archaeology#",
+    "http://arts.princeton.edu/academics/"
+  ],
+  "contacts": [
+    {
+      "type": "Executive Director",
+      "name": "Marion Friedman Young",
+      "email": "youngmf@princeton.edu"
+    },
+    {
+      "type": "Academic Administrator",
+      "name": "Crystal Henderson-Napoli",
+      "email": "crystalh@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students who wish to concentrate in anthropology must take one anthropology course (any level) prior to junior year or have permission from the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Courses in Program in Visual Arts",
+          "max_counted": 2,
+          "min_needed": 2,
+          "explanation": "Prospective ART students need two courses from the Program in Visual Arts.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "VIS ***"
+          ]
+        },
+        {
+          "name": "Course in Department of Art and Archaeology",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Prospective ART students need two courses from the Department of Art and Archaeology.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "ART ***",
+            "ARC ***"
+          ]
+        }
+      ]  
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Astrophysical Sciences",
+  "code": "AST",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-astrophysical-sciences#",
+    "https://web.astro.princeton.edu/academic/undergraduate-program/major-requirements"
+  ],
+  "contacts": [
+    {
+      "type": "Academic Program Administrator",
+      "name": "Polly Strauss",
+      "email": "pstrauss@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Susan Duncan",
+      "email": "sdawson@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students who wish to major in astrophysical sciences must. have the necessary math and physics requirements.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Math Requirement: Calculus",
+          "max_counted": 2,
+          "min_needed": 2,
+          "explanation": "Students must take MAT 103 and 104",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 103",
+            "MAT 104"
+          ]
+        },
+        {
+          "name": "Math Requirement: Advanced Multivariable Calculus",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take MAT 201, 203, or 218",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 201",
+            "MAT 203",
+            "MAT 218"
+          ]
+        },
+        {
+          "name": "Math Requirement: Linear Algebra",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take MAT 202, 204, or 217",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 202",
+            "MAT 204",
+            "MAT 217"
+          ]
+        },
+        {
+          "name": "Physics Requirement: Classical Mechanics",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take PHY 103 or 105",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 103",
+            "PHY 105"
+          ]
+        },
+        {
+          "name": "Physics Requirement: Electromagnetism",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take PHY 104 or 106",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 104",
+            "PHY 106"
+          ]
+        },
+        {
+          "name": "Physics Requirement: Advanced Mechanics",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take PHY 205 or 207",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 205",
+            "PHY 207"
+          ]
+        },
+        {
+          "name": "Topics in Modern Astronomy",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students are strongly recommended to take AST 204",
+          "double_counting_allowed": false,
+          "course_list": [
+            "AST 204"
+          ]
+        }
+      ]         
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Chemistry",
+  "code": "CHM",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-chemistry#"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Dr. Robert P. L'Esperance",
+      "email": "rpl@princeton.edu"
+    },
+    {
+      "type": "Departmental Representative",
+      "name": "Dr. Tom W. Muir",
+      "email": "muir@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "1. one year of general chemistry: CHM 201/203/207 and 202/204, or one unit of advanced placement in chemistry and CHM 202 or CHM 215, or the equivalent (such as two units of advanced placement in chemistry)\n2. differential and integral calculus: MAT 103 and 104, or the equivalent advanced placement\n3. one year of general physics: PHY 101 and 102, or 103 and 104, or 105 and 106, or equivalent credit\nPrerequisite courses may not be taken using the P/D/F grading option.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "General Chemistry",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "One Year of General Chemistry",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "Fall Semester Chemistry Choices",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Choose one from three possible classes.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHM 201",
+                "CHM 203",
+                "CHM 207"
+              ]
+            },
+            {
+              "name": "Spring Semester Chemistry Choices",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Choose one from two possible classes.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHM 202",
+                "CHM 204"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Differential and Integral Calculus",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "One year of differential and integral calculus, or the equivalent placement.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 103",
+            "MAT 104"
+          ]
+        },
+        {
+          "name": "One Year of General Physics",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "CHANGE_TO_NULL",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "PHY Sequence 1",
+              "max_counted": 1,
+              "min_needed": 2,
+              "explanation": "Selects sequence PHY 101/102",
+              "double_counting_allowed": false,
+              "course_list": [
+                "PHY 101",
+                "PHY 102"
+              ]
+            },
+            {
+              "name": "PHY Sequence 2",
+              "max_counted": 1,
+              "min_needed": 2,
+              "explanation": "Selects sequence PHY 103/104",
+              "double_counting_allowed": false,
+              "course_list": [
+                "PHY 103",
+                "PHY 104"
+              ]
+            },
+            {
+              "name": "PHY Sequence 3",
+              "max_counted": 1,
+              "min_needed": 2,
+              "explanation": "Selects sequence PHY 105/106",
+              "double_counting_allowed": false,
+              "course_list": [
+                "PHY 105",
+                "PHY 106"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Classics",
+  "code": "CLA",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-classics#",
+    "https://classics.princeton.edu/programs/undergraduate/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Chair",
+      "name": "Andrew Feldherr",
+      "email": "feldherr@princeton.edu"
+    },
+    {
+      "type": "Program Coordinator",
+      "name": "Brittany Masterson",
+      "email": "brittany.masterson@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "To enter this program, a student normally should have completed CLG 108 or LAT 108 or demonstrated intermediate proficiency in Greek or Latin through test scores (SAT, AP), a placement exam, or coursework. A strongly motivated student who has completed CLG 102 or LAT 102 (or CLG 103 or LAT 103) may concentrate, with permission of the departmental representative.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Introductory Greek/Latin Courses",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must have commpleted CLG 102 or LAT 102 (or CLG 103 or LAT 103).",
+          "double_counting_allowed": false,
+          "course_list": [
+            "CLG 102",
+            "LAT 102",
+            "CLG 102",
+            "LAT 103"
+          ]
+        },
+        {
+          "name": "Intermediate Greek/Latin Courses",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must have commpleted CLG 108 or LAT 108 or demonstrated intermediate proficiency in Greek or Latin.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "CLG 108",
+            "LAT 108"
+          ]
+        }
+      ]  
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Comparative Literature",
+  "code": "COM",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-comparative-literature",
+    "https://classics.princeton.edu/programs/undergraduate/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Manager",
+      "name": "Cheryl Anne Cantore",
+      "email": "cheryl@princeton.edu"
+    },
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Ann Marie Bramble Elliot",
+      "email": "ambe@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "To enter the Department, students must be sufficiently knowledgeable in one language other than English to take an upper-level course in it during junior year. They must also plan to read a second foreign language before graduation. Some students demonstrate their competency by taking an upper-level course in the literature of that language. Other students gain this competency by taking three terms of language study at Princeton, or two terms and an intensive language course in the summer, or (especially in the case of languages that are no longer spoken) an intensive language course in the summer. A few take a foreign language test administered by the relevant department during the summer. Students who wish to concentrate in comparative literature are advised (though not required) to take COM 205-206 or HUM 216-219 in their sophomore year or earlier.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Foreign Language Proficiency",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students who wish to major in Comparative Literature sould be sufficiently fluent in one foreign language.",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "One year of language study",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Students should have one year of language study in one non-English language.",
+              "double_counting_allowed": false,
+              "req_list": [
+                {
+                  "name": "Language study in Chinese",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Chinese.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "CHI 101",
+                    "CHI 102",
+                    "CHI 103",
+                    "CHI 105",
+                    "CHI 107",
+                    "CHI 108"
+                  ]
+                },
+                {
+                  "name": "Language study in Japanese",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Japanese.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "JPN 101",
+                    "JPN 102",
+                    "JPN 105",
+                    "JPN 107"
+                  ]
+                },
+                {
+                  "name": "Language study in Korean",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Korean.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "KOR 101",
+                    "KOR 102",
+                    "KOR 103",
+                    "KOR 105",
+                    "KOR 107"
+                  ]
+                },
+                {
+                  "name": "Language study in French",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take French.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "FRE 101",
+                    "FRE 102",
+                    "FRE 1027",
+                    "FRE 103",
+                    "FRE 105",
+                    "FRE 107",
+                    "FRE 108"
+                  ]
+                },
+                {
+                  "name": "Language study in Italian",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Italian.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "ITA 101",
+                    "ITA 102",
+                    "ITA 1027",
+                    "ITA 107"
+                  ]
+                },
+                {
+                  "name": "Language study in German",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take German.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "GER 101",
+                    "GER 102",
+                    "GER 1025",
+                    "GER 103",
+                    "GER 105",
+                    "GER 107"
+                  ]
+                },
+                {
+                  "name": "Language study in Bosnian-Croatian-Serbian",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Bosnian-Croatian-Serbian.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "BCS 101",
+                    "BCS 102"
+                  ]
+                },
+                {
+                  "name": "Language study in Czech",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Czech.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "CZE 101",
+                    "CZE 102",
+                    "CZE 105",
+                    "CZE 107"
+                  ]
+                },
+                {
+                  "name": "Language study in Polish",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Polish.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "POL 101",
+                    "POL 102"
+                  ]
+                },   
+                {
+                  "name": "Language study in Russian",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Russian.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "RUS 101",
+                    "RUS 102",
+                    "RUS 105",
+                    "RUS 107"
+                  ]
+                }, 
+                {
+                  "name": "Language study in Arabic",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Arabic.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "ARA 101",
+                    "ARA 102",
+                    "ARA 105",
+                    "ARA 107",
+                    "ARA 111",
+                    "ARA 113"
+                  ]
+                },   
+                {
+                  "name": "Language study in Hebrew",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Hebrew.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "HEB 101",
+                    "HEB 102",
+                    "HEB 105",
+                    "HEB 107"
+                  ]
+                },  
+                {
+                  "name": "Language study in Persian",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Persian.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "PER 101",
+                    "PER 102",
+                    "PER 105",
+                    "PER 107"
+                  ]
+                },  
+                {
+                  "name": "Language study in Turkish",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Turkish.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "TUR 101",
+                    "TUR 102",
+                    "TUR 105",
+                    "TUR 107"
+                  ]
+                },   
+                {
+                  "name": "Language study in Portuguese",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Portuguese.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "POR 101",
+                    "POR 102",
+                    "POR 108",
+                    "POR 109",
+                    "POR 110"
+                  ]
+                },  
+                {
+                  "name": "Language study in Spanish",
+                  "max_counted": null,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Spanish.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "SPA 101",
+                    "SPA 102",
+                    "SPA 103",
+                    "SPA 105",
+                    "SPA 107",
+                    "SPA 108"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Foreign Language Literature",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Students who wish to major in Comparative Literature must take one 200 level and above literature class in the foreign language of their choice.",
+      "double_counting_allowed": false,
+      "course_list": [
+        "CHI 2**",
+        "CHI 3**",
+        "CHI 4**",
+        "JPN 2**",
+        "JPN 3**",
+        "JPN 4**",
+        "KOR 2**",
+        "KOR 3**",
+        "KOR 4**",
+        "FRE 2**",
+        "FRE 3**",
+        "FRE 4**",
+        "ITA 2**",
+        "ITA 3**",
+        "ITA 4**",
+        "GER 2**",
+        "GER 3**",
+        "ARA 3**",
+        "ARA 4**",
+        "HEB 3**",
+        "PER 3**",
+        "RUS 2**",
+        "RUS 3**",
+        "SPA 2**",
+        "SPA 3**",
+        "SPA 4**",
+        "POR 2**",
+        "POR 3**"
+      ]          
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Computer Science - AB",
+  "code": "COS-AB",
+  "degree": "AB",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-computer-science-ab",
+    "https://www.cs.princeton.edu/ugrad/becoming-cs-major/requirements"
+  ],
+  "contacts": [
+    {
+      "type": "Program Coordinator",
+      "name": "Colleen Kenny",
+      "email": "ckenny@cs.princeton.edu"
+    },
+    {
+      "type": "Departmental Representative",
+      "name": "Brian Kernighan",
+      "email": "bwk@cs.princeton.edu"
+    },
+    {
+      "type": "Departmental Representative",
+      "name": "Andrea LaPaugh",
+      "email": "aslp@cs.princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": "ALL",
+      "description": "Prerequisites",
+      "explanation": "The prerequisites for AB Computer Science candidates are MAT 103, 104, and 202 or 204 ; COS 126; COS 217 and 226. Students should plan to take both 217 and 226 before the junior year. One or both of these are required prerequisites for all later computer science courses.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": false,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Calculus",
+          "max_counted": 2,
+          "min_needed": 2,
+          "description": null,
+          "explanation": "COS AB candidates must also take Math 103-104 and one of Math 202 or 204.",
+          "course_list": [
+            "MAT 103",
+            "MAT 104"
+          ]
+        },
+        {
+          "name": "Linear Algebra",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": null,
+          "explanation": "COS AB candidates must also take Math 103-104 and one of Math 202 or 204.",
+          "course_list": [
+            "MAT 202",
+            "MAT 204"
+          ]
+        },
+        {
+          "name": "Computer Science Prerequisites",
+          "max_counted": 3,
+          "min_needed": 3,
+          "description": null,
+          "explanation": "The three prerequisite computer science courses introduce the core concepts and techniques of the field. ",
+          "course_list": [
+            "COS 126",
+            "COS 217",
+            "COS 226"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Computer Science - BSE",
+  "code": "COS-BSE",
+  "degree": "BSE",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-computer-science-bse",
+    "https://www.cs.princeton.edu/ugrad/becoming-cs-major/requirements"
+  ],
+  "contacts": [
+    {
+      "type": "Program Coordinator",
+      "name": "Colleen Kenny",
+      "email": "ckenny@cs.princeton.edu"
+    },
+    {
+      "type": "Departmental Representative",
+      "name": "Brian Kernighan",
+      "email": "bwk@cs.princeton.edu"
+    },
+    {
+      "type": "Departmental Representative",
+      "name": "Andrea LaPaugh",
+      "email": "aslp@cs.princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": "ALL",
+      "description": "Prerequisites",
+      "explanation": "All BSE students must meet the School of Engineering and Applied Science general requirements. Students must complete 126, 217, and 226. Students should plan to take both 217 and 226 before the junior year. One or both of these are required prerequisites for all later computer science courses.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": false,
+      "req_list": [
+        {
+          "name": "Computer Science Prerequisites",
+          "max_counted": 3,
+          "min_needed": 3,
+          "description": null,
+          "explanation": "The three prerequisite computer science courses introduce the core concepts and techniques of the field. ",
+          "course_list": [
+            "COS 126",
+            "COS 217",
+            "COS 226"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "East Asian Studies",
+  "code": "EAS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-east-asian-studies",
+    "https://eap.princeton.edu/about"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Coordinator",
+      "name": "Sean Henry Miller",
+      "email": "shmiller@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Donna M. Musial-Manners",
+      "email": "dmusial@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students should have one year of language study in one East Asian language and have taken one 200-level EAS course.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "One year of language study",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students should have one year of language study in one East Asian language.",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "Language study in Chinese",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "Students can choose to take a year of Chinese.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHI 101",
+                "CHI 102",
+                "CHI 103",
+                "CHI 105",
+                "CHI 107",
+                "CHI 108"
+              ]
+            },
+            {
+              "name": "Language study in Japanese",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "Students can choose to take a year of Japanese.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "JPN 101",
+                "JPN 102",
+                "JPN 105",
+                "JPN 107"
+              ]
+            },
+            {
+              "name": "Language study in Korean",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "Students can choose to take a year of Korean.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "KOR 101",
+                "KOR 102",
+                "KOR 103",
+                "KOR 105",
+                "KOR 107"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "200-level EAS Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students who wish to major in EAS must take one 200-level EAS course",
+          "double_counting_allowed": false,
+          "course_list": [
+            "EAS 2**"
+          ]            
+        }
+      ]  
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Economics",
+  "code": "ECO",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-economics#",
+    "https://economics.princeton.edu/undergraduate-program/requirements/"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Program Manager",
+      "name": "Christina Lipsky",
+      "email": "lipsky@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Barbara Radvany",
+      "email": "bradvany@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "To enter the Department, a student must complete, by the end of sophomore year, the prerequisite courses ECO 100, 101, 202 and MAT 175 (or equivalents), earning a letter grade of C or better in each. ORF 245 can be substituted for 202; PSY 251 and SOC 301 are not acceptable; WWS 303 may be depending on each year’s content. The Statistics requirement cannot be satisfied with summer courses taken after the student has begun his/her studies at Princeton, except in unusual circumstances approved by the Departmental Representative, Prof. Smita Brunnermeier. A meeting for sophomores interested in joining the Department will be announced in the spring. Underclass students are welcome to discuss Department requirements with the Departmental Representative. Students considering study abroad are urged to meet with the Departmental Representative at the earliest opportunity in their freshman year. ",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Required Economics Courses",
+          "max_counted": 2,
+          "min_needed": 2,
+          "explanation": "Students must complete the prerequisite courses ECO 100 and 101, earning a letter grade of C or better.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "ECO 100",
+            "ECO 101"
+          ]
+        },
+        {
+          "name": "Required Statistics Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must complete one semester of statistics",
+          "double_counting_allowed": false,
+          "course_list": [
+            "ECO 202",
+            "ORF 245"
+          ]
+        },
+        {
+          "name": "Required Mathematics Courses",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students can fulfill the math requirement by taking MAT 175 or MAT 201-202, for the finance track.",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "MAT 175",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Students should complete MAT 175.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "MAT 175"
+              ]
+            },
+            {
+              "name": "Finance Track Math",
+              "max_counted": 1,
+              "min_needed": 2,
+              "explanation": "If chosing this track, students should compelete the MAT 201-202 sequence.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "MAT 201",
+                "MAT 202"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "One Semester of General Physics",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must take the first term of introductory physics",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 101",
+            "PHY 103",
+            "PHY 105"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "English",
+  "code": "ECO",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-english#",
+    "https://english.princeton.edu/undergraduate/program"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Tara Broderick",
+      "email": "tarab@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Karen Mink",
+      "email": "mink@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "English department prerequisites provide a background in literary history and familiarity with one of the major genres. Concentrators take both ENG 200 (British Literature from the 14th to the 18th Centuries) and one of the 200-level Reading Literature courses: ENG 205 (Poetry), ENG 206 (Fiction), ENG 207 (Drama), or ENG 208 (The Essay) or ENG 209 (Theory).",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Required British Literature Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": " Concentrators take both ENG 200 (British Literature from the 14th to the 18th Centuries).",
+          "double_counting_allowed": false,
+          "course_list": [
+            "ENG 200"
+          ]
+        },
+        {
+          "name": "Required 200-level Reading Literature Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take one of the 200-level Reading Literature courses: ENG 205 (Poetry), ENG 206 (Fiction), ENG 207 (Drama), or ENG 208 (The Essay) or ENG 209 (Theory).",
+          "double_counting_allowed": false,
+          "course_list": [
+            "ENG 205",
+            "ENG 206",
+            "ENG 207",
+            "ENG 208",
+            "ENG 209"
+          ]
+        }          
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "French and Italian",
+  "code": "FIT",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-french-and-italian#",
+    "https://fit.princeton.edu/undergraduate/concentrating/plan-study"
+  ],
+  "contacts": [
+    {
+      "type": "Department Chair",
+      "name": "Thomas Trezise",
+      "email": "ttrezise@princeton.edu"
+    },
+    {
+      "type": "Undergraduate Coordinator",
+      "name": "Kathleen Varra",
+      "email": "kvarra@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "The normal requirement for admission to the department is successful completion of at least one, preferably two, 200-level courses, including one of the following: FRE 211, 215, 221, 222, 224, or 225; ITA 208, 209, or 220.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "FRE 211",
+        "FRE 215",
+        "FRE 221",
+        "FRE 222",
+        "FRE 224",
+        "FRE 225",
+        "ITA 208",
+        "ITA 209",
+        "ITA 220"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Geosciences",
+  "code": "GEO",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-geosciences#",
+    "http://www.princeton.edu/geosciences/undergraduate/programs-of-study/"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate/Graduate Administrator and Faculty Assistant",
+      "name": "Sheryl Robas",
+      "email": "sroboas@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Nora Zelizer",
+      "email": "nzelizer@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "All concentrators are required to take either GEO 202 or GEO 203.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "GEO 202",
+        "GEO 203"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "German",
+  "code": "GER",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-german#",
+    "https://german.princeton.edu/undergraduate/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Chair",
+      "name": "Michael Jennings",
+      "email": "jennings@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Janine Calogero",
+      "email": "jcaloger@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "The requirement for admission to the German department is a satisfactory working knowledge of German demonstrated by the completion of 107, an SAT Subject Test score of 760, or a 5 on the Advanced Placement test.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "GER 107"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "History",
+  "code": "HIS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-history",
+    "https://history.princeton.edu/academics/undergraduate/majoring-history/"
+  ],
+  "contacts": [
+    {
+      "type": "Department Chair",
+      "name": "Michael Jennings",
+      "email": "jennings@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Janine Calogero",
+      "email": "jcaloger@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students are required to take and pass at least two departmental courses before they enter the department. At least one of these two courses must come from the list of courses designated as prerequisites.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Required Departmental Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "One of the required courses must come from this list of predetermined prerequisites.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "HIS 201",
+            "HIS 207",
+            "HIS 208",
+            "HIS 210",
+            "HIS 211",
+            "HIS 212",
+            "HIS 241",
+            "HIS 267",
+            "HIS 277",
+            "HIS 278",
+            "HIS 280",
+            "HIS 281",
+            "HIS 282",
+            "HIS 290",
+            "HIS 291",
+            "HIS 292"
+          ]
+        },
+        {
+          "name": "Other Departmental Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "The other departmental course can be chosen from any course in the department listed as HIS.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "HIS ***"
+          ]
+        }  
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Mathematics",
+  "code": "HIS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-mathematics-0",
+    "https://www.math.princeton.edu/undergraduate"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Program Administrator",
+      "name": "LeeAnn Coleman",
+      "email": "larushin@princeton.edu"
+    },
+    {
+      "type": "Department Manager",
+      "name": "Kathleen Applegate",
+      "email": "kapple@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Generally, either 215-217  or 216-218 or 203-204-215  are strongly recommended for admission to the department. Prospective mathematics majors should consult the department early and plan a program that includes as much of the 215-217 or 216-218 sequence as possible. Most majors begin taking courses at the 300-level by the second semester of the sophomore year, in preparation for their junior independent work.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Prerequisites Sequence 1",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "Students should take MAT 215, MAT 217.",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 215",
+            "MAT 217"
+          ]
+        },
+        {
+          "name": "Prerequisites Sequence 2",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "Students should take MAT 216. MAT 218",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 215",
+            "MAT 218"
+          ]
+        },
+        {
+          "name": "Prerequisites Sequence 3",
+          "max_counted": 1,
+          "min_needed": 3,
+          "explanation": "Students should take MAT 203, 204, 215",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 203",
+            "MAT 204",
+            "MAT 215"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Mechanical and Aerospace Engineering",
+  "code": "MAE",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-mechanical-and-aerospace-engineering-0#",
+    "https://mae.princeton.edu/undergraduate/programs"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Michael G. Littman",
+      "email": "mlittman@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Students entering the Department are expected to meet the requirements for the freshman year established by the School of Engineering and Applied Science.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "req_list": [
+        {
+          "name": "Introductory Courses",
+          "max_counted": 3,
+          "min_needed": 3,
+          "explanation": "The required introductory courses that are prerequisites for the Departmental upper class courses are normally completed by the end of the sophomore year.",
+          "double_counting_allowed": false,
+          "pdfs_allowed": 0,
+          "completed_by_semester": 4,
+          "req_list": [
+            {
+              "name": "Introductory Departmental",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "The Sophomore Laboratory provides experiments associated with Thermodynamics (MAE 221), Mechanics of Fluids (MAE 222) and Electronics. (Some of these courses may be satisfied by Advanced\nPlacement Credit).",
+              "double_counting_allowed": false,
+              "pdfs_allowed": 0,
+              "completed_by_semester": 4,
+              "req_list": [
+                {
+                  "name": "Introductory - Single",
+                  "max_counted": 4,
+                  "min_needed": 4,
+                  "explanation": "Non-substitutable Introductory Courses",
+                  "double_counting_allowed": false,
+                  "pdfs_allowed": 0,
+                  "completed_by_semester": 4,
+                  "course_list": [
+                      "MAE 206",
+                      "MAE 221",
+                      "MAE 222",
+                      "MAE 224"
+                  ]
+                },
+                {
+                  "name": "Introductory - Substitute",
+                  "max_counted": 2,
+                  "min_needed": 1,
+                  "explanation": "Substitutable Introductory Courses",
+                  "double_counting_allowed": false,
+                  "pdfs_allowed": 0,
+                  "completed_by_semester": 4,
+                  "course_list": [
+                    "MAE 223",
+                    "CEE 205"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Molecular Biology",
+  "code": "MOL",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-molecular-biology",
+    "https://molbio.princeton.edu/undergraduate/major"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Melissa DiMeglio",
+      "email": "md20@princeton.edu"
+    },
+    {
+      "type": "Departmental Manager",
+      "name": "Els N. Paine",
+      "email": "epaine@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "To enter the Department of Molecular Biology, students must have completed one of the two introductory courses, either MOL 214 or MOL 215, with a grade of C or better. CHM 201/207 and 202, or one unit of chemistry AP credit and CHM 202 or 215, or two units of chemistry AP credit, are also required to enter the department.An alternate path into the department is through the integrated science curriculum.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Introductory Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students must complete one of the two introductory courses, MOL 214 or MOL 215",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MOL 214",
+            "MOL 215"
+          ]
+        },
+        {
+          "name": "Chemistry Courses",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "Students need to complete CHM 201/207 and CHM 202, or one unit of chemistry AP credit plus CHM 202 or 215, or two units of chemistry AP credit.",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "General Chemistry I",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Students must complete either CHM 201 and 207",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHM 201",
+                "CHM 207"
+              ]
+            },
+            {
+              "name": "General Chemistry 2",
+              "max_counted": 1,
+              "min_needed": 1,
+              "explanation": "Students must complete CHM 202 or 215",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHM 202",
+                "CHM 215"
+              ]
+            }
+          ]
+        }        
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Operations Research and Financial Engineering",
+  "code": "ORF",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-operations-research-and-financial-engineering",
+    "https://orfe.princeton.edu/sites/orfe.princeton.edu/files/documents/Academic%20Guide%202020.pdf"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Dr. Alain L. Kornhauser",
+      "email": "alaink@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 420,
+      "explanation": "These form the intellectual foundation of our field, and cover statistics, probability, stochastic processes, and optimization.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "course_list": [
+        "ORF 245",
+        "ORF 307",
+        "ORF 309",
+        "ORF 335"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Religion",
+  "code": "REL",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-religion",
+    "http://religion.princeton.edu/undergraduate-program/major-requirements/"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Professor Seth Perry",
+      "email": "sethp@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 0,
+      "explanation": "Any course offered by the department.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [],
+      "course_list": [
+        "REL *"
+      ]
+    }
+  ]
+},
+{
+  "type": "Major",
+  "name": "Slavic Languages and Literatures",
+  "code": "SLA",
+  "year": 2018,
+  "urls": [
+        "https://ua.princeton.edu/academic-units/department-slavic-languages-and-literatures",
+        "https://slavic.princeton.edu/undergraduate-program/program-requirements"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Professor Katherine M. Hill Reischl",
+      "email": "kreischl@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "The department  gives its own placement test to all incoming students who have studied Russian. On the basis of this test students are placed in an appropriate course. Successful completion of RUS 107, RUS 108 (Russian for Heritage Speakers),  or immediate assignment to a higher course satisfies the A.B. foreign language requirement.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "course_list": [
+        "RUS 105R",
+        "RUS 107",
+        "RUS 107R"
+      ]
+    }
+  ]
+}
+]

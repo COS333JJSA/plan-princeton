@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import json
 import sys
+import re
 
 def timeConverter(time):
 	temp = time.split(" ")
@@ -40,25 +41,39 @@ def req_recursion(req, myid, parentid):
 	req_lists.append(req)
 
 	if "req_list" in req.keys():
-		for re in req["req_list"]:
+		for reg in req["req_list"]:
 			r += 1
-			req_recursion(re, r, myid)
+			req_recursion(reg, r, myid)
 
 	curr = []
-	for re in req_lists:
-		if re["parentid"] == myid:
-			curr.append(re["myid"])
+	for reg in req_lists:
+		if reg["parentid"] == myid:
+			curr.append(reg["myid"])
 
 	make_req_list(req, myid, curr)
 
+#for courses with *s, load all qualifying courses into c_pks
+def starcourses(c, c_pks):
+	if c[4] != '*':
+		send = c[0:5] + ".*"
+	else:
+		send = c[0:4] + ".*"
+	for course in course_pks:
+		if re.search(send, course) != None:
+			c_pks.append(course_pks[course])
+	return c_pks
 
+#create req_list object from information in req
 def make_req_list(req, myid, curr):
 	global outp
 	c_pks = []
 	#course list
 	if "course_list" in req.keys():
 		for c in req["course_list"]:
-			c_pks.append(course_pks[c[0:7]])
+			if '*' in c:
+				starcourses(c, c_pks)
+			else:
+				c_pks.append(course_pks[c[0:7]])
 	#description
 	if "description" not in req.keys():
 		req["description"] = ""
@@ -140,7 +155,7 @@ for a in areas:
 	outp += """{{"model": "home.area", "pk": {0}, "fields": {{"code": "{1}", "name": "{2}"}}}}, """.format(acounter, a, areas[a])
 	acounter += 1
 
-courses = json.load(open("coursesnew.json"))
+courses = json.load(open("courses.json"))
 
 #serialize courses
 for i in range(0, len(courses)):
@@ -191,10 +206,10 @@ for k in range(0, len(concs)):
 	ucurr.clear()
 	ccurr.clear()
 	#preprocess req_lists
-	for re in conc["req_list"]:
+	for reg in conc["req_list"]:
 		r += 1
 		rcurr.append(r)
-		req_recursion(re, r, 0)
+		req_recursion(reg, r, 0)
 		
 
 	#add urls

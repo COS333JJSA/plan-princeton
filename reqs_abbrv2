@@ -1,0 +1,86 @@
+[
+{
+  "type": "Major",
+  "name": "East Asian Studies",
+  "code": "EAS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-east-asian-studies",
+    "https://eap.princeton.edu/about"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Coordinator",
+      "name": "Sean Henry Miller",
+      "email": "shmiller@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Donna M. Musial-Manners",
+      "email": "dmusial@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisite ",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Students should have one year of language study in one East Asian language and have taken one 200-level EAS course.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "One year of language study",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students should have one year of language study in one East Asian language.",
+          "double_counting_allowed": false,
+          "req_list": [
+            {
+              "name": "Language study in Chinese",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "Students can choose to take a year of Chinese.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "CHI 102"
+              ]
+            },
+            {
+              "name": "Language study in Japanese",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "Students can choose to take a year of Japanese.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "JPN 102"
+              ]
+            },
+            {
+              "name": "Language study in Korean",
+              "max_counted": 2,
+              "min_needed": 2,
+              "explanation": "Students can choose to take a year of Korean.",
+              "double_counting_allowed": false,
+              "course_list": [
+                "KOR 102"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "200-level EAS Course",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Students who wish to major in EAS must take one 200-level EAS course",
+          "double_counting_allowed": false,
+          "course_list": [
+            "EAS 2**"
+          ]            
+        }
+      ]  
+    }
+  ]
+}
+]
