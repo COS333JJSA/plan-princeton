@@ -5,4 +5,5 @@ from django.conf.urls import url
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.login, name='login'),
+    path('scheduler/', views.scheduler, name='scheduler')
 ]
