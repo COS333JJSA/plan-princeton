@@ -75,6 +75,7 @@ class Concentration(models.Model):
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
 	objects = ConcentrationManager()
+	# sample_plans = models.ManyToManyField('Plan')
 
 	def __str__(self):
 		return str(self.name)
@@ -131,17 +132,23 @@ class Course(models.Model):
 	prereqs = models.ManyToManyField('self', blank=True)
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
+	# semesters = models.ManyToField('Semester')
 
 	def __str__(self):
 		return str(self.title)
 
+class User(models.Model):
+ 	netid = models.CharField(max_length = 100)
+ 	plans = models.ManyToManyField('Plan')
 
+class Plan(models.Model):
+ 	saved_courses = models.ManyToManyField('SavedCourse')
 
- #class User(models.Model):
- 	# userid = models.AutoField()
- 	# username = models.CharField(max_length = 100)
- 	# password = ??
- 	# past_courses = models.ManyToManyField(Course)
- 	# past_APs = AP model?
-#enrollment
-#save templates
+class SavedCourse(models.Model):
+	course = models.ManyToManyField('Course')
+	semester = models.ManyToManyField('Semester')
+
+class Semester(models.Model):
+	seasons = (('S', "Spring"), ('F', "Fall"))
+	season = models.CharField(max_length=6, choices=seasons)
+	year = models.IntegerField()
