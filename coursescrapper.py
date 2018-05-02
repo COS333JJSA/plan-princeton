@@ -23,16 +23,25 @@ import sys
 from urllib.request import urlopen
 from bs4  import BeautifulSoup
 
-TERM_CODE = 1122  # seems to be fall 11-12
-TERM_CODE = 1124  # so 1124 would be spring 11-12
-                  # 1134 is definitely spring 13 (course offerings link)`
-TERM_CODE = 1134
-TERM_CODE = 1142  # fall 2013; spring 2014 will be 1144
-TERM_CODE = 1144  # spring 2014
-TERM_CODE = 1154  # spring 2015
-TERM_CODE = 1174  # spring 2017
-TERM_CODE = 1184  # spring 2018
-TERM_CODE = 1182  # fall 2017 ??
+# TERM_CODE = 1122  # fall 2011
+# TERM_CODE = 1124  # spring 2012
+# TERM_CODE = 1132  # fall 2012
+# TERM_CODE = 1134  # spring 2013
+# TERM_CODE = 1142  # fall 2013
+# TERM_CODE = 1144  # spring 2014
+# TERM_CODE = 1152  # fall 2014
+# TERM_CODE = 1154  # spring 2015
+# TERM_CODE = 1162  # fall 2015
+# TERM_CODE = 1164  # spring 2016
+# TERM_CODE = 1172  # fall 2016
+# TERM_CODE = 1174  # spring 2017
+# TERM_CODE = 1182  # fall 2017
+# TERM_CODE = 1184  # spring 2018
+# TERM_CODE = 1192  # fall 2019
+TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016",
+1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2019"}
+
+course_dict = {}
 
 URL_PREFIX = "http://registrar.princeton.edu/course-offerings/"
 LIST_URL = URL_PREFIX + "search_results.xml?term={term}"
@@ -181,14 +190,17 @@ def scrape_all():
       import traceback
       traceback.print_exc(file=sys.stderr)
       sys.stderr.write('Error processing course id {0}\n'.format(id))
-
+      
+#iterate through terms, also find duplicates
 if __name__ == "__main__":
   first = True
-  for course in scrape_all():
-    if first:
-      first = False
-      print('[')
-    else:
-      print(',')
-    json.dump(course, sys.stdout)
+  for term in TERM_CODES:
+    TERM_CODE = term
+    for course in scrape_all():
+      if first:
+        first = False
+        print('[')
+      else:
+        print(',')
+      json.dump(course, sys.stdout)
   print(']')
