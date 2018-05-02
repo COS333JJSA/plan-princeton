@@ -141,6 +141,13 @@ class User(models.Model):
  	netid = models.CharField(max_length = 100)
  	plans = models.ManyToManyField('Plan')
 
+#  	objects = models.UserManager()
+
+# class UserManager(models.User):
+# 	def create_user(self, ni):
+# 		user = self.create(netid=ni)
+# 		return user
+
 class Plan(models.Model):
  	saved_courses = models.ManyToManyField('SavedCourse')
 
