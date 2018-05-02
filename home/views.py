@@ -2,10 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from home.models import Concentration
 from django.shortcuts import render_to_response
+from home.models import Concentration
 
 # Create your views here.
 @login_required
 def index(request):
+	instance = Concentration.objects.get_BSE('Chemistry')
+	print (instance)
 	return render(
    	    request,
         'index.html',
@@ -26,7 +29,7 @@ def logout(request):
 	)
 
 @login_required
-def schedule(request):
+def scheduler(request):
 	# cnetid = request.user.username
 	# #if no current user object, make one
 	# if len(User.objects.filter(netid=cnetid)) > 0:
