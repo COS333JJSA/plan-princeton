@@ -75,7 +75,6 @@ def scheduler(request):
 		plans = []
 
 	for course in Course.objects.all():
-		print(course.title_and_code())
 		allcourses.append(course.title_and_code())
 
 	for conc in Concentration.objects.all():
