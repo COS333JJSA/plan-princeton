@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from home.models import Concentration
 from django.shortcuts import render_to_response
+from home.models import User
 
 # Create your views here.
 @login_required
@@ -27,13 +28,20 @@ def logout(request):
 @login_required
 def scheduler(request):
 	cnetid = request.user.username
+
 	#if no current user object, make one
 	if len(User.objects.filter(netid=cnetid)) > 0:
-		plans = User.objects.filter(netid=cnetid).values('plans')
+		plans = User.objects.filter(netid=cnetid).plans.all()
 	#retreive user plans
-	# else:
+	else:
+		u = User(netid=cnetid)
+		u.save()
+		plans = []
+
+	info = {"plans": plans}
 
 	return render(
 		request,
-		'schedule.html'
+		'schedule.html',
+		info
 	)
