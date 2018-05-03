@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Req_List, Contact, URL, Department, Concentration, Professor, Listing, Class, Course, Area, Semester, User, SavedCourse, Plan, UserManager, ConcentrationManager, CourseManager
+from .models import Req_List, Contact, URL, Department, Concentration, Professor, Listing, Class, Course, Area, Semester, User, SavedCourse, Plan, UserManager, ConcentrationManager
 
 admin.site.register(Req_List)
 admin.site.register(Concentration)
