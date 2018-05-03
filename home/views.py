@@ -32,22 +32,22 @@ def logout(request):
 
 @login_required
 def scheduler(request):
-	cnetid = request.user.username
+	# cnetid = request.user.username
 
 	#if no current user object, make one
-	if len(User.objects.filter(netid=cnetid)) > 0:
-		plans = User.objects.filter(netid=cnetid).plans.all()
+	# if len(User.objects.filter(netid=cnetid)) > 0:
+	# 	plans = User.objects.filter(netid=cnetid).values('plans')
 	#retreive user plans
 
-	else:
-		u = User(netid=cnetid)
-		u.save()
-		plans = []
+	# else:
+	# 	u = User(netid=cnetid)
+	# 	u.save()
+	# 	plans = []
 
-	info = {"plans": plans}
+	# info = {"plans": plans}
 
 	return render(
 		request,
 		'schedule.html',
-		info
+		# info
 	)
