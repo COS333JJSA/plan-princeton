@@ -101,7 +101,7 @@ h6 {
     display: block;
     color: black;
     text-align: center;
-    padding: 14px 16px;
+    padding-bottom: 25px
     text-decoration: none;
     font-size: 17px;
 }
@@ -118,21 +118,12 @@ h6 {
     color: white;
 }
 
-/* Style the search box inside the navigation bar */
-.topnav input[type=text] {
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-}
-
 /* Style the tab */
 #topTabs .tab {
     overflow: hidden;
+    padding-top: 25px;
     border: none;
-    background-color: #f9f9f9;
+    background-color: transparent;
 }
 
 /* Style the buttons inside the tab */
