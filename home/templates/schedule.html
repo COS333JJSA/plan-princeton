@@ -22,7 +22,7 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
         <!-- Custom styles for this template -->
-        {% load static %}
+
         <link href="{% static 'css/schedule.css' %}" rel="stylesheet" type="text/css"> 
 
     </head>
@@ -36,6 +36,26 @@
          }
          function dragEnter(ev) {
             event.preventDefault();
+
+        <!-- <link href="{% static 'css/schedule.css'  %}" rel="stylesheet">  -->
+        <style type="text/css">
+            #boxA, #boxB {
+                float:left;padding:10px;margin:10px; -moz-user-select:none;
+            }
+         
+            #boxA { background-color: #6633FF; width:75px; height:75px;  }
+            #boxB { background-color: #FF6699; width:150px; height:150px; }
+        </style>
+      
+        <script type="text/javascript">
+            function dragStart(ev) {
+                ev.dataTransfer.effectAllowed='move';
+                ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+                ev.dataTransfer.setDragImage(ev.target,0,0);
+                return true;
+            }
+            function dragEnter(ev) {
+                event.preventDefault();
                 return true;
          }
          
@@ -182,8 +202,7 @@
                 <select id="ddl2">
                     <option>Select Concentration:</option>
                 </select>
-            </div>          
-
+            </div>      
             <!--Search Courses-->
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
@@ -196,6 +215,9 @@
                     <a href="#AAS305/REL391/MUS354/AMS355"> AAS 305/REL 391/MUS 354/AMS 355: The History of Black Gospel Music</a>
                 </div>
             </div>
+
+            <h1>All Concentrations: {{ conclist }} </h1>
+            <h1>All Courses: {{ courselist }} </h1>
 
             <!--Remaining requirements-->
             <div class="requirements">
