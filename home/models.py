@@ -66,8 +66,6 @@ class Req_List(models.Model):
 			
 
 class ConcentrationManager(models.Manager):
-	def get_queryset(self):
-		return super(ConcentrationManager, self).get_queryset()
 
 	def get_BSE(self, conc):
 		reqs = []
