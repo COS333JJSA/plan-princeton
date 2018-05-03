@@ -59,10 +59,19 @@ def scheduler(request):
 
 	info = {"plans": plans, "courselist": allcourses, "conclist": allconcentrations}
 
-
-
 	return render(
 		request,
 		'schedule.html',
 		info
+	)
+
+def sampleschedules(request):
+	return render(
+		request,
+		'sampleschedules.html',
+	)
+def aas(request):
+	return render(
+		request,
+		'aas.html',
 	)
