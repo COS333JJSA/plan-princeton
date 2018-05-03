@@ -129,14 +129,14 @@ h6 {
 }
 
 /* Style the tab */
-.tab {
+#topTabs .tab {
     overflow: hidden;
     border: none;
     background-color: #f9f9f9;
 }
 
 /* Style the buttons inside the tab */
-.tab button {
+#topTabs .tab button {
     background-color: transparent;
     float: left;
     border: transparent;
@@ -148,17 +148,17 @@ h6 {
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
+#topTabs .tab button:hover {
     background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
+#topTabs .tab button.active {
     background-color: #ccc;
 }
 
 /* Style the tab content */
-.tabcontent {
+#Plan-1 .tabcontent {
   display: none;
   padding: 6px 12px;
   -webkit-animation: fadeEffect 1s;
@@ -199,7 +199,6 @@ h6 {
 
 #myInput{
   border-box: box-sizing;
-  background-image: url("../searchicon.png");
   background-position: 6px 6px;
   background-repeat: no-repeat;
   font-size: 12pt;
