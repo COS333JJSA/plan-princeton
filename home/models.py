@@ -22,12 +22,12 @@ class Department(models.Model):
 	def __str__(self):
 		return str(self.name)
 
-class Req_ListManager(models.Manager):
-	def get_queryset(self):
-		return super(ConcentrationManager, self).get_queryset()
+# class Req_ListManager(models.Manager):
+# 	def get_queryset(self):
+# 		return super(ConcentrationManager, self).get_queryset()
 
-	def get_concentration(self, conc):
-		return super(ConcentrationManager, self).get_queryset().get(name = conc)
+# 	def get_concentration(self, conc):
+# 		return super(ConcentrationManager, self).get_queryset().get(name = conc)
 
 class Req_List(models.Model):
 	name = models.CharField(max_length=100)
@@ -41,7 +41,7 @@ class Req_List(models.Model):
 	completed_by_semester = models.IntegerField(default=8)
 	req_lists_inside = models.ManyToManyField('self', blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
-	objects = Req_ListManager()
+	# objects = Req_ListManager()
 
 	def __str__(self):
 		return str(self.name)
@@ -65,19 +65,19 @@ class Req_List(models.Model):
 # 		return reqs
 			
 
-class ConcentrationManager(models.Manager):
+# class ConcentrationManager(models.Manager):
 
-	def get_BSE(self, conc):
-		reqs = []
-		for req in super(ConcentrationManager, self).get_queryset().get(name=conc).req_lists.get(name='Prerequisites').req_lists_inside.all():
-			courses = []
-			courses.append(req.min_needed)
-			for course in req.course_list.all():
-				courses.append(course.title)
-			reqs.append(req.name)
-			reqs.append(req.min_needed)
-			reqs.append(courses)
-		return reqs
+# 	def get_BSE(self, conc):
+# 		reqs = []
+# 		for req in super(ConcentrationManager, self).get_queryset().get(name=conc).req_lists.get(name='Prerequisites').req_lists_inside.all():
+# 			courses = []
+# 			courses.append(req.min_needed)
+# 			for course in req.course_list.all():
+# 				courses.append(course.title)
+# 			reqs.append(req.name)
+# 			reqs.append(req.min_needed)
+# 			reqs.append(courses)
+# 		return reqs
 
 
 # for r in reqs:
@@ -103,7 +103,8 @@ class Concentration(models.Model):
 	urls = models.ManyToManyField(URL)
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
-	objects = ConcentrationManager()
+	#  super(ConcentrationManager, self).get_queryset()
+#objects = ConcentrationManager()
 	# sample_plans = models.ManyToManyField('Plan')
 
 	def __str__(self):
