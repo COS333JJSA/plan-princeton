@@ -22,9 +22,8 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
         <!-- Custom styles for this template -->
-
-        <link href="{% static 'css/schedule.css' %}" rel="stylesheet" type="text/css"> 
-
+        {% load static %}
+        <link href="{% static 'css/schedule.css' %}" rel="stylesheet"> 
     </head>
 
     <script type="text/javascript">
@@ -34,29 +33,21 @@
             ev.dataTransfer.setDragImage(ev.target,0,0);
             return true;
          }
+
          function dragEnter(ev) {
             event.preventDefault();
-
-        <!-- <link href="{% static 'css/schedule.css'  %}" rel="stylesheet">  -->
-        <style type="text/css">
-            #boxA, #boxB {
-                float:left;padding:10px;margin:10px; -moz-user-select:none;
-            }
+         }
+   
+         function dragStart(ev) {
+            ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true;
+         }
          
-            #boxA { background-color: #6633FF; width:75px; height:75px;  }
-            #boxB { background-color: #FF6699; width:150px; height:150px; }
-        </style>
-      
-        <script type="text/javascript">
-            function dragStart(ev) {
-                ev.dataTransfer.effectAllowed='move';
-                ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
-                ev.dataTransfer.setDragImage(ev.target,0,0);
-                return true;
-            }
-            function dragEnter(ev) {
-                event.preventDefault();
-                return true;
+         function dragEnter(ev) {
+            event.preventDefault();
+            return true;
          }
          
          function dragOver(ev) {
@@ -174,73 +165,72 @@
                }
             }
          }
-      </script>
+   </script>
 
-    <body>
+   <body>
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="/home" target="_blank">Plan Princeton</a>
             </div>
-        </nav>
+      </nav> 
 
-        <!--Top Navigation Tabs -->
-        <div class="tab">
-          <button class="plan-1 tablinks btn btn-primary btn-xl" onclick="openPlan(event, 'Plan 1')">Plan 1</button>
-        </div>
+      <!--Top Navigation Tabs -->
+      <div class="tab" id="topTabs">
+         <button class="plan-1 tablinks btn btn-primary btn-xl" onclick="openPlan(event, 'Plan 1')">Plan 1</button>
+      </div>
         
-        <div id="Plan 1" class="tabcontent">
-            <!-- Drag and Drop Menu for Concentration and Certificates-->
-            
-            <div class="selectDegree">
-                <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'))">                
-                    <option value="select">Select Degree:</option>
-                    <option value="ab">A.B.</option>
-                    <option value="bse">B.S.E.</option>
-                </select>
+      <div id="Plan-1" class="tabcontent">
+         <!-- Drag and Drop Menu for Concentration and Certificates-->
+         <div class="selectDegree">
+            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'))">                
+               <option value="select">Select Degree:</option>
+               <option value="ab">A.B.</option>
+               <option value="bse">B.S.E.</option>
+            </select>
                 
-                <select id="ddl2">
-                    <option>Select Concentration:</option>
-                </select>
-            </div>      
-            <!--Search Courses-->
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
-                    <a href="#AAS201">AAS 201: Introduction to the Study of African American Cultural Practices</a>
-                    <a href="#AAS230/ENG231">AAS 230/ENG 231: Topics in African American Studies: The Fire This Time - Reading James Baldwin</a>
-                    <a href="#AAS245/ART245">AAS 245/ART 245: Harlem Renaissance and Black Arts Movements</a>
-                    <a href="#AAS300">AAS 300: Junior Seminar: Research and Writing in African American Studies</a>
-                    <a href="#AAS305/REL391/MUS354/AMS355"> AAS 305/REL 391/MUS 354/AMS 355: The History of Black Gospel Music</a>
-                </div>
+            <select id="ddl2">
+               {% for i in conclist %}
+                  <option> {{ i }} </option>
+               {% endfor %}
+            </select>
+         </div>      
+      
+         <!--Search Courses-->
+         <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
+            <div id="myDropdown" class="dropdown-content">
+               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
+               {% for i in courselist %}
+                  <a> {{ i }} </a>
+               {% endfor %}
             </div>
+         </div>
 
-            <h1>All Concentrations: {{ conclist }} </h1>
-            <h1>All Courses: {{ courselist }} </h1>
+         <!--Remaining requirements-->
+         <div class="requirements">
+            <h2>Remaining Requirements</h2>
+         </div>
 
-            <!--Remaining requirements-->
-            <div class="requirements">
-                <h2>Remaining Requirements</h2>
-            </div>
-
-            <!--Schedule-->
-            <div class="schedule">
-                <h1>Freshman Fall</h1>
-            </div>
-            <div class="schedule">
-                <h1>Freshman Spring</h1>
-            </div>
-            <div class="schedule">
-                <h1>Sophomore Fall</h1>
-            </div>
-            <div class="schedule">
-                <h1>Sophomore Spring</h1>
-            </div>
-        </div>
-
-
-    </body>
+         <!--Schedule-->
+         <div class="schedule">
+            <h1>Freshman Fall</h1>
+         </div>
+         
+         <div class="schedule">
+            <h1>Freshman Spring</h1>
+         </div>
+         
+         <div class="schedule">
+            <h1>Sophomore Fall</h1>
+         </div>
+         
+         <div class="schedule">
+            <h1>Sophomore Spring</h1>
+         </div>
+      
+      </div>
+   </body>
 </html>
 
 
