@@ -191,42 +191,42 @@ for i in range(0, len(courses)):
 		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
 
 
-# concs = json.load(open("reqs_abbrv"))
-# r = 0
-# ucounter = 0
-# ccounter = 0
-# req_lists = []
-# rcurr = []
-# ucurr = []
-# ccurr = []
+concs = json.load(open("reqs_abbrv"))
+r = 0
+ucounter = 0
+ccounter = 0
+req_lists = []
+rcurr = []
+ucurr = []
+ccurr = []
 
-# for k in range(0, len(concs)):
-# 	conc = concs[k]
-# 	rcurr.clear()
-# 	ucurr.clear()
-# 	ccurr.clear()
-# 	#preprocess req_lists
-# 	for reg in conc["req_list"]:
-# 		r += 1
-# 		rcurr.append(r)
-# 		req_recursion(reg, r, 0)
+for k in range(0, len(concs)):
+	conc = concs[k]
+	rcurr.clear()
+	ucurr.clear()
+	ccurr.clear()
+	#preprocess req_lists
+	for reg in conc["req_list"]:
+		r += 1
+		rcurr.append(r)
+		req_recursion(reg, r, 0)
 		
 
-# 	#add urls
-# 	for u in conc["urls"]:
-# 		outp += """{{"model": "home.url", "pk": {0}, "fields": {{"url": "{1}"}}}}, """.format(ucounter, u)
-# 		ucurr.append(ucounter)
-# 		ucounter += 1
-# 	#add contacts
-# 	for c in conc["contacts"]:
-# 		outp += """{{"model": "home.contact", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "email": "{3}"}}}}, """.format(ccounter, c["type"], c["name"], c["email"])
-# 		ccurr.append(ccounter)
-# 		ccounter += 1
+	#add urls
+	for u in conc["urls"]:
+		outp += """{{"model": "home.url", "pk": {0}, "fields": {{"url": "{1}"}}}}, """.format(ucounter, u)
+		ucurr.append(ucounter)
+		ucounter += 1
+	#add contacts
+	for c in conc["contacts"]:
+		outp += """{{"model": "home.contact", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "email": "{3}"}}}}, """.format(ccounter, c["type"], c["name"], c["email"])
+		ccurr.append(ccounter)
+		ccounter += 1
 
-# 	if "degree" not in conc.keys():
-# 		conc["degree"] = "AB"
-# 	#add req
-# 	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
+	if "degree" not in conc.keys():
+		conc["degree"] = "AB"
+	#add req
+	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
 
 
 print("[" + outp[:len(outp) - 2] + "]")
