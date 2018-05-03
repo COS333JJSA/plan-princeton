@@ -2,14 +2,19 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from home.models import Concentration
 from django.shortcuts import render_to_response
+from home.models import Concentration
 from home.models import User
 
 # Create your views here.
 @login_required
 def index(request):
+	dic = {"instance": Concentration.objects.get_BSE('Chemistry')}
+	print ("here")
+	print (Concentration.objects.get_BSE('Chemistry'))
 	return render(
    	    request,
         'index.html',
+        dic
     )
 
 def login(request):
