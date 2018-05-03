@@ -41,27 +41,58 @@ class Req_List(models.Model):
 	completed_by_semester = models.IntegerField(default=8)
 	req_lists_inside = models.ManyToManyField('self', blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
-	objects = Req_ListManager
+	objects = Req_ListManager()
 
 	def __str__(self):
 		return str(self.name)
 
+# class ConcentrationManager(models.Manager):
+# 	def get_queryset(self):
+# 		return super(ConcentrationManager, self).get_queryset()
+
+# 	def get_BSE(self, conc):
+# 		reqs = {}
+# 		for req in super(ConcentrationManager, self).get_queryset().get(name=conc).req_lists.get(name='Prerequisites').req_lists_inside.all():
+# 			courses = []
+# 			courses.append(req.min_needed)
+# 			for course in req.course_list.all():
+# 				courses.append(course.title)
+# 			reqs[req.name] = courses
+# 			#print (req)
+# 			#for c in req.:
+# 				#print (course)
+# 				#print subreq.course_list
+# 		return reqs
+			
+
 class ConcentrationManager(models.Manager):
 
 	def get_BSE(self, conc):
-		reqs = {}
+		reqs = []
 		for req in super(ConcentrationManager, self).get_queryset().get(name=conc).req_lists.get(name='Prerequisites').req_lists_inside.all():
 			courses = []
 			courses.append(req.min_needed)
 			for course in req.course_list.all():
 				courses.append(course.title)
-			reqs[req.name] = courses
-			#print (req)
-			#for c in req.:
-				#print (course)
-				#print subreq.course_list
+			reqs.append(req.name)
+			reqs.append(req.min_needed)
+			reqs.append(courses)
 		return reqs
-			
+
+
+# for r in reqs:
+# 	level_one.append(r.name)
+# 	if len(r.req_lists_inside) > 0:
+# 		for r2 in r.req_lists_inside:
+# 			level_two.append(r2.name)
+# 			if len(r2.req_lists_inside) > 0:
+# 				for r3 in r2.req_lists_inside:
+# 					level_three.append(r3.name)
+# 			else:
+# 				for c3 in r2.course_list:
+# 					level_three.append(c3.title)
+
+
 #Concentration.objects.get(name = 'African American Studies').req_lists.get(name='Prerequisite ').explanation
 class Concentration(models.Model):
 	tipe = models.CharField(max_length=15)
@@ -121,6 +152,8 @@ class Area(models.Model):
 	def __str__(self):
 		return str(self.code)
 
+
+
 class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
 	title = models.CharField(max_length=200)
@@ -131,6 +164,16 @@ class Course(models.Model):
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
 	# semesters = models.ManyToField('Semester')
+	# objects = CourseManager()
+
+	def title_and_code(self):
+		st = ""
+		for l in self.listings.all():
+			st += str(l.department.code) + " " + str(l.number)
+			st += "/"
+		st = st[:len(st)-1]
+		st += ": " + self.title
+		return st
 
 	def __str__(self):
 		return str(self.title)
