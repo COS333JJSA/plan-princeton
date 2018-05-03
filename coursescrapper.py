@@ -22,6 +22,7 @@ import sqlite3
 import sys
 from urllib.request import urlopen
 from bs4  import BeautifulSoup
+import ssl
 
 # TERM_CODE = 1122  # fall 2011
 # TERM_CODE = 1124  # spring 2012
@@ -192,6 +193,7 @@ def scrape_all():
       sys.stderr.write('Error processing course id {0}\n'.format(id))
       
 #iterate through terms, also find duplicates
+
 if __name__ == "__main__":
   first = True
   for term in TERM_CODES:

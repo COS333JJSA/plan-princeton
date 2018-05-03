@@ -64,6 +64,8 @@ def scheduler(request):
 	allcourses = []
 	allconcentrations = []
 	cnetid = request.user.username
+	courseexplanations = []
+	coursedescrip = {}
 
 	# if no current user object, make one
 	if len(User.objects.filter(netid=cnetid)) > 0:
@@ -75,15 +77,29 @@ def scheduler(request):
 		plans = []
 
 	for course in Course.objects.all():
+		# print(course.title_and_code())
+		coursedescrip[course.title] = course.descrip
 		allcourses.append(course.title_and_code())
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"plans": plans, "courselist": allcourses, "conclist": allconcentrations}
+	info = {"plans": plans, "courselist": allcourses, "conclist": allconcentrations, "descripdict": coursedescrip}
+
 
 	return render(
 		request,
 		'schedule.html',
 		info
+	)
+
+def sampleschedules(request):
+	return render(
+		request,
+		'sampleschedules.html',
+	)
+def aas(request):
+	return render(
+		request,
+		'aas.html',
 	)

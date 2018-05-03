@@ -27,41 +27,27 @@
     </head>
 
     <script type="text/javascript">
-         function dragStart(ev) {
-            ev.dataTransfer.effectAllowed='move';
-            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
-            ev.dataTransfer.setDragImage(ev.target,0,0);
-            return true;
-         }
 
-         function dragEnter(ev) {
-            event.preventDefault();
-         }
-   
-         function dragStart(ev) {
-            ev.dataTransfer.effectAllowed='move';
-            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
-            ev.dataTransfer.setDragImage(ev.target,0,0);
-            return true;
-         }
-         
-         function dragEnter(ev) {
-            event.preventDefault();
-            return true;
-         }
-         
-         function dragOver(ev) {
-               return false;
-         }
-         
-         function dragDrop(ev) {
-            var src = ev.dataTransfer.getData("Text");
-            ev.target.appendChild(document.getElementById(src));
-            ev.stopPropagation();
-            return false;
-         }
+      function dragstart_handler(ev) {
+        console.log("dragStart");
+        // Add the target element's id to the data transfer object
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+      }
 
-         function openPlan(evt, name) {
+      function dragover_handler(ev) {
+        ev.preventDefault();
+        // Set the dropEffect to move
+        ev.dataTransfer.dropEffect = "move"
+      }
+
+      function drop_handler(ev) {
+        ev.preventDefault();
+        // Get the id of the target and add the moved element to the target's DOM
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+
+        function openPlan(evt, name) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
@@ -169,17 +155,21 @@
 
    <body>
         <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="/home" target="_blank">Plan Princeton</a>
             </div>
       </nav> 
 
       <!--Top Navigation Tabs -->
-      <div class="tab" id="topTabs">
-         <button class="plan-1 tablinks btn btn-primary btn-xl" onclick="openPlan(event, 'Plan 1')">Plan 1</button>
-      </div>
-        
+      <div class="container">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#plan1">Plan 1</a>
+          </li>
+        </ul>
+      </div>    
+
       <div id="Plan-1" class="tabcontent">
          <!-- Drag and Drop Menu for Concentration and Certificates-->
          <div class="selectDegree">
@@ -187,49 +177,48 @@
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
-            </select>
+             </select>
                 
             <select id="ddl2">
                {% for i in conclist %}
                   <option> {{ i }} </option>
                {% endfor %}
             </select>
-         </div>      
+        </div>      
       
          <!--Search Courses-->
-         <div class="dropdown">
+        <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
                <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
                {% for i in courselist %}
-                  <a> {{ i }} </a>
+                  <a id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ i }} </a>
                {% endfor %}
             </div>
-         </div>
+        </div>
 
          <!--Remaining requirements-->
          <div class="requirements">
-            <h2>Remaining Requirements</h2>
+            <h2>Remaining <br/> Requirements</h2>
          </div>
 
          <!--Schedule-->
-         <div class="schedule">
+         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Freshman Fall</h1>
          </div>
          
-         <div class="schedule">
+         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Freshman Spring</h1>
          </div>
          
-         <div class="schedule">
+         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall</h1>
          </div>
          
-         <div class="schedule">
+         <div id="target" ondrop="drop_handler(event);" ondragover="(event);" class="schedule">
             <h1>Sophomore Spring</h1>
          </div>
-      
-      </div>
+
    </body>
 </html>
 
