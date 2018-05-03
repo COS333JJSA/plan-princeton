@@ -11,17 +11,20 @@
     <title>Sample Schedules</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    {% load static %}
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
 
   </head>
 
@@ -52,7 +55,8 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('img/nassau1.jpg')">
+    {% load static %}
+    <header class="masthead" style="static 'background-image: url('img/nassau1.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
