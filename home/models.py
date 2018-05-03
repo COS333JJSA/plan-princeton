@@ -172,6 +172,7 @@ class Course(models.Model):
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
 	# semesters = models.ManyToField('Semester')
+	objects = CourseManager()
 
 	def __str__(self):
 		return str(self.title)

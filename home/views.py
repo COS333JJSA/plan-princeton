@@ -74,8 +74,8 @@ def scheduler(request):
 		u.save()
 		plans = []
 
-	for course in Course.objects.all():
-		allcourses.append(course.title)
+	for course in Course.objects.title_and_code():
+		allcourses.append(course)
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
