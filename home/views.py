@@ -59,8 +59,6 @@ def scheduler(request):
 
 	info = {"plans": plans, "courselist": allcourses, "conclist": allconcentrations}
 
-
-
 	return render(
 		request,
 		'schedule.html',
