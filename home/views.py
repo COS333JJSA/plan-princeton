@@ -31,7 +31,7 @@ def scheduler(request):
 
 	#if no current user object, make one
 	if len(User.objects.filter(netid=cnetid)) > 0:
-		plans = User.objects.filter(netid=cnetid).plans.all()
+		plans = User.objects.filter(netid=cnetid).values('plans')
 	#retreive user plans
 	else:
 		u = User(netid=cnetid)

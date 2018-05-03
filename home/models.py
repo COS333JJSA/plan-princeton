@@ -41,7 +41,7 @@ class Req_List(models.Model):
 	completed_by_semester = models.IntegerField(default=8)
 	req_lists_inside = models.ManyToManyField('self', blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
-	objects = Req_ListManager
+	objects = Req_ListManager()
 
 	def __str__(self):
 		return str(self.name)
