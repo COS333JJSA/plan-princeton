@@ -1,6 +1,9 @@
 body {
   overflow-x: hidden;
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 p {
@@ -118,7 +121,8 @@ h6 {
     color: white;
 }
 
-/* Style the tab */
+/*
+
 #topTabs .tab {
     overflow: hidden;
     padding-top: 25px;
@@ -126,9 +130,8 @@ h6 {
     background-color: transparent;
 }
 
-/* Style the buttons inside the tab */
 #topTabs .tab button {
-    background-color: transparent;
+    background-color: white;
     float: left;
     border: transparent;
     outline: none;
@@ -138,16 +141,35 @@ h6 {
     font-size: 18px;
 }
 
-/* Change background color of buttons on hover */
 #topTabs .tab button:hover {
     background-color: #ddd;
 }
 
-/* Create an active/current tablink class */
 #topTabs .tab button.active {
     background-color: #ccc;
 }
 
+#topTabs .tablink {
+  background-color: transparent;
+} */
+
+.nav-tabs {
+  background-color: transparent;
+}
+
+.nav-tabs > li > a {
+  background-color: white !important;
+  font-size: 20px;
+  font-style: bold;
+  border-radius: 25px;
+  width: 20px;
+  height: 15px; 
+
+}
+
+.nav-tabs > li > a:hover{
+  background-color: #ddd !important;
+}
 /* Style the tab content */
 #Plan-1 .tabcontent {
   display: none;
@@ -171,6 +193,7 @@ h6 {
 .selectDegree {
   float: left;
   position: absolute;
+  padding: 16px;
 }
 
 /* Dropdown filters for courses */
@@ -178,9 +201,9 @@ h6 {
   float: left;
   background-color: #ffa12e;
   color: white;
-  padding: 16px;
+  padding: 10px;
   font-size: 16px;
-  border: none;
+  border-radius: 25px;
   cursor: pointer;
 }
 
@@ -207,7 +230,7 @@ h6 {
   display: inline-block;
   float: left;
   width: 15%;
-  top: 40px;
+  padding-top: 50px
 }
 
 .dropdown-content {
@@ -236,7 +259,7 @@ h6 {
 .requirements {
   width: 15%;
   height: 100vh;
-  padding: 0 1% 0 3%;
+  padding: 50px 3% 0 3%;
   border: transparent;
   float: left;
 }
@@ -245,6 +268,7 @@ h6 {
 .schedule {
   width: 15%;
   height: 100vh;
+  padding: 50px 2% 0 2%;
   border: 1px solid #ccc;
   float: left;
 }
