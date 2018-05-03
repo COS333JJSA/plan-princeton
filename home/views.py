@@ -7,11 +7,13 @@ from home.models import Concentration
 # Create your views here.
 @login_required
 def index(request):
-	instance = Concentration.objects.get_BSE('Chemistry')
-	print (instance)
+	dic = {"instance": Concentration.objects.get_BSE('Chemistry')}
+	print ("here")
+	print (Concentration.objects.get_BSE('Chemistry'))
 	return render(
    	    request,
         'index.html',
+        dic
     )
 
 def login(request):
@@ -35,7 +37,6 @@ def scheduler(request):
 		plans = User.objects.filter(netid=cnetid).values('plans')
 	#retreive user plans
 	# else:
-
 	return render(
 		request,
 		'schedule.html'

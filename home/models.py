@@ -56,13 +56,13 @@ class ConcentrationManager(models.Manager):
 			courses = []
 			courses.append(req.min_needed)
 			for course in req.course_list.all():
-				courses.append(course)
-			reqs[req] = courses
+				courses.append(course.title)
+			reqs[req.name] = courses
 			#print (req)
 			#for c in req.:
 				#print (course)
 				#print subreq.course_list
-		print (reqs)
+		return reqs
 			
 #Concentration.objects.get(name = 'African American Studies').req_lists.get(name='Prerequisite ').explanation
 class Concentration(models.Model):
