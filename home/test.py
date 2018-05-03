@@ -18,9 +18,9 @@ for r in reqs:
 			level_one_nums.append(r)
 		counter1 += 1
 	else:
+		temp2 = []
+		temp3 = []
 		for r2 in r:
-			temp2 = []
-			temp3 = [[[]]]
 			counter3 = 0
 			if type(r2) != list:
 				if type(r2) != int:
@@ -31,7 +31,7 @@ for r in reqs:
 				for r3 in r2:
 					if type(r3) != list:
 						if type(r3) != int:
-							temp3[counter3].append(r3)
+							temp3.append(r3)
 							counter3 += 1
 						else:
 							level_three_nums.append(r3)
@@ -39,8 +39,8 @@ for r in reqs:
 					else:
 						for r4 in r:
 							level_four.append(r4)
-					level_three.append(temp3)
-			level_two.append(temp2)
+				level_three.append(temp3)
+		level_two.append(temp2)
 
 
 print(level_one)

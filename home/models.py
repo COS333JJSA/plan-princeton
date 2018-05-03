@@ -154,6 +154,16 @@ class Area(models.Model):
 	def __str__(self):
 		return str(self.code)
 
+class CourseManager(models.Manager):
+	def title_and_code(self):
+		st = ""
+		for l in self.listings:
+			st += str(l.department.code) + " " + str(l.number)
+			st += "/"
+		st = st[:len(st)-1]
+		st += ": " + self.title
+		return st
+
 class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
 	title = models.CharField(max_length=200)
