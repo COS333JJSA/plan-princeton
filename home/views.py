@@ -77,7 +77,7 @@ def scheduler(request):
 		plans = []
 
 	for course in Course.objects.all():
-		# print(course.title_and_code())
+		print(course.title_and_code())
 		coursedescrip[course.title] = course.descrip
 		allcourses.append(course.title_and_code())
 
