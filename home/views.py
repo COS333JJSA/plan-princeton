@@ -277,14 +277,3 @@ def wws(request):
 		request,
 		'wws.html',
 	)
-
-
-
-
-
-
-
-
-
-
->>>>>>> ayushi
