@@ -31,7 +31,7 @@
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
       "course_list": [
-        "AAS 201"
+        "AAS 235"
       ]
     }
   ]
@@ -67,7 +67,7 @@
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
       "course_list": [
-        "ANT 232"
+        "ANT 378"
       ]
     }
   ]
@@ -98,8 +98,8 @@
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
       "course_list": [
-        "ARC 203",
-        "ARC 350"
+        "ARC 376",
+        "ARC 208"
       ]    
     }
   ]
@@ -142,7 +142,7 @@
           "explanation": "Prospective ART students need two courses from the Program in Visual Arts.",
           "double_counting_allowed": false,
           "course_list": [
-            "VIS 348"
+            "VIS 445"
           ]
         },
         {
@@ -152,8 +152,7 @@
           "explanation": "Prospective ART students need two courses from the Department of Art and Archaeology.",
           "double_counting_allowed": false,
           "course_list": [
-            "ART 380",
-            "ARC 593"
+            "ART 471"
           ]
         }
       ]  
@@ -198,8 +197,8 @@
           "explanation": "Students must take MAT 103 and 104",
           "double_counting_allowed": false,
           "course_list": [
-            "MAT 103",
-            "MAT 104"
+            "MAT 473",
+            "MAT 391"
           ]
         },
         {
@@ -210,7 +209,7 @@
           "double_counting_allowed": false,
           "course_list": [
             "MAT 201",
-            "MAT 203",
+            "MAT 473",
             "MAT 391"
           ]
         },
@@ -273,8 +272,7 @@
               "explanation": "Choose one from three possible classes.",
               "double_counting_allowed": false,
               "course_list": [
-                "CHM 201",
-                "CHM 207"
+                "CHM 202"
               ]
             },
             {
@@ -284,7 +282,7 @@
               "explanation": "Choose one from two possible classes.",
               "double_counting_allowed": false,
               "course_list": [
-                "CHM 527"
+                "CHM 202"
               ]
             }
           ]
@@ -342,7 +340,7 @@
           "explanation": "Students must have commpleted CLG 102 or LAT 102 (or CLG 103 or LAT 103).",
           "double_counting_allowed": false,
           "course_list": [
-            "LAT 105"
+            "LAT 102"
           ]
         },
         {
@@ -352,7 +350,7 @@
           "explanation": "Students must have commpleted CLG 108 or LAT 108 or demonstrated intermediate proficiency in Greek or Latin.",
           "double_counting_allowed": false,
           "course_list": [
-            "LAT 105"
+            "LAT 102"
           ]
         }
       ]  
