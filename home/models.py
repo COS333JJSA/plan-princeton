@@ -39,7 +39,7 @@ class Req_List(models.Model):
 	max_common_with_major = models.IntegerField(null=True, blank=True)
 	pdfs_allowed = models.IntegerField(null=True, blank=True)
 	completed_by_semester = models.IntegerField(default=8)
-	req_lists_inside = models.ManyToManyField('self', blank=True)
+	req_lists_inside = models.ManyToManyField('self', symmetrical=False, blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
 	# objects = Req_ListManager()
 
@@ -165,15 +165,15 @@ class Concentration(models.Model):
 								for r4 in r3.req_lists_inside.all():
 									temp2.append(r4.name + " (" + str(r4.min_needed) + ")")
 							else:
-								for c4 in reqs.course_list.all():
+								for c4 in r3.course_list.all():
 									temp2.append(c4)
 						temp3.append(temp4)
 					else:
-						for c3 in reqs.course_list.all():
+						for c3 in r2.course_list.all():
 							temp2.append(c3)
 				temp2.append(temp3)
 			else:
-				for c2 in reqs.course_list.all():
+				for c2 in r.course_list.all():
 					temp2.append(c2)
 		temp.append(temp2)
 		return temp
@@ -303,7 +303,7 @@ class Course(models.Model):
 	prereqs = models.ManyToManyField('self', blank=True)
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
-	# semesters = models.ManyToField('Semester')
+	semesters = models.ManyToManyField('Semester')
 	objects = CourseManager()
 
 	def title_and_code(self):
