@@ -198,6 +198,5 @@ class SavedCourse(models.Model):
 	semester = models.ManyToManyField('Semester')
 
 class Semester(models.Model):
-	seasons = (('S', "Spring"), ('F', "Fall"))
-	season = models.CharField(max_length=6, choices=seasons)
+	season = models.CharField(max_length=1, choices=seasons)
 	year = models.IntegerField()
