@@ -5,37 +5,11 @@ from django.shortcuts import render_to_response
 from home.models import Concentration
 from home.models import User
 from home.models import Course
+from home.models import CourseManager
 
 # Create your views here.
 @login_required
 def index(request):
-	# reqs = Concentration.objects.get_BSE('Chemistry')
-	# level_one = []
-	# level_two = []
-	# level_three = []
-	# level_four = []
-	# level_one_nums = []
-	# counter = 0
-
-	# for r in reqs:
-	# 	if type(r) == int:
-	# 		if counter % 2 == 0:
-	# 			level_one.append(r)
-	# 		else:
-	# 			level_one_nums.append(r)
-	# 		counter += 1
-	# 	else:
-	# 		for r2 in r:
-	# 			if type(r) == int:
-	# 				level_two.append(r2)
-	# 			else:
-	# 				for r3 in r:
-	# 					if type(r) == int:
-	# 						level_three.append(r3)
-	# 					else:
-	# 						for r4 in r:
-	# 							level_four.append(r4)
-
 	return render(
    	    request,
         'index.html',
@@ -71,14 +45,14 @@ def scheduler(request):
 		u.save()
 		plans = []
 
-	for course in Course.objects.all():
-		coursedescrip[course.title] = course.descrip
-		allcourses.append(course.title_and_code())
+	# for course in Course.objects.all():
+	# 	coursedescrip[course.title] = course.descrip
+	# 	allcourses.append(course.title_and_code())
 
-	for conc in Concentration.objects.all():
-		allconcentrations.append(conc.name)
+	# for conc in Concentration.objects.all():
+	# 	allconcentrations.append(conc.name)
 
-	info = {"plans": plans, "courselist": allcourses, "conclist": allconcentrations, "descripdict": coursedescrip}
+	info = {"plans": plans, "courses": Course.objects.all_info(), "conclist": allconcentrations}
 
 
 	return render(

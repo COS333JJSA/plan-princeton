@@ -49,18 +49,18 @@ class Req_List(models.Model):
 class ConcentrationManager(models.Manager):
 	def get_queryset(self):
 		return super(ConcentrationManager, self).get_queryset()
-	def get_reqs(self, conc):
-		level_one = []
-		level_two = []
-		level_three = []
-		level_four = []
-		level_five = []
-		levels = [level_one, level_two, level_three, level_four, level_five]
-		temp = {}
-		temp_c = []
-		temp["titles"] = temp_c
-		level = 0
-		return 
+	# def get_reqs(self, conc):
+	# 	level_one = []
+	# 	level_two = []
+	# 	level_three = []
+	# 	level_four = []
+	# 	level_five = []
+	# 	levels = [level_one, level_two, level_three, level_four, level_five]
+	# 	temp = {}
+	# 	temp_c = []
+	# 	temp["titles"] = temp_c
+	# 	level = 0
+	# 	return 
 
 		# for r in reqs:
 		# 	temp_c.append(r.name + " (" + str(r.min_needed) + ")")
@@ -133,7 +133,7 @@ class Concentration(models.Model):
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
 	#  super(ConcentrationManager, self).get_queryset()
-#objects = ConcentrationManager()
+	#objects = ConcentrationManager()
 	# sample_plans = models.ManyToManyField('Plan')
 
 	def __str__(self):
@@ -143,9 +143,77 @@ class Concentration(models.Model):
 		return self.req_lists
 
 	# def get_reqs(self):
-	# 	fields = []
-	# 	for f in self.meta.fields:
-	# 		print (f)
+	# 	# reqs = [{"name": "General Chemistry", "min_needed": 2, "req_lists_inside": [{"name": "Differential and Integral Calculus", "min_needed": 2, "course_list": ["Calculus II", "Calculus I"]}, {"name": "Req2", "min_needed": 4, "course_list": ["c1", "c2"]}]}, {"name": "Gen2", "min_needed": 3, "course_list": ["c3", "c4"]}]
+	# 	# reqs = 
+	# 	level_one = []
+	# 	level_two = []
+	# 	level_three = []
+	# 	level_four = []
+	# 	level_five = []
+	# 	levels = [level_one, level_two, level_three, level_four, level_five]
+	# 	temp = {}
+	# 	temp_c = []
+	# 	temp["titles"] = temp_c
+	# 	level = 0
+
+	# 	for r in reqs:
+	# 		temp_c.append(r.name + " (" + str(r.min_needed) + ")")
+	# 		level += 1
+	# 		temp2 = {}
+	# 		temp2_c = []
+	# 		#if another nested level
+	# 		#if len(r["req_lists_inside"]) > 0:
+	# 		if "req_lists_inside" in r.keys():
+	# 			temp2["titles"] = temp2_c
+	# 			for r2 in r.req_lists_inside:
+	# 				temp2_c.append(r2.name + " (" + str(r2.min_needed) + ")")
+	# 				level += 1
+	# 				temp3 = {}
+	# 				temp3_c = []
+	# 				#if another nested level
+	# 				#if len(r2["req_lists_inside"]) > 0:
+	# 				if "req_lists_inside" in r2.keys():
+	# 					temp3["titles"] = temp3_c
+	# 					for r3 in r2.req_lists_inside:
+	# 						temp3_c.append(r3.name + " (" + str(r3.min_needed) + ")")
+	# 						level += 1
+	# 						temp4 = {}
+	# 						temp4_c = []
+	# 						#if another nested level
+	# 						#if len(r3["req_lists_inside"]) > 0:
+	# 						if "req_lists_inside" in r3.keys():
+	# 							temp4["titles"] = temp4_c
+	# 							for r4 in r3.req_lists_inside:
+	# 								temp4_c.append(r4.name + " (" + str(r4.min_needed) + ")")
+	# 								level += 1
+	# 								temp5 = {}
+	# 								temp5_c = []
+	# 								temp5["courses"] = temp5_c
+	# 								for c5 in r4.course_list:
+	# 									temp5_c.append(c5)
+	# 								levels[level].append(temp5)
+	# 								level -= 1
+	# 						else:
+	# 							temp4["courses"] = temp4_c
+	# 							for c4 in r3.course_list:
+	# 								temp4_c.append(c4)
+	# 						levels[level].append(temp4)
+	# 						level -= 1
+	# 				else:
+	# 					temp3["courses"] = temp3_c
+	# 					for c3 in r2.course_list:
+	# 						temp3_c.append(c3)
+	# 				levels[level].append(temp3)
+	# 				level -= 1
+	# 		else:
+	# 			temp2["courses"] = temp2_c
+	# 			for c2 in r.course_list:
+	# 				temp2_c.append(c2)
+	# 		levels[level].append(temp2)
+	# 		level -= 1
+	# 	levels[level].append(temp)
+
+	# 	return levels
 
 class Professor(models.Model):
 	uid = models.CharField(max_length=9)
@@ -182,7 +250,13 @@ class Area(models.Model):
 	def __str__(self):
 		return str(self.code)
 
-
+class CourseManager(models.Manager):
+	def all_info(self):
+		dic = {}
+		all_courses = Course.objects.all()
+		for c in all_courses:
+			dic.update(c.all_info_solo())
+		return dic
 
 class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
@@ -194,7 +268,7 @@ class Course(models.Model):
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
 	# semesters = models.ManyToField('Semester')
-	# objects = CourseManager()
+	objects = CourseManager()
 
 	def title_and_code(self):
 		st = ""
@@ -204,6 +278,14 @@ class Course(models.Model):
 		st = st[:len(st)-1]
 		st += ": " + self.title
 		return st
+
+	def all_info_solo(self):
+		d = {}
+		s = []
+		for p in self.professor.all():
+			s.append(p.name)
+		d[self.courseid] = {"coursename": self.title_and_code(), "title": self.title, "professors": s, "description": self.descrip}
+		return d
 
 	def __str__(self):
 		return str(self.title)
