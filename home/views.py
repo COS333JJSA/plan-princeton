@@ -42,11 +42,6 @@ def index(request):
     )
 
 def login(request):
-	levelone = ['General Chemistry', 'Req']
-	leveltwo = [['Integrated Caluculus'], ['course1', 'course2']]
-	levelthree = [[['Calculus I', 'Calculus II']], []]
-	dic = {'level1': levelone, 'level2': leveltwo, 'level3': levelthree}
-
 	return render(
 		request,
 		'login.html',
