@@ -209,15 +209,15 @@ if __name__ == "__main__":
     for course in scrape_all():
       if (course["courseid"] in result):
         result.get(course["courseid"])["term"].append(TERM_CODES[term])
-        #json.dump(course, sys.stdout)
+        json.dump(course, sys.stdout)
       else:
         if (course not in oneterm):
 
           course["term"].append(TERM_CODES[term])
           oneterm.append(course)
-          #json.dump(course, sys.stdout)
+          json.dump(course, sys.stdout)
 
-        #json.dump(course, sys.stdout)
+        json.dump(course, sys.stdout)
 
     for c in oneterm:
       result[c["courseid"]] = c
