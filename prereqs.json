@@ -1085,7 +1085,7 @@
 {
   "type": "Major",
   "name": "English",
-  "code": "ECO",
+  "code": "ENG",
   "year": 2018,
   "urls": [
     "https://ua.princeton.edu/academic-units/department-english#",
@@ -1331,7 +1331,7 @@
 {
   "type": "Major",
   "name": "Mathematics",
-  "code": "HIS",
+  "code": "MAT",
   "year": 2018,
   "urls": [
     "https://ua.princeton.edu/academic-units/department-mathematics-0",
