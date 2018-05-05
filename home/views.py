@@ -51,8 +51,8 @@ def scheduler(request):
 	# 	coursedescrip[course.title] = course.descrip
 	# 	allcourses.append(course.title_and_code())
 
-	# for conc in Concentration.objects.all():
-	# 	allconcentrations.append(conc.name)
+	for conc in Concentration.objects.all():
+		allconcentrations.append(conc.name)
 
 	info = {"plans": plans, "courses": Course.objects.all_info(), "conclist": allconcentrations}
 

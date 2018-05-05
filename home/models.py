@@ -39,7 +39,7 @@ class Req_List(models.Model):
 	max_common_with_major = models.IntegerField(null=True, blank=True)
 	pdfs_allowed = models.IntegerField(null=True, blank=True)
 	completed_by_semester = models.IntegerField(default=8)
-	req_lists_inside = models.ManyToManyField('self', blank=True)
+	req_lists_inside = models.ManyToManyField('self', symmetrical=False, blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
 	# objects = Req_ListManager()
 
