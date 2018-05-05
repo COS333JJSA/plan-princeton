@@ -204,20 +204,22 @@ if __name__ == "__main__":
   for term in TERM_CODES:
     print (term)
     oneterm = []
+    oneterm_ids = []
     TERM_CODE = term
 
     for course in scrape_all():
-      if (course["courseid"] in result):
-        result.get(course["courseid"])["term"].append(TERM_CODES[term])
-        json.dump(course, sys.stdout)
-      else:
-        if (course not in oneterm):
+      if (course["courseid"] not in oneterm_ids):
+        if (course["courseid"] in result):
+          result.get(course["courseid"])["term"].append(TERM_CODES[term])
+          print("Case3\n")
+          json.dump(course["courseid"], sys.stdout)
+        course["term"].append(TERM_CODES[term])
+        oneterm.append(course)
+        oneterm_ids.append(course["courseid"])
+        print("cases34")
+        json.dump(course["courseid"], sys.stdout)
 
-          course["term"].append(TERM_CODES[term])
-          oneterm.append(course)
-          json.dump(course, sys.stdout)
-
-        json.dump(course, sys.stdout)
+        # json.dump(course["courseid"], sys.stdout)
 
     for c in oneterm:
       result[c["courseid"]] = c
