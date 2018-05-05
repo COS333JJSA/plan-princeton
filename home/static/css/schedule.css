@@ -124,30 +124,30 @@ h6 {
     color: white;
 }
 
-.nav-tabs {
-  background-color: #f5f5f5;
+.nav-pills {
+  background-color: #ffc681;
+  border-radius: 25px;
 }
 
-.nav-tabs > li > a {
-  background-color: #f2f2f2;
+.nav-pills > li {
+  background-color: #ffc681;
+  padding: 6px;  
+  border-radius: 20px;
+  border: transparent;
+}
+
+.nav-pills > li > a {
   font-size: 20px;
   font-style: bold;
   color: black;
-  border-radius: 25px;
-  width: 20px;
-  height: 15px; 
 }
 
-.nav-tabs > li > a:hover{
-  background-color: #d9d9d9!important;
-  color: #ffa12e;
-}
-/* Style the tab content */
-#topTab .tabcontent {
-  display: none;
-  padding: 6px 12px;
-  -webkit-animation: fadeEffect 1s;
-  animation: fadeEffect 1s;
+.nav-pills > li > a:hover{
+  background-color: #f5f5f5; 
+  padding: 10px;
+  border-radius: 20px;
+  border: transparent;
+  color: black;
 }
 
 /* Fade in tabs */
@@ -168,6 +168,13 @@ h6 {
   padding: 16px;
 }
 
+.dropdown {
+  float: left;
+  width: 275px;
+  height: 100vh;
+  margin: 50px 10px 10px 13px;
+}
+
 /* Dropdown filters for courses */
 .dropbtn {
   float: left;
@@ -183,7 +190,7 @@ h6 {
   background-color: #cc8024;
 }
 
-#myInput{
+#myInput {
   border-box: box-sizing;
   background-position: 6px 6px;
   background-repeat: no-repeat;
@@ -191,38 +198,34 @@ h6 {
   padding: 6px 6px 0 6px;
   border: none;
   border-bottom: 1px solid #ddd;
-  width: 275px;
+  width: 287px;
   position: fixed;
+  display: inline-block;
 }
 
 #myInput:focus {
   outline: 3px solid #ddd;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-  float: left;
-  width: 275px;
-  height: 100vh;
-  padding-top: 50px;
-  padding-left: 10px;
+.dropdown-courses {
+  margin-top: 30px;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f6f6f6;
-  border: 1px solid #ddd;
-  overflow: scroll;
+  background-color: white;
+  border: 2px solid #ddd;
+  overflow: auto;
   height: 100vh;
+  border-radius: 25px;
+  z-index: 1;
 }
 
 .dropdown-content a {
   color: black;
   padding: 12px;
   display: block;
-  border: 1px solid #ddd;
   width: 275px;
   height: 100px;
   overflow: hidden;
@@ -232,13 +235,30 @@ h6 {
   background-color: white;
 }
 
+ul {
+  list-style-type: none;
+  padding: 2px;
+}
+
+ul li {
+  margin: 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 25px;
+  display: block;
+}
+
 #dragCourse {
   color: black;
+  background-color: #ffecd5;
   padding: 12px;
   display: block;
   border: 1px solid #ddd;
   width: 275px;
   height: 100px;
+  border-radius: 25px;
+  overflow: auto;
+  font-size: 16px;
 }
 
 .show {
