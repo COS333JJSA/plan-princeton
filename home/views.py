@@ -10,8 +10,8 @@ from home.models import CourseManager
 # Create your views here.
 @login_required
 def index(request):
-	test = Concentration.objects.get(name="Chemistry").get_reqs()
-	print(test)
+	# test = Concentration.objects.get(name="Chemistry").get_reqs()
+	# print(test)
 
 	allconcentrations = []
 	for conc in Concentration.objects.all():
