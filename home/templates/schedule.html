@@ -191,9 +191,13 @@
             <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
                <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
-               {% for i in courselist %}
-                  <a id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ i }} </a>
-               {% endfor %}
+               <ul>
+                {% for i in courselist %}
+                  <li id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ i }} </li>
+                {% endfor %}
+               </ul>
+
+               
             </div>
         </div>
 
