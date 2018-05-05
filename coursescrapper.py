@@ -39,9 +39,11 @@ import ssl
 # TERM_CODE = 1182  # fall 2017
 # TERM_CODE = 1184  # spring 2018
 # TERM_CODE = 1192  # fall 2019
-TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016",
-1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2019"}
+# TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016",
+# 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2019"}
 
+TERM_CODES = {1152: "fall 2014", 1154: "spring 2015"}
+currentTerm = 0
 course_dict = {}
 
 URL_PREFIX = "http://registrar.princeton.edu/course-offerings/"
@@ -144,6 +146,7 @@ def get_single_class(row):
     'roomnum': bldg_link.nextSibling.string.replace('&nbsp;', ' ').strip(),
     'enroll': enroll, # bwk
     'limit': limit   #bwk
+
   }
 
 def get_course_classes(soup):
@@ -161,6 +164,7 @@ def scrape_page(page):
   course['listings'] = get_course_listings(soup)
   course['profs'] = get_course_profs(soup)
   course['classes'] = get_course_classes(soup)
+  course['term'] = []
   return course
 
 def scrape_id(id):
@@ -194,15 +198,37 @@ def scrape_all():
       
 #iterate through terms, also find duplicates
 
+result = []
 if __name__ == "__main__":
   first = True
   for term in TERM_CODES:
+    print (term)
+    oneterm = []
     TERM_CODE = term
+
     for course in scrape_all():
-      if first:
-        first = False
-        print('[')
+      if (course["courseid"] in result):
+        result.get(course["courseid"])["term"].append(TERM_CODES[term])
+        json.dump(course, sys.stdout)
       else:
-        print(',')
-      json.dump(course, sys.stdout)
+        if (course not in oneterm):
+
+          course["term"].append(TERM_CODES[term])
+          oneterm.append(course)
+          json.dump(course, sys.stdout)
+
+        json.dump(course, sys.stdout)
+
+    for c in oneterm:
+      result[c["courseid"]] = c
+
+# printing
+  first = True
+  for c in result:
+    if first:
+      first = False
+      print('[')
+    else:
+      print(',')
+    json.dump(result[c["courseid"]], sys.stdout)
   print(']')
