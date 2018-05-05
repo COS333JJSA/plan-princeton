@@ -297,7 +297,7 @@ class CourseManager(models.Manager):
 class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
 	title = models.CharField(max_length=200)
-	courseid = models.IntegerField()
+	courseid = models.CharField(max_length=8)
 	listings = models.ManyToManyField(Listing)
 	area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True, blank=True)
 	prereqs = models.ManyToManyField('self', blank=True)
