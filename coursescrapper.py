@@ -39,10 +39,9 @@ import ssl
 # TERM_CODE = 1182  # fall 2017
 # TERM_CODE = 1184  # spring 2018
 # TERM_CODE = 1192  # fall 2019
-# TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016",
-# 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2019"}
+# TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016", 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2019"}
 
-TERM_CODES = {1152: "fall 2014", 1154: "spring 2015"}
+TERM_CODES = {1192: "fall 2019", 1184: "spring 2018"}
 currentTerm = 0
 course_dict = {}
 
