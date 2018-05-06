@@ -210,7 +210,7 @@ if __name__ == "__main__":
       if (course["courseid"] not in oneterm_ids):
         if (course["courseid"] in result):
           result.get(course["courseid"])["term"].append(TERM_CODES[term])
-          json.dump(course["courseid"], sys.stdout)
+          # json.dump(course["courseid"], sys.stdout)
         course["term"].append(TERM_CODES[term])
         oneterm.append(course)
         oneterm_ids.append(course["courseid"])
@@ -220,6 +220,8 @@ if __name__ == "__main__":
 
     for c in oneterm:
       result[c["courseid"]] = c
+    print(result)
+
 
 # printing
   first = True
