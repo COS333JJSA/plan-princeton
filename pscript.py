@@ -111,9 +111,11 @@ lcounter = 0
 ccounter = 0
 dcounter = 0
 acounter = 0
+scounter = 0
 pcurr = []
 lcurr = []
 ccurr = []
+scurr = []
 course_pks = {}
 areas = OrderedDict({"EC": "Epistemology and Cognition", "EM": "Ethical Thought and Moral Values", "HA": "Historical Analysis", "LA": 
 	"Literature and the Arts", "SA": "Social Analysis", "QR": "Quantitative Reasoning", "STN": "Science and Technology - no lab",
@@ -163,11 +165,13 @@ for i in range(0, len(courses)):
 	for l in course["listings"]:
 		course_pks[stringify(l)] = i
 
+#make course objects
 for i in range(0, len(courses)):
 	course = courses[i]
 	pcurr.clear()
 	lcurr.clear()
 	ccurr.clear()
+	scurr.clear()
 
 	for p in course["profs"]:
 		outp += """{{"model": "home.professor", "pk": {0}, "fields": {{"uid": "{1}", "name": "{2}"}}}}, """.format(pcounter, p["uid"], p["name"])
@@ -182,6 +186,11 @@ for i in range(0, len(courses)):
 			c["classnum"], c["enroll"], c["limit"], timeConverter(c["starttime"]), c["section"], timeConverter(c["endtime"]), c["roomnum"], c["days"], c["bldg"])
 		ccurr.append(ccounter)
 		ccounter += 1
+	for s in course["term"]:
+		s = s.split()
+		outp += """{{"model": home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0], s[1])
+		scurr.append(scounter)
+		scounter += 1
 	#check for area
 	if course["area"] == "":
 		area = "null"
