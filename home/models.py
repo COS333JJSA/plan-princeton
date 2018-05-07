@@ -39,7 +39,7 @@ class Req_List(models.Model):
 	max_common_with_major = models.IntegerField(null=True, blank=True)
 	pdfs_allowed = models.IntegerField(null=True, blank=True)
 	completed_by_semester = models.IntegerField(default=8)
-	req_lists_inside = models.ManyToManyField('self', blank=True)
+	req_lists_inside = models.ManyToManyField('self', symmetrical=False, blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
 	# objects = Req_ListManager()
 
@@ -143,8 +143,11 @@ class Concentration(models.Model):
 		return self.req_lists
 
 	def get_reqs(self):
+		calculate_reqs(self.req_lists.all())
+
+	def calculate_reqs(self, r_array):
 		temp = []
-		for r in self.req_lists.all():
+		for r in r_array:
 			temp.append(r.name + " (" + str(r.min_needed) + ")")
 			temp2 = []
 			print("here1")
@@ -165,18 +168,64 @@ class Concentration(models.Model):
 								for r4 in r3.req_lists_inside.all():
 									temp2.append(r4.name + " (" + str(r4.min_needed) + ")")
 							else:
-								for c4 in reqs.course_list.all():
+								for c4 in r3.course_list.all():
 									temp2.append(c4)
 						temp3.append(temp4)
 					else:
-						for c3 in reqs.course_list.all():
+						for c3 in r2.course_list.all():
 							temp2.append(c3)
 				temp2.append(temp3)
 			else:
-				for c2 in reqs.course_list.all():
+				for c2 in r.course_list.all():
 					temp2.append(c2)
 		temp.append(temp2)
 		return temp
+
+
+	def update_reqs(self, courses):
+		print("update_reqs")
+		#args: plan, conc
+		#make a list of course ids in current plan
+		# courses = []
+		# for c in plan.saved_courses:
+		# 	courses.append(c.course.courseid)
+		#make a copy of the req_list
+		# self.pk = None
+		rs = []
+		for r in self.req_lists.all():
+			rs.append(r)
+			if r.req_lists_inside.all():
+				for r2 in r.req_lists_inside.all():
+					if r2.req_lists_inside.all():
+						for r3 in r2.req_lists_inside.all():
+							if r3.req_lists_inside.all():
+								for r4 in r3.req_lists_inside.all():
+									for c in r4.course_list.all():
+										if c in r3.course_list.all():
+											r4.course_list.remove(c)
+											r4.min_needed -= 1
+											r3.min_needed -= 1
+											r2.min_needed -= 1
+											r.min_needed -= 1
+							else:
+								for c in courses:
+									if c in r3.course_list.all():
+										r3.course_list.remove(c)
+										r3.min_needed -= 1
+										r2.min_needed -= 1
+										r.min_needed -= 1
+					else:
+						for c in courses:
+							if c in r2.course_list.all():
+								r2.course_list.remove(c)
+								r2.min_needed -= 1
+								r.min_needed -= 1
+			else:
+				for c in courses:
+					if c in r2.course_list.all():
+						r.course_list.remove(c)
+						r.min_needed -= 1
+		return self.calculate_reqs(rs)
 
 	# def get_reqs(self):
 	# 	# reqs = [{"name": "General Chemistry", "min_needed": 2, "req_lists_inside": [{"name": "Differential and Integral Calculus", "min_needed": 2, "course_list": ["Calculus II", "Calculus I"]}, {"name": "Req2", "min_needed": 4, "course_list": ["c1", "c2"]}]}, {"name": "Gen2", "min_needed": 3, "course_list": ["c3", "c4"]}]
@@ -297,13 +346,13 @@ class CourseManager(models.Manager):
 class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
 	title = models.CharField(max_length=200)
-	courseid = models.IntegerField()
+	courseid = models.CharField(max_length=8)
 	listings = models.ManyToManyField(Listing)
 	area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True, blank=True)
 	prereqs = models.ManyToManyField('self', blank=True)
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
-	# semesters = models.ManyToField('Semester')
+	semesters = models.ManyToManyField('Semester')
 	objects = CourseManager()
 
 	def title_and_code(self):
