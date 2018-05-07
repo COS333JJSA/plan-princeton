@@ -24,9 +24,9 @@ def stringify(listing):
 
 def escape(s):
 	c = []
-	if s == None:
+	if s == None or len(s) == 0:
 		return ""
-	if s.find('&#39;') != -1:
+	elif s.find('&#39;') != -1:
 		c.append(s[0:s.find('&#39;')])
 		c.append('\'')
 		c.append(s[(s.find('&#39;')+5):])
@@ -34,10 +34,14 @@ def escape(s):
 		c.append(s[0:s.find('&amp;')])
 		c.append('&')
 		c.append(s[(s.find('&amp;')+5):])
-	elif s.find('"') != -1 and s.find('\\"') == -1:
-		c.append(s[0:s.find('"')])
+	elif s[0] == '"':
+		c.append('\\')
+		c.append(s)
+	elif re.search(r"[A-Za-z\s\.,\?!\(\)]\"", s) != None:
+		st = re.search(r"[A-Za-z\s\.,\?!\(\)]\"", s).end()
+		c.append(s[0:st-1])
 		c.append('\\"')
-		c.append(s[(s.find('"')+1):])
+		c.append(s[(st):])
 	else:
 		for char in s:
 			c.append(char)
