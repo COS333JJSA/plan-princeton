@@ -2033,7 +2033,7 @@
       "max_counted": 1,
       "min_needed": 3,
       "explanation": "PSY 251 (or a pre-approved alternative), and two of the following: PSY 101, PSY 252, PSY 254, PSY 255, PSY 258/NEU 201 or NEU 175"
-      "double_counting_allowed": false,
+      "double_counting_allowed" : false,
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
       "req_list": [
@@ -2060,71 +2060,69 @@
             "PSY 255"
             "PSY 258"
             "NEU 175"
-          ]
-        }         
-      ]
-    }
-  ]
-},
+            ]
+          }         
+        ]
+      }
+    ]
+  },
 
   {
-  "type": "Major",
-  "name": "Spanish and Portuguese",
-  "code": "SPO",
-  "year": 2018,
-  "urls": [
-    "https://ua.princeton.edu/academic-units/department-african-american-studies#",
-    "http://aas.princeton.edu/programs/undergraduate/aas-concentration/",
-    "http://aas.princeton.edu/courses/"
-  ],
-  "contacts": [
-    {
-      "type": "Department Manager",
-      "name": "April Peters",
-      "email": "aprilp@princeton.edu"
-    },
-    {
-      "type": "Department Chair",
-      "name": "Dr. Eddie S. Glaude, Jr.",
-      "email": "esglaude@princeton.edu"
-    }
-  ],
-  "req_list": [
-    {
-      "name": "Prerequisite ",
-      "max_counted": 1,
-      "min_needed": 1,
-      "explanation": "Normally, two 200-level courses in Spanish or one 200-level course in Portuguese",
-      "double_counting_allowed": false,
-      "pdfs_allowed": 0,
-      "completed_by_semester": 4,
-      "req_list": [
-        {
-          "name": "Core 1",
-          "max_counted": 1,
-          "min_needed": 1,
-          "explanation": "One 200-level course in Spanish or Portuguese",
-          "double_counting_allowed": false,
-          "course_list": [
-            "POR 2*",
-            "SPA 2*"
-          ]
-        },
-        {
-          "name": "Core 2",
-          "max_counted": 1,
-          "min_needed": 2,
-          "explanation": "A second 200-level course in Spanish",
-          "double_counting_allowed": false,
-          "course_list": [
-            "SPA 2*"
-          ]
-        }         
-      ]
-    }
-  ]
-}
-
-
+    "type": "Major",
+    "name": "Spanish and Portuguese",
+    "code": "SPO",
+    "year": 2018,
+    "urls": [
+      "https://ua.princeton.edu/academic-units/department-african-american-studies#",
+      "http://aas.princeton.edu/programs/undergraduate/aas-concentration/",
+      "http://aas.princeton.edu/courses/"
+    ],
+    "contacts": [
+      {
+        "type": "Department Manager",
+        "name": "April Peters",
+        "email": "aprilp@princeton.edu"
+      },
+      {
+        "type": "Department Chair",
+        "name": "Dr. Eddie S. Glaude, Jr.",
+        "email": "esglaude@princeton.edu"
+      }
+    ],
+    "req_list": [
+      {
+        "name": "Prerequisite ",
+        "max_counted": 1,
+        "min_needed": 1,
+        "explanation": "Normally, two 200-level courses in Spanish or one 200-level course in Portuguese",
+        "double_counting_allowed": false,
+        "pdfs_allowed": 0,
+        "completed_by_semester": 4,
+        "req_list": [
+          {
+            "name": "Core 1",
+            "max_counted": 1,
+            "min_needed": 1,
+            "explanation": "One 200-level course in Spanish or Portuguese",
+            "double_counting_allowed": false,
+            "course_list": [
+              "POR 2*",
+              "SPA 2*"
+            ]
+          },
+          {
+            "name": "Core 2",
+            "max_counted": 1,
+            "min_needed": 2,
+            "explanation": "A second 200-level course in Spanish",
+            "double_counting_allowed": false,
+            "course_list": [
+              "SPA 2*"
+            ]
+          }         
+        ]
+      }
+    ]
+  }
 // NO COMMA AT THE END
 ]
