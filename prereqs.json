@@ -1935,7 +1935,7 @@
     {
       "name": "Prerequisites",
       "max_counted": 1,
-      "min_needed": 3,
+      "min_needed": 5,
       "explanation": "PHY 105-106 (or PHY 103-104) by end of first year (no AP credit accepted); PHY 205 (or 207); MAT 201-202 or 203-204 or 217-218."      
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
@@ -1956,7 +1956,7 @@
           "name": "Core 2",
           "max_counted": 1,
           "min_needed": 1,
-          "explanation": "Concentrators must take NEU 202",
+          "explanation": "Concentrators must take either PHY 104 or PHY 106",
           "double_counting_allowed": false,
           "course_list": [
             "PHY 104"
@@ -1967,23 +1967,101 @@
           "name": "Core 3",
           "max_counted": 1,
           "min_needed": 1,
-          "explanation": "Concentrators must take NEU 202",
+          "explanation": "Concentrators must take either PHY 205 or PHY 207",
           "double_counting_allowed": false,
           "course_list": [
-            "PHY 104"
-            "PHY 106"
+            "PHY 205"
+            "PHY 207"
           ]
         },
         {
-          "name": "Math",
+          "name": "Math 1",
           "max_counted": 1,
           "min_needed": 1,
-          "explanation": "MAT 103 can be fulfilled by AP Calculus",
+          "explanation": "MAT 201-202 or 203-204 or 217-218",
           "double_counting_allowed": false,
           "course_list": [
-            "MAT 103"
+            "MAT 201"
+            "MAT 203"
+            "MAT 217"
+
           ]
-        }          
+        },
+
+{
+          "name": "Math 2",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "MAT 201-202 or 203-204 or 217-218",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 202"
+            "MAT 204"
+            "MAT 218"            
+          ]
+        }     
+
+      ]
+    }
+  ]
+},
+
+{
+  "type": "Major",
+  "name": "Psychology",
+  "code": "PSY",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-english#",
+    "https://english.princeton.edu/undergraduate/program"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Tara Broderick",
+      "email": "tarab@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Karen Mink",
+      "email": "mink@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "PSY 251 (or a pre-approved alternative), and two of the following: PSY 101, PSY 252, PSY 254, PSY 255, PSY 258/NEU 201 or NEU 175"
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Core 1",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take PSY 251",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PSY 251"
+          ]
+        },
+        {
+          "name": "Core 2",
+          "max_counted": 1,
+          "min_needed": 2,
+          "explanation": "Concentrators must take two of the following: PSY 101, PSY 252, PSY 254, PSY 255, PSY 258/NEU 201 or NEU 175",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PSY 101"
+            "PSY 252"
+            "PSY 254"
+            "PSY 255"
+            "PSY 258"
+            "NEU 175"
+          ]
+        }         
       ]
     }
   ]
