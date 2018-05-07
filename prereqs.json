@@ -1673,7 +1673,7 @@
       "name": "Prerequisites",
       "max_counted": 1,
       "min_needed": 2,
-      "explanation": "Any course offered by the department.",
+      "explanation": "two courses in Politics taken on a graded basis; recommended at least one at the 200-level.",
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
@@ -1706,7 +1706,7 @@
       "name": "Prerequisites",
       "max_counted": 1,
       "min_needed": 1,
-      "explanation": "Any course offered by the department.",
+      "explanation": "one or more courses in SOC; strongly recommended, but not required, that students take SOC 101 or another sociology course or Freshman Seminar taught by a sociology professor.",
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
@@ -1739,23 +1739,255 @@
       "name": "Prerequisites",
       "max_counted": 1,
       "min_needed": 1,
-      "explanation": "Any course offered by the department.",
+      "explanation": "At least one course in the department (language courses count). Note that departmental language requirement is four terms (i.e., through 107 level) of Arabic, Hebrew, Persian, or Turkish.",
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
       "req_list": [],
       "course_list": [
-        "SOC *"
+        "NES *"
+      ]
+    }
+  ]
+},
+
+{
+  "type": "Major",
+  "name": "Philosophy",
+  "code": "PHI",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-department-politics,"
+    "https://www.princeton.edu/politics/"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Frederick F. Wherry",
+      "email": "N/A"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "any course in the department.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [],
+      "course_list": [
+        "PHI *"
+      ]
+    }
+  ]
+},
+
+{
+  "type": "Major",
+  "name": "Music",
+  "code": "MUS",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-english#",
+    "https://english.princeton.edu/undergraduate/program"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Tara Broderick",
+      "email": "tarab@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Karen Mink",
+      "email": "mink@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "MUS 105-106 or 205-206. Students who are considering majoring in music are advised to take 105-106 in their first year.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Core 1",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take either MUS 105 or MUS 205",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MUS 105",
+            "MUS 205"
+          ]
+        },
+        {
+          "name": "Core 2",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take either MUS 106 or MUS 206",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MUS 106",
+            "MUS 206"
+          ]
+        }          
       ]
     }
   ]
 },
 
 
+{
+  "type": "Major",
+  "name": "Neuroscience",
+  "code": "NEU",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-english#",
+    "https://english.princeton.edu/undergraduate/program"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Tara Broderick",
+      "email": "tarab@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Karen Mink",
+      "email": "mink@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "NEU 201 (formerly 258), NEU 202, and MAT 103 (or AP). ISC 231-234 provides an alternate path"
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Core 1",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take NEU 201",
+          "double_counting_allowed": false,
+          "course_list": [
+            "NEU 201"
+          ]
+        },
+        {
+          "name": "Core 2",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take NEU 202",
+          "double_counting_allowed": false,
+          "course_list": [
+            "NEU 202"
+          ]
+        },
+        {
+          "name": "Math",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "MAT 103 can be fulfilled by AP Calculus",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 103"
+          ]
+        }          
+      ]
+    }
+  ]
+},
 
 
-
-
+{
+  "type": "Major",
+  "name": "Physics",
+  "code": "PHY",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-english#",
+    "https://english.princeton.edu/undergraduate/program"
+  ],
+  "contacts": [
+    {
+      "type": "Undergraduate Administrator",
+      "name": "Tara Broderick",
+      "email": "tarab@princeton.edu"
+    },
+    {
+      "type": "Academic Department Manager",
+      "name": "Karen Mink",
+      "email": "mink@princeton.edu"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 3,
+      "explanation": "PHY 105-106 (or PHY 103-104) by end of first year (no AP credit accepted); PHY 205 (or 207); MAT 201-202 or 203-204 or 217-218."      
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [
+        {
+          "name": "Core 1",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take either PHY 103 or PHY 105",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 103"
+            "PHY 105"
+          ]
+        },
+        {
+          "name": "Core 2",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take NEU 202",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 104"
+            "PHY 106"
+          ]
+        },
+        {
+          "name": "Core 3",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Concentrators must take NEU 202",
+          "double_counting_allowed": false,
+          "course_list": [
+            "PHY 104"
+            "PHY 106"
+          ]
+        },
+        {
+          "name": "Math",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "MAT 103 can be fulfilled by AP Calculus",
+          "double_counting_allowed": false,
+          "course_list": [
+            "MAT 103"
+          ]
+        }          
+      ]
+    }
+  ]
+},
 
 
 // NO COMMA AT THE END
