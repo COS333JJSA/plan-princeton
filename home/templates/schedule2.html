@@ -44,17 +44,20 @@
             // Add the target element's id to the data transfer object
             ev.dataTransfer.setData("text/plain", ev.target.id);
           }
+
           function dragover_handler(ev) {
             ev.preventDefault();
             // Set the dropEffect to move
             ev.dataTransfer.dropEffect = "move"
           }
+
           function drop_handler(ev) {
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
           }
+
             function openPlan(evt, name) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
@@ -68,6 +71,7 @@
                 document.getElementById(name).style.display = "block";
                 evt.currentTarget.className += "active";
              } 
+
              function configureDegreeLists(ddl1,ddl2) {
                 var select = ['Select Concentration'];
                 var ab = ['Select Concentration:', 
@@ -106,6 +110,7 @@
                    'ELE (Electrical Engineering)', 
                    'MAE (Mechanical and Aerospace Engineering)', 
                    'ORF (Operations Research and Financial Engineering)'];
+
                 switch (ddl1.value) {
                    case 'select': 
                       ddl2.options.length = 0;
@@ -130,6 +135,7 @@
                       break;
                 }
              }
+
              function createOption(ddl, text, value) {
                 var opt = document.createElement('option');
                 opt.value = value;
@@ -145,14 +151,14 @@
                 var input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();
-                ul = document.getElementById("myUL");
-                li = ul.getElementsByTagName("li");
-                for (i = 0; i < li.length; i++) {
-                   if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                      li[i].style.display = "";
+                div = document.getElementById("myDropdown");
+                a = div.getElementsByTagName("a");
+                for (i = 0; i < a.length; i++) {
+                   if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
                    } 
                    else {
-                      li[i].style.display = "none";
+                      a[i].style.display = "none";
                    }
                 }
              }
@@ -184,7 +190,7 @@
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
             </select>                
-            <select id="ddl2">
+            <select id="ddl2" onchange="onSelectConcentration(document.getElementById('ddl1'), this)">
                {% for i in conclist %}
                   <option> {{ i }} </option>
                {% endfor %}
@@ -197,11 +203,11 @@
             <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
                <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
-               <ul id="myUL" class="dropdown-courses">
-                {% for key, value in courses.items %}
-                  <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} </li>
+               <ul class="dropdown-courses">
+                {% for key,value in courses.items %}
+                  <li id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} <div class="deleteCourse"> X </li>
                 {% endfor %}
-               </ul>              
+               </ul>               
             </div>
         </div>
 
@@ -212,20 +218,20 @@
 
          <!--Schedule-->
          <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
-            <h1>Freshman Fall 2018</h1>
+            <h1>Freshman Fall</h1>
          </div>
          
          <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
-            <h1>Freshman Spring 2019</h1>
+            <h1>Freshman Spring</h1>
          </div>
          
          <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
-            <h1>Sophomore Fall 2019</h1>
+            <h1>Sophomore Fall</h1>
          </div>
          
          <div id="target" ondrop="drop_handler(event);" ondragover="(event);" class="schedule">
-            <h1>Sophomore Spring 2020</h1>
+            <h1>Sophomore Spring</h1>
          </div>
-
+      </div>
    </body>
 </html>

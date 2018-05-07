@@ -248,7 +248,7 @@ ul li {
   display: block;
 }
 
-#dragCourse {
+.dragCourse {
   color: black;
   background-color: #ffecd5;
   padding: 12px;
