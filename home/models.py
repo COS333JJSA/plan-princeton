@@ -76,26 +76,15 @@ class Concentration(models.Model):
 	def get_description(self):
 		return self.req_lists
 
-	def get_reqs(self):
-		calculate_reqs(self.req_lists.all())
-
 	def calculate_reqs(self, r_array):
 		temp = []
 		for r in r_array:
 			temp.append(r.name + " (" + str(r.min_needed) + ")")
 			temp2 = []
-			# print("here1")
-			#print(len(r.req_lists_inside.all()))
-			print(r.req_lists_inside.all())
 			if len(r.req_lists_inside.all()):
 				for r2 in r.req_lists_inside.all():
-					print (r2)
 					temp2.append(r2.name + " (" + str(r2.min_needed) + ")")
 					temp3 = []
-					#print("here2")
-					#print(len(r2.req_lists_inside.all()))
-					print(r2.req_lists_inside.all())
-					print (len(r2.req_lists_inside.all()))
 					if len(r2.req_lists_inside.all()):
 						for r3 in r2.req_lists_inside.all():
 							temp3.append(r3.name + " (" + str(r3.min_needed) + ")")
@@ -105,18 +94,21 @@ class Concentration(models.Model):
 									temp2.append(r4.name + " (" + str(r4.min_needed) + ")")
 							else:
 								for c4 in r3.course_list.all():
-									temp4.append(c4.title)
+									temp4.append(c4.title_and_code())
 							temp3.append(temp4)
 					else:
 						for c3 in r2.course_list.all():
-							temp3.append(c3.title)
+							temp3.append(c3.title_and_code())
 					temp2.append(temp3)
 			else:
 				for c2 in r.course_list.all():
-					temp2.append(c2.title)
+					temp2.append(c2.title_and_code())
 		temp.append(temp2)
 		return temp
 
+
+	def get_reqs(self):
+		return self.calculate_reqs(self.req_lists.all())
 
 	def update_reqs(self, courses):
 		print("update_reqs")

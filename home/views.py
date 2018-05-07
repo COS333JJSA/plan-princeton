@@ -10,8 +10,6 @@ from home.models import CourseManager
 # Create your views here.
 @login_required
 def index(request):
-
-
 	test = Concentration.objects.get(name="Art and Archaeology").get_reqs()
 	print(test)
 	courses = ["010828"]
