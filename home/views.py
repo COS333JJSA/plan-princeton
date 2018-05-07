@@ -12,10 +12,11 @@ from home.models import CourseManager
 def index(request):
 
 
-	# test = Concentration.objects.get(name="Chemistry").get_reqs()
-	# print(test)
-	courses = ["010828"]
-	print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
+	test = Concentration.objects.get(name="Chemistry").get_reqs()
+	print(test)
+	
+	# courses = ["010828"]
+	# print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
 
 	allconcentrations = []
 	for conc in Concentration.objects.all():
