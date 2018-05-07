@@ -75,6 +75,7 @@ def scheduler(request):
 
 
 def choose_conc(request):
+	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
 	data = {'reqs': Concentration.objects.get(name=conc).get_reqs()}
 	return JsonResponse(data)
