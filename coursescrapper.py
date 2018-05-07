@@ -39,10 +39,9 @@ import ssl
 # TERM_CODE = 1182  # fall 2017
 # TERM_CODE = 1184  # spring 2018
 # TERM_CODE = 1192  # fall 2019
-# TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016",
-# 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2019"}
+# TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016", 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2018"}
 
-TERM_CODES = {1152: "fall 2014", 1154: "spring 2015"}
+TERM_CODES = {1192: "fall 2018", 1184: "spring 2018", 1182: "fall 2017", 1174: "spring 2017", 1172: "fall 2016", 1164: "spring 2016", 1162: "fall 2015", 1154: "spring 2015", 1152: "fall 2014"}
 currentTerm = 0
 course_dict = {}
 
@@ -198,29 +197,31 @@ def scrape_all():
       
 #iterate through terms, also find duplicates
 
-result = []
+result = {}
 if __name__ == "__main__":
   first = True
   for term in TERM_CODES:
-    print (term)
+    print ("TERM: " + str(term))
     oneterm = []
+    oneterm_ids = []
     TERM_CODE = term
 
     for course in scrape_all():
-      if (course["courseid"] in result):
-        result.get(course["courseid"])["term"].append(TERM_CODES[term])
-        json.dump(course, sys.stdout)
-      else:
-        if (course not in oneterm):
+      if (course["courseid"] not in oneterm_ids):
+        if (course["courseid"] in result):
+          result.get(course["courseid"])["term"].append(TERM_CODES[term])
+          # json.dump(course["courseid"], sys.stdout)
+        course["term"].append(TERM_CODES[term])
+        oneterm.append(course)
+        oneterm_ids.append(course["courseid"])
+        json.dump(course["courseid"], sys.stdout)
 
-          course["term"].append(TERM_CODES[term])
-          oneterm.append(course)
-          json.dump(course, sys.stdout)
-
-        json.dump(course, sys.stdout)
+        # json.dump(course["courseid"], sys.stdout)
 
     for c in oneterm:
       result[c["courseid"]] = c
+    print(result)
+
 
 # printing
   first = True

@@ -10,8 +10,12 @@ from home.models import CourseManager
 # Create your views here.
 @login_required
 def index(request):
-	test = Concentration.objects.get(name="Chemistry").get_reqs()
-	print(test)
+
+
+	# test = Concentration.objects.get(name="Chemistry").get_reqs()
+	# print(test)
+	courses = ["010828"]
+	print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
 
 	allconcentrations = []
 	for conc in Concentration.objects.all():
@@ -59,7 +63,6 @@ def scheduler(request):
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
-	print (Course.objects.all_info())
 
 	info = {"plans": plans, "courses": Course.objects.all_info(), "conclist": allconcentrations}
 
