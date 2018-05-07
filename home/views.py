@@ -10,12 +10,19 @@ from home.models import CourseManager
 # Create your views here.
 @login_required
 def index(request):
+	# test = Concentration.objects.get(name="Chemistry").get_reqs()
+	# print(test)
+	courses = ["010828"]
+	print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
+
+	allconcentrations = []
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 	context = {"concs": allconcentrations}
 	return render(
    	    request,
         'index.html',
+        context
     )
 
 def login(request):
