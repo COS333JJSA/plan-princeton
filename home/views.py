@@ -12,8 +12,8 @@ from home.models import CourseManager
 def index(request):
 
 
-	# test = Concentration.objects.get(name="Chemistry").get_reqs()
-	# print(test)
+	test = Concentration.objects.get(name="Art and Archaeology").get_reqs()
+	print(test)
 	courses = ["010828"]
 	print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
 
