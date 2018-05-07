@@ -1,0 +1,225 @@
+36,40c36
+<           });
+< 
+<           $('.deleteCourse').on('click', function() {
+<             $(this).closest('li').remove();
+<           });
+---
+>           })
+46,64c42,46
+<             function myFunction() {
+<               document.getElementById("myDropdown").classList.toggle("show");
+<             }
+< 
+<             function filterFunction() {
+<               var input, filter, ul, li, a, i;
+<               input = document.getElementById("myInput");
+<               filter = input.value.toUpperCase();
+<               div = document.getElementById("myDropdown");
+<               a = div.getElementsByTagName("a");
+<               for (i = 0; i < a.length; i++) {
+<                 if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+<                   a[i].style.display = "";
+<                 }
+<                 else {
+<                   a[i].style.display = "none";
+<                 } 
+<               }
+<             }
+---
+>           function dragstart_handler(ev) {
+>             console.log("dragStart");
+>             // Add the target element's id to the data transfer object
+>             ev.dataTransfer.setData("text/plain", ev.target.id);
+>           }
+66d47
+<           /*
+80,84d60
+<           function dragover_handler(ev) {
+<          ev.preventDefault();
+<          // Set the dropEffect to move
+<          ev.dataTransfer.dropEffect = "move"
+<        }
+98,131d73
+<              */
+< 
+<           function dragstart_handler(ev) {
+<             console.log("dragStart");
+<             // Add the target element's id to the data transfer object
+<             ev.dataTransfer.setData("text/plain", ev.target.id);
+<           }
+< 
+<           function dragover_handler(ev) {
+<             ev.preventDefault();
+<             // Set the dropEffect to move
+<             ev.dataTransfer.dropEffect = "move";
+<           }
+< 
+<           function drop_handler(ev) {
+<             ev.preventDefault();
+<             // Get the id of the target and add the moved element to the target's DOM
+<             var data = ev.dataTransfer.getData("text");
+<             ev.target.appendChild(document.getElementById(data));
+<           }
+< 
+<           function openPlan(evt, name) {
+<             var i, tabcontent, tablinks;
+<             tabcontent = document.getElementsByClassName("tabcontent");
+<             for (i = 0; i < tabcontent.length; i++) {
+<               tabcontent[i].style.display = "none";
+<             }
+<             tablinks = document.getElementsByClassName("tablinks");
+<             for (i = 0; i < tablinks.length; i++) {
+<               tablinks[i].className = tablinks[i].className.replace("active", "");
+<             }
+<             document.getElementById(name).style.display = "block";
+<             evt.currentTarget.className += "active";
+<           }
+133,140c75,112
+<           function configureDegreeLists(ddl1,ddl2, concs) {
+<             var select = ['Select Concentration'];
+<             // var ab = ['Select Concentration:', ];
+<             // var bse = ['Select Concentration:',];
+< 
+<             for (i = 0; i < concs.length; i++) {
+<               createOption(ddl1, concs[i]);
+<             }
+---
+>              function configureDegreeLists(ddl1,ddl2) {
+>                 var select = ['Select Concentration'];
+>                 var ab = ['Select Concentration:', 
+>                    'AAS (African American Studies)', 
+>                    'ANT (Anthropology)',
+>                    'ARC (Architecture)',
+>                    'ART (Art and Archaeology)',
+>                    'AST (Astrophysical Sciences)',
+>                    'CHM (Chemistry)',
+>                    'CLA (CLassics)',
+>                    'COM (Comparative Literature', 
+>                    'COS (Computer Science)', 
+>                    'EAS (East Asian Studies)',
+>                    'EEB (Ecology and Evolutionary Biology)',
+>                    'ECO (Economics)',
+>                    'FIT (French and Italian)',
+>                    'GEO (Geosciences)',
+>                    'GER (German)',
+>                    'HIS (History)',
+>                    'MAT (Mathematics)',
+>                    'MOL (Molecular Biology)',
+>                    'MUS (Music)',
+>                    'NES (Near Eastern Studies)', 
+>                    'NEU (Neuroscience)',
+>                    'PHI (Philosophy)',
+>                    'PSY (Psychology)',
+>                    'REL (Religion)',
+>                    'SLA (Slavic Languages and Literatures)',
+>                    'SOC (Sociology)',
+>                    'SPO (Spanish and Portuguese)',
+>                    'WWS (The Woodrow Wilson School)'];
+>                 var bse = ['Select Concentration:', 
+>                    'CBE (Chemical and Biological Engineering)', 
+>                    'CEE (Civil and Environmental Engineering)', 
+>                    'COS (Computer Science)', 
+>                    'ELE (Electrical Engineering)', 
+>                    'MAE (Mechanical and Aerospace Engineering)', 
+>                    'ORF (Operations Research and Financial Engineering)'];
+142d113
+<                 /*
+166,205d136
+<                 */
+<           }
+< 
+<           function onSelectConcentration(ddl1, ddl2) {
+<             var conc = ddl2.options[ddl2.selectedIndex].value; 
+<             var deg = ddl1.value; // check this reference
+<             $.ajax({
+<               url: '/ajax/choose_conc/', // HEROKU LINK TO DATABASE
+<               data: {
+<                         'c': conc, // 3 letter CONC... comma or nah
+<                         // 'd' : deg // degree
+<                       },
+<                       dataType: 'json',
+<                       // send back reqlist
+<                       success: function (data) { // backend sends fields of data prob JSON/dict 
+<                         // process json data 
+<                         // can prob take the next if statement out
+<                         if (data.is_taken) {
+<                           alert("A user with this username already exists.");
+<                         }
+< 
+<                       }
+<                     });
+<              }
+< 
+<             function onSelectDegree(ddl1) {
+<               var deg = ddl1.value; // check this reference
+<               $.ajax({
+<                       url: '/ajax/choose_deg/', // HEROKU LINK TO DATABASE
+<                       data: {
+<                         'd' : deg
+<                       }
+<                       dataType: 'json',
+<                       success: function(data) {
+<                         arrConcs = data.concs 
+<                         // unhide concentration bar
+<                         // populate the concentration bar
+<                         configureDegreeLists(ddl1, ddl2, arrConcs)
+<                       }
+<               });
+208d138
+<              /*
+211c141
+<                 opt.value = text.substring(0,3);
+---
+>                 opt.value = value;
+215c145,164
+<              */
+---
+> 
+>              function myFunction() {
+>                 document.getElementById("myDropdown").classList.toggle("show");
+>              }
+> 
+>              function filterFunction() {
+>                 var input, filter, ul, li, a, i;
+>                 input = document.getElementById("myInput");
+>                 filter = input.value.toUpperCase();
+>                 div = document.getElementById("myDropdown");
+>                 a = div.getElementsByTagName("a");
+>                 for (i = 0; i < a.length; i++) {
+>                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+>                       a[i].style.display = "";
+>                    } 
+>                    else {
+>                       a[i].style.display = "none";
+>                    }
+>                 }
+>              }
+244c193
+<             <select id="ddl2" onchange="onSelectConcentration(document.getElementById('ddl1'), this)">
+---
+>             <select id="ddl2">
+250,253c199,201
+<     
+<       </div>
+< 
+<       <!--Search Courses-->
+---
+>         </div>      
+>       
+>          <!--Search Courses-->
+259,262c207,208
+<                 {% for key, value in courses.items %}
+<                   <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }}
+<                     <div class="deleteCourse">X</div>
+<                   </li>
+---
+>                 {% for key,value in courses.items %}
+>                   <li id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} </li>
+289,291d234
+<       </div>  
+<   </body>
+< </html>
+292a236,237
+>    </body>
+> </html>
