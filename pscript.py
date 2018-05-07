@@ -22,17 +22,27 @@ def timeConverter(time):
 def stringify(listing):
 	return(listing["dept"] + " " + listing["number"])
 
-# def escape(s):
-# 	char = []
-# 	if s == None:
-# 		return ""
-# 	for c in s:
-# 		if c == '"':
-# 			char.append('\\')
-# 			char.append('"')
-# 		else:
-# 			char.append(c)
-# 	return ''.join(char)
+def escape(s):
+	c = []
+	if s == None:
+		return ""
+	if s.find('&#39;') != -1:
+		c.append(s[0:s.find('&#39;')])
+		c.append('\'')
+		c.append(s[(s.find('&#39;')+5):])
+	elif s.find('&amp') != -1:
+		c.append(s[0:s.find('&amp;')])
+		c.append('&')
+		c.append(s[(s.find('&amp;')+5):])
+	elif s.find('"') != -1 and s.find('\\"') == -1:
+		c.append(s[0:s.find('"')])
+		c.append('\\"')
+		c.append(s[(s.find('"')+1):])
+	else:
+		for char in s:
+			c.append(char)
+		return(''.join(c))
+	return(escape(''.join(c)))
 
 def req_recursion(req, myid, parentid):
 	global r
@@ -105,7 +115,7 @@ def make_req_list(req, myid, curr):
 		req["completed_by_semester"] = 8
 
 	outp += """{{"model": "home.req_list", "pk": {0}, "fields": {{"name": "{1}", "max_counted": {2}, "min_needed": {3}, "description": "{4}", "explanation": "{5}", "double_counting_allowed": {6}, "max_common_with_major": {7}, "pdfs_allowed": {8}, "completed_by_semester": {9}, "req_lists_inside": {10}, "course_list": {11}}}}}, """.format(
-		myid, req["name"], req["max_counted"], req["min_needed"], req["description"], req["explanation"], req["double_counting_allowed"], req["max_common_with_major"], req["pdfs_allowed"], req["completed_by_semester"], curr, c_pks)
+		myid, req["name"], req["max_counted"], req["min_needed"], escape(req["description"]), escape(req["explanation"]), req["double_counting_allowed"], req["max_common_with_major"], req["pdfs_allowed"], req["completed_by_semester"], curr, c_pks)
 
 
 #STATIC INFO and DECLARATIONS
@@ -180,7 +190,7 @@ for i in range(0, len(courses)):
 	scurr.clear()
 
 	for p in course["profs"]:
-		outp += """{{"model": "home.professor", "pk": {0}, "fields": {{"uid": "{1}", "name": "{2}"}}}}, """.format(pcounter, p["uid"], p["name"])
+		outp += """{{"model": "home.professor", "pk": {0}, "fields": {{"uid": "{1}", "name": "{2}"}}}}, """.format(pcounter, p["uid"], escape(p["name"]))
 		pcurr.append(pcounter)
 		pcounter += 1
 	for l in course["listings"]:
@@ -203,7 +213,7 @@ for i in range(0, len(courses)):
 	else:
 		area = list(areas.keys()).index(course["area"])
 	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}}}}}, """.format(i, 
-		course["title"], course["courseid"], area, course["descrip"], pcurr, lcurr, ccurr)
+		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
 
 
 #CONCENTRATIONS
