@@ -71,6 +71,20 @@ def scheduler(request):
 		info
 	)
 
+
+def choose_conc(request):
+	conc = request.GET.get('conc', None)
+	data = {'reqs': Concentration.objects.get(name=conc).get_reqs()}
+	return JsonResponse(data)
+
+def choose_deg(request):
+	deg = request.GET.get('deg', None)
+	concs = []
+	for c in Concentration.objects.filter(degree=deg):
+		concs.append(c.code_and_name())
+	data = {'concs': concs}
+	return JsonResponse(data)
+
 def sampleschedules(request):
 	return render(
 		request,
