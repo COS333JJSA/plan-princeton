@@ -33,7 +33,11 @@
           $('.continue').click(function(){
             var nextId = $(this).parents('.tab-pane').next().attr("id");
             $('[href=#'+nextId+']').tab('show');
-          })
+          });
+
+          $('.deleteCourse').on('click', function() {
+            $(this).closest('li').remove();
+          });
         </script>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -270,8 +274,10 @@
             <div id="myDropdown" class="dropdown-content">
                <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
                <ul class="dropdown-courses">
-                {% for i in courselist %}
-                  <li id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ i }} </li>
+                {% for key, value in courses.items %}
+                  <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }}
+                    <div class="deleteCourse">X</div>
+                  </li>
                 {% endfor %}
                </ul>               
             </div>
