@@ -1573,7 +1573,7 @@
     {
       "name": "Prerequisites",
       "max_counted": 1,
-      "min_needed": 420,
+      "min_needed": 4,
       "explanation": "These form the intellectual foundation of our field, and cover statistics, probability, stochastic processes, and optimization.",
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
@@ -1650,5 +1650,113 @@
       ]
     }
   ]
-}
+},
+
+{
+  "type": "Major",
+  "name": "Politics",
+  "code": "POL",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-department-politics,"
+    "https://www.princeton.edu/politics/"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Joanne S. Gowa",
+      "email": "N/A"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 2,
+      "explanation": "Any course offered by the department.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [],
+      "course_list": [
+        "POL *"
+      ]
+    }
+  ]
+},
+
+{
+  "type": "Major",
+  "name": "Sociology",
+  "code": "SOC",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-department-politics,"
+    "https://www.princeton.edu/politics/"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Frederick F. Wherry",
+      "email": "N/A"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Any course offered by the department.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [],
+      "course_list": [
+        "SOC *"
+      ]
+    }
+  ]
+},
+
+{
+  "type": "Major",
+  "name": "Near East Studies",
+  "code": "SOC",
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/academic-units/department-department-politics,"
+    "https://www.princeton.edu/politics/"
+  ],
+  "contacts": [
+    {
+      "type": "Departmental Representative",
+      "name": "Frederick F. Wherry",
+      "email": "N/A"
+    }
+  ],
+  "req_list": [
+    {
+      "name": "Prerequisites",
+      "max_counted": 1,
+      "min_needed": 1,
+      "explanation": "Any course offered by the department.",
+      "double_counting_allowed": false,
+      "pdfs_allowed": 0,
+      "completed_by_semester": 4,
+      "req_list": [],
+      "course_list": [
+        "SOC *"
+      ]
+    }
+  ]
+},
+
+
+
+
+
+
+
+
+// NO COMMA AT THE END
 ]
