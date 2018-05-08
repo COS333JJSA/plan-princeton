@@ -101,6 +101,7 @@ def choose_conc(request):
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
 	}
+	print(data)
 	return JsonResponse(data)
 
 def choose_deg(request):
