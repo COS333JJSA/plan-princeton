@@ -91,12 +91,15 @@ def choose_season(request):
 def choose_conc(request):
 	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
-	# if (conc.degree == 'AB'):
-		
-	# else:
+	if (conc.degree == 'AB'):
+		degreereqs = Concentration.objects.get(name='A.B.').get_reqs()
+	else:
+		degreereqs = Concentration.objects.get(name='B.S.E.').get_reqs()
 
 
-	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs()}
+	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
+			'degreereqs': degreereqs
+	}
 	return JsonResponse(data)
 
 def choose_deg(request):
