@@ -43,7 +43,7 @@
         // <script>
 
           function dragstart_handler(ev) {
-            console.log("dragStart");
+            // console.log("dragStart");
             // Add the target element's id to the data transfer object
             ev.dataTransfer.setData("text/plain", ev.target.id);
           }
@@ -151,17 +151,17 @@
                 opt.value = text.substring(0,3);
                 opt.text = text;
                 ddl.options.add(opt);
-                console.log("createOption");
+                // console.log("createOption");
              }
 
               function configureDegreeLists(ddl1,ddl2, concs) {
-                console.log("ONE configureDegreeLists");
+                // console.log("ONE configureDegreeLists");
                 var select = ['Select Concentration'];
-                console.log(concs);
-                for (i = 0; i < concs.size(); i++) {
+                // console.log(concs);
+                for (i = 0; i < concs.length; i++) {
                   createOption(ddl2, concs[i])
                 }
-                console.log("configureDegreeLists");
+                // console.log("configureDegreeLists");
               }
 
               function configureRequirements(reqs) {
@@ -169,14 +169,15 @@
                 for(var i = 0; i < reqs.length; i++){
                   if (!(typeof reqs[i] === 'string' || reqs[i] instanceof String)) {
                     configureRequirements(reqs[i])
-                    console.log(reqs[i]);
+                    // console.log(reqs[i]);
                   }
                 }
+
               }
 
               //  {% block javascript %}
               function onSelectConcentration(ddl1, ddl2) {
-                console.log("CONC 1");
+                // console.log("CONC 1");
 
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
@@ -192,8 +193,9 @@
                         success: function (data) { // backend sends fields of data prob JSON/dict 
                           // process json data 
                           // can prob take the next if statement out
-                          console.log($(this).val());
+                          // console.log($(this).val());
                           console.log(data.reqs);
+
                           configureRequirements(data.reqs)
                           /*
                           if (data.is_taken) {
@@ -213,10 +215,6 @@
                             },
                             dataType: 'json',
                             success: function(data) {
-                              console.log(ddl1)
-                              console.log(data.concs)
-                              console.log("ajax");
-
                               // console.log( $(this).val() );
                               // unhide concentration bar
                               // populate the concentration bar
@@ -268,7 +266,7 @@
                   $("h4").toggle()
               });
             });
-            
+            */
 
 
             function remove_course(ev) {
@@ -276,14 +274,14 @@
                 $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
-                    'id' = id;
+                    'id' : id
                   },
                   dataType: 'json',
                   success: function(data) {
                     configureDegreeLists(ddl1, ddl2, data.concs)
                   }
                 })
-              } */
+              } 
        </script>
 
     </head>  
@@ -308,7 +306,7 @@
       <div class="tabcontent">
         <div class="tab-pane" id="plan1">
          <!-- Drag and Drop  Menu for Concentration and Certificates-->
-         <div class="selectDegree">
+         <div class="SelectDegree">
             <select id="ddl1" onchange="onSelectDegree(this)">                
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>

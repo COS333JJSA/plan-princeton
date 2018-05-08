@@ -227,11 +227,7 @@ h6 {
   border: 2px solid #ddd;
   overflow: auto;
   height: 100vh;
-<<<<<<< HEAD
-  width: 297px;
-=======
   width: 287px;
->>>>>>> master
   border-radius: 25px;
   z-index: 1;
 }
