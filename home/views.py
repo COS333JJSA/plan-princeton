@@ -31,41 +31,38 @@ def logout(request):
 
 @login_required
 def scheduler(request):
-	allcourses = []
-	allconcentrations = []
 	cnetid = request.user.username
-	courseexplanations = []
-	coursedescrip = {}
+	first_info = {}
+
+	#ignore 'none' courses
+	allcourses = []
+	for springcourse in Course.objects.filter(season='s').all():
+		allcourses.append(springcourse)
+	for fallcourse in Course.objects.filter(season='f').all():
+		allcourses.append(fallcourse)
+	for bothcourse in Course.objects.filter(season='b').all():
+		allcourses.append(bothcourse)
 
 	#if user object exists and saved plan exists, load saved
 	if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
 		plan = User.objects.filter(netid=cnetid).values('plan')
-		saved_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).get_reqs(), 
-		'degreqs': Concentration.objects.get(name=plan.deg).get_reqs()}
+		plan_courses = plan.return_courses()
+
+
+
+		first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
+		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
 	#if either no user object or no plans
 	else 
 		# if no current user object, make one
 		if:
 			u = User(netid=cnetid)
 			u.save()
+		first_info = {'saved': False}
+
 		
-		
 
-	springcourses = []
-	fallcourses = []
-	bothcourses = []
-	for springcourse in Course.objects.filter(season='s').all():
-		springcourses.append(springcourse)
-	for fallcourse in Course.objects.filter(season='f').all():
-		fallcourses.append(fallcourse)
-	for bothcourse in Course.objects.filter(season='b').all():
-		bothcourses.append(bothcourse)
-
-	for conc in Concentration.objects.all():
-		allconcentrations.append(conc.name)
-
-	info = {"fallcourses": fallcourses, "springcourses": springcourses, "bothcourses": bothcourses,
-	"courses": Course.objects.all_info(), "conclist": allconcentrations}
+	info = {"courses": allcourses}
 
 	return render(
 		request,

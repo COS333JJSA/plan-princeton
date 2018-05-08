@@ -280,6 +280,11 @@ class Plan(models.Model):
 				spring20.append(course)
 		planbysem = {'fall18': fall18, 'fall19': fall19, 'spring19': spring19, 'spring20': spring20}
 		return planbysem
+	def return_courses(self):
+		courses = []
+		for s_course in self.saved_courses.all():
+			courses.append(s_course.course)
+		return courses
 
 class SavedCourse(models.Model):
 	course = models.ManyToManyField('Course')
