@@ -71,12 +71,12 @@ def scheduler(request):
 	# 		if springcourse.year == '2020':
 	# 			spring20.append(springcourse)
 
-	# springcourses = []
-	# fallcourses = []
-	# for springcourse in Course.objects.filter(season='s').all():
-	# 	springcourses.append(springcourse)
-	# for fallcourse in Course.objects.filter(season='f').all():
-	# 	fallcourses.append(fallcourse)
+	springcourses = []
+	fallcourses = []
+	for springcourse in Course.objects.filter(season='s').all():
+		springcourses.append(springcourse)
+	for fallcourse in Course.objects.filter(season='f').all():
+		fallcourses.append(fallcourse)
 
 
 	for conc in Concentration.objects.all():
