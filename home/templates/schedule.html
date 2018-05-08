@@ -148,19 +148,35 @@
                 opt.value = text.substring(0,3);
                 opt.text = text;
                 ddl.options.add(opt);
+                console.log("createOption");
              }
 
               function configureDegreeLists(ddl1,ddl2, concs) {
+                console.log("ONE configureDegreeLists");
                 var select = ['Select Concentration'];
                 for (i = 0; i < concs.length; i++) {
                   createOption(ddl1, concs[i])
+                }
+                console.log("configureDegreeLists");
               }
-            }
+
+              function configureRequirements(reqs) {
+                // iterate through the requirements array RECURSIVELY??
+                for(var i = 0; i < reqs.length; i++){
+                  if (!(typeof reqs[i] === 'string' || reqs[i] instanceof String)) {
+                    configureRequirements(reqs[i])
+                    console.log(reqs[i]);
+                  }
+                }
+              }
 
               //  {% block javascript %}
               function onSelectConcentration(ddl1, ddl2) {
+                console.log("CONC 1");
+
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
+                console.log("Conc before ajax");
                 $.ajax({
                         url: '/ajax/choose_conc/', // HEROKU LINK TO DATABASE
                         data: {
@@ -174,6 +190,7 @@
                           // can prob take the next if statement out
                           console.log($(this).val());
                           console.log("conc from backend");
+                          configureRequirements(data.reqs)
                           /*
                           if (data.is_taken) {
                             alert("A user with this username already exists.");
@@ -195,7 +212,6 @@
                               console.log(ddl1)
                               console.log(data.concs)
                               // console.log( $(this).val() );
-
                               // unhide concentration bar
                               // populate the concentration bar
                               configureDegreeLists(ddl1, ddl2, data.concs)

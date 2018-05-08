@@ -1,0 +1,16 @@
+Prerequisites 1
+-Gen Chem (2)
+   -Subreq 1 (1)
+   	 -c1
+   	 -c2
+   -Subreq 2 (1)
+     -c3
+     -c4
+-
+
+
+
+[Prerequisites (1), [Gen Chem (2), [Subreq 1 (1), [c1, c2], Subreq 2 (1), [c3, c4]]]]
+
+if type(arr[1]) == list:
+for i in arr[1]
