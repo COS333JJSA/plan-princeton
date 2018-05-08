@@ -47,17 +47,20 @@
             // Add the target element's id to the data transfer object
             ev.dataTransfer.setData("text/plain", ev.target.id);
           }
+
           function dragover_handler(ev) {
             ev.preventDefault();
             // Set the dropEffect to move
             ev.dataTransfer.dropEffect = "move"
           }
+
           function drop_handler(ev) {
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
           }
+
             function openPlan(evt, name) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
@@ -162,7 +165,7 @@
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
                 $.ajax({
-                        url: '/ajax/choose_conc/', // HEROKU LINK TO DATABASE
+                        url: '/home/ajax/choose_conc/', // HEROKU LINK TO DATABASE
                         data: {
                           'conc': conc, // 3 letter CONC... comma or nah
                           // 'd' : deg // degree
@@ -186,7 +189,7 @@
               function onSelectDegree(ddl1) {
                     var deg = ddl1.value; // check this reference
                     $.ajax({
-                            url: '/ajax/choose_deg/', // HEROKU LINK TO DATABASE
+                            url: '/home/ajax/choose_deg/', // HEROKU LINK TO DATABASE
                             data: {
                               'deg' : deg
                             },
@@ -224,16 +227,44 @@
                 }
              }
 
+             $(document).ready(function() {
+              $(".fa-times").click(function () {
 
-             function showCourseInformation(ev) {
+              })
+             })
+        /*     function showCourseInformation(ev) {
               var id = ev.target.id;
-              if (id.style.display === "none") {
-                id.style.display = "table";
+              alert("{{key}}");
+              if (tag.style.display === "none") {
+                tag.style.display = "table";
               }
               else {
-                id.style.display = "none";
+                tag.style.display = "none";
               }
              }
+
+            $(document).ready(function() {
+              $("#btn1").click(function() {
+                  $("h3").toggle();
+                  $("h4").toggle()
+              });
+            });
+            
+
+
+            function remove_course(ev) {
+              var id = ev.target.id;
+                $.ajax({
+                  url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
+                  data: {
+                    'id' = id;
+                  },
+                  dataType: 'json',
+                  success: function(data) {
+                    configureDegreeLists(ddl1, ddl2, data.concs)
+                  }
+                })
+              } */
        </script>
 
     </head>  
@@ -259,7 +290,7 @@
          <!-- Drag and Dro  Menu for Concentration and Certificates-->
          <div class="selectDegree">           
 
-            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'));">                
+            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'))">                
 
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
@@ -267,7 +298,7 @@
             </select>                
             <select id="ddl2">
                {% for i in conclist %}
-                  <option> {{ i }} </option>
+                  <option> {{i}} </option>
                {% endfor %}
             </select>
           </div>
@@ -275,22 +306,30 @@
       
          <!--Search Courses-->
         <div class="dropdown">
-            <button onclick="myFunction();" class="dropbtn">Start searching for courses!</button>
+            <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
-               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction();"> 
+               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
                <ul id="myUL" class="dropdown-courses">
+
                 {% for key, value in courses.items %}
-                  <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);" > {{ value.coursename }} 
-                    <button class="fa fa-caret-down" onclick="showCourseInformation(event);"></button>
+                  
+                  <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
+                    <button class="fa fa-caret-down"></button>
+                    <button class="fa fa-times" onclick="remove_course(event)"></button>
                   </li>
-                  <div id="{{ key }}" class="courseInfo">
+
+          <!--        <div class="{{key}}">
                     {% for p in value.professors %}
-                      <h3> Professors: </h3> {{ p }} 
-                      <br/> <br/>
-                      <h3> Course Description: </h3> {{ value.description }}
+                      <h3> Professors: </h3> 
+                      <h4> {{ p }} </h4>
                     {% endfor %}
+                      <br/> <br/>
+                      <h3> Course Description: </h3> 
+                      <h4> {{ value.description }} </h4>
                   </div>
+                         -->           
                 {% endfor %}
+
                </ul>              
             </div>
         </div>
@@ -307,19 +346,19 @@
          </div>
 
          <!--Schedule-->
-         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
+         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
          </div>
          
-         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
+         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Spring 2019</h1>
          </div>
          
-         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
+         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall 2019</h1>
          </div>
          
-         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
+         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Sophomore Spring 2020</h1>
          </div>
 
