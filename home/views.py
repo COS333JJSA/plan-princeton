@@ -11,18 +11,6 @@ from django.http import JsonResponse
 # Create your views here.
 @login_required
 def index(request):
-
-
-	test = Concentration.objects.get(name="Chemistry").get_reqs()
-	print(test)
-	
-	# courses = ["010828"]
-	# print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
-
-	allconcentrations = []
-	for conc in Concentration.objects.all():
-		allconcentrations.append(conc.name)
-	context = {"concs": allconcentrations}
 	return render(
    	    request,
         'index.html',
@@ -58,7 +46,7 @@ def scheduler(request):
 		u = User(netid=cnetid)
 		u.save()
 		plans = []
-
+		
 	# fall18, fall19, spring19, spring20 = []
 	# for plan in plans:
 	# 	for course in plan:
@@ -103,6 +91,7 @@ def choose_season(request):
 	return JsonResponse(data)
 
 def choose_conc(request):
+	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
 	data = {'reqs': Concentration.objects.get(name=conc).get_reqs()}
 	return JsonResponse(data)

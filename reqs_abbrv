@@ -137,8 +137,8 @@
       "req_list": [
         {
           "name": "Courses in Program in Visual Arts",
-          "max_counted": 2,
-          "min_needed": 2,
+          "max_counted": 1,
+          "min_needed": 1,
           "explanation": "Prospective ART students need two courses from the Program in Visual Arts.",
           "double_counting_allowed": false,
           "course_list": [

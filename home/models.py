@@ -22,13 +22,6 @@ class Department(models.Model):
 	def __str__(self):
 		return str(self.name)
 
-# class Req_ListManager(models.Manager):
-# 	def get_queryset(self):
-# 		return super(ConcentrationManager, self).get_queryset()
-
-# 	def get_concentration(self, conc):
-# 		return super(ConcentrationManager, self).get_queryset().get(name = conc)
-
 class Req_List(models.Model):
 	name = models.CharField(max_length=100)
 	max_counted = models.IntegerField(default=1)
@@ -46,80 +39,9 @@ class Req_List(models.Model):
 	def __str__(self):
 		return str(self.name)
 
-class ConcentrationManager(models.Manager):
-	def get_queryset(self):
-		return super(ConcentrationManager, self).get_queryset()
-	# def get_reqs(self, conc):
-	# 	level_one = []
-	# 	level_two = []
-	# 	level_three = []
-	# 	level_four = []
-	# 	level_five = []
-	# 	levels = [level_one, level_two, level_three, level_four, level_five]
-	# 	temp = {}
-	# 	temp_c = []
-	# 	temp["titles"] = temp_c
-	# 	level = 0
-	# 	return 
-
-		# for r in reqs:
-		# 	temp_c.append(r.name + " (" + str(r.min_needed) + ")")
-		# 	level += 1
-		# 	temp2 = {}
-		# 	temp2_c = []
-		# 	#if another nested level
-		# 	#if len(r["req_lists_inside"]) > 0:
-		# 	if "req_lists_inside" in r.keys():
-		# 		temp2["titles"] = temp2_c
-		# 		for r2 in r["req_lists_inside"]:
-		# 			temp2_c.append(r2["name"] + " (" + str(r2["min_needed"]) + ")")
-		# 			level += 1
-		# 			temp3 = {}
-		# 			temp3_c = []
-		# 			#if another nested level
-		# 			#if len(r2["req_lists_inside"]) > 0:
-		# 			if "req_lists_inside" in r2.keys():
-		# 				temp3["titles"] = temp3_c
-		# 				for r3 in r2["req_lists_inside"]:
-		# 					temp3_c.append(r3["name"] + " (" + str(r3["min_needed"]) + ")")
-		# 					level += 1
-		# 					temp4 = {}
-		# 					temp4_c = []
-		# 					#if another nested level
-		# 					#if len(r3["req_lists_inside"]) > 0:
-		# 					if "req_lists_inside" in r3.keys():
-		# 						temp4["titles"] = temp4_c
-		# 						for r4 in r3["req_lists_inside"]:
-		# 							temp4_c.append(r4["name"] + " (" + str(r4["min_needed"]) + ")")
-		# 							level += 1
-		# 							temp5 = {}
-		# 							temp5_c = []
-		# 							temp5["courses"] = temp5_c
-		# 							for c5 in r4.course_list:
-		# 								temp5_c.append(c5)
-		# 							levels[level].append(temp5)
-		# 							level -= 1
-		# 					else:
-		# 						temp4["courses"] = temp4_c
-		# 						for c4 in r3["course_list"]:
-		# 							temp4_c.append(c4)
-		# 					levels[level].append(temp4)
-		# 					level -= 1
-		# 			else:
-		# 				temp3["courses"] = temp3_c
-		# 				for c3 in r2["course_list"]:
-		# 					temp3_c.append(c3)
-		# 			levels[level].append(temp3)
-		# 			level -= 1
-		# 	else:
-		# 		temp2["courses"] = temp2_c
-		# 		for c2 in r["course_list"]:
-		# 			temp2_c.append(c2)
-		# 	levels[level].append(temp2)
-		# 	level -= 1
-		# levels[level].append(temp)
-
-
+# class ConcentrationManager(models.Manager):
+# 	def get_queryset(self):
+# 		return super(ConcentrationManager, self).get_queryset()
 
 
 #Concentration.objects.get(name = 'African American Studies').req_lists.get(name='Prerequisite ').explanation
@@ -132,8 +54,6 @@ class Concentration(models.Model):
 	urls = models.ManyToManyField(URL)
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
-	#  super(ConcentrationManager, self).get_queryset()
-	#objects = ConcentrationManager()
 	# sample_plans = models.ManyToManyField('Plan')
 
 	def __str__(self):
@@ -145,7 +65,8 @@ class Concentration(models.Model):
 	def get_description(self):
 		return self.req_lists
 
-	def calculate_reqs(self, r_array):
+	def get_reqs(self):
+		r_array = self.req_lists.all()
 		temp = []
 		for r in r_array:
 			temp.append(r.name + " (" + str(r.min_needed) + ")")
@@ -176,126 +97,83 @@ class Concentration(models.Model):
 		return temp
 
 
-	def get_reqs(self):
-		return self.calculate_reqs(self.req_lists.all())
-
 	def update_reqs(self, courses):
-		print("update_reqs")
-		#args: plan, conc
-		#make a list of course ids in current plan
-		# courses = []
-		# for c in plan.saved_courses:
-		# 	courses.append(c.course.courseid)
-		#make a copy of the req_list
-		# self.pk = None
-		rs = []
-		for r in self.req_lists.all():
-			rs.append(r)
-			if r.req_lists_inside.all():
-				for r2 in r.req_lists_inside.all():
-					if r2.req_lists_inside.all():
-						for r3 in r2.req_lists_inside.all():
-							if r3.req_lists_inside.all():
-								for r4 in r3.req_lists_inside.all():
-									for c in r4.course_list.all():
-										if c in r3.course_list.all():
-											r4.course_list.remove(c)
-											r4.min_needed -= 1
-											r3.min_needed -= 1
-											r2.min_needed -= 1
-											r.min_needed -= 1
-							else:
-								for c in courses:
-									if c in r3.course_list.all():
-										r3.course_list.remove(c)
-										r3.min_needed -= 1
-										r2.min_needed -= 1
-										r.min_needed -= 1
-					else:
-						for c in courses:
-							if c in r2.course_list.all():
-								r2.course_list.remove(c)
-								r2.min_needed -= 1
-								r.min_needed -= 1
-			else:
-				for c in courses:
-					if c in r2.course_list.all():
-						r.course_list.remove(c)
-						r.min_needed -= 1
-		return self.calculate_reqs(rs)
+		new_courses = []
+		for i in courses:
+			new_courses.append(Course.objects.get(courseid=i).title_and_code())
+		return self.reqing(new_courses, self.get_reqs())
 
-	# def get_reqs(self):
-	# 	# reqs = [{"name": "General Chemistry", "min_needed": 2, "req_lists_inside": [{"name": "Differential and Integral Calculus", "min_needed": 2, "course_list": ["Calculus II", "Calculus I"]}, {"name": "Req2", "min_needed": 4, "course_list": ["c1", "c2"]}]}, {"name": "Gen2", "min_needed": 3, "course_list": ["c3", "c4"]}]
-	# 	# reqs = 
-	# 	level_one = []
-	# 	level_two = []
-	# 	level_three = []
-	# 	level_four = []
-	# 	level_five = []
-	# 	levels = [level_one, level_two, level_three, level_four, level_five]
-	# 	temp = {}
-	# 	temp_c = []
-	# 	temp["titles"] = temp_c
-	# 	level = 0
+		
 
-	# 	for r in reqs:
-	# 		temp_c.append(r.name + " (" + str(r.min_needed) + ")")
-	# 		level += 1
-	# 		temp2 = {}
-	# 		temp2_c = []
-	# 		#if another nested level
-	# 		#if len(r["req_lists_inside"]) > 0:
-	# 		if "req_lists_inside" in r.keys():
-	# 			temp2["titles"] = temp2_c
-	# 			for r2 in r.req_lists_inside:
-	# 				temp2_c.append(r2.name + " (" + str(r2.min_needed) + ")")
-	# 				level += 1
-	# 				temp3 = {}
-	# 				temp3_c = []
-	# 				#if another nested level
-	# 				#if len(r2["req_lists_inside"]) > 0:
-	# 				if "req_lists_inside" in r2.keys():
-	# 					temp3["titles"] = temp3_c
-	# 					for r3 in r2.req_lists_inside:
-	# 						temp3_c.append(r3.name + " (" + str(r3.min_needed) + ")")
-	# 						level += 1
-	# 						temp4 = {}
-	# 						temp4_c = []
-	# 						#if another nested level
-	# 						#if len(r3["req_lists_inside"]) > 0:
-	# 						if "req_lists_inside" in r3.keys():
-	# 							temp4["titles"] = temp4_c
-	# 							for r4 in r3.req_lists_inside:
-	# 								temp4_c.append(r4.name + " (" + str(r4.min_needed) + ")")
-	# 								level += 1
-	# 								temp5 = {}
-	# 								temp5_c = []
-	# 								temp5["courses"] = temp5_c
-	# 								for c5 in r4.course_list:
-	# 									temp5_c.append(c5)
-	# 								levels[level].append(temp5)
-	# 								level -= 1
-	# 						else:
-	# 							temp4["courses"] = temp4_c
-	# 							for c4 in r3.course_list:
-	# 								temp4_c.append(c4)
-	# 						levels[level].append(temp4)
-	# 						level -= 1
-	# 				else:
-	# 					temp3["courses"] = temp3_c
-	# 					for c3 in r2.course_list:
-	# 						temp3_c.append(c3)
-	# 				levels[level].append(temp3)
-	# 				level -= 1
-	# 		else:
-	# 			temp2["courses"] = temp2_c
-	# 			for c2 in r.course_list:
-	# 				temp2_c.append(c2)
-	# 		levels[level].append(temp2)
-	# 		level -= 1
-	# 	levels[level].append(temp)
+	def reqing(self, courses, arr):
+		new_courses = courses
 
-	# 	return levels
+		# def calculator()
+		for c0 in range(0, len(arr)):
+			r = arr[c0]
+			if type(r) == list:
+				for c1 in range(0, len(r)):
+					r2 = r[c1]
+					if type(r2) == list:
+						for c2 in range(0, len(r2)):
+							r3 = r2[c2]
+							if type(r3) == list:
+								for c3 in range(0, len(r3)):
+									r4 = r3[c3]
+									if r4 in new_courses:
+										r3.remove(r4)
+										if len(r3) == 0:
+											r2.remove(r3)
+										temp4 = int(r2[c2-1][len(r2[c2-1])-2]) - 1
+										if temp4 == 0:
+											r2.remove(r2[c2-1])
+										else:
+											r2[c2-1] = str(r2[c2-1][0:len(r2[c2-1])-2] + str(temp4) + ")")
+										if len(r2) == 0:											
+											r.remove(r2)
+										temp4a = int(r[c1-1][len(r[c1-1])-2]) - 1
+										if temp4a == 0:
+											r.remove(r[c1-1])
+										else:
+											r[c1-1] = str(r[c1-1][0:len(r[c1-1])-2] + str(temp4a) + ")")
+										if len(r) == 0:
+											arr.remove(r)
+										temp4b = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+										if temp4b == 0:
+											return arr.remove(arr[c0-1])
+										else:
+											arr[c0-1] = str(arr[c0-1][0:len(arr[c0-1])-2] + str(temp4b) + ")")
+										return self.reqing(new_courses, arr)
+							elif r3 in new_courses:
+								r2.remove(r3)
+								if len(r2) == 0:
+									r.remove(r2)
+								temp3 = int(r[c1-1][len(r[c1-1])-2]) - 1
+								if temp3 == 0:
+									r.remove(r[c1-1])
+								else:
+									r[c1-1] = str(r[c1-1][0:len(r[c1-1])-2] + str(temp3) + ")")
+								if len(r) == 0:
+									arr.remove(r)
+								temp3a = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+								if temp3a == 0:
+									arr.remove(arr[c0-1])
+								else:
+									arr[c0-1] = str(arr[c0-1][0:len(arr[c0-1])-2] + str(temp3a) + ")")
+								return self.reqing(new_courses, arr)
+
+					elif r2 in new_courses:
+						r.remove(r2)
+						if len(r) == 0:
+							return None
+						temp2 = int(arr[c0-1][0:len(arr[c0-1])-2]) - 1
+						if temp2 == 0:
+							arr.remove(arr[c0-1])
+						else:
+							arr[c0-1] = str(arr[c0-1][len(arr[c0-1])-2] + str(temp2) + ")")
+						return self.reqing(new_courses, arr)
+		return arr
+
 
 class Professor(models.Model):
 	uid = models.CharField(max_length=9)
