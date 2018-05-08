@@ -49,8 +49,6 @@ def scheduler(request):
 			u = User(netid=cnetid)
 			u.save()
 		
-		
-
 	springcourses = []
 	fallcourses = []
 	bothcourses = []
