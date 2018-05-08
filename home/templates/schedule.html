@@ -159,7 +159,7 @@
                 var select = ['Select Concentration'];
                 console.log(concs);
                 for (i = 0; i < concs.size(); i++) {
-                  createOption(ddl1, concs[i])
+                  createOption(ddl2, concs[i])
                 }
                 console.log("configureDegreeLists");
               }
@@ -187,13 +187,13 @@
                           'conc': conc, // 3 letter CONC... comma or nah
                           // 'd' : deg // degree
                         },
-                        dataType: 'xml',
+                        dataType: 'json',
                         // send back reqlist
                         success: function (data) { // backend sends fields of data prob JSON/dict 
                           // process json data 
                           // can prob take the next if statement out
                           console.log($(this).val());
-                          console.log("conc from backend");
+                          console.log(data.reqs);
                           configureRequirements(data.reqs)
                           /*
                           if (data.is_taken) {
@@ -203,6 +203,7 @@
                         }
                       });
               }
+
               function onSelectDegree(ddl1) {
                     var deg = ddl1.value; // check this reference
                     $.ajax({
@@ -210,10 +211,12 @@
                             data: {
                               'deg' : deg
                             },
-                            dataType: 'xml',
+                            dataType: 'json',
                             success: function(data) {
                               console.log(ddl1)
                               console.log(data.concs)
+                              console.log("ajax");
+
                               // console.log( $(this).val() );
                               // unhide concentration bar
                               // populate the concentration bar
@@ -310,10 +313,9 @@
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
             </select>                
+
             <select id="ddl2">
-               {% for i in conclist %}
-                  <option> {{i}} </option>
-               {% endfor %}
+
             </select>
           </div>
         </div>      
