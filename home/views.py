@@ -66,9 +66,7 @@ def scheduler(request):
 	# if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
 	# 	plan = User.objects.filter(netid=cnetid).values('plan')
 	# 	plan_courses = plan.return_courses()
-
-
-
+	
 	# 	first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 	# 	'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
 	# #if either no user object or no plans
@@ -122,7 +120,7 @@ def choose_deg(request):
 	cnetid = request.user.username
 	plan = User.objects.filter(netid=cnetid).values('plan')
 	plan.degree = deg
-	plan.save()
+	# plan.save()
 
 	#send frontend list of concs associated with deg	
 	concs = []
