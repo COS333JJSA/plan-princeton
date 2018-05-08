@@ -8,6 +8,9 @@ from home.models import Course
 from home.models import CourseManager
 from django.http import JsonResponse
 from home.models import Plan
+from home.models import SavedCourse
+from home.models import Semester
+
 
 # Create your views here.
 @login_required
@@ -47,9 +50,14 @@ def scheduler(request):
 		allcourses.append(course)
 
 	#if user object exists and saved plan exists, load saved
-	if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
-		plan = User.objects.filter(netid=cnetid).values('plan')
-		plan_courses = plan.return_courses()
+	#if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
+	##?????
+	if User.objects.filter(netid=cnetid).count() > 0 and User.objects.get(netid=cnetid).plan is not None:
+		user = User.objects.get(netid=cnetid)
+		print (user.netid)
+		print (user.plan)
+		plan_courses = user.plan.return_courses()
+
 		for course in plan_courses:
 			allcourses.remove(course)
 			# ^ is that gonna work??
