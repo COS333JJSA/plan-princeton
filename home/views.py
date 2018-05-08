@@ -102,7 +102,7 @@ def choose_deg(request):
 	cnetid = request.user.username
 	plan = User.objects.filter(netid=cnetid).values('plan')
 	plan.degree = deg
-	plan.save()
+	# plan.save()
 
 	#send frontend list of concs associated with deg	
 	concs = []
