@@ -28,6 +28,6 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('', RedirectView.as_view(url='/home/')),
     url(r'accounts/login/$', django_cas_ng.views.login),
-    url(r'accounts/logout/$', django_cas_ng.views.logout)
+    url(r'accounts/logout/$', django_cas_ng.views.logout),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

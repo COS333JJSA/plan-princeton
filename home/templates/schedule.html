@@ -186,12 +186,13 @@
               function onSelectDegree(ddl1) {
                     var deg = ddl1.value; // check this reference
                     $.ajax({
-                            url: '/ajax/choose_deg/', // HEROKU LINK TO DATABASE
+                            url: '/home/ajax/choose_deg/', // HEROKU LINK TO DATABASE
                             data: {
                               'deg' : deg
                             },
                             dataType: 'json',
                             success: function(data) {
+                              console.log("hi")
                               console.log(ddl1)
                               console.log(data.concs)
                               // console.log( $(this).val() );

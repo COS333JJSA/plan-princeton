@@ -14,7 +14,6 @@ def index(request):
 	return render(
    	    request,
         'index.html',
-        context
     )
 
 def login(request):
@@ -97,7 +96,7 @@ def choose_conc(request):
 	return JsonResponse(data)
 
 def choose_deg(request):
-	deg = request.GET.get('deg', None)
+	deg = request.GET.get('deg', None).upper()
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())

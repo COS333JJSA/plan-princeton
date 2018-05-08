@@ -60,7 +60,7 @@ class Concentration(models.Model):
 		return str(self.name)
 
 	def code_and_name(self):
-		return self.conc_code + " (" + self.name + ")"
+		return self.conc_code.code + " (" + self.name + ")"
 
 	def get_description(self):
 		return self.req_lists
