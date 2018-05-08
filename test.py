@@ -1,4 +1,6 @@
 import json
+from partial_response import result
 
-result_load = json.load(open("partial_response.json", "r"))
-print(result_load['000004'])
+# result_load = result()
+# print(type(result_load))
+print("hi")
