@@ -359,6 +359,9 @@
          <!--Schedule-->
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
+            {% for key, value in fall1.items%}
+              <li> {{ value.coursename }} </li>
+            {% endfor %}
          </div>
          
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
