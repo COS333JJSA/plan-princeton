@@ -1,6 +1,8 @@
 body {
   overflow-x: hidden;
-  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
   min-width: 100%;
   margin: 0;
   padding: 0;
@@ -8,10 +10,6 @@ body {
 
 p {
   line-height: 1.75;
-}
-
-  color: #ffa12e;
-  font-size: 14px;
 }
 
 a:hover {
@@ -25,7 +23,7 @@ a:hover {
 h1 {
   font-weight: 600;
   font-size: 18px;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
 }
 
@@ -34,15 +32,20 @@ h2 {
   padding-left: 30px;
   font-size: 18px;
   text-align: center;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-h3,
+h3 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+
 h4,
 h5,
 h6 {
   font-weight: 700;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container {
@@ -60,14 +63,14 @@ h6 {
   color: #212529;
   border: 0;
   background-color: white;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #mainNav .navbar-brand {
   color: #ffa12e;
   font-size: 32px;
   font-weight: 800px;
-  font-family: 'Aclonica', 'Helvetica Neue', Helvetica, Arial, cursive;
+  font-family: 'Aclonica', cursive;
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
@@ -82,7 +85,7 @@ h6 {
 }
 
 .btn {
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
 
@@ -259,6 +262,19 @@ ul li {
   border-radius: 25px;
   overflow: auto;
   font-size: 16px;
+}
+
+.dragCourse:hover {
+  background-color: #ffa12e;
+}
+
+.fa-caret-down:hover {
+  background-color: black;
+  color: white;
+}
+
+.courseInfo {
+  display: none;
 }
 
 .show {
