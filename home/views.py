@@ -36,50 +36,39 @@ def scheduler(request):
 
 	#ignore 'none' courses
 	allcourses = []
-	for springcourse in Course.objects.filter(season='s').all():
-		allcourses.append(springcourse)
-	for fallcourse in Course.objects.filter(season='f').all():
-		allcourses.append(fallcourse)
-	for bothcourse in Course.objects.filter(season='b').all():
-		allcourses.append(bothcourse)
+	# for springcourse in Course.objects.filter(season='s').all():
+	# 	allcourses.append(springcourse)
+	# for fallcourse in Course.objects.filter(season='f').all():
+	# 	allcourses.append(fallcourse)
+	# for bothcourse in Course.objects.filter(season='b').all():
+	# 	allcourses.append(bothcourse)
+	for course in Course.objects.all():
+		allcourses.append(course)
 
 	#if user object exists and saved plan exists, load saved
 	if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
 		plan = User.objects.filter(netid=cnetid).values('plan')
 		plan_courses = plan.return_courses()
-
+		for course in plan_courses:
+			allcourses.remove(course)
+			# ^ is that gonna work??
 
 
 		first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
-		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
+		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses), 'courses': allcourses}
 	#if either no user object or no plans
 	else:
 		# if no current user object, make one
-		#if:
-			u = User(netid=cnetid)
-			u.save()
-		
-	# springcourses = []
-	# fallcourses = []
-	# bothcourses = []
-	# for springcourse in Course.objects.filter(season='s').all():
-	# 	springcourses.append(springcourse)
-	# for fallcourse in Course.objects.filter(season='f').all():
-	# 	fallcourses.append(fallcourse)
-	# for bothcourse in Course.objects.filter(season='b').all():
-	# 	bothcourses.append(bothcourse)
+		u = User(netid=cnetid)
+		u.save()
 
-	first_info = {'saved': False}
+		first_info = {'saved': False, 'courses': allcourses}
 
-
-		
-
-	info = {"courses": allcourses}
 
 	return render(
 		request,
 		'schedule.html',
-		info
+		firstinfo
 	)
 
 def choose_season(request):
