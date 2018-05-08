@@ -59,8 +59,6 @@ def scheduler(request):
 			u.save()
 		first_info = {'saved': False}
 
-		
-
 	info = {"courses": allcourses}
 
 	return render(
