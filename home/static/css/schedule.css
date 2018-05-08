@@ -261,11 +261,6 @@ ul li {
   font-size: 16px;
 }
 
-.deleteCourse {
-  float: right;
-  background: white;
-}
-
 .show {
   display: block;
 }

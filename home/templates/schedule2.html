@@ -36,28 +36,28 @@
           })
         </script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
-
-        // <script>
-
           function dragstart_handler(ev) {
             console.log("dragStart");
             // Add the target element's id to the data transfer object
             ev.dataTransfer.setData("text/plain", ev.target.id);
           }
+
           function dragover_handler(ev) {
             ev.preventDefault();
             // Set the dropEffect to move
             ev.dataTransfer.dropEffect = "move"
           }
+
           function drop_handler(ev) {
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
           }
+
             function openPlan(evt, name) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
@@ -72,7 +72,6 @@
                 evt.currentTarget.className += "active";
              } 
 
-             /*
              function configureDegreeLists(ddl1,ddl2) {
                 var select = ['Select Concentration'];
                 var ab = ['Select Concentration:', 
@@ -111,6 +110,7 @@
                    'ELE (Electrical Engineering)', 
                    'MAE (Mechanical and Aerospace Engineering)', 
                    'ORF (Operations Research and Financial Engineering)'];
+
                 switch (ddl1.value) {
                    case 'select': 
                       ddl2.options.length = 0;
@@ -141,68 +141,7 @@
                 opt.value = value;
                 opt.text = text;
                 ddl.options.add(opt);
-             } */
-
-            function createOption(ddl, text, value) {
-                var opt = document.createElement('option');
-                opt.value = text.substring(0,3);
-                opt.text = text;
-                ddl.options.add(opt);
              }
-
-              function configureDegreeLists(ddl1,ddl2, concs) {
-                var select = ['Select Concentration'];
-                for (i = 0; i < concs.length; i++) {
-                  createOption(ddl1, concs[i])
-              }
-            }
-
-              //  {% block javascript %}
-              function onSelectConcentration(ddl1, ddl2) {
-                var conc = ddl2.options[ddl2.selectedIndex].value; 
-                var deg = ddl1.value; // check this reference
-                $.ajax({
-                        url: '/ajax/choose_conc/', // HEROKU LINK TO DATABASE
-                        data: {
-                          'conc': conc, // 3 letter CONC... comma or nah
-                          // 'd' : deg // degree
-                        },
-                        dataType: 'json',
-                        // send back reqlist
-                        success: function (data) { // backend sends fields of data prob JSON/dict 
-                          // process json data 
-                          // can prob take the next if statement out
-                          console.log($(this).val());
-                          console.log("conc from backend");
-                          /*
-                          if (data.is_taken) {
-                            alert("A user with this username already exists.");
-                          }
-                          */
-                        }
-                      });
-              }
-
-              function onSelectDegree(ddl1) {
-                    var deg = ddl1.value; // check this reference
-                    $.ajax({
-                            url: '/ajax/choose_deg/', // HEROKU LINK TO DATABASE
-                            data: {
-                              'deg' : deg
-                            },
-                            dataType: 'json',
-                            success: function(data) {
-                              console.log(ddl1)
-                              console.log(data.concs)
-                              // console.log( $(this).val() );
-
-                              // unhide concentration bar
-                              // populate the concentration bar
-                              configureDegreeLists(ddl1, ddl2, data.concs)
-                            }
-                    })
-              }
-              // {% endblock %}
 
              function myFunction() {
                 document.getElementById("myDropdown").classList.toggle("show");
@@ -212,20 +151,18 @@
                 var input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();
-                ul = document.getElementById("myUL");
-                li = ul.getElementsByTagName("li");
-                for (i = 0; i < li.length; i++) {
-                   if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                      li[i].style.display = "";
+                div = document.getElementById("myDropdown");
+                a = div.getElementsByTagName("a");
+                for (i = 0; i < a.length; i++) {
+                   if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
                    } 
                    else {
-                      li[i].style.display = "none";
+                      a[i].style.display = "none";
                    }
                 }
              }
-
        </script>
-
     </head>  
 
    <body>
@@ -248,12 +185,12 @@
         <div class="tab-pane" id="plan1">
          <!-- Drag and Dro  Menu for Concentration and Certificates-->
          <div class="selectDegree">
-            <select id="ddl1" onchange="onSelectDegree(this)">                
+            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'))">                
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
             </select>                
-            <select id="ddl2">
+            <select id="ddl2" onchange="onSelectConcentration(document.getElementById('ddl1'), this)">
                {% for i in conclist %}
                   <option> {{ i }} </option>
                {% endfor %}
@@ -266,11 +203,11 @@
             <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
                <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
-               <ul id="myUL" class="dropdown-courses">
-                {% for key, value in courses.items %}
-                  <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} </li>
+               <ul class="dropdown-courses">
+                {% for key,value in courses.items %}
+                  <li id="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} <div class="deleteCourse"> X </li>
                 {% endfor %}
-               </ul>              
+               </ul>               
             </div>
         </div>
 
@@ -281,20 +218,20 @@
 
          <!--Schedule-->
          <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
-            <h1>Freshman Fall 2018</h1>
+            <h1>Freshman Fall</h1>
          </div>
          
          <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
-            <h1>Freshman Spring 2019</h1>
+            <h1>Freshman Spring</h1>
          </div>
          
          <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
-            <h1>Sophomore Fall 2019</h1>
+            <h1>Sophomore Fall</h1>
          </div>
          
          <div id="target" ondrop="drop_handler(event);" ondragover="(event);" class="schedule">
-            <h1>Sophomore Spring 2020</h1>
+            <h1>Sophomore Spring</h1>
          </div>
-
+      </div>
    </body>
 </html>
