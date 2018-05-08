@@ -114,7 +114,7 @@ def choose_deg(request):
 	data = {'concs': concs}
 	return JsonResponse(data)
 
-def course_dropped(request):
+def dropped_course(request):
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
 	allowed = false
@@ -122,6 +122,9 @@ def course_dropped(request):
 		allowed = true
 	data = {'allowed': allowed}
 	return JsonResponse(data)
+
+def remove_course(request):
+	course = request.GET.get('removedcourse', None)
 
 def sampleschedules(request):
 	return render(
