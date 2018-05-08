@@ -151,17 +151,17 @@
                 opt.value = text.substring(0,3);
                 opt.text = text;
                 ddl.options.add(opt);
-                // console.log("createOption");
+                console.log("createOption");
              }
 
               function configureDegreeLists(ddl1,ddl2, concs) {
-                // console.log("ONE configureDegreeLists");
+                console.log("ONE configureDegreeLists");
                 var select = ['Select Concentration'];
-                // console.log(concs);
+                console.log(concs);
                 for (i = 0; i < concs.length; i++) {
                   createOption(ddl2, concs[i])
                 }
-                // console.log("configureDegreeLists");
+                console.log("configureDegreeLists");
               }
 
               function configureRequirements(reqs) {
@@ -169,7 +169,7 @@
                 for(var i = 0; i < reqs.length; i++){
                   if (!(typeof reqs[i] === 'string' || reqs[i] instanceof String)) {
                     configureRequirements(reqs[i])
-                    // console.log(reqs[i]);
+                    console.log(reqs[i]);
                   }
                 }
 
@@ -177,8 +177,7 @@
 
               //  {% block javascript %}
               function onSelectConcentration(ddl1, ddl2) {
-                // console.log("CONC 1");
-
+                console.log("CONC 1");
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
                 console.log("Conc before ajax");
@@ -208,6 +207,7 @@
 
               function onSelectDegree(ddl1) {
                     var deg = ddl1.value; // check this reference
+                    console.log("START SelectDegree");
                     $.ajax({
                             url: '/home/ajax/choose_deg/', // HEROKU LINK TO DATABASE
                             data: {
@@ -215,7 +215,7 @@
                             },
                             dataType: 'json',
                             success: function(data) {
-                              // console.log( $(this).val() );
+                              console.log("SelectDegree");
                               // unhide concentration bar
                               // populate the concentration bar
                               configureDegreeLists(ddl1, ddl2, data.concs)
@@ -334,7 +334,7 @@
                   </li>
 
           <!--        <div class="{{key}}">
-                    {% for p in value.professors %}
+                    {% for p in value.professors %}g
                       <h3> Professors: </h3> 
                       <h4> {{ p }} </h4>
                     {% endfor %}
