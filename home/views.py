@@ -11,18 +11,6 @@ from django.http import JsonResponse
 # Create your views here.
 @login_required
 def index(request):
-
-
-	test = Concentration.objects.get(name="Chemistry").get_reqs()
-	print(test)
-	
-	# courses = ["010828"]
-	# print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
-
-	allconcentrations = []
-	for conc in Concentration.objects.all():
-		allconcentrations.append(conc.name)
-	context = {"concs": allconcentrations}
 	return render(
    	    request,
         'index.html',
@@ -58,7 +46,7 @@ def scheduler(request):
 		u = User(netid=cnetid)
 		u.save()
 		plans = []
-
+		
 	# fall18, fall19, spring19, spring20 = []
 	# for plan in plans:
 	# 	for course in plan:
@@ -74,15 +62,18 @@ def scheduler(request):
 
 	springcourses = []
 	fallcourses = []
+	bothcourses = []
 	for springcourse in Course.objects.filter(season='s').all():
 		springcourses.append(springcourse)
 	for fallcourse in Course.objects.filter(season='f').all():
 		fallcourses.append(fallcourse)
+	for bothcourse in Course.objects.filter(season='b').all():
+		bothcourses.append(bothcourse)
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"fallcourses": fallcourses, "springcourses": springcourses,
+	info = {"fallcourses": fallcourses, "springcourses": springcourses, "bothcourses": bothcourses,
 	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 
 	return render(
@@ -100,6 +91,7 @@ def choose_season(request):
 	return JsonResponse(data)
 
 def choose_conc(request):
+	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
 	data = {'reqs': Concentration.objects.get(name=conc).get_reqs()}
 	return JsonResponse(data)
@@ -111,6 +103,18 @@ def choose_deg(request):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
 	return JsonResponse(data)
+
+def dropped_course(request):
+	course = request.GET.get('course', None)
+	chosensemester = request.GET.get('chosensemester', None)
+	allowed = false
+	if (course.season == chosensemester): # Probably have to modify
+		allowed = true
+	data = {'allowed': allowed}
+	return JsonResponse(data)
+
+def remove_course(request):
+	course = request.GET.get('removedcourse', None)
 
 def sampleschedules(request):
 	return render(
