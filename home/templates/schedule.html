@@ -152,7 +152,8 @@
 
               function configureDegreeLists(ddl1,ddl2, concs) {
                 var select = ['Select Concentration'];
-                for (i = 0; i < concs.length; i++) {
+                console.log(concs);
+                for (i = 0; i < concs.size(); i++) {
                   createOption(ddl1, concs[i])
               }
             }
@@ -162,7 +163,7 @@
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
                 $.ajax({
-                        url: '/ajax/choose_conc/', // HEROKU LINK TO DATABASE
+                        url: '/home/ajax/choose_conc/', // HEROKU LINK TO DATABASE
                         data: {
                           'conc': conc, // 3 letter CONC... comma or nah
                           // 'd' : deg // degree
@@ -182,7 +183,6 @@
                         }
                       });
               }
-
               function onSelectDegree(ddl1) {
                     var deg = ddl1.value; // check this reference
                     $.ajax({
@@ -196,7 +196,6 @@
                               console.log(ddl1)
                               console.log(data.concs)
                               // console.log( $(this).val() );
-
                               // unhide concentration bar
                               // populate the concentration bar
                               configureDegreeLists(ddl1, ddl2, data.concs)
@@ -259,8 +258,7 @@
         <div class="tab-pane" id="plan1">
          <!-- Drag and Dro  Menu for Concentration and Certificates-->
          <div class="selectDegree">           
-
-            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'));">                
+            <select id="ddl1" onchange="onSelectDegree(this);">   
 
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
