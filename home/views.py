@@ -74,9 +74,6 @@ def scheduler(request):
 	# #if either no user object or no plans
 	# else:
 		# if no current user object, make one
-		if User.objects.filter(netid=cnetid).count() == 0:
-			u = User(netid=cnetid)
-			u.save()
 
 		first_info = {'saved': False, 'courses': allcourses}
 
