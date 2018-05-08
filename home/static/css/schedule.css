@@ -39,9 +39,15 @@ h3 {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   font-size: 14px;
+  display: none;
 }
 
-h4,
+h4 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: normal;
+  font-size: 14px;
+  display: none;
+}
 h5,
 h6 {
   font-weight: 700;
@@ -221,7 +227,11 @@ h6 {
   border: 2px solid #ddd;
   overflow: auto;
   height: 100vh;
+<<<<<<< HEAD
   width: 297px;
+=======
+  width: 287px;
+>>>>>>> master
   border-radius: 25px;
   z-index: 1;
 }
@@ -269,13 +279,16 @@ ul li {
   background-color: #ffa12e;
 }
 
-.fa-caret-down:hover {
-  background-color: black;
-  color: white;
+.fa-caret-down, .fa-times {
+  border-radius: 10px;
+  float: right;
 }
 
-.courseInfo {
-  display: none;
+.fa-caret-down:hover, .fa-times:hover {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  float: right;
 }
 
 .show {
