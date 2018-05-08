@@ -3,6 +3,7 @@ import json
 import sys
 import re
 
+#HELPER FUNCTIONS
 def timeConverter(time):
 	temp = time.split(" ")
 	slots = temp[0].split(":")
@@ -22,16 +23,30 @@ def stringify(listing):
 	return(listing["dept"] + " " + listing["number"])
 
 def escape(s):
-	char = []
-	if s == None:
+	c = []
+	if s == None or len(s) == 0:
 		return ""
-	for c in s:
-		if c == '"':
-			char.append('\\')
-			char.append('"')
-		else:
-			char.append(c)
-	return ''.join(char)
+	elif s.find('&#39;') != -1:
+		c.append(s[0:s.find('&#39;')])
+		c.append('\'')
+		c.append(s[(s.find('&#39;')+5):])
+	elif s.find('&amp') != -1:
+		c.append(s[0:s.find('&amp;')])
+		c.append('&')
+		c.append(s[(s.find('&amp;')+5):])
+	elif s[0] == '"':
+		c.append('\\')
+		c.append(s)
+	elif re.search(r"[A-Za-z\s\.,\?!\(\)]\"", s) != None:
+		st = re.search(r"[A-Za-z\s\.,\?!\(\)]\"", s).end()
+		c.append(s[0:st-1])
+		c.append('\\"')
+		c.append(s[(st):])
+	else:
+		for char in s:
+			c.append(char)
+		return(''.join(c))
+	return(escape(''.join(c)))
 
 def req_recursion(req, myid, parentid):
 	global r
@@ -63,6 +78,8 @@ def starcourses(c, c_pks):
 			c_pks.append(course_pks[course])
 	return c_pks
 
+
+#REQ_LISTS
 #create req_list object from information in req
 def make_req_list(req, myid, curr):
 	global outp
@@ -105,6 +122,7 @@ def make_req_list(req, myid, curr):
 		myid, req["name"], req["max_counted"], req["min_needed"], escape(req["description"]), escape(req["explanation"]), req["double_counting_allowed"], req["max_common_with_major"], req["pdfs_allowed"], req["completed_by_semester"], curr, c_pks)
 
 
+#STATIC INFO and DECLARATIONS
 outp = ""
 pcounter = 0
 lcounter = 0
@@ -157,7 +175,7 @@ for a in areas:
 	outp += """{{"model": "home.area", "pk": {0}, "fields": {{"code": "{1}", "name": "{2}"}}}}, """.format(acounter, a, areas[a])
 	acounter += 1
 
-courses = json.load(open("courses.json"))
+courses = json.load(open("courses.json", "rb"))
 
 #serialize courses
 for i in range(0, len(courses)):
@@ -165,6 +183,8 @@ for i in range(0, len(courses)):
 	for l in course["listings"]:
 		course_pks[stringify(l)] = i
 
+
+#COURSES
 #make course objects
 for i in range(0, len(courses)):
 	course = courses[i]
@@ -174,7 +194,7 @@ for i in range(0, len(courses)):
 	scurr.clear()
 
 	for p in course["profs"]:
-		outp += """{{"model": "home.professor", "pk": {0}, "fields": {{"uid": "{1}", "name": "{2}"}}}}, """.format(pcounter, p["uid"], p["name"])
+		outp += """{{"model": "home.professor", "pk": {0}, "fields": {{"uid": "{1}", "name": "{2}"}}}}, """.format(pcounter, p["uid"], escape(p["name"]))
 		pcurr.append(pcounter)
 		pcounter += 1
 	for l in course["listings"]:
@@ -186,11 +206,11 @@ for i in range(0, len(courses)):
 			c["classnum"], c["enroll"], c["limit"], timeConverter(c["starttime"]), c["section"], timeConverter(c["endtime"]), c["roomnum"], c["days"], c["bldg"])
 		ccurr.append(ccounter)
 		ccounter += 1
-	for s in course["term"]:
-		s = s.split()
-		outp += """{{"model": home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0], s[1])
-		scurr.append(scounter)
-		scounter += 1
+	# for s in course["term"]:
+	# 	s = s.split()
+	# 	outp += """{{"model": home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0], s[1])
+	# 	scurr.append(scounter)
+	# 	scounter += 1
 	#check for area
 	if course["area"] == "":
 		area = "null"
@@ -200,7 +220,8 @@ for i in range(0, len(courses)):
 		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
 
 
-concs = json.load(open("reqs_abbrv"))
+#CONCENTRATIONS
+concs = json.load(open("reqs_abbrv", "rb"))
 r = 0
 ucounter = 0
 ccounter = 0
@@ -236,6 +257,21 @@ for k in range(0, len(concs)):
 		conc["degree"] = "AB"
 	#add req
 	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
+
+# #SAMPLE SCHEDULES
+# plans = json.load(open("samples_schedules.json", "rb"))
+# pcounter = 0
+# ccounter = 0
+
+
+# for p in plans:
+
+# 		outp += """{{"model": "home.savedcourse", "pk": {0}, "fields": "course": {1}, "semester": {2}}}}}, """.format()
+# 	outp += """{{"model": "home.plan", "pk": {0}, "fields": {{"saved_courses": {1}}}}}, """.format(pcounter)
+
+
+# 	pcounter += 1
+
 
 
 print("[" + outp[:len(outp) - 2] + "]")

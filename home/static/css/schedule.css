@@ -248,7 +248,7 @@ ul li {
   display: block;
 }
 
-#dragCourse {
+.dragCourse {
   color: black;
   background-color: #ffecd5;
   padding: 12px;
@@ -259,6 +259,11 @@ ul li {
   border-radius: 25px;
   overflow: auto;
   font-size: 16px;
+}
+
+.deleteCourse {
+  float: right;
+  background: white;
 }
 
 .show {

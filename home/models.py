@@ -139,6 +139,9 @@ class Concentration(models.Model):
 	def __str__(self):
 		return str(self.name)
 
+	def code_and_name(self):
+		return self.conc_code + " (" + self.name + ")"
+
 	def get_description(self):
 		return self.req_lists
 
