@@ -82,8 +82,7 @@ def scheduler(request):
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"fall18": fal18, "fall19": fall19, "spring19": spring19, "spring2020": spring20,
-	"fallcourses": fallcourses, "springcourses": springcourses,
+	info = {"fallcourses": fallcourses, "springcourses": springcourses,
 	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 	return render(
 		request,
