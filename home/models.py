@@ -60,7 +60,7 @@ class Concentration(models.Model):
 		return str(self.name)
 
 	def code_and_name(self):
-		return self.conc_code + " (" + self.name + ")"
+		return self.conc_code.code + " (" + self.name + ")"
 
 	def get_description(self):
 		return self.req_lists
@@ -258,11 +258,33 @@ class UserManager(models.Manager):
 		
 class User(models.Model):
 	netid = models.CharField(max_length = 100)
-	plans = models.ManyToManyField('Plan')
+	plan = models.ForeignKey('Plan', on_delete=models.SET_NULL, null=True, blank=True)
 	objects = UserManager()
 
 class Plan(models.Model):
- 	saved_courses = models.ManyToManyField('SavedCourse')
+	degree = models.CharField(max_length=3, null=True, blank=True)
+	conc = models.ForeignKey(Concentration, on_delete=models.SET_NULL, null=True, blank=True)
+	saved_courses = models.ManyToManyField('SavedCourse')
+
+	def return_by_sem(self):
+		fall18, fall19, spring19, spring20 = []
+		planbysem = {}
+		for course in self.saved_courses.all():
+			if course.semester.year == 2018 and course.semester.season == 'f':
+				fall18.append(course)
+			if course.semester.year == 2019 and course.semester.season == 'f':
+				fall19.append(course)
+			if course.semester.year == 2019 and course.semester.season == 's':
+				spring19.append(course)
+			if course.semester.year == 2020 and course.semester.season == 's':
+				spring20.append(course)
+		planbysem = {'fall18': fall18, 'fall19': fall19, 'spring19': spring19, 'spring20': spring20}
+		return planbysem
+	def return_courses(self):
+		courses = []
+		for s_course in self.saved_courses.all():
+			courses.append(s_course.course)
+		return courses
 
 class SavedCourse(models.Model):
 	course = models.ManyToManyField('Course')

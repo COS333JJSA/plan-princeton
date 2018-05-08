@@ -31,49 +31,38 @@ def logout(request):
 
 @login_required
 def scheduler(request):
-	allcourses = []
-	allconcentrations = []
 	cnetid = request.user.username
-	courseexplanations = []
-	coursedescrip = {}
+	first_info = {}
 
-	# if no current user object, make one
-	if len(User.objects.filter(netid=cnetid)) > 0:
-		plans = User.objects.filter(netid=cnetid).values('plans')
-	# retreive user plans
-	else:
-		u = User(netid=cnetid)
-		u.save()
-		plans = []
-		
-	# fall18, fall19, spring19, spring20 = []
-	# for plan in plans:
-	# 	for course in plan:
-	# 		if course.year == '2018' and course.season == 'f':
-	# 			fall18.append(fallcourse)
-	# 		if course.year == '2019':
-	# 			fall19.append(fallcourse)
-	# 	for springcourse in plan.semester.objects.filter(season='S'):
-	# 		if springcourse.year == '2019':
-	# 			spring19.append(springcourse)
-	# 		if springcourse.year == '2020':
-	# 			spring20.append(springcourse)
-
-	springcourses = []
-	fallcourses = []
-	bothcourses = []
+	#ignore 'none' courses
+	allcourses = []
 	for springcourse in Course.objects.filter(season='s').all():
-		springcourses.append(springcourse)
+		allcourses.append(springcourse)
 	for fallcourse in Course.objects.filter(season='f').all():
-		fallcourses.append(fallcourse)
+		allcourses.append(fallcourse)
 	for bothcourse in Course.objects.filter(season='b').all():
-		bothcourses.append(bothcourse)
+		allcourses.append(bothcourse)
 
-	for conc in Concentration.objects.all():
-		allconcentrations.append(conc.name)
+	#if user object exists and saved plan exists, load saved
+	if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
+		plan = User.objects.filter(netid=cnetid).values('plan')
+		plan_courses = plan.return_courses()
 
-	info = {"fallcourses": fallcourses, "springcourses": springcourses, "bothcourses": bothcourses,
-	"courses": Course.objects.all_info(), "conclist": allconcentrations}
+
+
+		first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
+		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
+	#if either no user object or no plans
+	else 
+		# if no current user object, make one
+		if:
+			u = User(netid=cnetid)
+			u.save()
+		first_info = {'saved': False}
+
+		
+
+	info = {"courses": allcourses}
 
 	return render(
 		request,
@@ -92,15 +81,38 @@ def choose_season(request):
 def choose_conc(request):
 	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
-	data = {'reqs': Concentration.objects.get(name=conc).get_reqs()}
+	if (conc.degree == 'AB'):
+		degreereqs = Concentration.objects.get(name='AB').get_reqs()
+	else:
+		degreereqs = Concentration.objects.get(name='BSE').get_reqs()
+
+	#save deg to associated user plan
+	cnetid = request.user.username
+	plan = User.objects.filter(netid=cnetid).values('plan')
+	plan.conc = Concentration.objects.get(name=conc)
+	plan.save()
+
+	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
+			'degreereqs': degreereqs
+	}
 	return JsonResponse(data)
 
 def choose_deg(request):
-	deg = request.GET.get('deg', None)
+	#get data from frontend
+	deg = request.GET.get('deg', None).upper()
+
+	#save deg to associated user plan
+	cnetid = request.user.username
+	plan = User.objects.filter(netid=cnetid).values('plan')
+	plan.degree = deg
+	plan.save()
+
+	#send frontend list of concs associated with deg	
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
+
 	return JsonResponse(data)
 
 def dropped_course(request):
