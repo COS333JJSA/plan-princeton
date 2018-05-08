@@ -46,8 +46,7 @@ def scheduler(request):
 	# 	allcourses.append(fallcourse)
 	# for bothcourse in Course.objects.filter(season='b').all():
 	# 	allcourses.append(bothcourse)
-	for course in Course.objects.all():
-		allcourses.append(course)
+	allcourses = Course.objects.all_info()
 
 
 	if User.objects.filter(netid=cnetid).count() > 0:
@@ -69,6 +68,7 @@ def scheduler(request):
 		u.save()
 		first_info = {'saved': False, 'courses': allcourses}
 
+	app = {'fall1': [Course.objects.get(courseid='010097').all_info_solo()], 'fall2': [Course.objects.get(courseid='008072').all_info_solo()], 'spring1': [Course.objects.get(courseid='007987').all_info_solo()], 'spring2': [Course.objects.get(courseid='000976').all_info_solo()]}
 
 	return render(
 		request,
