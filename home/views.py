@@ -75,7 +75,7 @@ def scheduler(request):
 		'schedule.html',
 		first_info,
 	)
-
+@login_required
 def choose_season(request):
 	season = request.GET.get('season', None)
 	courses = []
@@ -83,7 +83,7 @@ def choose_season(request):
 		courses.append(c.title)
 	data = {'coursesbyseason': courses}
 	return JsonResponse(data)
-
+@login_required
 def choose_conc(request):
 	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
@@ -102,7 +102,7 @@ def choose_conc(request):
 			'degreereqs': degreereqs
 	}
 	return JsonResponse(data)
-
+@login_required
 def choose_deg(request):
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
@@ -120,7 +120,7 @@ def choose_deg(request):
 	data = {'concs': concs}
 
 	return JsonResponse(data)
-
+@login_required
 def dropped_course(request):
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
@@ -129,190 +129,227 @@ def dropped_course(request):
 		allowed = true
 	data = {'allowed': allowed}
 	return JsonResponse(data)
-
+@login_required
 def remove_course(request):
 	course = request.GET.get('removedcourse', None)
-
+@login_required
 def sampleschedules(request):
 	return render(
 		request,
 		'sampleschedules.html',
 	)
+@login_required
 def aas(request):
 	return render(
 		request,
 		'aas.html',
 	)
+@login_required
 def ant(request):
 	return render(
 		request,
 		'ant.html',
 	)
+
+@login_required
 def arc(request):
 	return render(
 		request,
 		'arc.html',
 	)
+@login_required
 def art(request):
 	return render(
 		request,
 		'art.html',
 	)
+@login_required
 def ast(request):
 	return render(
 		request,
 		'ast.html',
-	)		
+	)	
+@login_required	
 def cbe(request):
 	return render(
 		request,
 		'cbe.html',
 	)
+@login_required
 def cee(request):
 	return render(
 		request,
 		'cee.html',
 	)
+@login_required
 def chm(request):
 	return render(
 		request,
 		'chm.html',
 	)
+@login_required
 def cla(request):
 	return render(
 		request,
 		'cla.html',
 	)
+@login_required
 def com(request):
 	return render(
 		request,
 		'com.html',
 	)
+@login_required
 def cos(request):
 	return render(
 		request,
 		'cos.html',
 	)
+@login_required
 def eas(request):
 	return render(
 		request,
 		'eas.html',
 	)
+@login_required
 def eco(request):
 	return render(
 		request,
 		'eco.html',
 	)
+@login_required
 def eeb(request):
 	return render(
 		request,
 		'eeb.html',
 	)
+@login_required
 def ele(request):
 	return render(
 		request,
 		'ele.html',
 	)
+@login_required
 def eng(request):
 	return render(
 		request,
 		'eng.html',
-	)	
+	)
+@login_required	
 def fit(request):
 	return render(
 		request,
 		'fit.html',
 	)
+@login_required
 def geo(request):
 	return render(
 		request,
 		'geo.html',
 	)
+@login_required
 def ger(request):
 	return render(
 		request,
 		'ger.html',
 	)
+@login_required
 def his(request):
 	return render(
 		request,
 		'his.html',
 	)
+@login_required
 def mae(request):
 	return render(
 		request,
 		'mae.html',
 	)
+@login_required
 def mat(request):
 	return render(
 		request,
 		'mat.html',
-	)	
+	)
+@login_required	
 def mol(request):
 	return render(
 		request,
 		'mol.html',
 	)
+@login_required
 def mus(request):
 	return render(
 		request,
 		'mus.html',
 	)
+@login_required
 def nes(request):
 	return render(
 		request,
 		'nes.html',
 	)
+@login_required
 def neu(request):
 	return render(
 		request,
 		'neu.html',
 	)
+@login_required
 def orf(request):
 	return render(
 		request,
 		'orf.html',
 	)
+@login_required
 def phi(request):
 	return render(
 		request,
 		'phi.html',
 	)
+@login_required
 def phy(request):
 	return render(
 		request,
 		'phy.html',
 	)
+@login_required
 def pol(request):
 	return render(
 		request,
 		'pol.html',
 	)
+@login_required
 def psy(request):
 	return render(
 		request,
 		'psy.html',
 	)
+@login_required
 def rel(request):
 	return render(
 		request,
 		'rel.html',
 	)
+@login_required
 def sla(request):
 	return render(
 		request,
 		'sla.html',
 	)
+@login_required
 def soc(request):
 	return render(
 		request,
 		'soc.html',
 	)
+@login_required
 def spa(request):
 	return render(
 		request,
 		'spa.html',
 	)
+@login_required
 def wws(request):
 	return render(
 		request,
