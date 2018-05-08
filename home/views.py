@@ -6,6 +6,7 @@ from home.models import Concentration
 from home.models import User
 from home.models import Course
 from home.models import CourseManager
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required
@@ -69,12 +70,12 @@ def scheduler(request):
 	for bothcourse in Course.objects.filter(season='b').all():
 		bothcourses.append(bothcourse)
 
-
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
 	info = {"fallcourses": fallcourses, "springcourses": springcourses, "bothcourses": bothcourses,
 	"courses": Course.objects.all_info(), "conclist": allconcentrations}
+
 	return render(
 		request,
 		'schedule.html',
