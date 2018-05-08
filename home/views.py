@@ -49,47 +49,31 @@ def scheduler(request):
 	for course in Course.objects.all():
 		allcourses.append(course)
 
-	#if user object exists and saved plan exists, load saved
-	#if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
-	##?????
-	if User.objects.filter(netid=cnetid).count() > 0 and User.objects.get(netid=cnetid).plan is not None:
-		user = User.objects.get(netid=cnetid)
-		print (user.netid)
-		print (user.plan)
-		plan_courses = user.plan.return_courses()
 
-		for course in plan_courses:
-			allcourses.remove(course)
-			# ^ is that gonna work??
+	if User.objects.filter(netid=cnetid).count() > 0:
+		if User.objects.get(netid=cnetid).plan is not None:
+			user = User.objects.get(netid=cnetid)
+			plan_courses = user.plan.return_courses()
 
+			for course in plan_courses:
+				if course in all_courses:
+					allcourses.remove(course)
 
-		first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
-		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses), 'courses': allcourses}
+			first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
+			'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses), 'courses': allcourses}
+		else:
+			first_info = {'saved': False, 'courses': allcourses}
 	#if either no user object or no plans
 	else:
-		# if no current user object, make one
 		u = User(netid=cnetid)
 		u.save()
-
-	# if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
-	# 	plan = User.objects.filter(netid=cnetid).values('plan')
-	# 	plan_courses = plan.return_courses()
-
-
-
-	# 	first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
-	# 	'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
-	# #if either no user object or no plans
-	# else:
-		# if no current user object, make one
-
 		first_info = {'saved': False, 'courses': allcourses}
 
 
 	return render(
 		request,
 		'schedule.html',
-		firstinfo
+		first_info,
 	)
 
 def choose_season(request):
