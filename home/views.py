@@ -68,12 +68,12 @@ def scheduler(request):
 		u.save()
 		first_info = {'saved': False, 'courses': allcourses}
 
-	app = {'fall1': [Course.objects.get(courseid='010097').all_info_solo()], 'fall2': [Course.objects.get(courseid='008072').all_info_solo()], 'spring1': [Course.objects.get(courseid='007987').all_info_solo()], 'spring2': [Course.objects.get(courseid='000976').all_info_solo()]}
+	# app = {'fall1': [Course.objects.get(courseid='010097').all_info_solo()], 'fall2': [Course.objects.get(courseid='008072').all_info_solo()], 'spring1': [Course.objects.get(courseid='007987').all_info_solo()], 'spring2': [Course.objects.get(courseid='000976').all_info_solo()]}
 
 	return render(
 		request,
 		'schedule.html',
-		first_info.update(app),
+		first_info,
 	)
 
 def choose_season(request):
@@ -86,7 +86,7 @@ def choose_season(request):
 
 def choose_conc(request):
 	#also need AB/BSE reqs
-	print ("hi")
+	print ("conc")
 	conc = request.GET.get('conc', None)
 	if (conc.degree == 'AB'):
 		degreereqs = Concentration.objects.get(name='AB').get_reqs()
@@ -105,6 +105,7 @@ def choose_conc(request):
 	return JsonResponse(data)
 
 def choose_deg(request):
+	print ("degree")
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 

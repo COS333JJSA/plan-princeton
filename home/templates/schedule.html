@@ -181,7 +181,7 @@
 
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
-                // console.log("Conc before ajax");
+                console.log("Conc before ajax");
                 $.ajax({
                         url: '/home/ajax/choose_conc/', // HEROKU LINK TO DATABASE
                         data: {
@@ -266,7 +266,7 @@
                   $("h4").toggle()
               });
             });
-            
+            */
 
 
             function remove_course(ev) {
@@ -274,14 +274,14 @@
                 $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
-                    'id' = id;
+                    'id' : id
                   },
                   dataType: 'json',
                   success: function(data) {
                     configureDegreeLists(ddl1, ddl2, data.concs)
                   }
                 })
-              } */
+              } 
        </script>
 
     </head>  
@@ -306,7 +306,7 @@
       <div class="tabcontent">
         <div class="tab-pane" id="plan1">
          <!-- Drag and Drop  Menu for Concentration and Certificates-->
-         <div class="selectDegree">
+         <div class="SelectDegree">
             <select id="ddl1" onchange="onSelectDegree(this)">                
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
