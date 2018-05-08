@@ -58,22 +58,32 @@ def scheduler(request):
 		u.save()
 		plans = []
 
-	for plan in plans:
-		for fallcourse in plan.semester.objects.filter(season='F'):
-			if fallcourse.year == '2018':
-				fall18.append(fallcourse)
-			if fallcourse.year == '2019':
-				fall19.append(fallcourse)
-		for springcourse in plan.semester.objects.filter(season='S'):
-			if springcourse.year == '2019':
-				spring19.append(springcourse)
-			if springcourse.year == '2020':
-				spring19.append(springcourse)
+	# fall18, fall19, spring19, spring20 = []
+	# for plan in plans:
+	# 	for course in plan:
+	# 		if course.year == '2018' and course.season == 'f':
+	# 			fall18.append(fallcourse)
+	# 		if course.year == '2019':
+	# 			fall19.append(fallcourse)
+	# 	for springcourse in plan.semester.objects.filter(season='S'):
+	# 		if springcourse.year == '2019':
+	# 			spring19.append(springcourse)
+	# 		if springcourse.year == '2020':
+	# 			spring20.append(springcourse)
+
+	# springcourses = []
+	# fallcourses = []
+	# for springcourse in Course.objects.filter(season='s').all():
+	# 	springcourses.append(springcourse)
+	# for fallcourse in Course.objects.filter(season='f').all():
+	# 	fallcourses.append(fallcourse)
+
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
 	info = {"fall18": fal18, "fall19": fall19, "spring19": spring19, "spring2020": spring20,
+	"fallcourses": fallcourses, "springcourses": springcourses,
 	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 	return render(
 		request,
