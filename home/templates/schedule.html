@@ -183,7 +183,7 @@
                           'conc': conc, // 3 letter CONC... comma or nah
                           // 'd' : deg // degree
                         },
-                        dataType: 'json',
+                        dataType: 'xml',
                         // send back reqlist
                         success: function (data) { // backend sends fields of data prob JSON/dict 
                           // process json data 
@@ -199,7 +199,6 @@
                         }
                       });
               }
-
               function onSelectDegree(ddl1) {
                     var deg = ddl1.value; // check this reference
                     $.ajax({
@@ -207,7 +206,7 @@
                             data: {
                               'deg' : deg
                             },
-                            dataType: 'json',
+                            dataType: 'xml',
                             success: function(data) {
                               console.log(ddl1)
                               console.log(data.concs)
@@ -223,7 +222,7 @@
              function myFunction() {
                 document.getElementById("myDropdown").classList.toggle("show");
              }
-/*
+
              function filterFunction() {
                 var input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
@@ -239,7 +238,7 @@
                    }
                 }
              }
-*/
+
        </script>
 
     </head>  
@@ -258,11 +257,11 @@
           <li class="active"><a href="#plan1" data-toggle="tab">Plan 1</a></li>
           <li><a href="#plan2" data-toggle="tab">Plan 2</a></li>
         </ul>
-      </div>   
+      </div>
 
       <div class="tabcontent">
         <div class="tab-pane" id="plan1">
-         <!-- Drag and Dro  Menu for Concentration and Certificates-->
+         <!-- Drag and Drop  Menu for Concentration and Certificates-->
          <div class="selectDegree">
             <select id="ddl1" onchange="onSelectDegree(this)">                
                <option value="select">Select Degree:</option>
