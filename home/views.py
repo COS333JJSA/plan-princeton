@@ -73,7 +73,7 @@ def scheduler(request):
 	return render(
 		request,
 		'schedule.html',
-		first_info,
+		first_info.update(app),
 	)
 
 def choose_season(request):
