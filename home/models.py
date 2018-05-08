@@ -266,6 +266,21 @@ class Plan(models.Model):
 	conc = models.ForeignKey(Concentration, on_delete=models.SET_NULL, null=True, blank=True)
 	saved_courses = models.ManyToManyField('SavedCourse')
 
+	def return_by_sem(self):
+		fall18, fall19, spring19, spring20 = []
+		planbysem = {}
+		for course in self.saved_courses.all():
+			if course.semester.year == 2018 and course.semester.season == 'f':
+				fall18.append(course)
+			if course.semester.year == 2019 and course.semester.season == 'f':
+				fall19.append(course)
+			if course.semester.year == 2019 and course.semester.season == 's':
+				spring19.append(course)
+			if course.semester.year == 2020 and course.semester.season == 's':
+				spring20.append(course)
+		planbysem = {'fall18': fall18, 'fall19': fall19, 'spring19': spring19, 'spring20': spring20}
+		return planbysem
+
 class SavedCourse(models.Model):
 	course = models.ManyToManyField('Course')
 	semester = models.ManyToManyField('Semester')

@@ -46,17 +46,6 @@ def scheduler(request):
 		u.save()
 		plans = []
 		
-	# fall18, fall19, spring19, spring20 = []
-	# for course in plan:
-	# 	if course.year == '2018' and course.season == 'f':
-	# 		fall18.append(fallcourse)
-	# 	if course.year == '2019':
-	# 		fall19.append(fallcourse)
-	# for springcourse in plan.semester.objects.filter(season='S'):
-	# 	if springcourse.year == '2019':
-	# 		spring19.append(springcourse)
-	# 	if springcourse.year == '2020':
-	# 		spring20.append(springcourse)
 
 	springcourses = []
 	fallcourses = []
@@ -92,10 +81,15 @@ def choose_conc(request):
 	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
 	if (conc.degree == 'AB'):
-		degreereqs = Concentration.objects.get(name='A.B.').get_reqs()
+		degreereqs = Concentration.objects.get(name='AB').get_reqs()
 	else:
-		degreereqs = Concentration.objects.get(name='B.S.E.').get_reqs()
+		degreereqs = Concentration.objects.get(name='BSE').get_reqs()
 
+	#save deg to associated user plan
+	cnetid = request.user.username
+	plan = User.objects.filter(netid=cnetid).values('plan')
+	plan.conc = Concentration.objects.get(name=conc)
+	plan.save()
 
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
