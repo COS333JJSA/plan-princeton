@@ -41,8 +41,8 @@ import ssl
 # TERM_CODE = 1192  # fall 2019
 # TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016", 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2018"}
 
-# TERM_CODES = {1192: "fall 2018", 1184: "spring 2018", 1182: "fall 2017", 1174: "spring 2017", 1172: "fall 2016", 1164: "spring 2016", 1162: "fall 2015", 1154: "spring 2015", 1152: "fall 2014"}
-TERM_CODES = {1182: "fall 2017", 1174: "spring 2017"}
+TERM_CODES = {1192: "fall 2018", 1184: "spring 2018", 1182: "fall 2017", 1174: "spring 2017"}
+#TERM_CODES = {1182: "fall 2017", 1174: "spring 2017"}
 
 currentTerm = 0
 course_dict = {}
@@ -201,7 +201,7 @@ def scrape_all():
 
 result = {}
 if __name__ == "__main__":
-  result_load = json.load(open("partial_respons.json", "r"))
+  #result_load = json.load(open("partial_respons.json", "r"))
 
   first = True
   for term in TERM_CODES:
