@@ -86,6 +86,7 @@ def choose_season(request):
 
 def choose_conc(request):
 	#also need AB/BSE reqs
+	print ("hi")
 	conc = request.GET.get('conc', None)
 	if (conc.degree == 'AB'):
 		degreereqs = Concentration.objects.get(name='AB').get_reqs()
