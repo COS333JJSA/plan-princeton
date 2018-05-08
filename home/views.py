@@ -7,6 +7,7 @@ from home.models import User
 from home.models import Course
 from home.models import CourseManager
 from django.http import JsonResponse
+from home.models import Plan
 
 # Create your views here.
 @login_required
@@ -44,18 +45,18 @@ def scheduler(request):
 		allcourses.append(bothcourse)
 
 	#if user object exists and saved plan exists, load saved
-	if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
-		plan = User.objects.filter(netid=cnetid).values('plan')
-		plan_courses = plan.return_courses()
+	# if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
+	# 	plan = User.objects.filter(netid=cnetid).values('plan')
+	# 	plan_courses = plan.return_courses()
 
 
 
-		first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
-		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
-	#if either no user object or no plans
-	else 
+	# 	first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
+	# 	'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
+	# #if either no user object or no plans
+	# else:
 		# if no current user object, make one
-		if:
+		if User.objects.filter(netid=cnetid).count() == 0:
 			u = User(netid=cnetid)
 			u.save()
 		first_info = {'saved': False}
