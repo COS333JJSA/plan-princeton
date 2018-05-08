@@ -12,10 +12,11 @@ from home.models import CourseManager
 def index(request):
 
 
-	# test = Concentration.objects.get(name="Chemistry").get_reqs()
-	# print(test)
-	courses = ["010828"]
-	print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
+	test = Concentration.objects.get(name="Chemistry").get_reqs()
+	print(test)
+	
+	# courses = ["010828"]
+	# print(Concentration.objects.get(name="Art and Archaeology").update_reqs(courses))
 
 	allconcentrations = []
 	for conc in Concentration.objects.all():
@@ -57,16 +58,33 @@ def scheduler(request):
 		u.save()
 		plans = []
 
-	# for course in Course.objects.all():
-	# 	coursedescrip[course.title] = course.descrip
-	# 	allcourses.append(course.title_and_code())
+	# fall18, fall19, spring19, spring20 = []
+	# for plan in plans:
+	# 	for course in plan:
+	# 		if course.year == '2018' and course.season == 'f':
+	# 			fall18.append(fallcourse)
+	# 		if course.year == '2019':
+	# 			fall19.append(fallcourse)
+	# 	for springcourse in plan.semester.objects.filter(season='S'):
+	# 		if springcourse.year == '2019':
+	# 			spring19.append(springcourse)
+	# 		if springcourse.year == '2020':
+	# 			spring20.append(springcourse)
+
+	# springcourses = []
+	# fallcourses = []
+	# for springcourse in Course.objects.filter(season='s').all():
+	# 	springcourses.append(springcourse)
+	# for fallcourse in Course.objects.filter(season='f').all():
+	# 	fallcourses.append(fallcourse)
+
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"plans": plans, "courses": Course.objects.all_info(), "conclist": allconcentrations}
-
-
+	info = {"fall18": fal18, "fall19": fall19, "spring19": spring19, "spring2020": spring20,
+	"fallcourses": fallcourses, "springcourses": springcourses,
+	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 	return render(
 		request,
 		'schedule.html',
