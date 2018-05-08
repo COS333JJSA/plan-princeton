@@ -73,16 +73,19 @@ def scheduler(request):
 
 	springcourses = []
 	fallcourses = []
+	bothcourses = []
 	for springcourse in Course.objects.filter(season='s').all():
 		springcourses.append(springcourse)
 	for fallcourse in Course.objects.filter(season='f').all():
 		fallcourses.append(fallcourse)
+	for bothcourse in Course.objects.filter(season='b').all():
+		bothcourses.append(bothcourse)
 
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"fallcourses": fallcourses, "springcourses": springcourses,
+	info = {"fallcourses": fallcourses, "springcourses": springcourses, "bothcourses": bothcourses,
 	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 	return render(
 		request,
@@ -109,6 +112,15 @@ def choose_deg(request):
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
+	return JsonResponse(data)
+
+def course_dropped(request):
+	course = request.GET.get('course', None)
+	chosensemester = request.GET.get('chosensemester', None)
+	allowed = false
+	if (course.season == chosensemester): # Probably have to modify
+		allowed = true
+	data = {'allowed': allowed}
 	return JsonResponse(data)
 
 def sampleschedules(request):
