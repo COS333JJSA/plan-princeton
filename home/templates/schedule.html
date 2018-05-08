@@ -224,6 +224,16 @@
                 }
              }
 
+
+             function showCourseInformation(ev) {
+              var id = ev.target.id;
+              if (id.style.display === "none") {
+                id.style.display = "table";
+              }
+              else {
+                id.style.display = "none";
+              }
+             }
        </script>
 
     </head>  
@@ -247,8 +257,10 @@
       <div class="tabcontent">
         <div class="tab-pane" id="plan1">
          <!-- Drag and Dro  Menu for Concentration and Certificates-->
-         <div class="selectDegree">
-            <select id="ddl1" onchange="onSelectDegree(this)">                
+         <div class="selectDegree">           
+
+            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'));">                
+
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
@@ -263,16 +275,31 @@
       
          <!--Search Courses-->
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
+            <button onclick="myFunction();" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
-               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
+               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction();"> 
                <ul id="myUL" class="dropdown-courses">
                 {% for key, value in courses.items %}
-                  <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} </li>
+                  <li id="{{ key }}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);" > {{ value.coursename }} 
+                    <button class="fa fa-caret-down" onclick="showCourseInformation(event);"></button>
+                  </li>
+                  <div id="{{ key }}" class="courseInfo">
+                    {% for p in value.professors %}
+                      <h3> Professors: </h3> {{ p }} 
+                      <br/> <br/>
+                      <h3> Course Description: </h3> {{ value.description }}
+                    {% endfor %}
+                  </div>
                 {% endfor %}
                </ul>              
             </div>
         </div>
+
+        <!-- 
+          <div id="courseInfo">
+                    
+                    </div>
+                  -->
 
          <!--Remaining requirements-->
          <div class="requirements">
@@ -292,7 +319,7 @@
             <h1>Sophomore Fall 2019</h1>
          </div>
          
-         <div id="target" ondrop="drop_handler(event);" ondragover="(event);" class="schedule">
+         <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Spring 2020</h1>
          </div>
 
