@@ -58,16 +58,23 @@ def scheduler(request):
 		u.save()
 		plans = []
 
-	# for course in Course.objects.all():
-	# 	coursedescrip[course.title] = course.descrip
-	# 	allcourses.append(course.title_and_code())
+	for plan in plans:
+		for fallcourse in plan.semester.objects.filter(season='F'):
+			if fallcourse.year == '2018':
+				fall18.append(fallcourse)
+			if fallcourse.year == '2019':
+				fall19.append(fallcourse)
+		for springcourse in plan.semester.objects.filter(season='S'):
+			if springcourse.year == '2019':
+				spring19.append(springcourse)
+			if springcourse.year == '2020':
+				spring19.append(springcourse)
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"plans": plans, "courses": Course.objects.all_info(), "conclist": allconcentrations}
-
-
+	info = {"fall18": fal18, "fall19": fall19, "spring19": spring19, "spring2020": spring20,
+	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 	return render(
 		request,
 		'schedule.html',
