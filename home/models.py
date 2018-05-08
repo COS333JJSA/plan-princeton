@@ -228,6 +228,7 @@ class Course(models.Model):
 	classes = models.ManyToManyField('Class')
 	descrip = models.TextField()
 	semesters = models.ManyToManyField('Semester')
+	season = models.TextField()
 	objects = CourseManager()
 
 	def title_and_code(self):
@@ -258,7 +259,6 @@ class UserManager(models.Manager):
 class User(models.Model):
 	netid = models.CharField(max_length = 100)
 	plans = models.ManyToManyField('Plan')
-
 	objects = UserManager()
 
 class Plan(models.Model):
