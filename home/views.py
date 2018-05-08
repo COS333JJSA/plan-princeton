@@ -39,7 +39,7 @@ def scheduler(request):
 
 	# if no current user object, make one
 	if len(User.objects.filter(netid=cnetid)) > 0:
-		plans = User.objects.filter(netid=cnetid).values('plans')
+		plan = User.objects.filter(netid=cnetid).values('plan')
 	# retreive user plans
 	else:
 		u = User(netid=cnetid)
@@ -47,17 +47,16 @@ def scheduler(request):
 		plans = []
 		
 	# fall18, fall19, spring19, spring20 = []
-	# for plan in plans:
-	# 	for course in plan:
-	# 		if course.year == '2018' and course.season == 'f':
-	# 			fall18.append(fallcourse)
-	# 		if course.year == '2019':
-	# 			fall19.append(fallcourse)
-	# 	for springcourse in plan.semester.objects.filter(season='S'):
-	# 		if springcourse.year == '2019':
-	# 			spring19.append(springcourse)
-	# 		if springcourse.year == '2020':
-	# 			spring20.append(springcourse)
+	# for course in plan:
+	# 	if course.year == '2018' and course.season == 'f':
+	# 		fall18.append(fallcourse)
+	# 	if course.year == '2019':
+	# 		fall19.append(fallcourse)
+	# for springcourse in plan.semester.objects.filter(season='S'):
+	# 	if springcourse.year == '2019':
+	# 		spring19.append(springcourse)
+	# 	if springcourse.year == '2020':
+	# 		spring20.append(springcourse)
 
 	springcourses = []
 	fallcourses = []
@@ -101,11 +100,21 @@ def choose_conc(request):
 	return JsonResponse(data)
 
 def choose_deg(request):
+	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
+
+	#save deg to associated user plan
+	cnetid = request.user.username
+	plan = User.objects.filter(netid=cnetid).values('plan')
+	plan.degree = deg
+	plan.save()
+
+	#send frontend list of concs associated with deg	
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
+
 	return JsonResponse(data)
 
 def dropped_course(request):

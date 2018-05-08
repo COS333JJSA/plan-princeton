@@ -258,11 +258,13 @@ class UserManager(models.Manager):
 		
 class User(models.Model):
 	netid = models.CharField(max_length = 100)
-	plans = models.ManyToManyField('Plan')
+	plan = models.ForeignKey('Plan', on_delete=models.SET_NULL, null=True, blank=True)
 	objects = UserManager()
 
 class Plan(models.Model):
- 	saved_courses = models.ManyToManyField('SavedCourse')
+	degree = models.CharField(max_length=3, null=True, blank=True)
+	conc = models.ForeignKey(Concentration, on_delete=models.SET_NULL, null=True, blank=True)
+	saved_courses = models.ManyToManyField('SavedCourse')
 
 class SavedCourse(models.Model):
 	course = models.ManyToManyField('Course')
