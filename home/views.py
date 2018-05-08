@@ -48,12 +48,10 @@ def scheduler(request):
 		plan = User.objects.filter(netid=cnetid).values('plan')
 		plan_courses = plan.return_courses()
 
-
-
 		first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 		'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses)}
 	#if either no user object or no plans
-	else 
+		else 
 		# if no current user object, make one
 		if:
 			u = User(netid=cnetid)
