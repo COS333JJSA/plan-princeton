@@ -71,19 +71,18 @@ def scheduler(request):
 	# 		if springcourse.year == '2020':
 	# 			spring20.append(springcourse)
 
-	# springcourses = []
-	# fallcourses = []
-	# for springcourse in Course.objects.filter(season='s').all():
-	# 	springcourses.append(springcourse)
-	# for fallcourse in Course.objects.filter(season='f').all():
-	# 	fallcourses.append(fallcourse)
+	springcourses = []
+	fallcourses = []
+	for springcourse in Course.objects.filter(season='s').all():
+		springcourses.append(springcourse)
+	for fallcourse in Course.objects.filter(season='f').all():
+		fallcourses.append(fallcourse)
 
 
 	for conc in Concentration.objects.all():
 		allconcentrations.append(conc.name)
 
-	info = {"fall18": fal18, "fall19": fall19, "spring19": spring19, "spring2020": spring20,
-	"fallcourses": fallcourses, "springcourses": springcourses,
+	info = {"fallcourses": fallcourses, "springcourses": springcourses,
 	"courses": Course.objects.all_info(), "conclist": allconcentrations}
 	return render(
 		request,
@@ -91,6 +90,13 @@ def scheduler(request):
 		info
 	)
 
+def choose_season(request):
+	season = request.GET.get('season', None)
+	courses = []
+	for c in Course.objects.filter(season=season):
+		courses.append(c.title)
+	data = {'coursesbyseason': courses}
+	return JsonResponse(data)
 
 def choose_conc(request):
 	conc = request.GET.get('conc', None)

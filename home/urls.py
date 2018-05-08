@@ -9,6 +9,7 @@ urlpatterns = [
     path('scheduler/', views.scheduler, name='scheduler'),
     url(r'^ajax/choose_conc/$', views.choose_conc, name='choose_conc'),
     url(r'^ajax/choose_deg/$', views.choose_deg, name='choose_deg'),
+    url(r'^ajax/choose_season/$', views.choose_season, name='choose_season'),
     path('sampleschedules/', views.sampleschedules, name='sampleschedules'),
     path('sampleschedules/aas/', views.aas, name='aas'),
     path('sampleschedules/ant/', views.ant, name='ant'),
