@@ -6,6 +6,7 @@ from home.models import Concentration
 from home.models import User
 from home.models import Course
 from home.models import CourseManager
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required
@@ -66,13 +67,11 @@ def scheduler(request):
 
 	info = {"plans": plans, "courses": Course.objects.all_info(), "conclist": allconcentrations}
 
-
 	return render(
 		request,
 		'schedule.html',
 		info
 	)
-
 
 def choose_conc(request):
 	conc = request.GET.get('conc', None)

@@ -36,9 +36,12 @@
           })
         </script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
 
         <script type="text/javascript">
+
+        // <script>
+
           function dragstart_handler(ev) {
             console.log("dragStart");
             // Add the target element's id to the data transfer object
@@ -68,6 +71,8 @@
                 document.getElementById(name).style.display = "block";
                 evt.currentTarget.className += "active";
              } 
+
+             /*
              function configureDegreeLists(ddl1,ddl2) {
                 var select = ['Select Concentration'];
                 var ab = ['Select Concentration:', 
@@ -130,12 +135,74 @@
                       break;
                 }
              }
+
              function createOption(ddl, text, value) {
                 var opt = document.createElement('option');
                 opt.value = value;
                 opt.text = text;
                 ddl.options.add(opt);
+             } */
+
+            function createOption(ddl, text, value) {
+                var opt = document.createElement('option');
+                opt.value = text.substring(0,3);
+                opt.text = text;
+                ddl.options.add(opt);
              }
+
+              function configureDegreeLists(ddl1,ddl2, concs) {
+                var select = ['Select Concentration'];
+                for (i = 0; i < concs.length; i++) {
+                  createOption(ddl1, concs[i])
+              }
+            }
+
+              //  {% block javascript %}
+              function onSelectConcentration(ddl1, ddl2) {
+                var conc = ddl2.options[ddl2.selectedIndex].value; 
+                var deg = ddl1.value; // check this reference
+                $.ajax({
+                        url: '/ajax/choose_conc/', // HEROKU LINK TO DATABASE
+                        data: {
+                          'conc': conc, // 3 letter CONC... comma or nah
+                          // 'd' : deg // degree
+                        },
+                        dataType: 'json',
+                        // send back reqlist
+                        success: function (data) { // backend sends fields of data prob JSON/dict 
+                          // process json data 
+                          // can prob take the next if statement out
+                          console.log($(this).val());
+                          console.log("conc from backend");
+                          /*
+                          if (data.is_taken) {
+                            alert("A user with this username already exists.");
+                          }
+                          */
+                        }
+                      });
+              }
+
+              function onSelectDegree(ddl1) {
+                    var deg = ddl1.value; // check this reference
+                    $.ajax({
+                            url: '/ajax/choose_deg/', // HEROKU LINK TO DATABASE
+                            data: {
+                              'deg' : deg
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                              console.log(ddl1)
+                              console.log(data.concs)
+                              // console.log( $(this).val() );
+
+                              // unhide concentration bar
+                              // populate the concentration bar
+                              configureDegreeLists(ddl1, ddl2, data.concs)
+                            }
+                    })
+              }
+              // {% endblock %}
 
              function myFunction() {
                 document.getElementById("myDropdown").classList.toggle("show");
@@ -156,7 +223,9 @@
                    }
                 }
              }
+
        </script>
+
     </head>  
 
    <body>
@@ -179,7 +248,7 @@
         <div class="tab-pane" id="plan1">
          <!-- Drag and Dro  Menu for Concentration and Certificates-->
          <div class="selectDegree">
-            <select id="ddl1" onchange="configureDegreeLists(this, document.getElementById('ddl2'))">                
+            <select id="ddl1" onchange="onSelectDegree(this)">                
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
