@@ -37,14 +37,18 @@ def scheduler(request):
 	courseexplanations = []
 	coursedescrip = {}
 
-	# if no current user object, make one
-	if len(User.objects.filter(netid=cnetid)) > 0:
+	#if user object exists and saved plan exists, load saved
+	if User.objects.filter(netid=cnetid).count() > 0 and Plan.objects.filter(netid=cnetid).count() > 0:
 		plan = User.objects.filter(netid=cnetid).values('plan')
-	# retreive user plans
-	else:
-		u = User(netid=cnetid)
-		u.save()
-		plans = []
+		saved_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).get_reqs(), 
+		'degreqs': Concentration.objects.get(name=plan.deg).get_reqs()}
+	#if either no user object or no plans
+	else 
+		# if no current user object, make one
+		if:
+			u = User(netid=cnetid)
+			u.save()
+		
 		
 
 	springcourses = []
