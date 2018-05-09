@@ -7,12 +7,12 @@ body {
   background-color: #fef9e5; 
 }
 
-img {
-  opacity: 0.5;
-  filter: alpha(opacity=50); /* For IE8 and earlier */
-}
 p {
   line-height: 1.75;
+}
+
+a {
+  padding: 5px;
 }
 
 a:hover {
@@ -64,9 +64,6 @@ h6 {
 
 .container {
   min-width: 100%;
-}
-#mainNav {
-  background-color: white;
 }
 
 #mainNav .navbar-toggler {
