@@ -54,6 +54,7 @@ def scheduler(request):
 		if User.objects.get(netid=cnetid).plan is not None:
 			user = User.objects.get(netid=cnetid)
 			plan_courses = user.plan.return_courses()
+			courses_by_sem = user.plan.return_by_sem()
 
 			for course in plan_courses:
 				if course in all_courses:
@@ -61,6 +62,7 @@ def scheduler(request):
 
 			first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses), 'courses': allcourses}
+			first_info = first_info.update(courses_by_sem)
 		else:
 			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
