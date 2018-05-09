@@ -84,15 +84,15 @@ class Concentration(models.Model):
 									temp2.append(r4.name + " (" + str(r4.min_needed) + ")")
 							else:
 								for c4 in r3.course_list.all():
-									temp4.append(c4.title_and_code())
+									temp4.append(c4.codes())
 							temp3.append(temp4)
 					else:
 						for c3 in r2.course_list.all():
-							temp3.append(c3.title_and_code())
+							temp3.append(c3.codes())
 					temp2.append(temp3)
 			else:
 				for c2 in r.course_list.all():
-					temp2.append(c2.title_and_code())
+					temp2.append(c2.codes())
 		temp.append(temp2)
 		return temp
 
@@ -245,6 +245,13 @@ class Course(models.Model):
 			st += "/"
 		st = st[:len(st)-1]
 		st += ": " + self.title
+		return st
+	def codes(self):
+		st = ""
+		for l in self.listings.all():
+			st += str(l.department.code) + " " + str(l.number)
+			st += "/"
+		st = st[:len(st)-1]
 		return st
 
 	def all_info_solo(self):
