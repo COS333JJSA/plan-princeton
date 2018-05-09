@@ -91,7 +91,10 @@ def choose_conc(request):
 	#also need AB/BSE reqs
 
 	conc_code = request.GET.get('conc', None)
-	dep = Department.objects.get(code=conc_code)
+	conc = conc_code[5:len(conc_code)-1]
+
+	#dep = Department.objects.get(=conc_code)
+
 
 	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
 	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
@@ -106,7 +109,7 @@ def choose_conc(request):
 	# plan.save()
 
 
-	data = {'concreqs': Concentration.objects.get(conc_code=dep).get_reqs(),
+	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
 	}
 	print(data)
