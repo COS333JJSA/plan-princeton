@@ -103,20 +103,20 @@ def choose_conc(request):
 	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
 	degreereqs = ['Degree Reqs will be Here!']
 
-<<<<<<< HEAD
+
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
 	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
-=======
+
 	#save conc to associated user plan
 	# cnetid = request.user.username
 	# plan = User.objects.filter(netid=cnetid).values('plan')
 	# plan.conc = Concentration.objects.get(name=conc)
 	# plan.save()
 
->>>>>>> master
+
 
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
