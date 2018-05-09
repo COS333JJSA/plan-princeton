@@ -252,6 +252,7 @@ class Course(models.Model):
 			st += str(l.department.code) + " " + str(l.number)
 			st += "/"
 		st = st[:len(st)-1]
+		return st
 
 	def all_info_solo(self):
 		d = {}
