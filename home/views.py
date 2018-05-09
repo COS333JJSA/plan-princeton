@@ -49,7 +49,7 @@ def scheduler(request):
 	# 	allcourses.append(bothcourse)
 	allcourses = Course.objects.all_info()
 
-
+	# User already exists
 	if User.objects.filter(netid=cnetid).count() > 0:
 		if User.objects.get(netid=cnetid).plan is not None:
 			user = User.objects.get(netid=cnetid)
@@ -67,7 +67,10 @@ def scheduler(request):
 			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
 	else:
-		u = User(netid=cnetid)
+		print ("HERE")
+		blankplan = Plan()
+		blankplan.save()
+		u = User(netid=cnetid, plan=blankplan)
 		u.save()
 		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
@@ -102,11 +105,15 @@ def choose_conc(request):
 	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
 	degreereqs = ['Degree Reqs will be Here!']
 
-	#save deg to associated user plan
-	# cnetid = request.user.username
-	# plan = User.objects.filter(netid=cnetid).values('plan')
-	# plan.conc = Concentration.objects.get(name=conc)
-	# plan.save()
+	# save deg to associated user plan if user has saved plan
+	cnetid = request.user.username
+	if User.objects.filter(netid=cnetid).count() > 0:
+		if User.objects.get(netid=cnetid).plan is not None:
+			userplan = User.objects.get(netid=cnetid).plan
+			updatedplan = Plan(degree=userplan.degree, conc=Concentration.objects.get(name=conc), saved_courses=userplan.saved_courses)
+
+			#plan.conc = Concentration.objects.get(name=conc)
+			updatedplan.save()
 
 
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),

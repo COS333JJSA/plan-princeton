@@ -271,7 +271,7 @@ class User(models.Model):
 class Plan(models.Model):
 	degree = models.CharField(max_length=3, null=True, blank=True)
 	conc = models.ForeignKey(Concentration, on_delete=models.SET_NULL, null=True, blank=True)
-	saved_courses = models.ManyToManyField('SavedCourse')
+	saved_courses = models.ManyToManyField('SavedCourse', blank=True)
 
 	def return_by_sem(self):
 		fall18, fall19, spring19, spring20 = []
