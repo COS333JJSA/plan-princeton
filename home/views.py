@@ -49,9 +49,9 @@ def scheduler(request):
 	# 	allcourses.append(bothcourse)
 	allcourses = Course.objects.all_info()
 
-	# User already exists
+	# User already exists and plan is NOT blank
 	if User.objects.filter(netid=cnetid).count() > 0:
-		if User.objects.get(netid=cnetid).plan is not None:
+		if User.objects.get(netid=cnetid).plan.saved_courses.all().count() > 0 :
 			user = User.objects.get(netid=cnetid)
 			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
@@ -67,7 +67,6 @@ def scheduler(request):
 			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
 	else:
-		print ("HERE")
 		blankplan = Plan()
 		blankplan.save()
 		u = User(netid=cnetid, plan=blankplan)
@@ -107,14 +106,9 @@ def choose_conc(request):
 
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
-	if User.objects.filter(netid=cnetid).count() > 0:
-		if User.objects.get(netid=cnetid).plan is not None:
-			userplan = User.objects.get(netid=cnetid).plan
-			updatedplan = Plan(degree=userplan.degree, conc=Concentration.objects.get(name=conc), saved_courses=userplan.saved_courses)
-
-			#plan.conc = Concentration.objects.get(name=conc)
-			updatedplan.save()
-
+	userplan = User.objects.get(netid=cnetid).plan
+	userplan.conc = Concentration.objects.get(name=conc)
+	userplan.save()
 
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
@@ -128,9 +122,10 @@ def choose_deg(request):
 
 	#save deg to associated user plan
 	cnetid = request.user.username
-	plan = User.objects.filter(netid=cnetid).values('plan')
-	plan.degree = deg
-	# plan.save()
+	userplan = User.objects.get(netid=cnetid).plan
+	userplan.degree = deg
+	userplan.save()
+	#print (User.objects.get(netid=cnetid).plan.degree)
 
 	#send frontend list of concs associated with deg	
 	concs = []
@@ -146,11 +141,24 @@ def dropped_course(request):
 	allowed = false
 	if (course.season == chosensemester): # Probably have to modify
 		allowed = true
+
+	# cnetid = request.user.username
+	# userplan = User.objects.get(netid=cnetid).plan.usercourses
+	# usercourses = userplan.return_courses
+	# for course in usercourses:
+
+
+	userplan.save()
+
 	data = {'allowed': allowed}
 	return JsonResponse(data)
 @login_required
 def remove_course(request):
 	course = request.GET.get('removedcourse', None)
+
+	# return new updated plan
+	# return new course list to populate on the side with removed course added
+
 @login_required
 def sampleschedules(request):
 	return render(
