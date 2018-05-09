@@ -211,12 +211,14 @@ class Area(models.Model):
 		return str(self.code)
 
 class CourseManager(models.Manager):
+	# takes all courses and creates one dict where keys are course ids and values are information
 	def all_info(self):
 		dic = {}
 		all_courses = Course.objects.all()
 		for c in all_courses:
 			dic.update(c.all_info_solo())
 		return dic
+	# list of courses
 	def all_info_some(self, courses):
 		dic = {}
 		for c in courses:
@@ -283,7 +285,7 @@ class Plan(models.Model):
 				spring19.append(course)
 			if course.semester.year == 2020 and course.semester.season == 's':
 				spring20.append(course)
-		planbysem = {'fall18': fall18, 'fall19': fall19, 'spring19': spring19, 'spring20': spring20}
+		planbysem = {'fall18': Course.objects.all_info_some(fall18), 'fall19': Course.objects.all_info_some(fall19), 'spring19': Course.objects.all_info_some(spring19), 'spring20': Course.objects.all_info_some(spring20)}
 		return planbysem
 	def return_courses(self):
 		courses = []
