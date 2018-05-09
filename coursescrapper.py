@@ -226,7 +226,7 @@ if __name__ == "__main__":
         # json.dump(course["courseid"], sys.stdout)
 
     for c in oneterm:
-      result[c["courseid"]] = c
+      result[c] = c
     print(result)
 
 

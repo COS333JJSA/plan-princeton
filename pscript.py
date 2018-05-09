@@ -141,7 +141,7 @@ areas = OrderedDict({"EC": "Epistemology and Cognition", "EM": "Ethical Thought 
 depts = OrderedDict({"AAS": "African American Studies", "ANT": "Anthropology", "ARC": "Architecture", "ART": "Art and Archaeology",
 	"AST": "Astrophysical Sciences", "CHM": "Chemistry", "CLA": "Classics", "COM": "Comparative Literature",
 	"COS": "Computer Science", "EAS": "East Asian Studies", "EEB": "Ecology and Evolutionary Biology", "ECO": "Economics",
-	"ENG": "English", "FRE": "French and Italian", "GEO": "Geosciences", "GER": "German", "HIS": "History", "MAT": "Mathematics",
+	"ENG": "English", "FRE": "French", "GEO": "Geosciences", "GER": "German", "HIS": "History", "MAT": "Mathematics",
 	"MOL": "Molecular Biology", "MUS": "Music", "NES": "Near Eastern Studies", "NEU": "Neuroscience", "PHI": "Philosophy",
 	"PHY": "Physics", "POL": "Politics", "PSY": "Psychology", "REL": "Religion", "SLA": "Slavic Languages and Literature",
 	"SOC": "Sociology", "SPA": "Spanish", "WWS": "Woodrow Wilson School of Public and International Affairs",
@@ -164,7 +164,7 @@ depts = OrderedDict({"AAS": "African American Studies", "ANT": "Anthropology", "
 	"Statistics and Machine Learning", "STC": "Science and Technology Council", "SWA": "Swahili", "THR": "Theater",
 	"TPP": "Teacher Preparation", "TRA": "Translation and Intercultural Communication", "TUR": "Turkish", "TWI": "Twi",
 	"URB": "Urban Studies", "URD": "Urdu", "VIS": "Visual Arts", "WRI": "Princeton Writing Program", "ARA": "Arabic",
-	"CGS": "Cognitive Science", "SPO": "Spanish and Portuguese", "RUS": "Russian"
+	"CGS": "Cognitive Science", "SPO": "Spanish and Portuguese", "RUS": "Russian", "FIT": "French and Italian"
 	})
 
 for d in depts:
