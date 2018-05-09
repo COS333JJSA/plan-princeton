@@ -181,7 +181,8 @@
 
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
                 var deg = ddl1.value; // check this reference
-                // console.log("Conc before ajax");
+                console.log("Conc before ajax");
+                console.log(conc)
                 $.ajax({
                         url: '/home/ajax/choose_conc/', // HEROKU LINK TO DATABASE
                         data: {

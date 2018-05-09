@@ -61,19 +61,20 @@ def scheduler(request):
 			first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses), 'courses': allcourses}
 		else:
-			first_info = {'saved': False, 'courses': allcourses}
+			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
 	else:
 		u = User(netid=cnetid)
 		u.save()
-		first_info = {'saved': False, 'courses': allcourses}
+		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
-	app = {'fall1': [Course.objects.get(courseid='010097').all_info_solo()], 'fall2': [Course.objects.get(courseid='008072').all_info_solo()], 'spring1': [Course.objects.get(courseid='007987').all_info_solo()], 'spring2': [Course.objects.get(courseid='000976').all_info_solo()]}
+	# app = {'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
+	print(first_info)
 
 	return render(
 		request,
 		'schedule.html',
-		first_info.update(app),
+		first_info,
 	)
 
 def choose_season(request):
@@ -85,8 +86,8 @@ def choose_season(request):
 	return JsonResponse(data)
 
 def choose_conc(request):
+	print("conc")
 	#also need AB/BSE reqs
-	print ("hi")
 	conc = request.GET.get('conc', None)
 	if (conc.degree == 'AB'):
 		degreereqs = Concentration.objects.get(name='AB').get_reqs()
@@ -106,6 +107,7 @@ def choose_conc(request):
 	return JsonResponse(data)
 
 def choose_deg(request):
+	print("deg")
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
