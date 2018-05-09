@@ -59,6 +59,7 @@
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
+            dropped_course(ev)
           }
 
             function openPlan(evt, name) {
@@ -192,25 +193,53 @@
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
-                    html += "<li>" + reqs[i] + "</li>";
+                    //course
+                    if (reqs[i].charAt(reqs[i].length-1) != ")") {
+                      html += "<li>" + reqs[i] + "</li>";
+                    }
+                    //req title
+                    else {
+                      html += "<li><b>" + reqs[i] + "</b></li>";
+                    }
                   }
                   else {
                     html += "<ol>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
-                        html += "<li>" + reqs[i][j] + "</li>";
+                        //course
+                        if (reqs[i][j].charAt(reqs[i][j].length-1) != ")") {
+                          html += "<li>" + reqs[i][j] + "</li>";
+                        }
+                        //req title
+                        else {
+                          html += "<li><b>" + reqs[i][j] + "</b></li>";
+                        }
                       }
                       else {
                         html += "<ol>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
-                            html += "<li>" + reqs[i][j][k] + "</li>";
+                            //course
+                            if (reqs[i][j][k].charAt(reqs[i][j][k].length-1) != ")") {
+                              html += "<li>" + reqs[i][j][k].toUpperCase() + "</li>";
+                            }
+                            //req title
+                            else {
+                              html += "<li><b>" + reqs[i][j][k] + "</b></li>";
+                            }
                           }
                           else {
                             html += "<ol>";
-                            for (var l = 0; l < reqs[i][j][k].length; l++) {                              
-                              html += "<li>" + reqs[i][j][k][l] + "</li>";
+                            for (var l = 0; l < reqs[i][j][k].length; l++) { 
+                              //course
+                              if (reqs[i][j][k][l].charAt(reqs[i][j][k][l].length-1) != ")") {                             
+                                html += "<li>" + reqs[i][j][k][l] + "</li>";
+                              }
+                              //req title
+                              else {
+                                html += "<li><b>" + reqs[i][j][k][l] + "</b></li>";
+                              }
                             }
                             html += "</ol>";
                           }
@@ -339,7 +368,7 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                    dropped_course(id, data.reqs) // ???????
+                    // dropped_course(id, data.reqs) // ???????
                     configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
@@ -350,6 +379,7 @@
 
             function dropped_course(ev) {
                 var id = ev.target.id;
+                  console.log("dropped_course START");
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
@@ -360,6 +390,7 @@
                       configureRequirements(data.concreqs, data.degreereqs)
                     }
                   });
+                  console.log("dropped_course END");
                 }
 
                /* function displayRemoves() {
@@ -454,7 +485,7 @@
             <ul id="spring19">
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}

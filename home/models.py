@@ -34,17 +34,12 @@ class Req_List(models.Model):
 	completed_by_semester = models.IntegerField(default=8)
 	req_lists_inside = models.ManyToManyField('self', symmetrical=False, blank=True)
 	course_list = models.ManyToManyField("Course", blank=True)
-	# objects = Req_ListManager()
 
 	def __str__(self):
 		return str(self.name)
 
-# class ConcentrationManager(models.Manager):
-# 	def get_queryset(self):
-# 		return super(ConcentrationManager, self).get_queryset()
 
 
-#Concentration.objects.get(name = 'African American Studies').req_lists.get(name='Prerequisite ').explanation
 class Concentration(models.Model):
 	tipe = models.CharField(max_length=15)
 	name = models.CharField(max_length=200)
@@ -84,15 +79,15 @@ class Concentration(models.Model):
 									temp2.append(r4.name + " (" + str(r4.min_needed) + ")")
 							else:
 								for c4 in r3.course_list.all():
-									temp4.append(c4.title_and_code())
+									temp4.append(c4.codes())
 							temp3.append(temp4)
 					else:
 						for c3 in r2.course_list.all():
-							temp3.append(c3.title_and_code())
+							temp3.append(c3.codes())
 					temp2.append(temp3)
 			else:
 				for c2 in r.course_list.all():
-					temp2.append(c2.title_and_code())
+					temp2.append(c2.codes())
 		temp.append(temp2)
 		return temp
 
@@ -246,6 +241,13 @@ class Course(models.Model):
 		st = st[:len(st)-1]
 		st += ": " + self.title
 		return st
+	def codes(self):
+		st = ""
+		for l in self.listings.all():
+			st += str(l.department.code) + " " + str(l.number)
+			st += "/"
+		st = st[:len(st)-1]
+		return st
 
 	def all_info_solo(self):
 		d = {}
@@ -271,7 +273,7 @@ class User(models.Model):
 class Plan(models.Model):
 	degree = models.CharField(max_length=3, null=True, blank=True)
 	conc = models.ForeignKey(Concentration, on_delete=models.SET_NULL, null=True, blank=True)
-	saved_courses = models.ManyToManyField('SavedCourse')
+	saved_courses = models.ManyToManyField('SavedCourse', blank=True)
 
 	def return_by_sem(self):
 		fall18, fall19, spring19, spring20 = []
