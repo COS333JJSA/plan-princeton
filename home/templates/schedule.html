@@ -159,6 +159,7 @@
                 console.log(ddl);
                 if (select != null) {
                   var length = select.options.length;
+                  console.log(length);
                   for (i = 0; i < length; i++) {
                     select.remove(i);
                   }
@@ -180,11 +181,8 @@
               }
 
               function configureRequirements(concreqs, degreereqs) {
-
                 document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
-                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)
-                
-                
+                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)                
               }
               function req_html(reqs) {
                 html = ""
