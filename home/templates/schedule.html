@@ -354,10 +354,13 @@
                   console.log("dropped_course START");
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
+                    console.log("dropped_course URL");
                     data: {
                       'id' : id
+                    console.log("dropped_course URL");
                     },
                     dataType: 'json',
+                    console.log("dropped_course dataType");
                     success: function(data) {
                       configureRequirements(data.concreqs, data.degreereqs)
                     }
