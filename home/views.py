@@ -68,7 +68,7 @@ def scheduler(request):
 		u.save()
 		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
-	app = {'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': [Course.objects.get(courseid='008072').all_info_solo()], 'spring1': [Course.objects.get(courseid='007987').all_info_solo()], 'spring2': [Course.objects.get(courseid='000976').all_info_solo()]}
+	app = {'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
 	return render(
 		request,

@@ -282,6 +282,7 @@
                   }
                 })
               } 
+              
        </script>
 
     </head>  
@@ -348,25 +349,51 @@
             <h1>Freshman Fall 2018</h1>
             <ul id="fall1">
               {% for key, value in fall1.items %}
-
-              <li id="{{key}}"> {{ value.coursename }} </li>
-
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
+                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button class="fa fa-caret-down"></button>
+                </li>
               {% endfor %}
             </ul>
          </div>
          
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Spring 2019</h1>
+            <ul id="spring1">
+              {% for key, value in spring1.items %}
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
+                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button class="fa fa-caret-down"></button>
+                </li>
+              {% endfor %}
+            </ul>
          </div>
          
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall 2019</h1>
+            <ul id="fall2">
+              {% for key, value in fall2.items %}
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
+                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button class="fa fa-caret-down"></button>
+                </li>
+              {% endfor %}
+            </ul>
          </div>
          
-
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Sophomore Spring 2020</h1>
+            <ul id="spring2">
+              {% for key, value in spring2.items %}
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
+                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button class="fa fa-caret-down"></button>
+                </li>
+              {% endfor %}
+            </ul>
          </div>
 
    </body>
 </html>
+
+
