@@ -140,6 +140,9 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
+	print("hello")
+	print(request.GET.get('course', None))
+	
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
 	year = ""

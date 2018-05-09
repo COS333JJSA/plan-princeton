@@ -175,7 +175,7 @@ for a in areas:
 	outp += """{{"model": "home.area", "pk": {0}, "fields": {{"code": "{1}", "name": "{2}"}}}}, """.format(acounter, a, areas[a])
 	acounter += 1
 
-courses = json.load(open("courses.json", "rb"))
+courses = json.load(open("scrape.json", "rb"))
 
 #serialize courses
 for i in range(0, len(courses)):
@@ -221,7 +221,7 @@ for i in range(0, len(courses)):
 
 
 #CONCENTRATIONS
-concs = json.load(open("reqs_abbrv", "rb"))
+concs = json.load(open("prereqs.json", "rb"))
 r = 0
 ucounter = 0
 ccounter = 0
