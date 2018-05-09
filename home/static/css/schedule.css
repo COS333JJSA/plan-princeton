@@ -7,10 +7,6 @@ body {
   background-color: #fef9e5; 
 }
 
-img {
-  opacity: 0.5;
-  filter: alpha(opacity=50); /* For IE8 and earlier */
-}
 p {
   line-height: 1.75;
 }
