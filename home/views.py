@@ -115,6 +115,8 @@ def choose_conc(request):
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
 	}
+	print("hi")
+	print(data)
 	return JsonResponse(data)
 
 @login_required
@@ -140,6 +142,9 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
+	print("hello")
+	print(request.GET.get('course', None))
+	
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
 	year = ""

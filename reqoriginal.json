@@ -255,7 +255,8 @@
           "explanation": "Students must take PHY 205 or 207",
           "double_counting_allowed": false,
           "course_list": [
-            "PHY 205"
+            "PHY 205",
+            "PHY 207"
           ]
         },
         {
@@ -297,7 +298,7 @@
       "name": "Prerequisites",
       "max_counted": 1,
       "min_needed": 3,
-      "explanation": "1. one year of general chemistry: CHM 201/203/207 and 202/204, or one unit of advanced placement in chemistry and CHM 202 or CHM 215, or the equivalent (such as two units of advanced placement in chemistry)2. differential and integral calculus: MAT 103 and 104, or the equivalent advanced placement3. one year of general physics: PHY 101 and 102, or 103 and 104, or 105 and 106, or equivalent credit. Prerequisite courses may not be taken using the P/D/F grading option.",
+      "explanation": "1. one year of general chemistry: CHM 201/203/207 and 202/204, or one unit of advanced placement in chemistry and CHM 202 or CHM 215, or the equivalent (such as two units of advanced placement in chemistry) 2. differential and integral calculus: MAT 103 and 104, or the equivalent advanced placement. 3. one year of general physics: PHY 101 and 102, or 103 and 104, or 105 and 106, or equivalent credit. Prerequisite courses may not be taken using the P/D/F grading option.",
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
       "completed_by_semester": 4,
@@ -317,6 +318,7 @@
               "double_counting_allowed": false,
               "course_list": [
                 "CHM 201",
+                "CHM 203",
                 "CHM 207"
               ]
             },
@@ -327,7 +329,8 @@
               "explanation": "Choose one from two possible classes.",
               "double_counting_allowed": false,
               "course_list": [
-                "CHM 202"
+                "CHM 202",
+                "CHM 204"
               ]
             }
           ]
@@ -574,6 +577,7 @@
                     "GER 101",
                     "GER 102",
                     "GER 1025",
+                    "GER 103",
                     "GER 105",
                     "GER 107"
                   ]
@@ -585,7 +589,8 @@
                   "explanation": "Students can choose to take Bosnian-Croatian-Serbian.",
                   "double_counting_allowed": false,
                   "course_list": [
-                    "BCS 101"
+                    "BCS 101",
+                    "BCS 102"
                   ]
                 },
                 {
@@ -595,7 +600,21 @@
                   "explanation": "Students can choose to take Czech.",
                   "double_counting_allowed": false,
                   "course_list": [
-                    "CZE 101"
+                    "CZE 101",
+                    "CZE 102",
+                    "CZE 105",
+                    "CZE 107"
+                  ]
+                },
+                {
+                  "name": "Language study in Polish",
+                  "max_counted": 1,
+                  "min_needed": 1,
+                  "explanation": "Students can choose to take Polish.",
+                  "double_counting_allowed": false,
+                  "course_list": [
+                    "POL 101",
+                    "POL 102"
                   ]
                 },   
                 {
@@ -621,7 +640,9 @@
                     "ARA 101",
                     "ARA 102",
                     "ARA 105",
-                    "ARA 107"
+                    "ARA 107",
+                    "ARA 111",
+                    "ARA 113"
                   ]
                 },   
                 {
@@ -1109,8 +1130,11 @@
           "explanation": "Concentrators must take one of the 200-level Reading Literature courses: ENG 205 (Poetry), ENG 206 (Fiction), ENG 207 (Drama), or ENG 208 (The Essay) or ENG 209 (Theory).",
           "double_counting_allowed": false,
           "course_list": [
+            "ENG 205",
+            "ENG 206",
             "ENG 207",
-            "ENG 208"
+            "ENG 208",
+            "ENG 209"
           ]
         }          
       ]
@@ -1153,7 +1177,9 @@
         "FRE 221",
         "FRE 222",
         "FRE 224",
+        "FRE 225",
         "ITA 208",
+        "ITA 209",
         "ITA 220"
       ]
     }
@@ -1271,14 +1297,21 @@
           "double_counting_allowed": false,
           "course_list": [
             "HIS 201",
+            "HIS 207",
             "HIS 208",
             "HIS 210",
             "HIS 211",
+            "HIS 212",
             "HIS 241",
             "HIS 267",
             "HIS 277",
             "HIS 278",
-            "HIS 280"
+            "HIS 280",
+            "HIS 281",
+            "HIS 282",
+            "HIS 290",
+            "HIS 291",
+            "HIS 292"
           ]
         },
         {
@@ -1481,7 +1514,8 @@
           "explanation": "Students must complete one of the two introductory courses, MOL 214 or MOL 215",
           "double_counting_allowed": false,
           "course_list": [
-            "MOL 214"
+            "MOL 214",
+            "MOL 215"
           ]
         },
         {
@@ -1687,7 +1721,7 @@
 {
   "type": "Major",
   "name": "Near East Studies",
-  "code": "NES",
+  "code": "SOC",
   "year": 2018,
   "urls": [
     "https://ua.princeton.edu/academic-units/department-department-politics",
@@ -1936,7 +1970,8 @@
           "explanation": "Concentrators must take either PHY 205 or PHY 207",
           "double_counting_allowed": false,
           "course_list": [
-            "PHY 205"
+            "PHY 205",
+            "PHY 207"
           ]
         },
         {
@@ -2020,9 +2055,11 @@
           "double_counting_allowed": false,
           "course_list": [
             "PSY 101",
+            "PSY 252",
             "PSY 254",
             "PSY 255",
-            "PSY 258"
+            "PSY 258",
+            "NEU 175"
             ]
           }         
         ]
