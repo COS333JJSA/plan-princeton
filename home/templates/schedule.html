@@ -144,17 +144,32 @@
                 opt.value = value;
                 opt.text = text;
                 ddl.options.add(opt);
-             } */
+             } 
 
             function createOption(ddl, text, value) {
                 var opt = document.createElement('option');
-                opt.value = text.substring(0,3);
+                opt.value = value.substring(0,3);
+                opt.text = text;
+                ddl.options.add(opt);
+                console.log("createOption");
+             } */
+
+             function createOption(ddl, text) {
+                var select = document.getElementById(ddl);
+                console.log(ddl);
+                if (select != null) {
+                  var length = select.options.length;
+                  for (i = 0; i < length; i++) {
+                    select.remove(i);
+                  }
+                }
+                var opt = document.createElement('option');
                 opt.text = text;
                 ddl.options.add(opt);
                 console.log("createOption");
              }
 
-              function configureDegreeLists(ddl1,ddl2, concs) {
+              function configureDegreeLists(ddl1, ddl2, concs) {
                 console.log("ONE configureDegreeLists");
                 var select = ['Select Concentration'];
                 console.log(concs);
@@ -195,7 +210,6 @@
                           // can prob take the next if statement out
                           // console.log($(this).val());
                           console.log(data.reqs);
-
                           configureRequirements(data.reqs)
                           /*
                           if (data.is_taken) {
@@ -206,7 +220,7 @@
                       });
               }
 
-              function onSelectDegree(ddl1) {
+              function onSelectDegree(ddl1, ddl2) {
                     var deg = ddl1.value; // check this reference
                     console.log("START SelectDegree");
                     $.ajax({
@@ -219,9 +233,11 @@
                               console.log("SelectDegree");
                               // unhide concentration bar
                               // populate the concentration bar
+                              // configureDegreeLists(ddl1, ddl2, data.concs)
                               configureDegreeLists(ddl1, ddl2, data.concs)
+
                             }
-                    })
+                    });
               }
               // {% endblock %}
 
@@ -269,7 +285,6 @@
             });
             */
 
-
             function remove_course(ev) {
               var id = ev.target.id;
                 $.ajax({
@@ -279,10 +294,24 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                    configureDegreeLists(ddl1, ddl2, data.concs)
+                    configureRequirements(data.reqs)
                   }
-                })
+                });
               } 
+
+              function add_course(ev) {
+                var id = ev.target.id;
+                  $.ajax({
+                    url: '/home/ajax/add_course/', // HEROKU LINK TO DATABASE
+                    data: {
+                      'id' : id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                      configureRequirements(data.reqs)
+                    }
+                  });
+                }
        </script>
 
     </head>  
@@ -308,7 +337,7 @@
         <div class="tab-pane" id="plan1">
          <!-- Drag and Drop  Menu for Concentration and Certificates-->
          <div class="selectDegree">
-            <select id="ddl1" onchange="onSelectDegree(this)">                
+            <select id="ddl1" onchange="onSelectDegree(this, document.getElementById('ddl2'))">               
                <option value="select">Select Degree:</option>
                <option value="ab">A.B.</option>
                <option value="bse">B.S.E.</option>
