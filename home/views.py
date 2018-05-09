@@ -71,8 +71,6 @@ def scheduler(request):
 		u.save()
 		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
-	app = {'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
-
 	return render(
 		request,
 		'schedule.html',
@@ -86,6 +84,7 @@ def choose_season(request):
 		courses.append(c.title)
 	data = {'coursesbyseason': courses}
 	return JsonResponse(data)
+
 @login_required
 def choose_conc(request):
 	#also need AB/BSE reqs
@@ -102,7 +101,7 @@ def choose_conc(request):
 	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
 	degreereqs = ['Degree Reqs will be Here!']
 
-	#save deg to associated user plan
+	#save conc to associated user plan
 	# cnetid = request.user.username
 	# plan = User.objects.filter(netid=cnetid).values('plan')
 	# plan.conc = Concentration.objects.get(name=conc)
@@ -113,6 +112,7 @@ def choose_conc(request):
 			'degreereqs': degreereqs
 	}
 	return JsonResponse(data)
+
 @login_required
 def choose_deg(request):
 
@@ -132,18 +132,44 @@ def choose_deg(request):
 	data = {'concs': concs}
 
 	return JsonResponse(data)
+
 @login_required
 def dropped_course(request):
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
+	year = ""
 	allowed = false
 	if (course.season == chosensemester): # Probably have to modify
 		allowed = true
 	data = {'allowed': allowed}
+	if allowed:
+		#if user already has a plan. NOTE: THIS SHOULD ALWAYS BE TRUE
+		if User.objects.filter(netid=request.user.username).count() > 0:		
+			plan = User.objects.get(netid=request.user.username).plan
+
+			#add course to plan
+			sem = Semester.objects.create(season=chosensemester, year=year)
+			sem.save()
+			s_course = SavedCourse.objects.create(course=course, semester=sem)
+			s_course.save()
+			plan.saved_courses.add(s_course)
+			#recalculate reqs
+			conc = User.objects.get(netid=request.user.username).plan.conc
+			conc = User.objects.get(netid=request.user.username).plan.deg
+			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
+			degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
+
+			#save plan
+			plan.save()
+			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
+
+	
 	return JsonResponse(data)
+
 @login_required
 def remove_course(request):
 	course = request.GET.get('removedcourse', None)
+
 @login_required
 def sampleschedules(request):
 	return render(
