@@ -88,6 +88,9 @@ def choose_conc(request):
 	print("conc")
 	#also need AB/BSE reqs
 	conc = request.GET.get('conc', None)
+	print(conc)
+	conc = conc[5:len(conc)-1]
+	print(conc)
 	if (Concentration.objects.get(name=conc).degree == 'AB'):
 		degreereqs = Concentration.objects.get(name='AB').get_reqs()
 	else:
