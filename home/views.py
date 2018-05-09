@@ -115,6 +115,8 @@ def choose_conc(request):
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
 	}
+	print("hi")
+	print(data)
 	return JsonResponse(data)
 
 @login_required

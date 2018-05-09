@@ -192,25 +192,45 @@
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
-                    html += "<li>" + reqs[i] + "</li>";
+                    if ((reqs[i].charAt(7) == ":") || (reqs[i].charAt(7) == "/")) {
+                      html += "<li>" + reqs[i].toUpperCase() + "</li>";
+                    }
+                    else {
+                      html += "<li>" + reqs[i] + "</li>";
+                    }
                   }
                   else {
                     html += "<ol>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
-                        html += "<li>" + reqs[i][j] + "</li>";
+                        if ((reqs[i][j].charAt(7) == ":") || (reqs[i][j].charAt(7) == "/") ) {
+                          html += "<li>" + reqs[i][j].toUpperCase() + "</li>";
+                        }
+                        else {
+                          html += "<li>" + reqs[i][j] + "</li>";
+                        }
                       }
                       else {
                         html += "<ol>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
-                            html += "<li>" + reqs[i][j][k] + "</li>";
+                            if ((reqs[i][j][k].charAt(7) == ":") || (reqs[i][j][k].charAt(7) == "/") ) {
+                              html += "<li>" + reqs[i][j][k].toUpperCase() + "</li>";
+                            }
+                            else {
+                              html += "<li>" + reqs[i][j][k] + "</li>";
+                            }
                           }
                           else {
                             html += "<ol>";
-                            for (var l = 0; l < reqs[i][j][k].length; l++) {                              
-                              html += "<li>" + reqs[i][j][k][l] + "</li>";
+                            for (var l = 0; l < reqs[i][j][k].length; l++) { 
+                              if ((reqs[i][j][k][l].charAt(7) == ":") || (reqs[i][j][k][l].charAt(7) == "/") ) {                             
+                                html += "<li>" + reqs[i][j][k][l] + "</li>";
+                              }
+                              else {
+                                html += "<li>" + reqs[i][j][k][l] + "</li>";
+                              }
                             }
                             html += "</ol>";
                           }
