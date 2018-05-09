@@ -59,6 +59,7 @@
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
+            dropped_course(ev)
           }
 
             function openPlan(evt, name) {
@@ -339,7 +340,7 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                    dropped_course(id, data.reqs) // ???????
+                    // dropped_course(id, data.reqs) // ???????
                     configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
@@ -350,6 +351,7 @@
 
             function dropped_course(ev) {
                 var id = ev.target.id;
+                  console.log("dropped_course START");
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
@@ -360,6 +362,7 @@
                       configureRequirements(data.concreqs, data.degreereqs)
                     }
                   });
+                  console.log("dropped_course END");
                 }
 
                /* function displayRemoves() {
@@ -372,7 +375,6 @@
     </head>  
 
    <body>
-      <img src="../img/nassau1.jpg"> 
         <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top" id="mainNav">
             <div class="container">
@@ -455,7 +457,7 @@
             <ul id="spring19">
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
