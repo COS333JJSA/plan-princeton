@@ -164,12 +164,19 @@
                 console.log("configureDegreeLists");
               }
 
-              function configureRequirements(reqs) {
+              function configureRequirements(concreqs, degreereqs) {
                 // iterate through the requirements array RECURSIVELY??
-                for(var i = 0; i < reqs.length; i++){
-                  if (!(typeof reqs[i] === 'string' || reqs[i] instanceof String)) {
-                    configureRequirements(reqs[i])
-                    console.log(reqs[i]);
+                for(var i = 0; i < concreqs.length; i++){
+                  if (!(typeof concreqs[i] === 'string' || concreqs[i] instanceof String)) {
+                    configureRequirements(concreqs[i], degreereqs)
+                    console.log(concreqs[i]);
+                  }
+                }
+
+                for(var i = 0; i < degreereqs.length; i++){
+                  if (!(typeof degreereqs[i] === 'string' || degreereqs[i] instanceof String)) {
+                    configureRequirements(concreqs, degreereqs[i])
+                    console.log(degreereqs[i]);
                   }
                 }
 
@@ -194,9 +201,8 @@
                           // process json data 
                           // can prob take the next if statement out
                           // console.log($(this).val());
-                          console.log(data.reqs);
-
-                          configureRequirements(data.reqs)
+                          console.log(data.concreqs);
+                          configureRequirements(data.concreqs, data.degreereqs)
                           /*
                           if (data.is_taken) {
                             alert("A user with this username already exists.");
@@ -272,6 +278,8 @@
 
             function remove_course(ev) {
               var id = ev.target.id;
+              print("remove_course")
+/*
                 $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
@@ -281,9 +289,10 @@
                   success: function(data) {
                     configureDegreeLists(ddl1, ddl2, data.concs)
                   }
-                })
+                });
+*/
               } 
-
+              
        </script>
 
     </head>  
@@ -331,7 +340,7 @@
                 {% for key, value in courses.items %}
                   
                   <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
-                    <button class="fa fa-times" onclick="remove_course(event)"></button>
+                                      <button class="fa fa-times" onclick="remove_course(event)"></button>
                     <button class="fa fa-caret-down"></button>
                   </li>         
                 {% endfor %}
