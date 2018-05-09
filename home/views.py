@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from home.models import Plan
 from home.models import SavedCourse
 from home.models import Semester
+from home.models import Department
 
 
 # Create your views here.
@@ -85,24 +86,25 @@ def choose_season(request):
 	return JsonResponse(data)
 
 def choose_conc(request):
-	print("conc")
 	#also need AB/BSE reqs
-	conc = request.GET.get('conc', None)
-	print(conc)
-	conc = conc[5:len(conc)-1]
-	print(conc)
-	if (Concentration.objects.get(name=conc).degree == 'AB'):
-		degreereqs = Concentration.objects.get(name='AB').get_reqs()
-	else:
-		degreereqs = Concentration.objects.get(name='BSE').get_reqs()
+
+	conc_code = request.GET.get('conc', None)
+	dep = Department.objects.get(code=conc_code)
+
+	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
+	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
+	# else:
+	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
+	degreereqs = ['Degree Reqs will be Here!']
 
 	#save deg to associated user plan
-	cnetid = request.user.username
-	plan = User.objects.filter(netid=cnetid).values('plan')
-	plan.conc = Concentration.objects.get(name=conc)
-	plan.save()
+	# cnetid = request.user.username
+	# plan = User.objects.filter(netid=cnetid).values('plan')
+	# plan.conc = Concentration.objects.get(name=conc)
+	# plan.save()
 
-	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
+
+	data = {'concreqs': Concentration.objects.get(conc_code=dep).get_reqs(),
 			'degreereqs': degreereqs
 	}
 	print(data)
