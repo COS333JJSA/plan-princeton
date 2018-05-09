@@ -179,7 +179,7 @@ h6 {
   float: left;
   width: 15%;
   height: 100vh;
-  margin: 4% 1% 1% 1%;
+  margin: 3.5% 1% 1% 1%;
 }
 
 /* Dropdown filters for courses */
@@ -281,7 +281,7 @@ ul li {
 /* Requirements Column */
 .requirements {
   height: 100vh;
-  margin-top: 2%;
+  margin-top: 3.5%;
   border: transparent;
   width: 20%;
   float: left;
@@ -291,7 +291,7 @@ ul li {
 .schedule {
   width: 15%;
   height: 100vh;
-  padding-top: 2%;
+  padding-top: 3.5%;
   border-left: 1px solid #ccc;
   float: left;
 }

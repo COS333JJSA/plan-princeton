@@ -294,21 +294,21 @@
             */
 
             function remove_course(ev) {
-              print("remove_course")
-/*
-                var id = ev.target.id;
-                $.ajax({
+              console.log("remove_course");
+              var id = ev.target.id;
+              $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
                     'id' : id
                   },
                   dataType: 'json',
                   success: function(data) {
-                    configureRequirements(data.reqs)
+                    add_course(id, data.reqs)
                   }
                 });
+              ev.remove(id);
               } 
-
+/*
             function add_course(ev) {
                 var id = ev.target.id;
                   $.ajax({
@@ -322,9 +322,9 @@
                     }
                   });
                 }
-*/
-              } 
+
               
+    */          
        </script>
 
     </head>  
@@ -372,7 +372,7 @@
                 {% for key, value in courses.items %}
                   
                   <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
-                                      <button class="fa fa-times" onclick="remove_course(event)"></button>
+                      <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
                     <button class="fa fa-caret-down"></button>
                   </li>         
                 {% endfor %}
@@ -389,10 +389,10 @@
          <!--Schedule-->
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
-            <ul id="fall1">
-              {% for key, value in fall1.items %}
+            <ul id="fall18">
+              {% for key, value in fall18.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
@@ -401,10 +401,10 @@
          
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Spring 2019</h1>
-            <ul id="spring1">
-              {% for key, value in spring1.items %}
+            <ul id="spring19">
+              {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
@@ -413,10 +413,10 @@
          
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall 2019</h1>
-            <ul id="fall2">
-              {% for key, value in fall2.items %}
+            <ul id="fall19">
+              {% for key, value in fall19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
@@ -425,10 +425,10 @@
          
          <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Sophomore Spring 2020</h1>
-            <ul id="spring2">
-              {% for key, value in spring2.items %}
+            <ul id="spring20">
+              {% for key, value in spring20.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
