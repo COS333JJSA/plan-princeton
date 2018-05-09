@@ -227,7 +227,6 @@ if __name__ == "__main__":
 
     for c in oneterm:
       result[c] = c
-    print(result)
 
 
 # printing
