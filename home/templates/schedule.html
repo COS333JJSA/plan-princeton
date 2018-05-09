@@ -176,10 +176,11 @@
               }
 
               //  {% block javascript %}
-              function onSelectConcentration(ddl1, ddl2) {
+              // function onSelectConcentration(ddl1, ddl2) {
+              function onSelectConcentration(ddl2) {
                 console.log("CONC 1");
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
-                var deg = ddl1.value; // check this reference
+                // var deg = ddl1.value; // check this reference
                 console.log("Conc before ajax");
                 $.ajax({
                         url: '/home/ajax/choose_conc/', // HEROKU LINK TO DATABASE
@@ -314,9 +315,9 @@
                <option value="bse">B.S.E.</option>
             </select>                
 
-            <select id="ddl2">
-
+            <select id="ddl2" onchange="onSelectConcentration(this);"> 
             </select>
+
           </div>
         </div>      
       

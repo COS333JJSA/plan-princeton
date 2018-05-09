@@ -217,6 +217,11 @@ class CourseManager(models.Manager):
 		for c in all_courses:
 			dic.update(c.all_info_solo())
 		return dic
+	def all_info_some(self, courses):
+		dic = {}
+		for c in courses:
+			dic.update(c.all_info_solo())
+		return dic
 
 class Course(models.Model):
 	professor = models.ManyToManyField(Professor)
