@@ -193,11 +193,13 @@
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
-                    if ((reqs[i].charAt(7) == ":") || (reqs[i].charAt(7) == "/")) {
-                      html += "<li>" + reqs[i].toUpperCase() + "</li>";
-                    }
-                    else {
+                    //course
+                    if (reqs[i].charAt(reqs[i].length-1) != ")") {
                       html += "<li>" + reqs[i] + "</li>";
+                    }
+                    //req title
+                    else {
+                      html += "<li><b>" + reqs[i] + "</b></li>";
                     }
                   }
                   else {
@@ -205,32 +207,38 @@
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
-                        if ((reqs[i][j].charAt(7) == ":") || (reqs[i][j].charAt(7) == "/") ) {
-                          html += "<li>" + reqs[i][j].toUpperCase() + "</li>";
-                        }
-                        else {
+                        //course
+                        if (reqs[i][j].charAt(reqs[i][j].length-1) != ")") {
                           html += "<li>" + reqs[i][j] + "</li>";
+                        }
+                        //req title
+                        else {
+                          html += "<li><b>" + reqs[i][j] + "</b></li>";
                         }
                       }
                       else {
                         html += "<ol>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
-                            if ((reqs[i][j][k].charAt(7) == ":") || (reqs[i][j][k].charAt(7) == "/") ) {
+                            //course
+                            if (reqs[i][j][k].charAt(reqs[i][j][k].length-1) != ")") {
                               html += "<li>" + reqs[i][j][k].toUpperCase() + "</li>";
                             }
+                            //req title
                             else {
-                              html += "<li>" + reqs[i][j][k] + "</li>";
+                              html += "<li><b>" + reqs[i][j][k] + "</b></li>";
                             }
                           }
                           else {
                             html += "<ol>";
                             for (var l = 0; l < reqs[i][j][k].length; l++) { 
-                              if ((reqs[i][j][k][l].charAt(7) == ":") || (reqs[i][j][k][l].charAt(7) == "/") ) {                             
+                              //course
+                              if (reqs[i][j][k][l].charAt(reqs[i][j][k][l].length-1) != ")") {                             
                                 html += "<li>" + reqs[i][j][k][l] + "</li>";
                               }
+                              //req title
                               else {
-                                html += "<li>" + reqs[i][j][k][l] + "</li>";
+                                html += "<li><b>" + reqs[i][j][k][l] + "</b></li>";
                               }
                             }
                             html += "</ol>";

@@ -1402,6 +1402,7 @@
   "name": "Mechanical and Aerospace Engineering",
   "code": "MAE",
   "year": 2018,
+  "degree": "BSE",
   "urls": [
     "https://ua.princeton.edu/academic-units/department-mechanical-and-aerospace-engineering-0#",
     "https://mae.princeton.edu/undergraduate/programs"
@@ -1558,6 +1559,7 @@
   "name": "Operations Research and Financial Engineering",
   "code": "ORF",
   "year": 2018,
+  "degree": "BSE",
   "urls": [
     "https://ua.princeton.edu/academic-units/department-operations-research-and-financial-engineering",
     "https://orfe.princeton.edu/sites/orfe.princeton.edu/files/documents/Academic%20Guide%202020.pdf"
