@@ -159,6 +159,7 @@
                 console.log(ddl);
                 if (select != null) {
                   var length = select.options.length;
+                  console.log(length);
                   for (i = 0; i < length; i++) {
                     select.remove(i);
                   }
@@ -180,11 +181,8 @@
               }
 
               function configureRequirements(concreqs, degreereqs) {
-
                 document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
-                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)
-                
-                
+                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)                
               }
               function req_html(reqs) {
                 html = ""
@@ -342,28 +340,26 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                    add_course(id, data.reqs)
+                    //add_course(id, data.reqs) // ???????
+                    configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
               ev.remove(id);
-              } 
-/*
-            function add_course(ev) {
+              }
+ 
+            function dropped_course(ev) {
                 var id = ev.target.id;
                   $.ajax({
-                    url: '/home/ajax/add_course/', // HEROKU LINK TO DATABASE
+                    url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
                       'id' : id
                     },
                     dataType: 'json',
                     success: function(data) {
-                      configureRequirements(data.reqs)
+                      configureRequirements(data.concreqs, data.degreereqs)
                     }
                   });
                 }
-
-              
-    */          
        </script>
 
     </head>  
