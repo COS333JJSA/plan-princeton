@@ -165,20 +165,53 @@
               }
 
               function configureRequirements(concreqs, degreereqs) {
-                // iterate through the requirements array RECURSIVELY??
-                for(var i = 0; i < concreqs.length; i++){
-                  if (!(typeof concreqs[i] === 'string' || concreqs[i] instanceof String)) {
-                    configureRequirements(concreqs[i], degreereqs)
-                    console.log(concreqs[i]);
-                  }
-                }
 
-                for(var i = 0; i < degreereqs.length; i++){
-                  if (!(typeof degreereqs[i] === 'string' || degreereqs[i] instanceof String)) {
-                    configureRequirements(concreqs, degreereqs[i])
-                    console.log(degreereqs[i]);
+                document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
+                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)
+                
+                
+              }
+              function req_html(reqs) {
+                html = ""
+                // iterate through the requirements array RECURSIVELY??
+                for(var i = 0; i < reqs.length; i++){
+                  html += "<ul>"
+                  if (typeof reqs[i] === "string") {
+                    html += "<li>" + reqs[i] + "</li>";
+                  }
+                  else {
+                    for (var j = 0; j < reqs[i].length; j++){
+                      html += "<ul>"
+                      if (typeof reqs[i][j] == "string") {
+                        html += "<li>" + reqs[i][j] + "</li>";
+                      }
+                      else {
+                        for (var k = 0; k < reqs[i][j].length; k++) {
+                          html += "<ul>"
+                          if (typeof reqs[i][j][k] == "string") {
+                            html += "<li>" + reqs[i][j][k] + "</li>";
+                          }
+                          else {
+                            for (var l = 0; l < reqs[i][j][k].length; l++) {
+                              html += "<li>" + reqs[i][j][k][l] + "</li>";
+                            }
+                          }
+                        }
+                        html += "</ul>"
+                      }
+                    }
+                    html += "</ul>"
                   }
                 }
+                html += "</ul>"
+                return html
+
+                // for(var i = 0; i < degreereqs.length; i++){
+                //   if (!(typeof degreereqs[i] === 'string' || degreereqs[i] instanceof String)) {
+                //     configureRequirements(concreqs, degreereqs[i])
+                //     console.log(degreereqs[i]);
+                //   }
+                // }
 
               }
 
@@ -351,7 +384,14 @@
 
          <!--Remaining requirements-->
          <div class="requirements">
-            <h2>Remaining <br/> Requirements</h2>
+            <h1>Major Requirements</h1>
+            <br>
+            <div id="maj_reqs">
+            </div>
+            <h1>Degree Requirements</h1>
+            <br>
+            <div id="deg_reqs">
+            </div>
          </div>
 
          <!--Schedule-->
