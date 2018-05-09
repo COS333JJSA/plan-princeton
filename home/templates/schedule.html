@@ -184,46 +184,45 @@
                 document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
                 document.getElementById("maj_reqs").innerHTML = req_html(concreqs)                
               }
+
               function req_html(reqs) {
                 html = ""
                 // iterate through the requirements array RECURSIVELY??
-                html += "<ul>"
+                html += "<ol>"
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
                     html += "<li>" + reqs[i] + "</li>";
                   }
                   else {
-                    html += "<ul>"
+                    html += "<ol>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
                         html += "<li>" + reqs[i][j] + "</li>";
                       }
                       else {
-                        html += "<ul>"
-                        for (var k = 0; k < reqs[i][j].length; k++) {
-                          
+                        html += "<ol>";
+                        for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
                             html += "<li>" + reqs[i][j][k] + "</li>";
                           }
                           else {
-                            html += "<ul>"
-                            for (var l = 0; l < reqs[i][j][k].length; l++) {
-                              
+                            html += "<ol>";
+                            for (var l = 0; l < reqs[i][j][k].length; l++) {                              
                               html += "<li>" + reqs[i][j][k][l] + "</li>";
                             }
-                            html += "</ul>"
+                            html += "</ol>";
                           }
                         }
-                        html += "</ul>"
+                        html += "</ol>";
                       }
                     }
-                    html += "</ul>"
+                    html += "</ol>";
                   }
                 }
-                html += "</ul>"
-                return html
+                html += "</ol>";
+                return html;
 
                 // for(var i = 0; i < degreereqs.length; i++){
                 //   if (!(typeof degreereqs[i] === 'string' || degreereqs[i] instanceof String)) {
@@ -311,7 +310,7 @@
 
               })
              })
-        /*     function showCourseInformation(ev) {
+        /*     function show_course_info(ev) {
               var id = ev.target.id;
               alert("{{key}}");
               if (tag.style.display === "none") {
@@ -340,12 +339,14 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                    //add_course(id, data.reqs) // ???????
+                    dropped_course(id, data.reqs) // ???????
                     configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
-              ev.remove(id);
+              for (var i = 0; i < id.length; i++) {
+                id.remove(i);
               }
+            }
 
             function dropped_course(ev) {
                 var id = ev.target.id;
@@ -360,11 +361,18 @@
                     }
                   });
                 }
+
+               /* function displayRemoves() {
+                  $(".dragCourse").click(function() {
+                    $(".fa-times").toggle();
+                  })
+                }*/
        </script>
 
     </head>  
 
    <body>
+      <img src="../img/nassau1.jpg"> 
         <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top" id="mainNav">
             <div class="container">
@@ -386,14 +394,14 @@
          <!-- Drag and Drop  Menu for Concentration and Certificates-->
          <div class="selectDegree">
             <select id="ddl1" onchange="onSelectDegree(this, document.getElementById('ddl2'))">               
-               <option value="select">Select Degree:</option>
-               <option value="ab">A.B.</option>
-               <option value="bse">B.S.E.</option>
+              <option value="select">Select Degree:</option>
+              <option value="ab">A.B.</option>
+              <option value="bse">B.S.E.</option>
             </select>                
-
+            
             <select id="ddl2" onchange="onSelectConcentration(this);"> 
+              <option> Select Concentration: </option>
             </select>
-
           </div>
         </div>      
       
@@ -418,13 +426,14 @@
 
          <!--Remaining requirements-->
          <div class="requirements">
-            <h1>Major Requirements</h1>
-            <br>
-            <div id="maj_reqs">
-            </div>
-            <h1>Degree Requirements</h1>
-            <br>
+            <h2>Major <br/> Requirements</h2>
+            <div id="maj_reqs">  
+              <br/>            
+            </div>  
+
+            <h2>Degree <br/> Requirements</h2>
             <div id="deg_reqs">
+              <br/>
             </div>
          </div>
 
@@ -471,7 +480,7 @@
               {% for key, value in spring20.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-caret-down" onclick="show_course_info(event)"></button>
                 </li>
               {% endfor %}
             </ul>

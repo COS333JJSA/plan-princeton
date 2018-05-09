@@ -4,8 +4,13 @@ body {
   font-size: 14px;
   font-weight: normal;
   min-width: 100%;
+  background-color: #fef9e5; 
 }
 
+img {
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}
 p {
   line-height: 1.75;
 }
@@ -20,14 +25,19 @@ a:hover {
 
 h1 {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 17px;
   font-family: 'Montserrat', sans-serif;
   text-align: center;
+  border: 5px outset white;
+  background-color: #c7deff;
+  padding: 10% 0;
+  border-radius: 15px;
+  width: 95%;
+  margin-left: 2%;
 }
 
 h2 {
-  font-weight: 900;
-  padding-left: 30px;
+  font-weight: 600;
   font-size: 18px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -61,11 +71,9 @@ h6 {
 
 #mainNav .navbar-toggler {
   font-size: 18px;
-  right: 0;
   padding: 13px;
   text-transform: uppercase;
   color: #212529;
-  border: 0;
   background-color: white;
   font-family: 'Montserrat', sans-serif;
 }
@@ -133,7 +141,7 @@ h6 {
 
 .nav-pills {
   background-color: #ffc681;
-  border-radius: 25px;
+  border-radius: 15px;
 }
 
 .nav-pills > li {
@@ -173,13 +181,14 @@ h6 {
   float: left;
   position: absolute;
   padding: 16px;
+  width: 15%;
 }
 
 .dropdown {
   float: left;
-  width: 15%;
+  width: 16%;
   height: 100vh;
-  margin: 3.5% 1% 1% 1%;
+  margin: 6% 1% 1% 1%;
 }
 
 /* Dropdown filters for courses */
@@ -188,10 +197,11 @@ h6 {
   background-color: #ffa12e;
   color: white;
   padding: 5% ;
-  font-size: 16px;
-  border-radius: 25px;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 2px solid white;
   cursor: pointer;
-  width: 130%;
+  width: 100%;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -221,27 +231,14 @@ h6 {
 }
 
 .dropdown-content {
-  display: none;
   position: absolute;
   background-color: white;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
   overflow: auto;
   height: 100vh;
-  width: 130%;
-  border-radius: 25px;
+  width: 100%;
+  border-radius: 15px;
   z-index: 1;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0.5%;
-}
-
-ul li {
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 25px;
-  display: block;
 }
 
 .dragCourse {
@@ -249,10 +246,10 @@ ul li {
   background-color: #ffecd5;
   padding: 2%;
   display: block;
-  border: 1px solid #ddd;
+  border: 3px outset white;
   width: 98%;
   height: 10% ;
-  border-radius: 25px;
+  border-radius: 15px;
   overflow: auto;
   font-size: 16px;
   margin: 5px;
@@ -260,6 +257,11 @@ ul li {
 
 .dragCourse:hover {
   background-color: #ffa12e;
+}
+
+
+.fa-times {
+  display: none;
 }
 
 .fa-caret-down, .fa-times {
@@ -274,6 +276,7 @@ ul li {
   float: right;
 }
 
+
 .show {
   display: block;
 }
@@ -281,9 +284,34 @@ ul li {
 /* Requirements Column */
 .requirements {
   height: 100vh;
-  margin-top: 3.5%;
+  padding-top: 3.5%;
   border: transparent;
   width: 20%;
+  float: left;
+  border: 2px solid white;
+  background-color: #e9f2ff;
+}
+
+hr {
+  height: 1px;
+  border-top: 1px solid #ccc;
+  position: relative;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0.5%;
+}
+
+ul li {
+  border: transparent
+  background-color: #ddd;
+  display: block;
+}
+
+#maj_reqs, #deg_reqs {
+  position: relative;
+  width: 100%;
   float: left;
 }
 
@@ -292,7 +320,7 @@ ul li {
   width: 15%;
   height: 100vh;
   padding-top: 3.5%;
-  border-left: 1px solid #ccc;
+  border: 2px solid white;
   float: left;
 }
 
