@@ -4,8 +4,6 @@ body {
   font-size: 14px;
   font-weight: normal;
   min-width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 p {
@@ -179,9 +177,9 @@ h6 {
 
 .dropdown {
   float: left;
-  width: 275px;
+  width: 15%;
   height: 100vh;
-  margin: 50px 10px 10px 13px;
+  margin: 4% 1% 1% 1%;
 }
 
 /* Dropdown filters for courses */
@@ -189,10 +187,11 @@ h6 {
   float: left;
   background-color: #ffa12e;
   color: white;
-  padding: 10px;
+  padding: 5% ;
   font-size: 16px;
   border-radius: 25px;
   cursor: pointer;
+  width: 130%;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -204,11 +203,12 @@ h6 {
   background-position: 6px 6px;
   background-repeat: no-repeat;
   font-size: 12pt;
-  padding: 6px 6px 0 6px;
+  padding: 1% 1% 0 1%;
   border: none;
   border-bottom: 1px solid #ddd;
-  width: 287px;
-  position: fixed;
+  width: 100%;
+  height: 4%;
+  position: absolute;
   display: inline-block;
 }
 
@@ -217,7 +217,7 @@ h6 {
 }
 
 .dropdown-courses {
-  margin-top: 30px;
+  margin-top: 15%;
 }
 
 .dropdown-content {
@@ -227,31 +227,17 @@ h6 {
   border: 2px solid #ddd;
   overflow: auto;
   height: 100vh;
-  width: 287px;
+  width: 130%;
   border-radius: 25px;
   z-index: 1;
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px;
-  display: block;
-  width: 275px;
-  height: 100px;
-  overflow: hidden;
-}
-
-.dropdown-content a:hover {
-  background-color: white;
-}
-
 ul {
   list-style-type: none;
-  padding: 2px;
+  padding: 0.5%;
 }
 
 ul li {
-  margin: 5px;
   border: 1px solid #ddd;
   background-color: white;
   border-radius: 25px;
@@ -261,14 +247,15 @@ ul li {
 .dragCourse {
   color: black;
   background-color: #ffecd5;
-  padding: 12px;
+  padding: 2%;
   display: block;
   border: 1px solid #ddd;
-  width: 275px;
-  height: 100px;
+  width: 98%;
+  height: 10% ;
   border-radius: 25px;
   overflow: auto;
   font-size: 16px;
+  margin: 5px;
 }
 
 .dragCourse:hover {
@@ -293,27 +280,20 @@ ul li {
 
 /* Requirements Column */
 .requirements {
-  width: 15%px;
   height: 100vh;
-  padding-top: 50px;
+  margin-top: 2%;
   border: transparent;
-  width: 275px;
+  width: 20%;
   float: left;
 }
 
 /* Each semester's schedule */
 .schedule {
-  width: 275px;
+  width: 15%;
   height: 100vh;
-  padding-top: 50px;
-  border: 1px solid #ccc;
+  padding-top: 2%;
+  border-left: 1px solid #ccc;
   float: left;
-}
-
-/* Style page content */
-.main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
@@ -329,7 +309,6 @@ ul li {
         display: block;
         text-align: left;
         width: 100%;
-        margin: 0;
         padding: 14px;
     }
     .topnav input[type=text] {

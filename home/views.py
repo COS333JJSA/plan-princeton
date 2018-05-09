@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from home.models import Plan
 from home.models import SavedCourse
 from home.models import Semester
+from home.models import Department
 
 
 # Create your views here.
@@ -61,14 +62,14 @@ def scheduler(request):
 			first_info = {'saved': True, 'deg': plan.deg, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=plan.deg).update_reqs(plan_courses), 'courses': allcourses}
 		else:
-			first_info = {'saved': False, 'courses': allcourses}
+			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
 	else:
 		u = User(netid=cnetid)
 		u.save()
-		first_info = {'saved': False, 'courses': allcourses}
+		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
-	# app = {'fall1': [Course.objects.get(courseid='010097').all_info_solo()], 'fall2': [Course.objects.get(courseid='008072').all_info_solo()], 'spring1': [Course.objects.get(courseid='007987').all_info_solo()], 'spring2': [Course.objects.get(courseid='000976').all_info_solo()]}
+	app = {'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 
 	return render(
 		request,
@@ -86,26 +87,31 @@ def choose_season(request):
 
 def choose_conc(request):
 	#also need AB/BSE reqs
-	print ("conc")
-	conc = request.GET.get('conc', None)
-	if (Concentration.objects.get(name=conc).degree == 'AB'):
-		degreereqs = Concentration.objects.get(name='AB').get_reqs()
-	else:
-		degreereqs = Concentration.objects.get(name='BSE').get_reqs()
+
+	conc_code = request.GET.get('conc', None)
+	dep = Department.objects.get(code=conc_code)
+
+	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
+	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
+	# else:
+	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
+	degreereqs = ['Degree Reqs will be Here!']
 
 	#save deg to associated user plan
-	cnetid = request.user.username
-	plan = User.objects.filter(netid=cnetid).values('plan')
-	plan.conc = Concentration.objects.get(name=conc)
-	plan.save()
+	# cnetid = request.user.username
+	# plan = User.objects.filter(netid=cnetid).values('plan')
+	# plan.conc = Concentration.objects.get(name=conc)
+	# plan.save()
 
-	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
+
+	data = {'concreqs': Concentration.objects.get(conc_code=dep).get_reqs(),
 			'degreereqs': degreereqs
 	}
+	print(data)
 	return JsonResponse(data)
 
 def choose_deg(request):
-	print ("degree")
+
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
