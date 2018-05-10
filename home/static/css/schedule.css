@@ -187,12 +187,12 @@ h6 {
 .selectDegree {
   float: left;
   position: absolute;
-  padding: 16px;
+  padding: 1%;
   width: 15%;
 }
 
-#ddl1 {
-  margin-bottom: 10px;
+#ddl1, #ddl2{
+  margin-bottom: 1%;
 }
 
 .dropdown {
@@ -221,7 +221,7 @@ h6 {
 
 #myInput {
   border-box: box-sizing;
-  background-position: 6px 6px;
+  background-position: 1% 1%;
   background-repeat: no-repeat;
   font-size: 12pt;
   padding: 1% 1% 0 1%;
@@ -262,12 +262,16 @@ h6 {
   height: 10% ;
   border-radius: 15px;
   overflow: auto;
-  font-size: 16px;
-  margin: 5px;
+  font-size: 14px;
+  margin: 1%;
 }
 
 .dragCourse:hover {
   background-color: #ffa12e;
+}
+
+.fa-caret-down {
+  display: none;
 }
 
 .fa-caret-down, .fa-times {
@@ -319,6 +323,10 @@ ul li {
 ul #reqs{
   padding-left: 10%;
   list-style-type: none;
+}
+
+.collapse {
+  display: show;
 }
 
 #maj_reqs, #deg_reqs {
