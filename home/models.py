@@ -64,11 +64,9 @@ class Concentration(models.Model):
 		r_array = self.req_lists.all()
 		temp = []
 		for r in r_array:
-			print("r: " + str(r))
 			temp.append(r.name + " (" + str(r.min_needed) + ")")
 			temp2 = []
 			if len(r.req_lists_inside.all()):
-				print("if")
 				for r2 in r.req_lists_inside.all():
 					temp2.append(r2.name + " (" + str(r2.min_needed) + ")")
 					temp3 = []
@@ -88,7 +86,6 @@ class Concentration(models.Model):
 							temp3.append(c3.codes())
 					temp2.append(temp3)
 			else:
-				print("else")
 				for c2 in r.course_list.all():
 					temp2.append(c2.codes())
 			temp.append(temp2)
@@ -98,7 +95,7 @@ class Concentration(models.Model):
 	def update_reqs(self, courses):
 		new_courses = []
 		for i in courses:
-			new_courses.append(Course.objects.get(courseid=i).title_and_code())
+			new_courses.append(Course.objects.get(courseid=i.courseid).title_and_code())
 		return self.reqing(new_courses, self.get_reqs())
 
 		
@@ -279,17 +276,20 @@ class Plan(models.Model):
 	saved_courses = models.ManyToManyField('SavedCourse', blank=True)
 
 	def return_by_sem(self):
-		fall18, fall19, spring19, spring20 = []
+		fall18 = []
+		fall19 = []
+		spring19 = []
+		spring20 = []
 		planbysem = {}
 		for course in self.saved_courses.all():
-			if course.semester.year == 2018 and course.semester.season == 'f':
-				fall18.append(course)
-			if course.semester.year == 2019 and course.semester.season == 'f':
-				fall19.append(course)
-			if course.semester.year == 2019 and course.semester.season == 's':
-				spring19.append(course)
-			if course.semester.year == 2020 and course.semester.season == 's':
-				spring20.append(course)
+			if course.semester.year == 18 and course.semester.season == 'f':
+				fall18.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 'f':
+				fall19.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 's':
+				spring19.append(course.course)
+			if course.semester.year == 20 and course.semester.season == 's':
+				spring20.append(course.course)
 		planbysem = {'fall18': Course.objects.all_info_some(fall18), 'fall19': Course.objects.all_info_some(fall19), 'spring19': Course.objects.all_info_some(spring19), 'spring20': Course.objects.all_info_some(spring20)}
 		return planbysem
 	def return_courses(self):
@@ -299,8 +299,8 @@ class Plan(models.Model):
 		return courses
 
 class SavedCourse(models.Model):
-	course = models.ManyToManyField('Course')
-	semester = models.ManyToManyField('Semester')
+	course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+	semester = models.ForeignKey('Semester', on_delete=models.CASCADE, null=True, blank=True)
 
 class Semester(models.Model):
 	season = models.CharField(max_length=1)

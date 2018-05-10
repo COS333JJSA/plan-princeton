@@ -267,7 +267,7 @@
 
             function remove_course(ev) {
               console.log("remove_course");
-              var id = ev.target.id;
+              var id = (this)[0].id;
               $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
@@ -288,7 +288,8 @@
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
-                      'id' : id
+                      'id' : id,
+                      'term': term
                       // console.log("dropped id")
                     },
                     dataType: 'json',
@@ -369,6 +370,7 @@
          </div>
 
          <!--Schedule-->
+
          <div id="fall18" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
             <ul>

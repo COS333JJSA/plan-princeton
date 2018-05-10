@@ -1,6 +1,6 @@
 [{
   "type": "Degree",
-  "name": "A.B.",
+  "name": "AB",
   "year": 2018,
   "urls": [
     "https://ua.princeton.edu/contents/program-study-degree-bachelor-arts",
@@ -131,7 +131,7 @@
 },
 {
   "type": "Degree",
-  "name": "B.S.E.",
+  "name": "BSE",
   "year": 2018,
   "urls": [
     "https://ua.princeton.edu/contents/program-study-degree-bachelor-science-engineering",
