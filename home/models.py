@@ -95,7 +95,7 @@ class Concentration(models.Model):
 	def update_reqs(self, courses):
 		new_courses = []
 		for i in courses:
-			new_courses.append(Course.objects.get(courseid=i.courseid).title_and_code())
+			new_courses.append(Course.objects.get(courseid=i.courseid).codes())
 		return self.reqing(new_courses, self.get_reqs())
 
 		
@@ -158,10 +158,14 @@ class Concentration(models.Model):
 								return self.reqing(new_courses, arr)
 
 					elif r2 in new_courses:
+						print("hi")
+						print(self.name)
+						print(r2)
+						print("r2: "+ str(arr[c0-1]))
 						r.remove(r2)
 						if len(r) == 0:
 							return None
-						temp2 = int(arr[c0-1][0:len(arr[c0-1])-2]) - 1
+						temp2 = int(arr[c0-1][len(arr[c0-1])-2]) - 1
 						if temp2 == 0:
 							arr.remove(arr[c0-1])
 						else:
