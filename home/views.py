@@ -11,11 +11,14 @@ from home.models import Plan
 from home.models import SavedCourse
 from home.models import Semester
 from home.models import Department
+from home.models import Area
 
 
 # Create your views here.
 @login_required
 def index(request):
+
+	print(Course.objects.filter(area=Area.objects.get(code="SA")).values('pk'))
 	return render(
    	    request,
         'index.html',
