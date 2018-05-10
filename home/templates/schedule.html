@@ -262,18 +262,23 @@
               }
             }
 
-            function dropped_course(ev) {
-                var id = ev.target.id;
+            function dropped_course(id) {
+                console.log(id)
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
                       'id' : id
+                      // console.log("dropped id")
                     },
                     dataType: 'json',
+                    // console.log("dropped json")
                     success: function(data) {
                       configureRequirements(data.concreqs, data.degreereqs)
+                      //console.log("dropped SUCCESS")
                     }
                   });
+                console.log("dropped END")
+
                 }
 
                /* function displayRemoves() {
