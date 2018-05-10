@@ -58,8 +58,9 @@
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-            dropped_course(ev)
+            var course = document.getElementById(data);
+            ev.target.appendChild(course);
+            dropped_course(course.id);
           }
 
             function openPlan(evt, name) {
