@@ -58,8 +58,16 @@
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
+<<<<<<< HEAD
             ev.target.appendChild(document.getElementById(data));
             dropped_course(ev);
+=======
+            var course = document.getElementById(data);
+            // console.log(course);
+            // console.log(course.id);
+            ev.target.appendChild(course);
+            dropped_course(course.id);
+>>>>>>> master
           }
 
             function openPlan(evt, name) {
@@ -75,85 +83,6 @@
                 document.getElementById(name).style.display = "block";
                 evt.currentTarget.className += "active";
              } 
-
-             /*
-             function configureDegreeLists(ddl1,ddl2) {
-                var select = ['Select Concentration'];
-                var ab = ['Select Concentration:', 
-                   'AAS (African American Studies)', 
-                   'ANT (Anthropology)',
-                   'ARC (Architecture)',
-                   'ART (Art and Archaeology)',
-                   'AST (Astrophysical Sciences)',
-                   'CHM (Chemistry)',
-                   'CLA (CLassics)',
-                   'COM (Comparative Literature', 
-                   'COS (Computer Science)', 
-                   'EAS (East Asian Studies)',
-                   'EEB (Ecology and Evolutionary Biology)',
-                   'ECO (Economics)',
-                   'FIT (French and Italian)',
-                   'GEO (Geosciences)',
-                   'GER (German)',
-                   'HIS (History)',
-                   'MAT (Mathematics)',
-                   'MOL (Molecular Biology)',
-                   'MUS (Music)',
-                   'NES (Near Eastern Studies)', 
-                   'NEU (Neuroscience)',
-                   'PHI (Philosophy)',
-                   'PSY (Psychology)',
-                   'REL (Religion)',
-                   'SLA (Slavic Languages and Literatures)',
-                   'SOC (Sociology)',
-                   'SPO (Spanish and Portuguese)',
-                   'WWS (The Woodrow Wilson School)'];
-                var bse = ['Select Concentration:', 
-                   'CBE (Chemical and Biological Engineering)', 
-                   'CEE (Civil and Environmental Engineering)', 
-                   'COS (Computer Science)', 
-                   'ELE (Electrical Engineering)', 
-                   'MAE (Mechanical and Aerospace Engineering)', 
-                   'ORF (Operations Research and Financial Engineering)'];
-                switch (ddl1.value) {
-                   case 'select': 
-                      ddl2.options.length = 0;
-                      for (i = 0; i < select.length; i++) {
-                         createOption(ddl2, select[i]);
-                      }
-                      break;
-                   case 'ab':
-                      ddl2.options.length = 0;
-                      for (i = 0; i < ab.length; i++) {
-                         createOption(ddl2, ab[i]);
-                      }
-                      break;
-                   case 'bse':
-                      ddl2.options.length = 0; 
-                      for (i = 0; i < bse.length; i++) {
-                         createOption(ddl2, bse[i]);
-                      }f
-                      break;
-                   default:
-                      ddl2.options.length = 0;
-                      break;
-                }
-             }
-
-             function createOption(ddl, text, value) {
-                var opt = document.createElement('option');
-                opt.value = value;
-                opt.text = text;
-                ddl.options.add(opt);
-             } 
-
-            function createOption(ddl, text, value) {
-                var opt = document.createElement('option');
-                opt.value = value.substring(0,3);
-                opt.text = text;
-                ddl.options.add(opt);
-                console.log("createOption");
-             } */
 
              function createOption(ddl, text) {
                 var select = document.getElementById(ddl);
@@ -193,45 +122,25 @@
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
-                    if ((reqs[i].charAt(7) == ":") || (reqs[i].charAt(7) == "/")) {
-                      html += "<li>" + reqs[i].toUpperCase() + "</li>";
-                    }
-                    else {
-                      html += "<li>" + reqs[i] + "</li>";
-                    }
+                    html += "<li>" + reqs[i] + "</li>";
                   }
                   else {
                     html += "<ol>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
-                        if ((reqs[i][j].charAt(7) == ":") || (reqs[i][j].charAt(7) == "/") ) {
-                          html += "<li>" + reqs[i][j].toUpperCase() + "</li>";
-                        }
-                        else {
-                          html += "<li>" + reqs[i][j] + "</li>";
-                        }
+                        html += "<li>" + reqs[i][j] + "</li>";
                       }
                       else {
                         html += "<ol>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
-                            if ((reqs[i][j][k].charAt(7) == ":") || (reqs[i][j][k].charAt(7) == "/") ) {
-                              html += "<li>" + reqs[i][j][k].toUpperCase() + "</li>";
-                            }
-                            else {
-                              html += "<li>" + reqs[i][j][k] + "</li>";
-                            }
+                            html += "<li>" + reqs[i][j][k] + "</li>";
                           }
                           else {
                             html += "<ol>";
-                            for (var l = 0; l < reqs[i][j][k].length; l++) { 
-                              if ((reqs[i][j][k][l].charAt(7) == ":") || (reqs[i][j][k][l].charAt(7) == "/") ) {                             
-                                html += "<li>" + reqs[i][j][k][l] + "</li>";
-                              }
-                              else {
-                                html += "<li>" + reqs[i][j][k][l] + "</li>";
-                              }
+                            for (var l = 0; l < reqs[i][j][k].length; l++) {                              
+                              html += "<li>" + reqs[i][j][k][l] + "</li>";
                             }
                             html += "</ol>";
                           }
@@ -244,18 +153,8 @@
                 }
                 html += "</ol>";
                 return html;
-
-                // for(var i = 0; i < degreereqs.length; i++){
-                //   if (!(typeof degreereqs[i] === 'string' || degreereqs[i] instanceof String)) {
-                //     configureRequirements(concreqs, degreereqs[i])
-                //     console.log(degreereqs[i]);
-                //   }
-                // }
-
               }
 
-              //  {% block javascript %}
-              // function onSelectConcentration(ddl1, ddl2) {
               function onSelectConcentration(ddl2) {
                 console.log("CONC 1");
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
@@ -304,7 +203,6 @@
                             }
                     });
               }
-              // {% endblock %}
 
              function myFunction() {
                 document.getElementById("myDropdown").classList.toggle("show");
@@ -360,7 +258,7 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                    // dropped_course(id, data.reqs) // ???????
+                    dropped_course(id, data.reqs) // ???????
                     configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
@@ -369,20 +267,23 @@
               }
             }
 
-            function dropped_course(ev) {
-                var id = ev.target.id;
-                  console.log("dropped_course START");
+            function dropped_course(id) {
+                console.log(id)
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
                       'id' : id
+                      // console.log("dropped id")
                     },
                     dataType: 'json',
+                    // console.log("dropped json")
                     success: function(data) {
                       configureRequirements(data.concreqs, data.degreereqs)
+                      //console.log("dropped SUCCESS")
                     }
                   });
-                  console.log("dropped_course END");
+                console.log("dropped END")
+
                 }
 
                /* function displayRemoves() {
@@ -435,7 +336,6 @@
                <ul id="myUL" class="dropdown-courses">
 
                 {% for key, value in courses.items %}
-                  
                   <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
                       <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
                     <button class="fa fa-caret-down"></button>
@@ -477,7 +377,7 @@
             <ul id="spring19">
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
                 <button class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}

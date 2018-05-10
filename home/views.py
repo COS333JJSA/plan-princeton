@@ -124,6 +124,7 @@ def choose_deg(request):
 
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
+	print(deg)
 
 	#save deg to associated user plan
 	cnetid = request.user.username
@@ -137,7 +138,7 @@ def choose_deg(request):
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
-
+	print(data)
 	return JsonResponse(data)
 
 @login_required
