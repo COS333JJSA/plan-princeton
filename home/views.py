@@ -143,13 +143,7 @@ def choose_deg(request):
 @login_required
 def dropped_course(request):
 
-	course = request.GET.get('course', None)
-	chosensemester = request.GET.get('chosensemester', None)
-	year = ""
-	allowed = false
-	if (course.season == chosensemester): # Probably have to modify
-		allowed = true
-
+	#get and parse data from front end
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
@@ -157,20 +151,14 @@ def dropped_course(request):
 	course = Course.objects.get(courseid=cid)
 
 
-	# cnetid = request.user.username
-	# userplan = User.objects.get(netid=cnetid).plan.usercourses
-	# usercourses = userplan.return_courses
-	# for course in usercourses:
-
-
+	#determine if course is allowed in this semester
 	allcourses = Course.objects.all_info()
 	allowed = True
 	# if (course.season == season): # Probably have to modify
 	#  	allowed = True
 
-	userplan.save()
-
 	data = {'allowed': allowed}
+	#if course is allowed in the semester, update plan and recalculate reqs
 	if allowed:
 		#if user already has a plan. NOTE: THIS SHOULD ALWAYS BE TRUE
 		if User.objects.filter(netid=request.user.username).count() > 0:		
@@ -193,15 +181,12 @@ def dropped_course(request):
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
 
 
-			#
-			user = User.objects.get(netid=request.user.username)
-			plan_courses = user.plan.return_courses()
+			plan_courses = plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
 			for c in plan_courses:
 				if c in allcourses:
 					allcourses.remove(c)
-			print(concreqs)
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
