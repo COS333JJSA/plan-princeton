@@ -208,7 +208,7 @@ for i in range(0, len(courses)):
 		ccounter += 1
 	for s in course["term"]:
 		s = s.split()
-		outp += """{{"model": home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0][0], int(s[1]))
+		outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0][0], int(s[1]))
 		scurr.append(scounter)
 		scounter += 1
 	#check for area
@@ -216,7 +216,7 @@ for i in range(0, len(courses)):
 		area = "null"
 	else:
 		area = list(areas.keys()).index(course["area"])
-	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}, "term": {8}, "season": "{9}"}}}}, """.format(i, 
+	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}, "semesters": {8}, "season": "{9}"}}}}, """.format(i, 
 		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr, scurr, course["term"][0][0])
 
 
