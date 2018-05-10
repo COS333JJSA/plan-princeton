@@ -146,23 +146,15 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
-	print("hello")
 	id = request.GET.get('id', None)
-	print (id)
-	Course.objects.get(id=id)
-	
+	course = Course.objects.get(id=id)
 
 	# chosensemester = request.GET.get('chosensemester', None)
 	year = ""
+	chosensem
 	allowed = False
 	if (course.season == chosensemester): # Probably have to modify
 	 	allowed = True
-
-	# cnetid = request.user.username
-	# userplan = User.objects.get(netid=cnetid).plan.usercourses
-	# usercourses = userplan.return_courses
-	# for course in usercourses:
-	#userplan.save()
 
 	data = {'allowed': allowed}
 	if allowed:
