@@ -145,9 +145,9 @@ def dropped_course(request):
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
 	year = ""
-	allowed = false
+	allowed = False
 	if (course.season == chosensemester): # Probably have to modify
-		allowed = true
+		allowed = True
 
 	# cnetid = request.user.username
 	# userplan = User.objects.get(netid=cnetid).plan.usercourses

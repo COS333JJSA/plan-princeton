@@ -64,11 +64,9 @@ class Concentration(models.Model):
 		r_array = self.req_lists.all()
 		temp = []
 		for r in r_array:
-			print("r: " + str(r))
 			temp.append(r.name + " (" + str(r.min_needed) + ")")
 			temp2 = []
 			if len(r.req_lists_inside.all()):
-				print("if")
 				for r2 in r.req_lists_inside.all():
 					temp2.append(r2.name + " (" + str(r2.min_needed) + ")")
 					temp3 = []
@@ -88,7 +86,6 @@ class Concentration(models.Model):
 							temp3.append(c3.codes())
 					temp2.append(temp3)
 			else:
-				print("else")
 				for c2 in r.course_list.all():
 					temp2.append(c2.codes())
 			temp.append(temp2)
