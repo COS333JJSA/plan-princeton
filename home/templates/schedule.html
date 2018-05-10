@@ -59,7 +59,7 @@
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
-            dropped_course(ev)
+            dropped_course(ev);
           }
 
             function openPlan(evt, name) {
@@ -352,7 +352,7 @@
 
             function remove_course(ev) {
               console.log("remove_course");
-              var id = ev.target.id;
+              var id = (this)[0].id;
               $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
@@ -460,7 +460,7 @@
          </div>
 
          <!--Schedule-->
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="{{key}}" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
             <ul id="fall18">
               {% for key, value in fall18.items %}

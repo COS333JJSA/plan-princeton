@@ -143,24 +143,22 @@ def choose_deg(request):
 @login_required
 def dropped_course(request):
 	print("hello")
-	print(request.GET.get('course', None))
+	id = request.GET.get('id', None)
+	print (id)
+	Course.objects.get(id=id)
 	
-	courseName = request.GET.get('course', None)
-	course = Course.objects.get(name=courseName)
 
-	chosensemester = request.GET.get('chosensemester', None)
+	# chosensemester = request.GET.get('chosensemester', None)
 	year = ""
-	allowed = false
+	allowed = False
 	if (course.season == chosensemester): # Probably have to modify
-		allowed = true
+	 	allowed = True
 
 	# cnetid = request.user.username
 	# userplan = User.objects.get(netid=cnetid).plan.usercourses
 	# usercourses = userplan.return_courses
 	# for course in usercourses:
-
-
-	userplan.save()
+	#userplan.save()
 
 	data = {'allowed': allowed}
 	if allowed:
@@ -184,7 +182,7 @@ def dropped_course(request):
 			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
 
-	
+	print (data)
 	return JsonResponse(data)
 
 @login_required
