@@ -75,7 +75,7 @@ def scheduler(request):
 		u = User(netid=cnetid, plan=blankplan)
 		u.save()
 		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
-
+	print (allcourses)
 	return render(
 		request,
 		'schedule.html',
@@ -118,7 +118,7 @@ def choose_conc(request):
 	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
 	}
-	print("hi")
+
 	print(data)
 	return JsonResponse(data)
 
@@ -146,18 +146,25 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
-	id = request.GET.get('id', None)
-	print(request.GET.get('term', None))
-	print(id)
-	#print(term)
-	course = Course.objects.get(id=id)
+	cid = request.GET.get('id', None)
+	term = request.GET.get('term', None)
+	term = term[:1]
+	course = Course.objects.get(courseid=cid)
 
-	# chosensemester = request.GET.get('chosensemester', None)
-	year = ""
-	chosensem
+
+	# have to modify when 'both' classes are considered
+	# print (course)
+	print (course.season)
+	print (term)
+
+	allcourses = Course.objects.all_info()
+
+
+
 	allowed = False
-	if (course.season == chosensemester): # Probably have to modify
+	if (course.season == term): # Probably have to modify
 	 	allowed = True
+
 
 	data = {'allowed': allowed}
 	if allowed:
@@ -166,7 +173,7 @@ def dropped_course(request):
 			plan = User.objects.get(netid=request.user.username).plan
 
 			#add course to plan
-			sem = Semester.objects.create(season=chosensemester, year=year)
+			sem = Semester.objects.create(season=term, year=year)
 			sem.save()
 			s_course = SavedCourse.objects.create(course=course, semester=sem)
 			s_course.save()
@@ -179,9 +186,18 @@ def dropped_course(request):
 
 			#save plan
 			plan.save()
-			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
 
-	print (data)
+			#
+			user = User.objects.get(netid=cnetid)
+			plan_courses = user.plan.return_courses()
+			courses_by_sem = user.plan.return_by_sem()
+
+			for c in plan_courses:
+				if c in all_courses:
+					allcourses.remove(c)
+
+			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
+
 	return JsonResponse(data)
 
 @login_required

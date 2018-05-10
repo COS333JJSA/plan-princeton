@@ -269,7 +269,8 @@
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
-                      'id' : id
+                      'id' : id,
+                      'term': term
                       // console.log("dropped id")
                     },
                     dataType: 'json',
