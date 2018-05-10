@@ -58,7 +58,7 @@ def scheduler(request):
 
 			for course in plan_courses:
 				if course in all_courses:
-					allcourses.remove(course)
+					all_courses.remove(course)
 
 
 			first_info = {'saved': True, 'deg': plan.degree, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
