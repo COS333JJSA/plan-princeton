@@ -334,7 +334,7 @@
                 {% for key, value in courses.items %}
                   <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
                       <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                    <button class="fa fa-caret-down"></button>
+                    <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
                   </li>         
                 {% endfor %}
 
@@ -361,8 +361,8 @@
             <ul>
               {% for key, value in fall18.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
@@ -373,8 +373,8 @@
             <ul>
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
@@ -386,7 +386,7 @@
               {% for key, value in fall19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
