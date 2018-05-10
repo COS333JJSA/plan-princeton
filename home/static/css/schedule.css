@@ -7,12 +7,12 @@ body {
   background-color: #fef9e5; 
 }
 
-img {
-  opacity: 0.5;
-  filter: alpha(opacity=50); /* For IE8 and earlier */
-}
 p {
   line-height: 1.75;
+}
+
+a {
+  padding: 5px;
 }
 
 a:hover {
@@ -56,6 +56,7 @@ h4 {
   font-size: 14px;
   display: none;
 }
+
 h5,
 h6 {
   font-weight: 700;
@@ -233,7 +234,7 @@ h6 {
 .dropdown-content {
   position: absolute;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 2px ridge #ddd;
   overflow: auto;
   height: 100vh;
   width: 100%;
