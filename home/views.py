@@ -53,6 +53,7 @@ def scheduler(request):
 	if User.objects.filter(netid=cnetid).count() > 0:
 		if User.objects.get(netid=cnetid).plan.saved_courses.all().count() > 0 :
 			user = User.objects.get(netid=cnetid)
+			plan = user.plan
 			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
