@@ -144,7 +144,8 @@ def choose_deg(request):
 def dropped_course(request):
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
-	term = term[:1]
+	season = term[:1]
+	year = int(term[-2:])
 	course = Course.objects.get(courseid=cid)
 
 
@@ -154,11 +155,8 @@ def dropped_course(request):
 	print (term)
 
 	allcourses = Course.objects.all_info()
-
-
-
 	allowed = False
-	if (course.season == term): # Probably have to modify
+	if (course.season == season): # Probably have to modify
 	 	allowed = True
 
 
@@ -169,9 +167,9 @@ def dropped_course(request):
 			plan = User.objects.get(netid=request.user.username).plan
 
 			#add course to plan
-			sem = Semester.objects.create(season=term, year=year)
+			sem = Semester.objects.create(season=season, year=year)
 			sem.save()
-			s_course = SavedCourse.objects.create(course=course, semester=sem)
+			s_course = SavedCourse(course=course, semester=sem)
 			s_course.save()
 			plan.saved_courses.add(s_course)
 			#recalculate reqs
@@ -190,6 +188,7 @@ def dropped_course(request):
 
 			for c in plan_courses:
 				if c in all_courses:
+					print ("here")
 					allcourses.remove(c)
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
