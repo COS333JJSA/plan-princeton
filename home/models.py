@@ -95,7 +95,7 @@ class Concentration(models.Model):
 	def update_reqs(self, courses):
 		new_courses = []
 		for i in courses:
-			new_courses.append(Course.objects.get(courseid=i).title_and_code())
+			new_courses.append(Course.objects.get(courseid=i.courseid).title_and_code())
 		return self.reqing(new_courses, self.get_reqs())
 
 		
@@ -276,7 +276,10 @@ class Plan(models.Model):
 	saved_courses = models.ManyToManyField('SavedCourse', blank=True)
 
 	def return_by_sem(self):
-		fall18, fall19, spring19, spring20 = []
+		fall18 = []
+		fall19 = []
+		spring19 = []
+		spring20 = []
 		planbysem = {}
 		for course in self.saved_courses.all():
 			if course.semester.year == 2018 and course.semester.season == 'f':
@@ -296,8 +299,8 @@ class Plan(models.Model):
 		return courses
 
 class SavedCourse(models.Model):
-	course = models.ManyToManyField('Course')
-	semester = models.ManyToManyField('Semester')
+	course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+	semester = models.ForeignKey('Semester', on_delete=models.CASCADE, null=True, blank=True)
 
 class Semester(models.Model):
 	season = models.CharField(max_length=1)
