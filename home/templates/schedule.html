@@ -58,11 +58,12 @@
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
+            var term = ev.target.id;
             var course = document.getElementById(data);
-            // console.log(course);
+            console.log(course);
             // console.log(course.id);
             ev.target.appendChild(course);
-            dropped_course(course.id);
+            dropped_course(course.id, term);
           }
 
             function openPlan(evt, name) {
@@ -258,12 +259,13 @@
                   }
                 });
               for (var i = 0; i < id.length; i++) {
-                id.remove(i);
+                id.delete(i);
               }
             }
 
-            function dropped_course(id) {
-                console.log(id)
+            function dropped_course(id, term) {
+                console.log(id);
+                console.log(term);
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
@@ -277,7 +279,7 @@
                       //console.log("dropped SUCCESS")
                     }
                   });
-                console.log("dropped END")
+                console.log("dropped END");
 
                 }
 
@@ -355,9 +357,9 @@
          </div>
 
          <!--Schedule-->
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="fall18" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
-            <ul id="fall18">
+            <ul>
               {% for key, value in fall18.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
@@ -367,9 +369,9 @@
             </ul>
          </div>
          
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring19" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Spring 2019</h1>
-            <ul id="spring19">
+            <ul>
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
@@ -379,9 +381,9 @@
             </ul>
          </div>
          
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
+         <div id="fall19" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall 2019</h1>
-            <ul id="fall19">
+            <ul>
               {% for key, value in fall19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
@@ -391,9 +393,9 @@
             </ul>
          </div>
          
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring20"ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Sophomore Spring 2020</h1>
-            <ul id="spring20">
+            <ul>
               {% for key, value in spring20.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
