@@ -206,18 +206,18 @@ for i in range(0, len(courses)):
 			c["classnum"], c["enroll"], c["limit"], timeConverter(c["starttime"]), c["section"], timeConverter(c["endtime"]), c["roomnum"], c["days"], c["bldg"])
 		ccurr.append(ccounter)
 		ccounter += 1
-	# for s in course["term"]:
-	# 	s = s.split()
-	# 	outp += """{{"model": home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0], s[1])
-	# 	scurr.append(scounter)
-	# 	scounter += 1
+	for s in course["term"]:
+		s = s.split()
+		outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0][0], int(s[1]))
+		scurr.append(scounter)
+		scounter += 1
 	#check for area
 	if course["area"] == "":
 		area = "null"
 	else:
 		area = list(areas.keys()).index(course["area"])
-	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}}}}}, """.format(i, 
-		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr)
+	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}, "semesters": {8}, "season": "{9}"}}}}, """.format(i, 
+		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr, scurr, course["term"][0][0])
 
 
 #CONCENTRATIONS
