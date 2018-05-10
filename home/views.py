@@ -142,33 +142,31 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
-<<<<<<< HEAD
+
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
 	year = ""
 	allowed = false
 	if (course.season == chosensemester): # Probably have to modify
 		allowed = true
-=======
+
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
 	year = int(term[-2:])
 	course = Course.objects.get(courseid=cid)
->>>>>>> c50be042011049285f30d1453ad5529be70582e1
+
 
 	# cnetid = request.user.username
 	# userplan = User.objects.get(netid=cnetid).plan.usercourses
 	# usercourses = userplan.return_courses
 	# for course in usercourses:
 
-<<<<<<< HEAD
-=======
+
 	allcourses = Course.objects.all_info()
 	allowed = True
 	# if (course.season == season): # Probably have to modify
 	#  	allowed = True
->>>>>>> c50be042011049285f30d1453ad5529be70582e1
 
 	userplan.save()
 
@@ -194,9 +192,7 @@ def dropped_course(request):
 			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
 
-<<<<<<< HEAD
-	
-=======
+
 			#
 			user = User.objects.get(netid=request.user.username)
 			plan_courses = user.plan.return_courses()
@@ -209,7 +205,6 @@ def dropped_course(request):
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
->>>>>>> c50be042011049285f30d1453ad5529be70582e1
 	return JsonResponse(data)
 
 @login_required
