@@ -107,16 +107,14 @@ def choose_conc(request):
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
-	userplan.conc = Concentration.objects.get(name=conc)
+	userplan.conc = conc_o
 	userplan.save()
 
+	# print(degreereqs)
 
-
-	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
+	data = {'concreqs': conc_o.get_reqs(),
 			'degreereqs': degreereqs
 	}
-	print("hi")
-	print(data)
 	return JsonResponse(data)
 
 @login_required
@@ -137,7 +135,6 @@ def choose_deg(request):
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
-	print(data)
 	return JsonResponse(data)
 
 @login_required
