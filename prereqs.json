@@ -2162,29 +2162,20 @@
       "dist_req": "QR"
     },
     {
-      "name": "Science and Technology",
+      "name": "Science and Technology with Lab",
       "max_counted": 1,
-      "min_needed": 2,
-      "description": "Science and Technology (STL/STN) — two courses. At least one course must be a science and technology course with laboratory (STL). Students may elect a second laboratory science course, or a nonlaboratory science course (STN).",
-      "explanation": "The requirement in science and technology is designed to give you a basic knowledge of the capabilities and limitations of scientific inquiry and technological development. The common purpose of courses in this area is to instill a lasting interest in science and technology; to impart some understanding of the value of scientific thinking and its relation to societal issues; to foster an appreciation of the essential role of experimentation and measurement; and to convey the excitement of doing scientific research. The laboratory component is essential to an understanding of how scientific concepts are tested and of the limitations of the scientific method, including the concepts of error and reproducibility.",
-      "req_list": [
-        {
-          "name": "Science and Technology with Lab",
-          "max_counted": 1,
-          "min_needed": 1,
-          "description": "Science and Technology with Lab (STL)",
-          "explanation": null,
-          "dist_req": "STL"
-        },
-        {
-          "name": "Science and Technology without Lab",
-          "max_counted": 1,
-          "min_needed": 1,
-          "description": "Science and Technology without Lab (STN)",
-          "explanation": null,
-          "dist_req": "STN"
-        }
-      ]
+      "min_needed": 1,
+      "description": "Science and Technology with Lab (STL)",
+      "explanation": null,
+      "dist_req": "STL"
+    },
+    {
+      "name": "Science and Technology without Lab",
+      "max_counted": 1,
+      "min_needed": 1,
+      "description": "Science and Technology without Lab (STN)",
+      "explanation": null,
+      "dist_req": "STN"
     }
   ]
 }
