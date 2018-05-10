@@ -296,6 +296,7 @@ h6 {
   float: left;
   border: 3px solid white;
   background-color: #e9f2ff;
+  overflow: auto;
 }
 
 hr {
@@ -313,6 +314,11 @@ ul li {
   border: transparent
   background-color: #ddd;
   display: block;
+}
+
+ul #reqs{
+  padding-left: 10%;
+  list-style-type: none;
 }
 
 #maj_reqs, #deg_reqs {

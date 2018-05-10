@@ -114,40 +114,40 @@
               function req_html(reqs) {
                 html = ""
                 // iterate through the requirements array RECURSIVELY??
-                html += "<ol>"
+                html += "<ul id='reqs'>"
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
                     html += "<li>" + reqs[i] + "</li>";
                   }
                   else {
-                    html += "<ol>";
+                    html += "<ul id='reqs'>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
                         html += "<li>" + reqs[i][j] + "</li>";
                       }
                       else {
-                        html += "<ol>";
+                        html += "<ul id='reqs'>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
                             html += "<li>" + reqs[i][j][k] + "</li>";
                           }
                           else {
-                            html += "<ol>";
+                            html += "<ul id='reqs'>";
                             for (var l = 0; l < reqs[i][j][k].length; l++) {                              
                               html += "<li>" + reqs[i][j][k][l] + "</li>";
                             }
-                            html += "</ol>";
+                            html += "</ul>";
                           }
                         }
-                        html += "</ol>";
+                        html += "</ul>";
                       }
                     }
-                    html += "</ol>";
+                    html += "</ul>";
                   }
                 }
-                html += "</ol>";
+                html += "</ul>";
                 return html;
               }
 
