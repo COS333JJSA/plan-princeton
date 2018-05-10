@@ -47,14 +47,12 @@ h3 {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   font-size: 14px;
-  display: none;
 }
 
 h4 {
   font-family: 'Roboto Slab', serif;
   font-weight: normal;
   font-size: 14px;
-  display: none;
 }
 
 h5,
@@ -258,11 +256,6 @@ h6 {
 
 .dragCourse:hover {
   background-color: #ffa12e;
-}
-
-
-.fa-times {
-  display: none;
 }
 
 .fa-caret-down, .fa-times {
