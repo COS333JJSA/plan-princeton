@@ -282,14 +282,14 @@ class Plan(models.Model):
 		spring20 = []
 		planbysem = {}
 		for course in self.saved_courses.all():
-			if course.semester.year == 2018 and course.semester.season == 'f':
-				fall18.append(course)
-			if course.semester.year == 2019 and course.semester.season == 'f':
-				fall19.append(course)
-			if course.semester.year == 2019 and course.semester.season == 's':
-				spring19.append(course)
-			if course.semester.year == 2020 and course.semester.season == 's':
-				spring20.append(course)
+			if course.semester.year == 18 and course.semester.season == 'f':
+				fall18.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 'f':
+				fall19.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 's':
+				spring19.append(course.course)
+			if course.semester.year == 20 and course.semester.season == 's':
+				spring20.append(course.course)
 		planbysem = {'fall18': Course.objects.all_info_some(fall18), 'fall19': Course.objects.all_info_some(fall19), 'spring19': Course.objects.all_info_some(spring19), 'spring20': Course.objects.all_info_some(spring20)}
 		return planbysem
 	def return_courses(self):

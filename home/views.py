@@ -68,7 +68,7 @@ def scheduler(request):
 
 			first_info = {'saved': True, 'deg': plan.degree, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=plan.degree).update_reqs(plan_courses), 'courses': all_courses}
-			first_info = first_info.update(courses_by_sem)
+			first_info.update(courses_by_sem)
 		else:
 			first_info = {"courses": all_courses}
 	#if no user object
@@ -78,6 +78,8 @@ def scheduler(request):
 		u = User(netid=cnetid, plan=blankplan)
 		u.save()
 		first_info = {"courses": all_courses}
+
+	# print(first_info)
 
 	return render(
 		request,
@@ -140,6 +142,7 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
+	print("here")
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
@@ -148,8 +151,6 @@ def dropped_course(request):
 
 	# have to modify when 'both' classes are considered
 	# print (course)
-	print (course.season)
-	print (term)
 
 	allcourses = Course.objects.all_info()
 	allowed = False
@@ -174,7 +175,7 @@ def dropped_course(request):
 			plan.saved_courses.add(s_course)
 			#recalculate reqs
 			conc = User.objects.get(netid=request.user.username).plan.conc
-			conc = User.objects.get(netid=request.user.username).plan.degree
+			deg = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
 
@@ -182,14 +183,15 @@ def dropped_course(request):
 			plan.save()
 
 			#
-			user = User.objects.get(netid=cnetid)
+			user = User.objects.get(netid=request.user.username)
 			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
 			for c in plan_courses:
-				if c in all_courses:
+				if c in allcourses:
 					print ("here")
 					allcourses.remove(c)
+			print(concreqs)
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
