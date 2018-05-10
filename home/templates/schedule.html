@@ -113,30 +113,57 @@
 
               function req_html(reqs) {
                 html = ""
-                // iterate through the requirements array RECURSIVELY??
                 html += "<ol>"
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
-                    html += "<li>" + reqs[i] + "</li>";
+                    // title
+                    if (reqs[i].charAt(reqs[i].length-1) == ")") {
+                      html += "<li><b>" + reqs[i] + "</b></li>";
+                    }
+                    //course
+                    else {
+                      html += "<li>" + reqs[i] + "</li>";
+                    }
                   }
                   else {
                     html += "<ol>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
-                        html += "<li>" + reqs[i][j] + "</li>";
+                        //title
+                        if (reqs[i][j].charAt(reqs[i][j].length-1) == ")") {
+                          html += "<li><b>" + reqs[i][j] + "</b></li>";
+                        }
+                        //course
+                        else {
+                          html += "<li>" + reqs[i][j] + "</li>";
+                        }
                       }
                       else {
                         html += "<ol>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
-                            html += "<li>" + reqs[i][j][k] + "</li>";
+                            //title
+                            if (reqs[i][j][k].charAt(reqs[i][j][k].length-1) == ")") {
+                              html += "<li><b>" + reqs[i][j][k] + "</b></li>";
+                            }
+                            //course
+                            else {
+                              html += "<li>" + reqs[i][j][k] + "</li>";
+                            }
                           }
                           else {
                             html += "<ol>";
-                            for (var l = 0; l < reqs[i][j][k].length; l++) {                              
-                              html += "<li>" + reqs[i][j][k][l] + "</li>";
+                            for (var l = 0; l < reqs[i][j][k].length; l++) {
+                              //title
+                              if (reqs[i][j][k][l].charAt(reqs[i][j][k][l].length-1) == ")") {                              
+                                html += "<li><b>" + reqs[i][j][k][l] + "</b></li>";
+                              }
+                              //course
+                              else {
+                                html += "<li>" + reqs[i][j][k][l] + "</li>";
+                              }
                             }
                             html += "</ol>";
                           }
