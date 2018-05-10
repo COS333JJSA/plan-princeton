@@ -40,14 +40,14 @@ def scheduler(request):
 	first_info = {}
 
 	#ignore 'none' courses
-	allcourses = []
+	# allcourses = []
 	# for springcourse in Course.objects.filter(season='s').all():
 	# 	allcourses.append(springcourse)
 	# for fallcourse in Course.objects.filter(season='f').all():
 	# 	allcourses.append(fallcourse)
 	# for bothcourse in Course.objects.filter(season='b').all():
 	# 	allcourses.append(bothcourse)
-	allcourses = Course.objects.all_info()
+	all_courses = Course.objects.all_info()
 
 	# User already exists and plan is NOT blank
 	if User.objects.filter(netid=cnetid).count() > 0:
