@@ -113,7 +113,7 @@
 
               function req_html(reqs) {
                 html = ""
-                html += "<ol>"
+                html += "<ul id='reqs'>"
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
@@ -154,7 +154,7 @@
                             }
                           }
                           else {
-                            html += "<ol>";
+                            html += "<ul id='reqs'>";
                             for (var l = 0; l < reqs[i][j][k].length; l++) {
                               //title
                               if (reqs[i][j][k][l].charAt(reqs[i][j][k][l].length-1) == ")") {                              
@@ -246,12 +246,6 @@
                    }
                 }
              }
-
-             $(document).ready(function() {
-              $(".fa-times").click(function () {
-
-              })
-             })
         /*     function show_course_info(ev) {
               var id = ev.target.id;
               alert("{{key}}");
@@ -285,10 +279,8 @@
                     configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
-              for (var i = 0; i < id.length; i++) {
-                id.delete(i);
-              }
-            }
+              console.log(id);
+            }  
 
             function dropped_course(id, term) {
                 console.log(id);
@@ -309,12 +301,6 @@
                   });
                 console.log("dropped END");
                 }
-
-               /* function displayRemoves() {
-                  $(".dragCourse").click(function() {
-                    $(".fa-times").toggle();
-                  })
-                }*/
        </script>
 
     </head>  
@@ -362,7 +348,7 @@
                 {% for key, value in courses.items %}
                   <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
                       <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                    <button class="fa fa-caret-down"></button>
+                    <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
                   </li>         
                 {% endfor %}
 
@@ -390,8 +376,8 @@
             <ul>
               {% for key, value in fall18.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
@@ -402,8 +388,8 @@
             <ul>
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
@@ -415,13 +401,13 @@
               {% for key, value in fall19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="spring20"ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring20" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Sophomore Spring 2020</h1>
             <ul>
               {% for key, value in spring20.items %}

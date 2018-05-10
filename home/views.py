@@ -11,18 +11,14 @@ from home.models import Plan
 from home.models import SavedCourse
 from home.models import Semester
 from home.models import Department
-from home.models import Area
 
 
 # Create your views here.
 @login_required
 def index(request):
-
-	data = {"SA": Course.objects.filter(area=Area.objects.get(code="STL")).values('pk')}
 	return render(
    	    request,
         'index.html',
-    	data,
     )
 
 def login(request):
@@ -44,20 +40,19 @@ def scheduler(request):
 	first_info = {}
 
 	#ignore 'none' courses
-	# allcourses = []
+	allcourses = []
 	# for springcourse in Course.objects.filter(season='s').all():
-	# 	all_courses.append(springcourse)
+	# 	allcourses.append(springcourse)
 	# for fallcourse in Course.objects.filter(season='f').all():
-	# 	all_courses.append(fallcourse)
+	# 	allcourses.append(fallcourse)
 	# for bothcourse in Course.objects.filter(season='b').all():
-	# 	all_courses.append(bothcourse)
-	all_courses = Course.objects.all_info()
+	# 	allcourses.append(bothcourse)
+	allcourses = Course.objects.all_info()
 
 	# User already exists and plan is NOT blank
 	if User.objects.filter(netid=cnetid).count() > 0:
 		if User.objects.get(netid=cnetid).plan.saved_courses.all().count() > 0 :
 			user = User.objects.get(netid=cnetid)
-			plan = user.plan
 			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
@@ -65,21 +60,21 @@ def scheduler(request):
 				if course in all_courses:
 					allcourses.remove(course)
 
+
 			first_info = {'saved': True, 'deg': plan.degree, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=plan.degree).get_reqs(), 'courses': all_courses}
 			first_info.update(courses_by_sem)
+
 		else:
-			first_info = {"courses": all_courses}
-	#if no user object
+			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
+	#if either no user object or no plans
 	else:
 		blankplan = Plan()
 		blankplan.save()
 		u = User(netid=cnetid, plan=blankplan)
 		u.save()
-		first_info = {"courses": all_courses}
+		first_info = {"saved": False, "courses": all_courses}
 
-	# print(first_info)
-	print(all_courses)
 	return render(
 		request,
 		'schedule.html',
@@ -101,22 +96,27 @@ def choose_conc(request):
 	conc_code = request.GET.get('conc', None)
 	conc = conc_code[5:len(conc_code)-1]
 
-	conc_o = Concentration.objects.get(name=conc)
+	#dep = Department.objects.get(=conc_code)
 
-	#hardcoded for AB. change later!!!
-	degreereqs = Concentration.objects.get(name="AB").get_reqs()
+
+	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
+	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
+	# else:
+	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
+	degreereqs = ['Degree Reqs will be Here!']
 
 
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
-	userplan.conc = conc_o
+	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
 
-	data = {'concreqs': conc_o.get_reqs(),
+
+
+	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
 			'degreereqs': degreereqs
 	}
-
 	return JsonResponse(data)
 
 @login_required
@@ -137,24 +137,40 @@ def choose_deg(request):
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
 	data = {'concs': concs}
+
 	return JsonResponse(data)
 
 @login_required
 def dropped_course(request):
+<<<<<<< HEAD
+	course = request.GET.get('course', None)
+	chosensemester = request.GET.get('chosensemester', None)
+	year = ""
+	allowed = false
+	if (course.season == chosensemester): # Probably have to modify
+		allowed = true
+=======
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
 	year = int(term[-2:])
 	course = Course.objects.get(courseid=cid)
+>>>>>>> c50be042011049285f30d1453ad5529be70582e1
 
-	# have to modify when 'both' classes are considered
-	# print (course)
+	# cnetid = request.user.username
+	# userplan = User.objects.get(netid=cnetid).plan.usercourses
+	# usercourses = userplan.return_courses
+	# for course in usercourses:
 
+<<<<<<< HEAD
+=======
 	allcourses = Course.objects.all_info()
 	allowed = True
 	# if (course.season == season): # Probably have to modify
 	#  	allowed = True
+>>>>>>> c50be042011049285f30d1453ad5529be70582e1
 
+	userplan.save()
 
 	data = {'allowed': allowed}
 	if allowed:
@@ -163,23 +179,24 @@ def dropped_course(request):
 			plan = User.objects.get(netid=request.user.username).plan
 
 			#add course to plan
-			sem = Semester.objects.create(season=season, year=year)
+			sem = Semester.objects.create(season=chosensemester, year=year)
 			sem.save()
-			s_course = SavedCourse(course=course, semester=sem)
-			# s_course.save()
-			# s_course.course.add(course)
-			# s_course.semester.add(sem)
+			s_course = SavedCourse.objects.create(course=course, semester=sem)
 			s_course.save()
 			plan.saved_courses.add(s_course)
 			#recalculate reqs
 			conc = User.objects.get(netid=request.user.username).plan.conc
-			deg = User.objects.get(netid=request.user.username).plan.degree
+			conc = User.objects.get(netid=request.user.username).plan.deg
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			# degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
 			degreereqs = Concentration.objects.get(name=deg).get_reqs()
 			#save plan
 			plan.save()
+			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
 
+<<<<<<< HEAD
+	
+=======
 			#
 			user = User.objects.get(netid=request.user.username)
 			plan_courses = user.plan.return_courses()
@@ -192,6 +209,7 @@ def dropped_course(request):
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
+>>>>>>> c50be042011049285f30d1453ad5529be70582e1
 	return JsonResponse(data)
 
 @login_required
