@@ -281,6 +281,7 @@ class Plan(models.Model):
 		spring19 = []
 		spring20 = []
 		planbysem = {}
+<<<<<<< HEAD
 		for c in Course.objects.all():
 			for code in c.codes():
 				if code == "FRS 109" or code == "ISC 231" or code == "ISC 232" or code == "WRI 190":
@@ -291,6 +292,17 @@ class Plan(models.Model):
 					spring19.append(c)
 				if code == "CHM 302b" or code == "MAT 201" or code == "CWR 201" or code == "HUM 302" or code == "PHI 203":
 					spring20.append(course)
+=======
+		for course in self.saved_courses.all():
+			if course.semester.year == 18 and course.semester.season == 'f':
+				fall18.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 'f':
+				fall19.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 's':
+				spring19.append(course.course)
+			if course.semester.year == 20 and course.semester.season == 's':
+				spring20.append(course.course)
+>>>>>>> 368697da5935521235b5b808841164485ee14578
 		planbysem = {'fall18': Course.objects.all_info_some(fall18), 'fall19': Course.objects.all_info_some(fall19), 'spring19': Course.objects.all_info_some(spring19), 'spring20': Course.objects.all_info_some(spring20)}
 		return planbysem
 	def return_courses(self):
