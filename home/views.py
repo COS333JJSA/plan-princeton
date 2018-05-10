@@ -147,6 +147,9 @@ def choose_deg(request):
 @login_required
 def dropped_course(request):
 	id = request.GET.get('id', None)
+	print(request.GET.get('term', None))
+	print(id)
+	#print(term)
 	course = Course.objects.get(id=id)
 
 	# chosensemester = request.GET.get('chosensemester', None)
