@@ -18,10 +18,11 @@ from home.models import Area
 @login_required
 def index(request):
 
-	print(Course.objects.filter(area=Area.objects.get(code="SA")).values('pk'))
+	data = {"SA": Course.objects.filter(area=Area.objects.get(code="STL")).values('pk')}
 	return render(
    	    request,
         'index.html',
+    	data,
     )
 
 def login(request):
@@ -97,14 +98,10 @@ def choose_conc(request):
 	conc_code = request.GET.get('conc', None)
 	conc = conc_code[5:len(conc_code)-1]
 
-	#dep = Department.objects.get(=conc_code)
+	conc_o = Concentration.objects.get(name=conc)
 
-
-	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
-	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
-	# else:
-	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
-	degreereqs = ['Degree Reqs will be Here!']
+	#hardcoded for AB. change later!!!
+	degreereqs = Concentration.objects.get(name="A.B.").get_reqs()
 
 
 	# save deg to associated user plan if user has saved plan
@@ -127,7 +124,6 @@ def choose_deg(request):
 
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
-	print(deg)
 
 	#save deg to associated user plan
 	cnetid = request.user.username
