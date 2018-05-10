@@ -64,10 +64,9 @@ def scheduler(request):
 			for course in plan_courses:
 				if course in all_courses:
 					allcourses.remove(course)
-			print(plan_courses)
 
 			first_info = {'saved': True, 'deg': plan.degree, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
-			'degreqs': Concentration.objects.get(name=plan.degree).update_reqs(plan_courses), 'courses': all_courses}
+			'degreqs': Concentration.objects.get(name=plan.degree).get_reqs(), 'courses': all_courses}
 			first_info.update(courses_by_sem)
 		else:
 			first_info = {"courses": all_courses}
@@ -80,7 +79,7 @@ def scheduler(request):
 		first_info = {"courses": all_courses}
 
 	# print(first_info)
-
+	print(all_courses)
 	return render(
 		request,
 		'schedule.html',
@@ -142,7 +141,6 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
-	print("here")
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
@@ -153,9 +151,9 @@ def dropped_course(request):
 	# print (course)
 
 	allcourses = Course.objects.all_info()
-	allowed = False
-	if (course.season == season): # Probably have to modify
-	 	allowed = True
+	allowed = True
+	# if (course.season == season): # Probably have to modify
+	#  	allowed = True
 
 
 	data = {'allowed': allowed}
@@ -177,8 +175,8 @@ def dropped_course(request):
 			conc = User.objects.get(netid=request.user.username).plan.conc
 			deg = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
-			degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
-
+			# degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
+			degreereqs = Concentration.objects.get(name=deg).get_reqs()
 			#save plan
 			plan.save()
 
@@ -189,7 +187,6 @@ def dropped_course(request):
 
 			for c in plan_courses:
 				if c in allcourses:
-					print ("here")
 					allcourses.remove(c)
 			print(concreqs)
 
