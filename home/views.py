@@ -78,16 +78,6 @@ def scheduler(request):
 		first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	print (allcourses)
 
-	CHM = {
-    "Concentration": "CHM",
-    "Freshman Fall": ["FRS 109", "ISC 231", "ISC 232", "WRI 190"],
-    "Freshman Spring": ["ISC 233","ISC 234","FRS 169","FRE 107"],
-    "Sophomore Fall": ["CHM 302b","MAT 201","CWR 201","HUM 302","PHI 203"],
-    "Sophomore Spring": ["CHM 304","ANT 405","MAT 202","CWR 204","ISC 326"]
-  	}
-
-  	first_info.update(CHM)
-
 	return render(
 		request,
 		'schedule.html',
