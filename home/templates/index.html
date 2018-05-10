@@ -17,16 +17,18 @@
 
     <!-- Custom fonts for this template -->
     {% load static %}
-    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet" type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
     {% load static %}
     <link href="{% static 'css/agency.css' %}" rel="stylesheet">
-
+    
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 
   <body id="page-top">
@@ -81,13 +83,13 @@
         <div class="row">
           <div class="col-lg-12 text-center">
 
-            <h1>Hi {{ netid }} </h1>
+           <!-- <h1>Hi {{ netid }} </h1> -->
             <h2 class="section-heading text-uppercase">What We Do</h2>
             <h3 class="section-subheading text-muted"> We help students plan out the classes they want to take over the course of their career to satisfy their potential majors and certificates.</h3>
           </div>
         </div>
         <div class="row text-center">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-columns fa-stack-1x fa-inverse"></i>
@@ -97,17 +99,7 @@
             <a class="btn btn-primary btn-xl links" href = "2year.html" target="_blank">Start a 2 Year Plan</a>
           </div>
 
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-              <i class="fa fa-table fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="service-heading">4 Year Plan</h4>
-            <p>Every department has specific pre-requisites, tracks, and research requirements. See where you stand and plan to fulfill your requirements. </p>
-            <a class="btn btn-primary btn-xl links" href = "4year.html" target="_blank">Start a 4 Year Plan</a>            
-          </div>
-
-          <div class="col-md-4">
+          <div class="col-md-6">
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-info fa-stack-1x fa-inverse"></i>
