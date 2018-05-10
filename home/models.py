@@ -26,7 +26,7 @@ class Req_List(models.Model):
 	name = models.CharField(max_length=100)
 	max_counted = models.IntegerField(default=1)
 	min_needed = models.IntegerField(default=0)
-	description = models.CharField(max_length=200, blank=True, null=True)
+	description = models.CharField(max_length=400, blank=True, null=True)
 	explanation = models.TextField(blank=True, null=True)
 	double_counting_allowed = models.BooleanField(default=False)
 	max_common_with_major = models.IntegerField(null=True, blank=True)
