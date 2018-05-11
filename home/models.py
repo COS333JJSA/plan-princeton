@@ -96,6 +96,8 @@ class Concentration(models.Model):
 		new_courses = []
 		for i in courses:
 			new_courses.append(Course.objects.get(courseid=i.courseid).codes())
+		print("updating")
+		print(self.get_reqs())
 		return self.reqing(new_courses, self.get_reqs())
 
 		
@@ -117,6 +119,10 @@ class Concentration(models.Model):
 									r4 = r3[c3]
 									if r4 in new_courses:
 										r3.remove(r4)
+										# print("here")
+										# print(r2)
+										# print(r3)
+										# print(r2[c2-1])
 										if len(r3) == 0:
 											r2.remove(r3)
 										temp4 = int(r2[c2-1][len(r2[c2-1])-2]) - 1

@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'planprinceton',
-    'django_cas_ng'
+    'django_cas_ng',
+    'django_extensions'
 ]
 
 MIDDLEWARE_CLASSES = [
