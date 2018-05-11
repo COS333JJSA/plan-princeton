@@ -62,11 +62,6 @@ def scheduler(request):
 				if course in all_courses:
 					all_courses.remove(course)
 
-			print("hi")
-			print(plan.conc)
-			print(Concentration.objects.get(name=plan.conc).get_reqs())
-			print(plan_courses)
-
 			first_info = {'saved': True, 'deg': plan.degree, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=plan.degree).get_reqs(), 'courses': all_courses}
 			first_info.update(courses_by_sem)
@@ -103,21 +98,14 @@ def choose_conc(request):
 	conc_code = request.GET.get('conc', None)
 	conc = conc_code[5:len(conc_code)-1]
 
-	#dep = Department.objects.get(=conc_code)
-
-
-	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
-	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
-	# else:
-	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
-	degreereqs = ['Degree Reqs will be Here!']
-
 
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
 	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
+
+	degreereqs = Concentration.objects.get(userplan.conc).get_reqs()
 
 
 
@@ -149,7 +137,6 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
-	print("hi")
 	#get and parse data from front end
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
@@ -182,8 +169,7 @@ def dropped_course(request):
 			conc = User.objects.get(netid=request.user.username).plan.conc
 			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
-			# concreqs = Concentration.objects.get(name=conc).get_reqs()
-			# degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
+			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
 			degreereqs = Concentration.objects.get(name=degree).get_reqs()
 			#save plan
 			plan.save()

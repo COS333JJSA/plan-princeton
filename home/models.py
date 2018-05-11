@@ -105,8 +105,10 @@ class Concentration(models.Model):
 	def reqing(self, courses, arr):
 		new_courses = courses
 
-		# def calculator()
+		
 		for c0 in range(0, len(arr)):
+			print("top")
+			print(arr)
 			r = arr[c0]
 			if type(r) == list:
 				for c1 in range(0, len(r)):
@@ -119,27 +121,26 @@ class Concentration(models.Model):
 									r4 = r3[c3]
 									if r4 in new_courses:
 										r3.remove(r4)
-										# print("here")
-										# print(r2)
-										# print(r3)
-										# print(r2[c2-1])
-										if len(r3) == 0:
-											r2.remove(r3)
 										temp4 = int(r2[c2-1][len(r2[c2-1])-2]) - 1
+										if len(r3) == 0 or temp4 == 0:
+											r2.remove(r3)
+										
 										if temp4 == 0:
 											r2.remove(r2[c2-1])
 										else:
 											r2[c2-1] = str(r2[c2-1][0:len(r2[c2-1])-2] + str(temp4) + ")")
-										if len(r2) == 0:											
-											r.remove(r2)
 										temp4a = int(r[c1-1][len(r[c1-1])-2]) - 1
+										if len(r2) == 0 or temp4a == 0:											
+											r.remove(r2)
+										
 										if temp4a == 0:
 											r.remove(r[c1-1])
 										else:
 											r[c1-1] = str(r[c1-1][0:len(r[c1-1])-2] + str(temp4a) + ")")
-										if len(r) == 0:
-											arr.remove(r)
 										temp4b = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+										if len(r) == 0 or temp4b == 0:
+											arr.remove(r)
+										
 										if temp4b == 0:
 											return arr.remove(arr[c0-1])
 										else:
@@ -147,16 +148,18 @@ class Concentration(models.Model):
 										return self.reqing(new_courses, arr)
 							elif r3 in new_courses:
 								r2.remove(r3)
-								if len(r2) == 0:
-									r.remove(r2)
 								temp3 = int(r[c1-1][len(r[c1-1])-2]) - 1
+								if len(r2) == 0 or temp3 == 0:
+									r.remove(r2)
+								
 								if temp3 == 0:
 									r.remove(r[c1-1])
 								else:
 									r[c1-1] = str(r[c1-1][0:len(r[c1-1])-2] + str(temp3) + ")")
-								if len(r) == 0:
-									arr.remove(r)
 								temp3a = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+								if len(r) == 0 or temp3a == 0:
+									arr.remove(r)
+								
 								if temp3a == 0:
 									arr.remove(arr[c0-1])
 								else:
@@ -164,14 +167,11 @@ class Concentration(models.Model):
 								return self.reqing(new_courses, arr)
 
 					elif r2 in new_courses:
-						print("hi")
-						print(self.name)
-						print(r2)
-						print("r2: "+ str(arr[c0-1]))
 						r.remove(r2)
-						if len(r) == 0:
-							return None
 						temp2 = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+						if len(r) == 0 or temp2 == 0:
+							return None
+						
 						if temp2 == 0:
 							arr.remove(arr[c0-1])
 						else:
