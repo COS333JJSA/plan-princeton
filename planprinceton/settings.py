@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'planprinceton',
     'django_cas_ng'
+    #'django_extensions'
 ]
 
 MIDDLEWARE_CLASSES = [
