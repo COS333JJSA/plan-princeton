@@ -4,7 +4,14 @@ body {
   font-size: 14px;
   font-weight: normal;
   min-width: 100%;
-  background-color: #fef9e5; 
+  background-image: url("../img/nassau2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 p {
@@ -47,14 +54,12 @@ h3 {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   font-size: 14px;
-  display: none;
 }
 
 h4 {
   font-family: 'Roboto Slab', serif;
   font-weight: normal;
   font-size: 14px;
-  display: none;
 }
 
 h5,
@@ -143,6 +148,7 @@ h6 {
 .nav-pills {
   background-color: #ffc681;
   border-radius: 15px;
+  border: 3px solid white;
 }
 
 .nav-pills > li {
@@ -181,15 +187,19 @@ h6 {
 .selectDegree {
   float: left;
   position: absolute;
-  padding: 16px;
+  padding: 1%;
   width: 15%;
+}
+
+#ddl1, #ddl2{
+  margin-bottom: 1%;
 }
 
 .dropdown {
   float: left;
   width: 16%;
   height: 100vh;
-  margin: 6% 1% 1% 1%;
+  margin: 5.5% 1% 1% 1%;
 }
 
 /* Dropdown filters for courses */
@@ -211,12 +221,12 @@ h6 {
 
 #myInput {
   border-box: box-sizing;
-  background-position: 6px 6px;
+  background-position: 1% 1%;
   background-repeat: no-repeat;
   font-size: 12pt;
   padding: 1% 1% 0 1%;
   border: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #f9f9f9;
   width: 100%;
   height: 4%;
   position: absolute;
@@ -224,7 +234,7 @@ h6 {
 }
 
 #myInput:focus {
-  outline: 3px solid #ddd;
+  outline: 3px solid #f9f9f9;
 }
 
 .dropdown-courses {
@@ -233,8 +243,8 @@ h6 {
 
 .dropdown-content {
   position: absolute;
-  background-color: white;
-  border: 2px ridge #ddd;
+  background-color: #f9f9f9;
+  border: 2px solid #f9f9f9;
   overflow: auto;
   height: 100vh;
   width: 100%;
@@ -252,16 +262,15 @@ h6 {
   height: 10% ;
   border-radius: 15px;
   overflow: auto;
-  font-size: 16px;
-  margin: 5px;
+  font-size: 14px;
+  margin: 1%;
 }
 
 .dragCourse:hover {
   background-color: #ffa12e;
 }
 
-
-.fa-times {
+.fa-caret-down {
   display: none;
 }
 
@@ -289,8 +298,9 @@ h6 {
   border: transparent;
   width: 20%;
   float: left;
-  border: 2px solid white;
+  border: 3px solid white;
   background-color: #e9f2ff;
+  overflow: auto;
 }
 
 hr {
@@ -310,6 +320,15 @@ ul li {
   display: block;
 }
 
+ul #reqs{
+  padding-left: 10%;
+  list-style-type: none;
+}
+
+.collapse {
+  display: show;
+}
+
 #maj_reqs, #deg_reqs {
   position: relative;
   width: 100%;
@@ -321,7 +340,7 @@ ul li {
   width: 15%;
   height: 100vh;
   padding-top: 3.5%;
-  border: 2px solid white;
+  border: 3px solid white;
   float: left;
 }
 

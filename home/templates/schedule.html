@@ -58,11 +58,12 @@
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
+            var term = ev.target.id;
             var course = document.getElementById(data);
-            // console.log(course);
+            console.log(course);
             // console.log(course.id);
             ev.target.appendChild(course);
-            dropped_course(course.id);
+            dropped_course(course.id, term);
           }
 
             function openPlan(evt, name) {
@@ -112,41 +113,68 @@
 
               function req_html(reqs) {
                 html = ""
-                // iterate through the requirements array RECURSIVELY??
-                html += "<ol>"
+                html += "<ul id='reqs'>"
                 for(var i = 0; i < reqs.length; i++){
                   
                   if (typeof reqs[i] === "string") {
-                    html += "<li>" + reqs[i] + "</li>";
+                    // title
+                    if (reqs[i].charAt(reqs[i].length-1) == ")") {
+                      html += "<li><b>" + reqs[i] + "</b></li>";
+                    }
+                    //course
+                    else {
+                      html += "<li>" + reqs[i] + "</li>";
+                    }
                   }
                   else {
-                    html += "<ol>";
+                    html += "<ul id='reqs'>";
                     for (var j = 0; j < reqs[i].length; j++){
                       
                       if (typeof reqs[i][j] == "string") {
-                        html += "<li>" + reqs[i][j] + "</li>";
+                        //title
+                        if (reqs[i][j].charAt(reqs[i][j].length-1) == ")") {
+                          html += "<li><b>" + reqs[i][j] + "</b></li>";
+                        }
+                        //course
+                        else {
+                          html += "<li>" + reqs[i][j] + "</li>";
+                        }
                       }
                       else {
-                        html += "<ol>";
+                        html += "<ul id='reqs'>";
                         for (var k = 0; k < reqs[i][j].length; k++) {  
                           if (typeof reqs[i][j][k] == "string") {
-                            html += "<li>" + reqs[i][j][k] + "</li>";
+                            //title
+                            if (reqs[i][j][k].charAt(reqs[i][j][k].length-1) == ")") {
+                              html += "<li><b>" + reqs[i][j][k] + "</b></li>";
+                            }
+                            //course
+                            else {
+                              html += "<li>" + reqs[i][j][k] + "</li>";
+                            }
                           }
                           else {
-                            html += "<ol>";
-                            for (var l = 0; l < reqs[i][j][k].length; l++) {                              
-                              html += "<li>" + reqs[i][j][k][l] + "</li>";
+                            html += "<ul id='reqs'>";
+                            for (var l = 0; l < reqs[i][j][k].length; l++) {
+                              //title
+                              if (reqs[i][j][k][l].charAt(reqs[i][j][k][l].length-1) == ")") {                              
+                                html += "<li><b>" + reqs[i][j][k][l] + "</b></li>";
+                              }
+                              //course
+                              else {
+                                html += "<li>" + reqs[i][j][k][l] + "</li>";
+                              }
                             }
-                            html += "</ol>";
+                            html += "</ul>";
                           }
                         }
-                        html += "</ol>";
+                        html += "</ul>";
                       }
                     }
-                    html += "</ol>";
+                    html += "</ul>";
                   }
                 }
-                html += "</ol>";
+                html += "</ul>";
                 return html;
               }
 
@@ -218,12 +246,6 @@
                    }
                 }
              }
-
-             $(document).ready(function() {
-              $(".fa-times").click(function () {
-
-              })
-             })
         /*     function show_course_info(ev) {
               var id = ev.target.id;
               alert("{{key}}");
@@ -245,7 +267,7 @@
 
             function remove_course(ev) {
               console.log("remove_course");
-              var id = ev.target.id;
+              var id = (this)[0].id;
               $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
@@ -257,18 +279,18 @@
                     configureRequirements(data.concreqs, data.degreereqs)
                   }
                 });
-              for (var i = 0; i < id.length; i++) {
-                id.remove(i);
-              }
-            }
+              console.log(id);
+            }  
 
-            function dropped_course(id) {
-                console.log(id)
+            function dropped_course(id, term) {
+                console.log(id);
+                console.log(term);
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     console.log("dropped_course URL");
                     data: {
-                      'id' : id
+                      'id' : id,
+                      'term': term
                       // console.log("dropped id")
                     },
                     dataType: 'json',
@@ -278,15 +300,8 @@
                       //console.log("dropped SUCCESS")
                     }
                   });
-                console.log("dropped END")
-
+                console.log("dropped END");
                 }
-
-               /* function displayRemoves() {
-                  $(".dragCourse").click(function() {
-                    $(".fa-times").toggle();
-                  })
-                }*/
        </script>
 
     </head>  
@@ -334,7 +349,7 @@
                 {% for key, value in courses.items %}
                   <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
                       <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                    <button class="fa fa-caret-down"></button>
+                    <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
                   </li>         
                 {% endfor %}
 
@@ -356,45 +371,46 @@
          </div>
 
          <!--Schedule-->
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+
+         <div id="fall18" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Fall 2018</h1>
-            <ul id="fall18">
+            <ul>
               {% for key, value in fall18.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring19" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Freshman Spring 2019</h1>
-            <ul id="spring19">
+            <ul>
               {% for key, value in spring19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}"class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
+         <div id="fall19" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall 2019</h1>
-            <ul id="fall19">
+            <ul>
               {% for key, value in fall19.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                <button class="fa fa-caret-down"></button>
+                <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring20" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
             <h1>Sophomore Spring 2020</h1>
-            <ul id="spring20">
+            <ul>
               {% for key, value in spring20.items %}
                 <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
                 <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>

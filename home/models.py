@@ -26,7 +26,7 @@ class Req_List(models.Model):
 	name = models.CharField(max_length=100)
 	max_counted = models.IntegerField(default=1)
 	min_needed = models.IntegerField(default=0)
-	description = models.CharField(max_length=200, blank=True, null=True)
+	description = models.CharField(max_length=400, blank=True, null=True)
 	explanation = models.TextField(blank=True, null=True)
 	double_counting_allowed = models.BooleanField(default=False)
 	max_common_with_major = models.IntegerField(null=True, blank=True)
@@ -88,14 +88,16 @@ class Concentration(models.Model):
 			else:
 				for c2 in r.course_list.all():
 					temp2.append(c2.codes())
-		temp.append(temp2)
+			temp.append(temp2)
 		return temp
 
 
 	def update_reqs(self, courses):
 		new_courses = []
 		for i in courses:
-			new_courses.append(Course.objects.get(courseid=i).title_and_code())
+			new_courses.append(Course.objects.get(courseid=i.courseid).codes())
+		print("updating")
+		print(self.get_reqs())
 		return self.reqing(new_courses, self.get_reqs())
 
 		
@@ -103,8 +105,10 @@ class Concentration(models.Model):
 	def reqing(self, courses, arr):
 		new_courses = courses
 
-		# def calculator()
+		
 		for c0 in range(0, len(arr)):
+			print("top")
+			print(arr)
 			r = arr[c0]
 			if type(r) == list:
 				for c1 in range(0, len(r)):
@@ -117,23 +121,26 @@ class Concentration(models.Model):
 									r4 = r3[c3]
 									if r4 in new_courses:
 										r3.remove(r4)
-										if len(r3) == 0:
-											r2.remove(r3)
 										temp4 = int(r2[c2-1][len(r2[c2-1])-2]) - 1
+										if len(r3) == 0 or temp4 == 0:
+											r2.remove(r3)
+										
 										if temp4 == 0:
 											r2.remove(r2[c2-1])
 										else:
 											r2[c2-1] = str(r2[c2-1][0:len(r2[c2-1])-2] + str(temp4) + ")")
-										if len(r2) == 0:											
-											r.remove(r2)
 										temp4a = int(r[c1-1][len(r[c1-1])-2]) - 1
+										if len(r2) == 0 or temp4a == 0:											
+											r.remove(r2)
+										
 										if temp4a == 0:
 											r.remove(r[c1-1])
 										else:
 											r[c1-1] = str(r[c1-1][0:len(r[c1-1])-2] + str(temp4a) + ")")
-										if len(r) == 0:
-											arr.remove(r)
 										temp4b = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+										if len(r) == 0 or temp4b == 0:
+											arr.remove(r)
+										
 										if temp4b == 0:
 											return arr.remove(arr[c0-1])
 										else:
@@ -141,16 +148,18 @@ class Concentration(models.Model):
 										return self.reqing(new_courses, arr)
 							elif r3 in new_courses:
 								r2.remove(r3)
-								if len(r2) == 0:
-									r.remove(r2)
 								temp3 = int(r[c1-1][len(r[c1-1])-2]) - 1
+								if len(r2) == 0 or temp3 == 0:
+									r.remove(r2)
+								
 								if temp3 == 0:
 									r.remove(r[c1-1])
 								else:
 									r[c1-1] = str(r[c1-1][0:len(r[c1-1])-2] + str(temp3) + ")")
-								if len(r) == 0:
-									arr.remove(r)
 								temp3a = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+								if len(r) == 0 or temp3a == 0:
+									arr.remove(r)
+								
 								if temp3a == 0:
 									arr.remove(arr[c0-1])
 								else:
@@ -159,9 +168,10 @@ class Concentration(models.Model):
 
 					elif r2 in new_courses:
 						r.remove(r2)
-						if len(r) == 0:
+						temp2 = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+						if len(r) == 0 or temp2 == 0:
 							return None
-						temp2 = int(arr[c0-1][0:len(arr[c0-1])-2]) - 1
+						
 						if temp2 == 0:
 							arr.remove(arr[c0-1])
 						else:
@@ -276,17 +286,20 @@ class Plan(models.Model):
 	saved_courses = models.ManyToManyField('SavedCourse', blank=True)
 
 	def return_by_sem(self):
-		fall18, fall19, spring19, spring20 = []
+		fall18 = []
+		fall19 = []
+		spring19 = []
+		spring20 = []
 		planbysem = {}
 		for course in self.saved_courses.all():
-			if course.semester.year == 2018 and course.semester.season == 'f':
-				fall18.append(course)
-			if course.semester.year == 2019 and course.semester.season == 'f':
-				fall19.append(course)
-			if course.semester.year == 2019 and course.semester.season == 's':
-				spring19.append(course)
-			if course.semester.year == 2020 and course.semester.season == 's':
-				spring20.append(course)
+			if course.semester.year == 18 and course.semester.season == 'f':
+				fall18.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 'f':
+				fall19.append(course.course)
+			if course.semester.year == 19 and course.semester.season == 's':
+				spring19.append(course.course)
+			if course.semester.year == 20 and course.semester.season == 's':
+				spring20.append(course.course)
 		planbysem = {'fall18': Course.objects.all_info_some(fall18), 'fall19': Course.objects.all_info_some(fall19), 'spring19': Course.objects.all_info_some(spring19), 'spring20': Course.objects.all_info_some(spring20)}
 		return planbysem
 	def return_courses(self):
@@ -296,8 +309,8 @@ class Plan(models.Model):
 		return courses
 
 class SavedCourse(models.Model):
-	course = models.ManyToManyField('Course')
-	semester = models.ManyToManyField('Semester')
+	course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+	semester = models.ForeignKey('Semester', on_delete=models.CASCADE, null=True, blank=True)
 
 class Semester(models.Model):
 	season = models.CharField(max_length=1)
