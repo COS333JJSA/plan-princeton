@@ -146,6 +146,9 @@ def choose_deg(request):
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
+
+	print("concs handler")
+	print(concs)
 	data = {'concs': concs}
 
 	return JsonResponse(data)

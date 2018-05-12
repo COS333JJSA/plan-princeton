@@ -78,7 +78,7 @@
                 }
                 document.getElementById(name).style.display = "block";
                 evt.currentTarget.className += "active";
-             } 
+             }
 
              function createOption(ddl, text) {
                 var select = document.getElementById(ddl);
@@ -107,8 +107,12 @@
               }
 
               function configureRequirements(concreqs, degreereqs) {
-                document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
-                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)                
+                if (degreereqs.length != 0) {
+                  document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
+                }
+                if (concreqs.len != 0) {
+                  document.getElementById("maj_reqs").innerHTML = req_html(concreqs)
+                }               
               }
 
               function req_html(reqs) {
@@ -207,21 +211,25 @@
                       });
               }
 
-              function onLoad(saved) {
-                if (saved[0] == "first" || saved[0] == "false" || saved[0] == false) {
-                  // User object and blank plan are created. 
-                  // Reqs remain blank. Degree and conc remain blank. 
-                  // WHAT DO I ADD HERE? 
-                } else if (saved[0] == "degree") {
-                  // Populate degree. Send degreqs only
-                    // onSelectDegree(saved[1], saved[2]) {
-                    onSelectDegree(saved[1], ddl2) {
-                } else if (saved[0] == "conc") {
-                  //  Populate degree and conc. Send reqs. Don’t populate schedule
-                    configureRequirements(saved[4], saved[3])
-                } else (saved[0] == "all") {
-                  //  Populate everything
-                    configureRequirements(saved[4], saved[3])
+              function onLoad() {
+                saved = "{{saved}}"
+                if (saved == "degree") {
+                  // Populate degree. TO DO. Note: do not call select degree! that does not set the dropdown, it sends the dropdown value to backend
+
+                  //Send degreqs only
+                  configureRequirements([], "{{degreqs}}");
+                } else if (saved == "conc") {
+                  //  Populate degree and conc. TO DO
+
+                  //Send reqs. Don’t populate schedule
+                  configureRequirements("{{concreqs}}", "{{degreqs}}");
+                } else if (saved == "all") {
+                  //  Populate degree and conc TO DO
+
+                  //load courses into plan TO DO
+
+                  //configure requirements
+                    configureRequirements("{{concreqs}}", "{{degreqs}}");
                 }
               }
 
@@ -305,7 +313,6 @@
                 console.log(term);
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
-                    console.log("dropped_course URL");
                     data: {
                       'id' : id,
                       'term': term
@@ -324,8 +331,7 @@
 
     </head>  
 
-   <body>
-      <element onload="onLoad()">
+   <body onload="onLoad();">
 
         <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top" id="mainNav">
