@@ -126,6 +126,7 @@ def choose_deg(request):
 
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
+	cnetid = request.user.username
 
 	# if user.plan is null, create plan
 	user = User.objects.get(netid=cnetid)
