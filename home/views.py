@@ -49,36 +49,38 @@ def scheduler(request):
 	# for bothcourse in Course.objects.filter(season='b').all():
 	# 	all_courses.append(bothcourse)
 	all_courses = Course.objects.all_info()
+	temp = True
 
 	# User already exists
 	if User.objects.filter(netid=cnetid).count() > 0:
-		userplan = User.objects.get(netid=cnetid).plan
-		user = User.objects.get(netid=cnetid)
-		# Check for degree
-		if userplan.degree is None :
-			first_info = {'saved': False, 'courses': all_courses}
-		# Check for conc
-		elif userplan.conc is None :
-			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs()}
-		elif userplan.saved_courses.count() == 0:
-			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
-		# Everything saved
-		else:
-			plan_courses = user.plan.return_courses()
-			courses_by_sem = user.plan.return_by_sem()
+		first_info = {'saved': False, 'courses': all_courses}
+	# 	#if plan does not exist
+	# 	if not User.objects.get(netid=cnetid).plan.exists():
+	# 		first_info = {'saved': False, 'courses': all_courses}
+	# 		temp = False
+	# 	else:
+	# 		userplan = User.objects.get(netid=cnetid).plan
+	# 		if userplan.conc is None :
+	# 			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs()}
+	# 		elif userplan.saved_courses.count() == 0:
+	# 			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
+	# 		# Everything saved
+	# 		else:
+	# 			plan_courses = user.plan.return_courses()
+	# 			courses_by_sem = user.plan.return_by_sem()
 
-			for course in plan_courses:
-				if course in all_courses:
-					all_courses.remove(course)
+	# 			for course in plan_courses:
+	# 				if course in all_courses:
+	# 					print ("REMOVING")
+	# 					print (course)
+	# 					all_courses.remove(course)
 
-			first_info = {'saved': True, 'deg': userplan.degree, 'conc': userplan.conc, 'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
-			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
-			first_info.update(courses_by_sem)
-	# New user
+	# 			first_info = {'saved': True, 'deg': userplan.degree, 'conc': userplan.conc, 'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
+	# 			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
+	# 			first_info.update(courses_by_sem)
+	# # New user
 	else:
-		blankplan = Plan()
-		blankplan.save()
-		u = User(netid=cnetid, plan=blankplan)
+		u = User(netid=cnetid)
 		u.save()
 		first_info = {"saved": False, "courses": all_courses}
 
@@ -125,12 +127,15 @@ def choose_deg(request):
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
-	#save deg to associated user plan
-	cnetid = request.user.username
-	userplan = User.objects.get(netid=cnetid).plan
-	userplan.degree = deg
-	userplan.save()
-	#print (User.objects.get(netid=cnetid).plan.degree)
+	# if user.plan is null, create plan
+	user = User.objects.get(netid=cnetid)
+	if user.plan is None:
+		plan = Plan()
+	else:
+		plan = user.plan
+
+	plan.degree = deg
+	plan.save()
 
 	#send frontend list of concs associated with deg	
 	concs = []
@@ -175,6 +180,7 @@ def dropped_course(request):
 			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
+			print(degree)
 			degreereqs = Concentration.objects.get(name=degree).get_reqs()
 			#save plan
 			plan.save()
