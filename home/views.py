@@ -50,11 +50,20 @@ def scheduler(request):
 	# 	all_courses.append(bothcourse)
 	all_courses = Course.objects.all_info()
 
-	# User already exists and plan is NOT blank
+	# User already exists
 	if User.objects.filter(netid=cnetid).count() > 0:
-		if User.objects.get(netid=cnetid).plan.saved_courses.all().count() > 0 :
-			user = User.objects.get(netid=cnetid)
-			plan = user.plan
+		userplan = User.objects.get(netid=cnetid).plan
+		user = User.objects.get(netid=cnetid)
+		# Check for degree
+		if userplan.degree is None :
+			first_info = {'saved': False, 'courses': all_courses}
+		# Check for conc
+		elif userplan.conc is None :
+			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs()}
+		elif userplan.saved_courses.count() == 0:
+			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
+		# Everything saved
+		else:
 			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
@@ -62,14 +71,10 @@ def scheduler(request):
 				if course in all_courses:
 					all_courses.remove(course)
 
-			first_info = {'saved': True, 'deg': plan.degree, 'conc': plan.conc, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 
-			'degreqs': Concentration.objects.get(name=plan.degree).get_reqs(), 'courses': all_courses}
+			first_info = {'saved': True, 'deg': userplan.degree, 'conc': userplan.conc, 'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
+			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
 			first_info.update(courses_by_sem)
-
-
-		else:
-			first_info = {'saved': False, 'courses': all_courses}
-	#if either no user object or no plans
+	# New user
 	else:
 		blankplan = Plan()
 		blankplan.save()
@@ -105,7 +110,7 @@ def choose_conc(request):
 	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
 
-	degreereqs = Concentration.objects.get(userplan.conc).get_reqs()
+	degreereqs = userplan.conc.get_reqs()
 
 
 
