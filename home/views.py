@@ -11,7 +11,8 @@ from home.models import Plan
 from home.models import SavedCourse
 from home.models import Semester
 from home.models import Department
-
+# from signal import signal, SIGPIPE, SIG_DFL
+# signal(SIGPIPE, SIG_DFL)
 
 # Create your views here.
 @login_required
@@ -40,17 +41,24 @@ def scheduler(request):
 	first_info = {}
 
 	#ignore 'none' courses
-	allcourses = []
+	# all_courses = []
 	# for springcourse in Course.objects.filter(season='s').all():
-	# 	allcourses.append(springcourse)
+	# 	all_courses.append(springcourse)
 	# for fallcourse in Course.objects.filter(season='f').all():
-	# 	allcourses.append(fallcourse)
+	# 	all_courses.append(fallcourse)
 	# for bothcourse in Course.objects.filter(season='b').all():
+<<<<<<< HEAD
 	# 	allcourses.append(bothcourse)
 	all_courses = Course.objects.all_info()
+=======
+	# 	all_courses.append(bothcourse)
+	all_courses = Course.objects.all_info()
+	temp = True
+>>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 
-	# User already exists and plan is NOT blank
+	# User already exists
 	if User.objects.filter(netid=cnetid).count() > 0:
+<<<<<<< HEAD
 		if User.objects.get(netid=cnetid).plan.saved_courses.all().count() > 0 :
 			user = User.objects.get(netid=cnetid)
 			plan = user.plan
@@ -69,10 +77,36 @@ def scheduler(request):
 		else:
 			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
+=======
+		first_info = {'saved': False, 'courses': all_courses}
+	# 	#if plan does not exist
+	# 	if not User.objects.get(netid=cnetid).plan.exists():
+	# 		first_info = {'saved': False, 'courses': all_courses}
+	# 		temp = False
+	# 	else:
+	# 		userplan = User.objects.get(netid=cnetid).plan
+	# 		if userplan.conc is None :
+	# 			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs()}
+	# 		elif userplan.saved_courses.count() == 0:
+	# 			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
+	# 		# Everything saved
+	# 		else:
+	# 			plan_courses = user.plan.return_courses()
+	# 			courses_by_sem = user.plan.return_by_sem()
+
+	# 			for course in plan_courses:
+	# 				if course in all_courses:
+	# 					print ("REMOVING")
+	# 					print (course)
+	# 					all_courses.remove(course)
+
+	# 			first_info = {'saved': True, 'deg': userplan.degree, 'conc': userplan.conc, 'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
+	# 			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
+	# 			first_info.update(courses_by_sem)
+	# # New user
+>>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 	else:
-		blankplan = Plan()
-		blankplan.save()
-		u = User(netid=cnetid, plan=blankplan)
+		u = User(netid=cnetid)
 		u.save()
 		first_info = {"saved": False, "courses": all_courses}
 
@@ -97,21 +131,14 @@ def choose_conc(request):
 	conc_code = request.GET.get('conc', None)
 	conc = conc_code[5:len(conc_code)-1]
 
-	#dep = Department.objects.get(=conc_code)
-
-
-	# if (Concentration.objects.get(conc_code=dep).degree == 'AB'):
-	# 	degreereqs = Concentration.objects.get(name='AB').get_reqs()
-	# else:
-	# 	degreereqs = Concentration.objects.get(name='BSE').get_reqs()
-	degreereqs = ['Degree Reqs will be Here!']
-
 
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
 	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
+
+	degreereqs = userplan.conc.get_reqs()
 
 
 
@@ -126,12 +153,15 @@ def choose_deg(request):
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
-	#save deg to associated user plan
-	cnetid = request.user.username
-	userplan = User.objects.get(netid=cnetid).plan
-	userplan.degree = deg
-	userplan.save()
-	#print (User.objects.get(netid=cnetid).plan.degree)
+	# if user.plan is null, create plan
+	user = User.objects.get(netid=cnetid)
+	if user.plan is None:
+		plan = Plan()
+	else:
+		plan = user.plan
+
+	plan.degree = deg
+	plan.save()
 
 	#send frontend list of concs associated with deg	
 	concs = []
@@ -143,6 +173,7 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
+<<<<<<< HEAD
 
 
 	course = request.GET.get('course', None)
@@ -152,57 +183,62 @@ def dropped_course(request):
 	if (course.season == chosensemester): # Probably have to modify
 		allowed = true
 
+=======
+	#get and parse data from front end
+>>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
 	year = int(term[-2:])
 	course = Course.objects.get(courseid=cid)
+	user = User.objects.get(netid=request.user.username)
 
 
+<<<<<<< HEAD
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
 	# usercourses = userplan.return_courses
 
 
+=======
+	#determine if course is allowed in this semester
+>>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 	allcourses = Course.objects.all_info()
 	allowed = True
 	# if (course.season == season): # Probably have to modify
 	#  	allowed = True
 
-	userplan.save()
-
 	data = {'allowed': allowed}
+	#if course is allowed in the semester, update plan and recalculate reqs
 	if allowed:
 		#if user already has a plan. NOTE: THIS SHOULD ALWAYS BE TRUE
-		if User.objects.filter(netid=request.user.username).count() > 0:		
-			plan = User.objects.get(netid=request.user.username).plan
+		if user.plan is not None:		
+			plan = user.plan
 
 			#add course to plan
-			sem = Semester.objects.create(season=chosensemester, year=year)
+			sem = Semester.objects.create(season=season, year=year)
 			sem.save()
 			s_course = SavedCourse.objects.create(course=course, semester=sem)
 			s_course.save()
 			plan.saved_courses.add(s_course)
 			#recalculate reqs
 			conc = User.objects.get(netid=request.user.username).plan.conc
-			conc = User.objects.get(netid=request.user.username).plan.deg
+			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
-			# degreereqs = Concentration.objects.get(name=deg).update_reqs(plan.return_courses())
-			degreereqs = Concentration.objects.get(name=deg).get_reqs()
+			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
+			print(degree)
+			degreereqs = Concentration.objects.get(name=degree).get_reqs()
 			#save plan
 			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
 
 
-			#
-			user = User.objects.get(netid=request.user.username)
-			plan_courses = user.plan.return_courses()
+			plan_courses = plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
 			for c in plan_courses:
 				if c in allcourses:
 					allcourses.remove(c)
-			print(concreqs)
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 

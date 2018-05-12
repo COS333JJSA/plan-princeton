@@ -32,7 +32,8 @@ CAS_ADMIN_PREFIX = '/admin'
 SECRET_KEY = "j05!$lfu(y*)g_%6kh02m)41y)8-ovln5sw-t4flvtd&rkf$5v"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+ALLOWED_HOSTS=['plan-princeton.herokuapp.com']
 
 # Application definition
 
