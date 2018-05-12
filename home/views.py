@@ -56,24 +56,21 @@ def scheduler(request):
 		user = User.objects.get(netid=cnetid)
 		#if plan does not exist
 		if userplan is None:
-			print ("none plan")
 			first_info = {'saved': False, 'courses': all_courses}
 		elif userplan.conc is None:
-			print ("conc none")
 			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs()}
 		elif userplan.saved_courses.count() == 0:
 			print ("no saved courses")
 			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
-			# Everything saved
 		else:
+			print ("everthing")
 			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
+			print (plan_courses)
 
 			for course in plan_courses:
-				if course in all_courses:
-					print ("REMOVING")
-					print (course)
-					all_courses.remove(course)
+				if course.courseid in all_courses:
+					del all_courses[course.courseid]
 
 			first_info = {'saved': True, 'deg': userplan.degree, 'conc': userplan.conc, 'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
 			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
@@ -109,7 +106,7 @@ def choose_conc(request):
 	# save deg to associated user plan if user has saved plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
-	print (userplan)
+	# print (userplan)
 	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
 
