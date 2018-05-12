@@ -57,7 +57,9 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: img src="{% static "img/aas.jpg" %}" alt="My image>
+        {% load static %}
+    <header class="masthead" style="background-image: url('..img/aas.jpg');">
+
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
