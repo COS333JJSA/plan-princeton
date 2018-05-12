@@ -207,6 +207,24 @@
                       });
               }
 
+              function onLoad(saved) {
+                if (saved[0] == "first" || saved[0] == "false" || saved[0] == false) {
+                  // User object and blank plan are created. 
+                  // Reqs remain blank. Degree and conc remain blank. 
+                  // WHAT DO I ADD HERE? 
+                } else if (saved[0] == "degree") {
+                  // Populate degree. Send degreqs only
+                    // onSelectDegree(saved[1], saved[2]) {
+                    onSelectDegree(saved[1], ddl2) {
+                } else if (saved[0] == "conc") {
+                  //  Populate degree and conc. Send reqs. Don’t populate schedule
+                    configureRequirements(saved[4], saved[3])
+                } else (saved[0] == "all") {
+                  //  Populate everything
+                    configureRequirements(saved[4], saved[3])
+                }
+              }
+
               function onSelectDegree(ddl1, ddl2) {
                     var deg = ddl1.value; // check this reference
                     console.log("START SelectDegree");
@@ -287,6 +305,7 @@
                 console.log(term);
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
+                    console.log("dropped_course URL");
                     data: {
                       'id' : id,
                       'term': term
@@ -306,6 +325,8 @@
     </head>  
 
    <body>
+      onload="onLoad()"
+
         <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top" id="mainNav">
             <div class="container">
