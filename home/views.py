@@ -144,11 +144,20 @@ def choose_deg(request):
 @login_required
 def dropped_course(request):
 
+
+	course = request.GET.get('course', None)
+	chosensemester = request.GET.get('chosensemester', None)
+	year = ""
+	allowed = false
+	if (course.season == chosensemester): # Probably have to modify
+		allowed = true
+
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
 	year = int(term[-2:])
 	course = Course.objects.get(courseid=cid)
+
 
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
@@ -183,6 +192,7 @@ def dropped_course(request):
 			#save plan
 			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
+
 
 			#
 			user = User.objects.get(netid=request.user.username)
