@@ -50,16 +50,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'planprinceton',
-    'django_cas_ng'
+    #'django_cas_ng'
 ]
 
-MIDDLEWARE_CLASSES = [
-    'django_cas_ng.middleware.CASMiddleware',
-]
+# MIDDLEWARE_CLASSES = [
+#     'django_cas_ng.middleware.CASMiddleware',
+# ]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
+   # 'django_cas_ng.backends.CASBackend',
 ]
 
 MIDDLEWARE = [
@@ -102,16 +102,16 @@ CAS_REDIRECT_URL = '/home'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'planprincetondb',
-        'USER': 'ppuser',
-        'PASSWORD': '333',
-        'HOST': '',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'planprincetondb',
+#         'USER': 'ppuser',
+#         'PASSWORD': '333',
+#         'HOST': '',
+#         'PORT': '',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -138,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
-CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
+#CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/New_York'
@@ -147,7 +147,23 @@ USE_L10N = True
 USE_TZ = True
 
 # Change 'default' database configuration with $DATABASE_URL.
-DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
+# DATABASES = { 
+#     'default' : dj_database_url.config(
+#         default=os.environ.get('DATABASE_URL')
+#         )
+# }
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'dd448m0fjud4ag',                     
+        'USER': 'yrboewxlsmsdew',
+        'PASSWORD': 'a828924e2bc45629021b4ac192a3ea524edd6d1cf183f076314c9788a3453a51',
+        'HOST': 'ec2-107-21-103-146.compute-1.amazonaws.com', # Or something like this
+        'PORT': '5432',                     
+    }
+}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
