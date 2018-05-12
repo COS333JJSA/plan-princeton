@@ -188,6 +188,9 @@ for i in range(0, len(courses)):
 	for l in course["listings"]:
 		course_pks[stringify(l)] = i
 
+sems = {"spring 2018": 0, "fall 2018": 1}
+outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(0, "s", 2018)
+outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(1, "f", 2018)
 
 #COURSES
 #make course objects
@@ -212,10 +215,7 @@ for i in range(0, len(courses)):
 		ccurr.append(ccounter)
 		ccounter += 1
 	for s in course["term"]:
-		s = s.split()
-		outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0][0], int(s[1]))
-		scurr.append(scounter)
-		scounter += 1
+		scurr.append(sems[s])
 	#check for area
 	if course["area"] == "":
 		area = "null"
