@@ -174,6 +174,7 @@ def dropped_course(request):
 	#  	allowed = True
 
 	data = {'allowed': allowed}
+	print (allowed)
 	#if course is allowed in the semester, update plan and recalculate reqs
 	if allowed:
 		#if user already has a plan. NOTE: THIS SHOULD ALWAYS BE TRUE
