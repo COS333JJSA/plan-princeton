@@ -234,6 +234,7 @@ def dropped_course(request):
 
 @login_required
 def remove_course(request):
+	print("hi")
 	cid = request.GET.get('course', None)
 	course = Course.objects.get(courseid=cid)
 
