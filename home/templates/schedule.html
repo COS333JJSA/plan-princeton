@@ -213,7 +213,7 @@
               }
 
               function onLoad() {
-                saved = "{{saved}}"
+                var saved = "{{saved}}";
                 if (saved == "first") {
                   //TO DO: create alert explaining how to use the interactive scheduler. 
                   
@@ -222,20 +222,36 @@
                   // Populate degree. TO DO. Note: do not call select degree! that does not set the dropdown, it sends the dropdown value to backend
 
                   //Send degreqs only
-                  configureRequirements([], "{{degreqs}}");
+                  loadReqs(1)
                 } else if (saved == "conc") {
                   //  Populate degree and conc. TO DO
 
                   //Send reqs. Don’t populate schedule
-                  configureRequirements("{{concreqs}}", "{{degreqs}}");
+                  loadReqs(2)
                 } else if (saved == "all") {
                   //  Populate degree and conc TO DO
 
-                  //load courses into plan TO DO
 
                   //configure requirements
-                    configureRequirements("{{concreqs}}", "{{degreqs}}");
+                  loadReqs(2)
+                    
                 }
+              }
+
+              function loadReqs(num) {
+                $.ajax({
+                    url:'/home/ajax/load/',
+                    data:{
+                      'num': num
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                      configureRequirements(data.concreqs, data.degreqs);
+                    }
+                  });
+              }
+              function loadDegReqs() {
+
               }
 
               function onSelectDegree(ddl1, ddl2) {
@@ -271,7 +287,7 @@
                 for (i = 0; i < li.length; i++) {
                    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
                       li[i].style.display = "";
-                   } 
+                   }
                    else {
                       li[i].style.display = "none";
                    }

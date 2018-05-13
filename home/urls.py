@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^ajax/choose_season/$', views.choose_season, name='choose_season'),
     url(r'^ajax/dropped_course/$', views.dropped_course, name='dropped_course'),
     url(r'^ajax/remove_course/$', views.remove_course, name='remove_course'),
+    url(r'^ajax/load/$', views.on_load, name='on_load'),
     path('sampleschedules/', views.sampleschedules, name='sampleschedules'),
     path('sampleschedules/aas/', views.aas, name='aas'),
     path('sampleschedules/ant/', views.ant, name='ant'),
