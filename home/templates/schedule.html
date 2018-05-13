@@ -219,7 +219,8 @@
                           // console.log($(this).val());
 
                           console.log(data.concreqs);
-                          configureRequirements(data.concreqs, data.degreereqs)
+                          document.getElementById('dropbtn').style.display = "block";
+                          configureRequirements(data.concreqs, data.degreereqs);
                           /*
                           if (data.is_taken) {
                             alert("A user with this username already exists.");
@@ -234,6 +235,8 @@
                 var ddl1 = document.getElementById('ddl1');
                 var ddl2 = document.getElementById('ddl2');
                 ddl2.style.display = "none";
+                document.getElementById('dropbtn').style.display = "none";
+                document.getElementById('myDropdown').style.display = "none";
                 if (saved == "first") {
                   //TO DO: create alert explaining how to use the interactive scheduler. 
                   alert("Welcome! Here's how you use it...");
@@ -269,6 +272,7 @@
                     success: function(data) {
                       console.log("ajax success");
                       document.getElementById('ddl2').style.display = "block";
+                      document.getElementById('dropbtn').style.display = "block";
                       configureRequirements(data.concreqs, data.degreqs);
                       configureConcsLists(ddl2, data.concs);
                       if (num == 2) {
@@ -277,6 +281,7 @@
                     }
                   });
               }
+
 
               function onSelectDegree(ddl1, ddl2) {
                     var deg = ddl1.value; // check this reference
@@ -298,7 +303,29 @@
                     });
               }
 
+              function fillCourses(courses) {
+                myUL = document.getElementById("myUL");
+                myUL.innerHTML = ""
+                html = ""
+                for (var key in courses) {
+                  html += "<li id=" + key + " class='dragCourse' draggable='true' ondragstart='dragstart_handler(event)''>" + courses[key].coursename + "<button id=" + key + " class='fa fa-times' onclick='remove_course(event)'></button><button id=" + key + " class='fa fa-caret-down' onclick='getCourseInfo(event)''></button></li>"
+
+                }
+                myUL.innerHTML = html
+                //$.(myUL).empty();
+                //                 {% for key, value in courses.items %}
+                // <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
+                // <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                // <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
+                // </li>         
+                // {% endfor %}
+                // //clear courses
+                console.log("new func");
+                //fill courses
+ 
+              }
              function myFunction() {
+                document.getElementById("myDropdown").style.display = "block";
                 document.getElementById("myDropdown").classList.toggle("show");
              }
 
@@ -379,8 +406,8 @@
                         // TO DO: don't allow drop!!!
                       }
                       else {
-                        configureRequirements(data.concreqs, data.degreereqs)
-                        // TO DO: repopulate course list
+                        configureRequirements(data.concreqs, data.degreereqs);
+                        fillCourses(data.allcourses);
                       }
                     }
                   });
@@ -426,18 +453,16 @@
       
          <!--Search Courses-->
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
+            <button onclick="myFunction()" class="dropbtn" id="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
                <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
                <ul id="myUL" class="dropdown-courses">
-
                 {% for key, value in courses.items %}
-                  <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
-                      <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                    <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
-                  </li>         
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
+                </li>         
                 {% endfor %}
-
                </ul>              
             </div>
         </div>

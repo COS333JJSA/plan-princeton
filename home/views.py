@@ -191,7 +191,7 @@ def dropped_course(request):
 
 
 	#determine if course is allowed in this semester
-	allcourses = Course.objects.all_info()
+	allcourses = all_courses.copy()
 	allowed = False
 	if (course.season == season) or (course.season == 'b'): # Probably have to modify
 		allowed = True
@@ -216,21 +216,16 @@ def dropped_course(request):
 			conc = User.objects.get(netid=request.user.username).plan.conc
 			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
-			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
 			degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
 			#save plan
 			plan.save()
-			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
-
 
 			plan_courses = plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
 
 			for c in plan_courses:
-				if c in allcourses:
-					allcourses.remove(c)
-
-			print("returning")
+				if c.courseid in allcourses:
+					del allcourses[c.courseid]
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 

@@ -1405,7 +1405,7 @@
           ]
         },
         {
-          "name": "Introductory - Substitute2",
+          "name": "Engineering Dynamics",
           "max_counted": 1,
           "min_needed": 1,
           "explanation": "Substitutable Introductory Courses",
@@ -1418,7 +1418,7 @@
           ]
         },
         {
-          "name": "Introductory - Substitute",
+          "name": "Solid Mechanics",
           "max_counted": 1,
           "min_needed": 1,
           "explanation": "Substitutable Introductory Courses",
