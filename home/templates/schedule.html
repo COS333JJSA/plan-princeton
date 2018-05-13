@@ -66,20 +66,6 @@
             dropped_course(course.id, term);
           }
 
-            function openPlan(evt, name) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                   tabcontent[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                   tablinks[i].className = tablinks[i].className.replace("active", "");
-                }
-                document.getElementById(name).style.display = "block";
-                evt.currentTarget.className += "active";
-             } 
-
              function createOption(ddl, text) {
                 var select = document.getElementById(ddl);
                 console.log(ddl);
@@ -246,24 +232,6 @@
                    }
                 }
              }
-        /*     function show_course_info(ev) {
-              var id = ev.target.id;
-              alert("{{key}}");
-              if (tag.style.display === "none") {
-                tag.style.display = "table";
-              }
-              else {
-                tag.style.display = "none";
-              }
-             }
-
-            $(document).ready(function() {
-              $("#btn1").click(function() {
-                  $("h3").toggle();
-                  $("h4").toggle()
-              });
-            });
-            */
 
             function remove_course(ev) {
               console.log("remove_course");
@@ -290,17 +258,19 @@
                     data: {
                       'id' : id,
                       'term': term
-                      // console.log("dropped id")
                     },
                     dataType: 'json',
-                    // console.log("dropped json")
-                    success: function(data) {
-                      configureRequirements(data.concreqs, data.degreereqs)
-                      //console.log("dropped SUCCESS")
+                     success: function(data) {
+
                     }
                   });
                 console.log("dropped END");
                 }
+
+            // add a remove button 
+            function add_remove(id) {
+
+            }
        </script>
 
     </head>  

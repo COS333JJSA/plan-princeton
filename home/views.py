@@ -47,18 +47,13 @@ def scheduler(request):
 	# for fallcourse in Course.objects.filter(season='f').all():
 	# 	all_courses.append(fallcourse)
 	# for bothcourse in Course.objects.filter(season='b').all():
-<<<<<<< HEAD
+
 	# 	allcourses.append(bothcourse)
 	all_courses = Course.objects.all_info()
-=======
-	# 	all_courses.append(bothcourse)
-	all_courses = Course.objects.all_info()
 	temp = True
->>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 
 	# User already exists
 	if User.objects.filter(netid=cnetid).count() > 0:
-<<<<<<< HEAD
 		if User.objects.get(netid=cnetid).plan.saved_courses.all().count() > 0 :
 			user = User.objects.get(netid=cnetid)
 			plan = user.plan
@@ -77,12 +72,11 @@ def scheduler(request):
 		else:
 			first_info = {'saved': False, 'courses': allcourses, 'fall1': Course.objects.get(courseid='010097').all_info_solo(), 'fall2': Course.objects.get(courseid='008072').all_info_solo(), 'spring1': Course.objects.get(courseid='007987').all_info_solo(), 'spring2': Course.objects.get(courseid='000976').all_info_solo()}
 	#if either no user object or no plans
-=======
 		first_info = {'saved': False, 'courses': all_courses}
 	# 	#if plan does not exist
 	# 	if not User.objects.get(netid=cnetid).plan.exists():
 	# 		first_info = {'saved': False, 'courses': all_courses}
-	# 		temp = False
+	# 		temp = i hearFalse
 	# 	else:
 	# 		userplan = User.objects.get(netid=cnetid).plan
 	# 		if userplan.conc is None :
@@ -104,7 +98,6 @@ def scheduler(request):
 	# 			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
 	# 			first_info.update(courses_by_sem)
 	# # New user
->>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 	else:
 		u = User(netid=cnetid)
 		u.save()
@@ -173,8 +166,6 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
-<<<<<<< HEAD
-
 
 	course = request.GET.get('course', None)
 	chosensemester = request.GET.get('chosensemester', None)
@@ -183,9 +174,7 @@ def dropped_course(request):
 	if (course.season == chosensemester): # Probably have to modify
 		allowed = true
 
-=======
 	#get and parse data from front end
->>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
 	season = term[:1]
@@ -193,16 +182,11 @@ def dropped_course(request):
 	course = Course.objects.get(courseid=cid)
 	user = User.objects.get(netid=request.user.username)
 
-
-<<<<<<< HEAD
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
 	# usercourses = userplan.return_courses
 
-
-=======
 	#determine if course is allowed in this semester
->>>>>>> 29baddf4a0f852a9ec4ec4d6d790aa406e7a3cc9
 	allcourses = Course.objects.all_info()
 	allowed = True
 	# if (course.season == season): # Probably have to modify
