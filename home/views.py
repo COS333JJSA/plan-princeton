@@ -49,37 +49,67 @@ def scheduler(request):
 	if User.objects.filter(netid=cnetid).exists():
 		userplan = User.objects.get(netid=cnetid).plan
 		user = User.objects.get(netid=cnetid)
-		#if plan does not exist
+		# if plan does not exist
 		if userplan is None:
 			first_info = {'saved': False, 'courses': all_courses}
-		elif userplan.conc is None:
-				first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree}
-		elif userplan.saved_courses.count() == 0:
-			print ("no saved courses")
-			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree}
 		else:
+			
 			print ("everthing")
-			courses_by_sem = user.plan.return_by_sem()
-			plan_courses = userplan.return_courses()
-			a_courses = all_courses.copy()
+			print(userplan)
+			plans = Concentration.objects.get(name="African American Studies").sample_plans
+			print(plans.count())
+			if plans.count() == 0:
+				return
+			data = {'saved': "all", 'degree': userplan.degree, 'courses': all_courses}
+			print("and...")
+			print(plans.all()[0].return_by_sem())
 
-			for course in plan_courses:
-				if course.courseid in a_courses:
-					del a_courses[course.courseid]
+			data.update(plans.all()[0].return_by_sem())
 
-			first_info = {'saved': "all", 'degree': userplan.degree, 'courses': a_courses}
-			first_info.update(courses_by_sem)
+			first_info = data
+		
+		# elif userplan.conc is None:
+		# 		first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree}
+		# elif userplan.saved_courses.count() == 0:
+		# 	print ("no saved courses")
+		# 	first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree}
+		# else:
+
+			# courses_by_sem = user.plan.return_by_sem()
+			# plan_courses = userplan.return_courses()
+			# a_courses = all_courses.copy()
+
+			# for course in plan_courses:
+			# 	if course.courseid in a_courses:
+			# 		del a_courses[course.courseid]
+
+			# first_info = {'saved': "all", 'degree': userplan.degree, 'courses': a_courses}
+			# first_info.update(courses_by_sem)
 	# # New user
 	else:
 		u = User(netid=cnetid)
 		u.save()
 		first_info = {"saved": False, "courses": all_courses}
 
+	
 	return render(
 		request,
 		'schedule.html',
 		first_info,
 	)
+
+@login_required
+def send_sample(deg):
+	print("here")
+	plans = Concentration.objects.get(conc_code="CHM").sample_plans
+	
+	if len(plans) == 0:
+		return
+	data = {'saved': "all", 'degree': deg, 'courses': all_courses}
+
+	return data.update(plans[0].return_by_sem())
+
+
 @login_required
 def choose_season(request):
 	season = request.GET.get('season', None)
@@ -231,14 +261,7 @@ def dropped_course(request):
 
 	return JsonResponse(data)
 
-@login_required
-def send_sample(request):
-	plans = Concentration.objects.get(conc_code="CHM").sample_plans
-	
-	if len(plans) == 0:
-		return
 
-	return plans[0].return_by_sem()
 
 
 

@@ -1,0 +1,17 @@
+[{
+  "AAS": {
+    "Concentration": "AAS",
+    "Freshman Fall": ["WRI 123", "FRS 102", "POR 208", "GEO 102"],
+    "Freshman Spring": ["POL 316","SPA 224","NEU 202","ENV 200","AAS 201"],
+    "Sophomore Fall": ["ECO 100","LAS 352","POL 384","POL 345"],
+    "Sophomore Spring": ["AAS 235","POL 380","SOC 207","POL 303"]
+  },
+  "ANT": {
+    "Concentration": "ANT",
+    "Freshman Fall": ["CHM 201", "FRS 102", "PHI 201", "SPA 101"],
+    "Freshman Spring": ["CHM 202","MOL 214","SPA 102","WRI 108"],
+    "Sophomore Fall": ["ANT 201","ANT 305","ENG 309","HIS 316"],
+    "Sophomore Spring": ["SPA 209","ART 367","ANT 301","ANT 405"]
+  }
+}
+]
