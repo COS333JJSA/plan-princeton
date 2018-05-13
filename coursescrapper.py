@@ -42,7 +42,7 @@ import ssl
 
 # TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016", 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2018"}
 
-TERM_CODES = {1192: "fall 2018", 1184: "spring 2018"}
+TERM_CODES = {1192: "fall 2018", 1184: "spring 2018", 1182: "fall 2017", 1174: "spring 2017"}
 
 
 

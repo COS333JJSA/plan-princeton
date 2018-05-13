@@ -73,7 +73,7 @@ def scheduler(request):
 	else:
 		u = User(netid=cnetid)
 		u.save()
-		first_info = {"saved": False, "courses": all_courses}
+		first_info = {"saved": "first", "courses": all_courses}
 
 	return render(
 		request,
