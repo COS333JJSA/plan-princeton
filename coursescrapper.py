@@ -212,16 +212,20 @@ if __name__ == "__main__":
     TERM_CODE = term
 
     for course in scrape_all():
+      # course should be considered only if it has NOT already been seen in this term
       if (course["courseid"] not in oneterm_ids):
         if (course["courseid"] in result):
           result.get(course["courseid"])["term"].append(TERM_CODES[term])
           # json.dump(course["courseid"], sys.stdout)
         else:
+          # Course has not been seen in current term nor previous terms
           course["term"].append(TERM_CODES[term])
           result[course["courseid"]] = course
         
+        # Always add course to oneterm since it has been seen
         oneterm_ids.append(course["courseid"])
 
+        # Unnecessary but maybe keep for progress checking 
         json.dump(course["courseid"], sys.stdout)
 
 
