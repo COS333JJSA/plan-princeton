@@ -6,20 +6,27 @@ saved_course_counter = 0
 
 for i in file_plans:
 	fall1 = i["Freshman Fall"]
-	fall2 = i[""]
+	fall2 = i["Freshman Spring"]
+	spring1 = i["Sophomore Fall"]
+	spring2 = i["Sophomore Spring"]
 
 	#key: COS 126 value: pk
 	saved_course_pks = []
-	sems = [fall1, fall2, spring1, spring2]
+	sems = [fall1, fall2]
 	for sem in sems:
 		for c in sem:
-			course_pk = course_pks[c]
-			sem_pk = 1
-			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(i, )
+			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(saved_course_counter, 
+				course_pks[c], 1)
 			saved_course_pks.append(saved_course_counter)
 			saved_course_counter += 1
 
-	for 
+	sems = [spring1, spring2]
+	for sem in sems:
+		for c in sem:
+			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(saved_course_counter, 
+				course_pks[c], 0)
+			saved_course_pks.append(saved_course_counter)
+			saved_course_counter += 1
 
 
 

@@ -69,13 +69,19 @@ def req_recursion(req, myid, parentid):
 
 #for courses with *s, load all qualifying courses into c_pks
 def starcourses(c, c_pks):
-	if c[4] != '*':
-		send = c[0:5] + ".*"
+	if c[0:4] == "LANG":
+		langs = ["ARA","BCS","SLA","CHI","CZE","FRE","GER","MOG","CLG","HEB","HIN","ITA","JPN","KOR","LAT","PER","PLS","POR","RUS","SPA","SWA","TUR","TWI","URD"]
+		for course in course_pks:
+			if course[0:3] in langs:
+				c_pks.append(course_pks[course])
 	else:
-		send = c[0:4] + ".*"
-	for course in course_pks:
-		if re.search(send, course) != None:
-			c_pks.append(course_pks[course])
+		if c[4] != '*':
+			send = c[0:5] + ".*"
+		else:
+			send = c[0:4] + ".*"
+		for course in course_pks:
+			if re.search(send, course) != None:
+				c_pks.append(course_pks[course])
 	return c_pks
 
 
@@ -266,19 +272,40 @@ for k in range(0, len(concs)):
 	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
 
 # #SAMPLE SCHEDULES
-# plans = json.load(open("samples_schedules.json", "rb"))
-# pcounter = 0
-# ccounter = 0
+fil = json.load(open("sample_schedules.json", "rb"))
+saved_course_counter = 0
+plan_counter = 0
+plans = fil[0]
+print(fil[0])
+for i in plans:
+	print(i)
+	fall1 = plans[i]["Freshman Fall"]
+	fall2 = plans[i]["Freshman Spring"]
+	spring1 = plans[i]["Sophomore Fall"]
+	spring2 = plans[i]["Sophomore Spring"]
+
+	#key: COS 126 value: pk
+	saved_course_pks = []
+	sems = [fall1, fall2]
+	for sem in sems:
+		for c in sem:
+			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(saved_course_counter, 
+				course_pks[c], 1)
+			saved_course_pks.append(saved_course_counter)
+			saved_course_counter += 1
+
+	sems = [spring1, spring2]
+	for sem in sems:
+		for c in sem:
+			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(saved_course_counter, 
+				course_pks[c], 0)
+			saved_course_pks.append(saved_course_counter)
+			saved_course_counter += 1
 
 
-# for p in plans:
 
-# 		outp += """{{"model": "home.savedcourse", "pk": {0}, "fields": "course": {1}, "semester": {2}}}}}, """.format()
-# 	outp += """{{"model": "home.plan", "pk": {0}, "fields": {{"saved_courses": {1}}}}}, """.format(pcounter)
-
-
-# 	pcounter += 1
-
+	outp += """{{"model": "home.plan", "pk": {0}, "fields": {{"conc": "{1}", "saved_courses": {2}}}, """.format(plan_counter, plans[i]["Concentration"], saved_course_pks)
+	plan_counter += 1
 
 
 print("[" + outp[:len(outp) - 2] + "]")
