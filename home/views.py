@@ -112,21 +112,32 @@ def on_load(request):
 
 @login_required
 def choose_conc(request):
-	#parse conc title
+	# get argument
 	conc_code = request.GET.get('conc', None)
-	paren = conc_code.index('(')
-	conc = conc_code[paren+1:len(conc_code)-1]
+	print(conc_code)
 
-	# save deg to associated user plan
+	# get user plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
-	userplan.conc = Concentration.objects.get(name=conc)
+	plan_courses = userplan.return_courses()
+
+	# if default then set to None
+	if conc_code == "Select Concentration:":
+		userplan.conc = None
+		concreqs = []
+	else:
+		#parse conc code
+		paren = conc_code.index('(')
+		conc = conc_code[paren+1:len(conc_code)-1]
+		# set conc
+		userplan.conc = Concentration.objects.get(name=conc)
+		concreqs = Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses)
+
+	# save plan
 	userplan.save()
 
-	#calculate reqs
-	plan_courses = userplan.return_courses()
+	#calculate degreqs
 	degreereqs = Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses)
-	concreqs = Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses)
 
 	data = {'concreqs': concreqs, 'degreereqs': degreereqs}
 

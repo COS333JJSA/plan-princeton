@@ -112,10 +112,24 @@
               }
 
               function configureRequirements(concreqs, degreereqs) {
-                if (typeof degreereqs != 'undefined') {
+                if (degreereqs == "complete") {
+                  document.getElementById("deg_reqs").innerHTML = "COMPLETED!";
+                }
+                else if ((typeof degreereqs != 'undefined') && (degreereqs.length != 0)) {
                   document.getElementById("deg_reqs").innerHTML = req_html(degreereqs);
                 }
-                document.getElementById("maj_reqs").innerHTML = req_html(concreqs);            
+                else {
+                  document.getElementById("deg_reqs").innerHTML = "Please choose a degree";
+                }
+                if (concreqs == "complete") {
+                  document.getElementById("maj_reqs").innerHTML = "COMPLETED!";
+                }
+                else if ((typeof degreereqs != 'undefined') && (concreqs.length != 0)) {
+                  document.getElementById("maj_reqs").innerHTML = req_html(concreqs); 
+                }
+                else {
+                  document.getElementById("maj_reqs").innerHTML = "Please choose a concentration";
+                }           
               }
 
               function req_html(reqs) {
@@ -259,7 +273,7 @@
                       configureRequirements(data.concreqs, data.degreqs);
                       configureConcsLists(ddl2, data.concs);
                       if (num == 2) {
-                        ddl2.options[data.concs.indexOf(data.conc)].selected = true;
+                        ddl2.options[data.concs.indexOf(data.conc)+1].selected = true;
                       }
                     }
                   });
@@ -428,10 +442,13 @@
 
          <!--Remaining requirements-->
          <div class="requirements">
+          <br>
+          <br>
             <h2>Major <br/> Requirements</h2>
             <div id="maj_reqs">  
               <br/>            
-            </div>  
+            </div> 
+            <br>
 
             <h2>Degree <br/> Requirements</h2>
             <div id="deg_reqs">
