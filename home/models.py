@@ -97,7 +97,6 @@ class Concentration(models.Model):
 		for i in courses:
 			new_courses.append(Course.objects.get(courseid=i.courseid).codes())
 		print("updating")
-		print(self.get_reqs())
 		return self.reqing(new_courses, self.get_reqs())
 
 		
@@ -107,8 +106,8 @@ class Concentration(models.Model):
 
 		
 		for c0 in range(0, len(arr)):
-			print("top")
-			print(arr)
+			# print("top")
+			# print(arr)
 			r = arr[c0]
 			if type(r) == list:
 				for c1 in range(0, len(r)):

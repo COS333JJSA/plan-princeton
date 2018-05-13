@@ -51,15 +51,14 @@ def scheduler(request):
 		if userplan is None:
 			first_info = {'saved': False, 'courses': all_courses}
 		elif userplan.conc is None:
-			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree}
+				first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree}
 		elif userplan.saved_courses.count() == 0:
 			print ("no saved courses")
-			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
+			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree}
 		else:
 			print ("everthing")
 			courses_by_sem = user.plan.return_by_sem()
-
-			first_info = {'saved': "all", 'deg': userplan.degree, 'conc': userplan.conc, 'courses': all_courses}
+			first_info = {'saved': "all", 'degree': userplan.degree, 'courses': all_courses}
 			first_info.update(courses_by_sem)
 	# # New user
 	else:
@@ -97,8 +96,13 @@ def on_load(request):
 	else:
 		degreqs = Concentration.objects.get(name=userplan.degree).get_reqs()
 
+	concs = []
+	for c in Concentration.objects.filter(degree=userplan.degree):
+		if c.name != "AB":
+			concs.append(c.code_and_name())
+
 	data = {'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
-			'degreqs': degreqs}
+			'degreqs': degreqs, 'concs': concs, 'conc': userplan.conc.code_and_name()}
 	return JsonResponse(data)
 
 @login_required
@@ -135,7 +139,6 @@ def choose_deg(request):
 
 	# if user.plan is null, create plan
 	user = User.objects.get(netid=cnetid)
-	print(user)
 	if user.plan is None:
 		plan = Plan(degree=deg)
 		plan.save()
@@ -151,7 +154,8 @@ def choose_deg(request):
 	#send frontend list of concs associated with deg	
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
-		concs.append(c.code_and_name())
+		if c.name != "AB":
+			concs.append(c.code_and_name())
 	data = {'concs': concs}
 
 	return JsonResponse(data)
@@ -191,7 +195,6 @@ def dropped_course(request):
 			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
-			print(degree)
 			degreereqs = Concentration.objects.get(name=degree).get_reqs()
 			#save plan
 			plan.save()
