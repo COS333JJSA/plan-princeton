@@ -1385,7 +1385,7 @@
     {
       "name": "Prerequisites",
       "max_counted": 1,
-      "min_needed": 1,
+      "min_needed": 5,
       "explanation": "Students entering the Department are expected to meet the requirements for the freshman year established by the School of Engineering and Applied Science.",
       "double_counting_allowed": false,
       "pdfs_allowed": 0,
@@ -1394,50 +1394,40 @@
           "name": "Introductory Courses",
           "max_counted": 3,
           "min_needed": 3,
-          "explanation": "The required introductory courses that are prerequisites for the Departmental upper class courses are normally completed by the end of the sophomore year.",
+          "explanation": "Non-substitutable Introductory Courses",
           "double_counting_allowed": false,
           "pdfs_allowed": 0,
           "completed_by_semester": 4,
-          "req_list": [
-            {
-              "name": "Introductory Departmental",
-              "max_counted": 2,
-              "min_needed": 2,
-              "explanation": "The Sophomore Laboratory provides experiments associated with Thermodynamics (MAE 221), Mechanics of Fluids (MAE 222) and Electronics. (Some of these courses may be satisfied by Advanced Placement Credit).",
-              "double_counting_allowed": false,
-              "pdfs_allowed": 0,
-              "completed_by_semester": 4,
-              "req_list": [
-                {
-                  "name": "Introductory - Single",
-                  "max_counted": 4,
-                  "min_needed": 4,
-                  "explanation": "Non-substitutable Introductory Courses",
-                  "double_counting_allowed": false,
-                  "pdfs_allowed": 0,
-                  "completed_by_semester": 4,
-                  "course_list": [
-                      "MAE 206",
-                      "MAE 221",
-                      "MAE 222",
-                      "MAE 224"
-                  ]
-                },
-                {
-                  "name": "Introductory - Substitute",
-                  "max_counted": 2,
-                  "min_needed": 1,
-                  "explanation": "Substitutable Introductory Courses",
-                  "double_counting_allowed": false,
-                  "pdfs_allowed": 0,
-                  "completed_by_semester": 4,
-                  "course_list": [
-                    "MAE 223",
-                    "CEE 205"
-                  ]
-                }
-              ]
-            }
+          "course_list": [
+              "MAE 221",
+              "MAE 222",
+              "MAE 224"
+          ]
+        },
+        {
+          "name": "Introductory - Substitute2",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Substitutable Introductory Courses",
+          "double_counting_allowed": false,
+          "pdfs_allowed": 0,
+          "completed_by_semester": 4,
+          "course_list": [
+            "MAE 206",
+            "PHY 205"
+          ]
+        },
+        {
+          "name": "Introductory - Substitute",
+          "max_counted": 1,
+          "min_needed": 1,
+          "explanation": "Substitutable Introductory Courses",
+          "double_counting_allowed": false,
+          "pdfs_allowed": 0,
+          "completed_by_semester": 4,
+          "course_list": [
+            "MAE 223",
+            "CEE 205"
           ]
         }
       ]
@@ -2176,6 +2166,177 @@
       "description": "Science and Technology without Lab (STN)",
       "explanation": null,
       "dist_req": "STN"
+    },
+    {
+      "name": "Foreign Language",
+      "max_counted": 1,
+      "min_needed": 1,
+      "description": "Foreign Language — one to four terms to complete, depending on the language students study and the level at which they start",
+      "explanation": "When you become proficient in a foreign language, you acquire more than a communication skill; you become literate in another culture and gain another perspective on the world. All candidates for the A.B. degree at Princeton must demonstrate proficiency in a foreign language before graduation. Many undergraduates satisfy the foreign language requirement by demonstrating proficiency when they enter the University. In order to fulfill the language requirement through coursework, we expect successful completion of courses normally numbered through 107/108. ",
+      "double_counting_allowed": false,
+      "course_list": [
+        "LANG 107",
+        "LANG 108",
+        "LANG 2**",
+        "LANG 3**",
+        "LANG 4**",
+        "LANG 5**"
+      ]
+    }
+  ]
+},
+{
+  "type": "Degree",
+  "name": "BSE",
+  "code": "BSE",
+  "contacts": [],
+  "year": 2018,
+  "urls": [
+    "https://ua.princeton.edu/contents/program-study-degree-bachelor-science-engineering",
+    "https://ua.princeton.edu/contents/general-education-requirements",
+    "https://lsi.princeton.edu/integratedscience/freshman-year",
+    "https://writing.princeton.edu/seminars/fall-seminars"
+  ],
+  "req_list": [
+    {
+      "name": "Mathematics",
+      "max_counted": 1,
+      "min_needed": 4,
+      "description": "Mathematics (four semesters)",
+      "explanation": null,
+      "pdfs_allowed": false,
+      "req_list": [
+        {
+          "name": "First Term Math",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": "103 Calculus",
+          "explanation": null,
+          "completed_by_semester": 2,
+          "course_list": [
+            "MAT 103"
+          ]
+        },
+        {
+          "name": "Second Term Math",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": "104 Calculus",
+          "explanation": null,
+          "completed_by_semester": 2,
+          "course_list": [
+            "MAT 104"
+          ]
+        },
+        {
+          "name": "Third Term Math",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": null,
+          "explanation": "201 Multivariable Calculus, 203 Advanced Multivariable Calculus, 218 Analysis in Several Variables, or EGR 192 Integrated Introduction to Engineering, Mathematics, Physics",
+          "course_list": [
+            "MAT 201",
+            "MAT 203",
+            "MAT 216",
+            "MAT 218",
+            "EGR 192"
+          ]
+        },
+        {
+          "name": "Fourth Term Math",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": null,
+          "explanation": "202 Linear Algebra with Applications, 204 Advanced Linear Algebra with Applications, or 217 Honors Linear Algebra, or equivalent",
+          "course_list": [
+            "MAT 202",
+            "MAT 204",
+            "MAT 217"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Physics",
+      "max_counted": 1,
+      "min_needed": 2,
+      "description": "Physics (two semesters)",
+      "explanation": null,
+      "pdfs_allowed": false,
+      "completed_by_semester": 2,
+      "req_list": [
+        {
+          "name": "Mechanics",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": null,
+          "explanation": "103 General Physics, 105 Advanced Physics, or EGR 191 Integrated Introduction to Engineering, Mathematics, Physics",
+          "course_list": [
+            "PHY 103",
+            "PHY 105",
+            "EGR 191"
+          ]
+        },
+        {
+          "name": "Electromagnetism",
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": null,
+          "explanation": "104 General Physics or 106 Advanced Physics, or equivalent",
+          "course_list": [
+            "PHY 104",
+            "PHY 106"
+          ]
+        },
+        {
+          "name": "ISC track",
+          "max_counted": 2,
+          "min_needed": 4,
+          "description": null,
+          "explanation": null,
+          "course_list": [
+            "ISC 231",
+            "ISC 232",
+            "ISC 233",
+            "ISC 234"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chemistry",
+      "max_counted": 1,
+      "min_needed": 1,
+      "description": "Chemistry (one semester)",
+      "explanation": null,
+      "pdfs_allowed": false,
+      "completed_by_semester": 2,
+      "req_list": [
+        {
+          "name": null,
+          "max_counted": 1,
+          "min_needed": 1,
+          "description": null,
+          "explanation": null,
+          "course_list": [
+            "CHM 201",
+            "CHM 201A",
+            "CHM 207"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Writing Seminar",
+      "max_counted": 1,
+      "min_needed": 1,
+      "description": "Writing Seminar",
+      "explanation": "All Princeton undergraduates take a Writing Seminar in the Fall or Spring of the freshman year. The Writing Seminars give Princeton freshmen an early opportunity to belong to a lively academic community in which members investigate a shared topic and discuss their writing together, with the aim of clarifying and deepening their thinking. The seminars are interdisciplinary in nature to emphasize transferable reading, writing and research skills. You’ll learn how to frame compelling questions, position your argument within a genuine academic debate, substantiate and organize claims, purposefully integrate a wide variety of sources and revise for greater cogency and clarity. Enrollment process: https://writing.princeton.edu/seminars/how-enroll",
+      "pdfs_allowed": false,
+      "completed_by_semester": 2,
+      "course_list": [
+        "WRI 1**"
+      ]
     }
   ]
 }

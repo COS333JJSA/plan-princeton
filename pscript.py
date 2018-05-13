@@ -69,13 +69,36 @@ def req_recursion(req, myid, parentid):
 
 #for courses with *s, load all qualifying courses into c_pks
 def starcourses(c, c_pks):
-	if c[4] != '*':
-		send = c[0:5] + ".*"
+	if c[0:4] == "LANG":
+		langs = ["ARA","BCS","SLA","CHI","CZE","FRE","GER","MOG","CLG","HEB","HIN","ITA","JPN","KOR","LAT","PER","PLS","POR","RUS","SPA","SWA","TUR","TWI","URD"]
+		# LANG XXX
+		if '*' not in c:
+			for l in langs:
+				send = l + " " + c[5:len(c)]
+				for course in course_pks:
+					if re.search(send, course) != None:
+						c_pks.append(course_pks[course])
+		# LANG 2**
+		elif c[4] != '*':
+			for l in langs:
+				send = l + " " + c[5] + ".*"
+				for course in course_pks:
+					if re.search(send, course) != None:
+						c_pks.append(course_pks[course])
+		#LANG *
+		else:
+			send = c[0:4] + ".*"
+			for course in course_pks:
+				if course[0:3] in langs:
+					c_pks.append(course_pks[course])
 	else:
-		send = c[0:4] + ".*"
-	for course in course_pks:
-		if re.search(send, course) != None:
-			c_pks.append(course_pks[course])
+		if c[4] != '*':
+			send = c[0:5] + ".*"
+		else:
+			send = c[0:4] + ".*"
+		for course in course_pks:
+			if re.search(send, course) != None:
+				c_pks.append(course_pks[course])
 	return c_pks
 
 
@@ -87,7 +110,7 @@ def make_req_list(req, myid, curr):
 	#course list
 	if "course_list" in req.keys():
 		for c in req["course_list"]:
-			if '*' in c:
+			if '*' in c or 'LANG' in c:
 				starcourses(c, c_pks)
 			else:
 				c_pks.append(course_pks[c[0:7]])
@@ -180,7 +203,7 @@ for a in areas:
 	outp += """{{"model": "home.area", "pk": {0}, "fields": {{"code": "{1}", "name": "{2}"}}}}, """.format(acounter, a, areas[a])
 	acounter += 1
 
-courses = json.load(open("scrape.json", "rb"))
+courses = json.load(open("finalcourses.json", "rb"))
 
 #serialize courses
 for i in range(0, len(courses)):
@@ -188,6 +211,9 @@ for i in range(0, len(courses)):
 	for l in course["listings"]:
 		course_pks[stringify(l)] = i
 
+sems = {"spring 2018": 0, "fall 2018": 1}
+outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(0, "s", 2018)
+outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(1, "f", 2018)
 
 #COURSES
 #make course objects
@@ -212,17 +238,18 @@ for i in range(0, len(courses)):
 		ccurr.append(ccounter)
 		ccounter += 1
 	for s in course["term"]:
-		s = s.split()
-		outp += """{{"model": "home.semester", "pk": {0}, "fields": {{"season": "{1}", "year": {2}}}}}, """.format(scounter, s[0][0], int(s[1]))
-		scurr.append(scounter)
-		scounter += 1
+		scurr.append(sems[s])
+	if len(scurr) > 1:
+		season = 'b'
+	else:
+		season =  course["term"][0][0]
 	#check for area
 	if course["area"] == "":
 		area = "null"
 	else:
 		area = list(areas.keys()).index(course["area"])
 	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}, "semesters": {8}, "season": "{9}"}}}}, """.format(i, 
-		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr, scurr, course["term"][0][0])
+		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr, scurr, season)
 
 
 #CONCENTRATIONS
@@ -266,19 +293,40 @@ for k in range(0, len(concs)):
 	outp += """{{"model": "home.concentration", "pk": {0}, "fields": {{"tipe": "{1}", "name": "{2}", "conc_code": {3}, "degree": "{4}", "year": {5}, "urls": {6}, "contacts": {7}, "req_lists": {8}}}}}, """.format(k, conc["type"], conc["name"], list(depts.keys()).index(conc["code"]), conc["degree"], conc["year"], ucurr, ccurr, rcurr)
 
 # #SAMPLE SCHEDULES
-# plans = json.load(open("samples_schedules.json", "rb"))
-# pcounter = 0
-# ccounter = 0
+# fil = json.load(open("sample_schedules.json", "rb"))
+# saved_course_counter = 0
+# plan_counter = 0
+# plans = fil[0]
+# print(fil[0])
+# for i in plans:
+# 	print(i)
+# 	fall1 = plans[i]["Freshman Fall"]
+# 	fall2 = plans[i]["Freshman Spring"]
+# 	spring1 = plans[i]["Sophomore Fall"]
+# 	spring2 = plans[i]["Sophomore Spring"]
+
+# 	#key: COS 126 value: pk
+# 	saved_course_pks = []
+# 	sems = [fall1, fall2]
+# 	for sem in sems:
+# 		for c in sem:
+# 			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(saved_course_counter, 
+# 				course_pks[c], 1)
+# 			saved_course_pks.append(saved_course_counter)
+# 			saved_course_counter += 1
+
+# 	sems = [spring1, spring2]
+# 	for sem in sems:
+# 		for c in sem:
+# 			outp += """{{"model": "home.SavedCourse", "pk": {0}, "fields": {{"course": "{1}", "semester": "{2}"}}}}, """.format(saved_course_counter, 
+# 				course_pks[c], 0)
+# 			saved_course_pks.append(saved_course_counter)
+# 			saved_course_counter += 1
 
 
-# for p in plans:
 
-# 		outp += """{{"model": "home.savedcourse", "pk": {0}, "fields": "course": {1}, "semester": {2}}}}}, """.format()
-# 	outp += """{{"model": "home.plan", "pk": {0}, "fields": {{"saved_courses": {1}}}}}, """.format(pcounter)
-
-
-# 	pcounter += 1
-
+# 	outp += """{{"model": "home.plan", "pk": {0}, "fields": {{"conc": "{1}", "saved_courses": {2}}}, """.format(plan_counter, plans[i]["Concentration"], saved_course_pks)
+# 	plan_counter += 1
 
 
 print("[" + outp[:len(outp) - 2] + "]")
