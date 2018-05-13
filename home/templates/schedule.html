@@ -217,6 +217,7 @@
                 var ddl2 = document.getElementById('ddl2')
                 if (saved == "first") {
                   //TO DO: create alert explaining how to use the interactive scheduler. 
+                  alert("Welcome! Here's how you use it...")
                   
                 }
                 else if (saved == "degree") {
@@ -350,13 +351,17 @@
                     data: {
                       'id' : id,
                       'term': term
-                      // console.log("dropped id")
                     },
                     dataType: 'json',
-                    // console.log("dropped json")
                     success: function(data) {
-                      configureRequirements(data.concreqs, data.degreereqs)
-                      //console.log("dropped SUCCESS")
+                      if (data.allowed == false) {
+                        alert("This course is not offered that semester.")
+                        // TO DO: don't allow drop!!!
+                      }
+                      else {
+                        configureRequirements(data.concreqs, data.degreereqs)
+                        // TO DO: repopulate course list
+                      }
                     }
                   });
                 console.log("dropped END");
