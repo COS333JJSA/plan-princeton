@@ -56,7 +56,7 @@
 
     <!-- Page Header -->
     {% load static %}
-    <header class="masthead" style="static 'background-image: url('img/nassau1.jpg')">
+    <header class="masthead">
 
       <div class="overlay"></div>
       <div class="container">
@@ -556,11 +556,13 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/clean-blog.min.js' %}"></script>
 
   </body>
 

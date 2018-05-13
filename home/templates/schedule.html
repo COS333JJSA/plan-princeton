@@ -59,6 +59,7 @@
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             var term = ev.target.id;
+            console.log(term)
             var course = document.getElementById(data);
             console.log(course);
             // console.log(course.id);
@@ -78,37 +79,57 @@
                 }
                 document.getElementById(name).style.display = "block";
                 evt.currentTarget.className += "active";
-             } 
-
-             function createOption(ddl, text) {
-                var select = document.getElementById(ddl);
-                console.log(ddl);
-                if (select != null) {
-                  var length = select.options.length;
-                  console.log(length);
-                  for (i = 0; i < length; i++) {
-                    select.remove(i);
-                  }
-                }
-                var opt = document.createElement('option');
-                opt.text = text;
-                ddl.options.add(opt);
-                console.log("createOption");
              }
 
-              function configureDegreeLists(ddl1, ddl2, concs) {
-                console.log("ONE configureDegreeLists");
-                var select = ['Select Concentration'];
-                console.log(concs);
-                for (i = 0; i < concs.length; i++) {
-                  createOption(ddl2, concs[i])
+              function configureConcsLists(ddl2, concs) {
+                console.log("in configure");
+                //clear list
+                for (i = 0; i < ddl2.options.length; i++) {
+                  ddl2.options[i] = null;
                 }
-                console.log("configureDegreeLists");
+                ddl2.options.length = 0;
+                //create new options
+                var opt = document.createElement('option');
+                opt.text = "Select Concentration:";
+                opt.selected = true
+                ddl2.options.add(opt);
+                for (i = 0; i < concs.length; i++) {
+                  var opt = document.createElement('option');
+                  opt.text = concs[i];
+                  ddl2.options.add(opt);
+                }
+              }
+              function configureDegreeSpecific(ddl1, chosen) {
+                ddl1.options[0].selected = false;
+                //fill list
+                if (chosen == "AB") {
+                  ddl1.options[1].selected = true;
+                }
+                else {
+                  ddl1.options[2].selected = true;
+                }
+
               }
 
               function configureRequirements(concreqs, degreereqs) {
-                document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
-                document.getElementById("maj_reqs").innerHTML = req_html(concreqs)                
+                if (degreereqs == "complete") {
+                  document.getElementById("deg_reqs").innerHTML = "COMPLETED!";
+                }
+                else if ((typeof degreereqs != 'undefined') && (degreereqs.length != 0)) {
+                  document.getElementById("deg_reqs").innerHTML = req_html(degreereqs);
+                }
+                else {
+                  document.getElementById("deg_reqs").innerHTML = "Please choose a degree";
+                }
+                if (concreqs == "complete") {
+                  document.getElementById("maj_reqs").innerHTML = "COMPLETED!";
+                }
+                else if ((typeof degreereqs != 'undefined') && (concreqs.length != 0)) {
+                  document.getElementById("maj_reqs").innerHTML = req_html(concreqs); 
+                }
+                else {
+                  document.getElementById("maj_reqs").innerHTML = "Please choose a concentration";
+                }           
               }
 
               function req_html(reqs) {
@@ -181,6 +202,7 @@
               function onSelectConcentration(ddl2) {
                 console.log("CONC 1");
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
+                console.log(conc);
                 // var deg = ddl1.value; // check this reference
                 console.log("Conc before ajax");
                 $.ajax({
@@ -207,6 +229,55 @@
                       });
               }
 
+              function onLoad() {
+                var saved = "{{saved}}";
+                var ddl1 = document.getElementById('ddl1');
+                var ddl2 = document.getElementById('ddl2');
+                ddl2.style.display = "none";
+                if (saved == "first") {
+                  //TO DO: create alert explaining how to use the interactive scheduler. 
+                  alert("Welcome! Here's how you use it...");
+                }
+                else if (saved == "degree") {
+                  // Populate degree.
+                  configureDegreeSpecific(ddl1, "{{degree}}");
+                  //Send degreqs only
+                  loadReqs(1);
+                } else if (saved == "conc") {
+                  //  Populate degree and conc. TO DO
+                  configureDegreeSpecific(ddl1, "{{degree}}");
+                  //Send reqs. Don’t populate schedule
+                  loadReqs(2);
+                } else if (saved == "all") {
+                  console.log("in all")
+                  //  Populate degree and conc TO DO
+                  configureDegreeSpecific(ddl1, "{{degree}}");
+                  //configure requirements
+                  loadReqs(2);
+                    
+                }
+              }
+
+              function loadReqs(num) {
+                console.log("sending ajax")
+                $.ajax({
+                    url:'/home/ajax/load/',
+                    data:{
+                      'num': num
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                      console.log("ajax success");
+                      document.getElementById('ddl2').style.display = "block";
+                      configureRequirements(data.concreqs, data.degreqs);
+                      configureConcsLists(ddl2, data.concs);
+                      if (num == 2) {
+                        ddl2.options[data.concs.indexOf(data.conc)+1].selected = true;
+                      }
+                    }
+                  });
+              }
+
               function onSelectDegree(ddl1, ddl2) {
                     var deg = ddl1.value; // check this reference
                     console.log("START SelectDegree");
@@ -218,10 +289,10 @@
                             dataType: 'json',
                             success: function(data) {
                               console.log("SelectDegree");
+                              document.getElementById('ddl2').style.display = "block";
                               // unhide concentration bar
                               // populate the concentration bar
-                              // configureDegreeLists(ddl1, ddl2, data.concs)
-                              configureDegreeLists(ddl1, ddl2, data.concs)
+                              configureConcsLists(ddl2, data.concs)
 
                             }
                     });
@@ -240,7 +311,7 @@
                 for (i = 0; i < li.length; i++) {
                    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
                       li[i].style.display = "";
-                   } 
+                   }
                    else {
                       li[i].style.display = "none";
                    }
@@ -266,20 +337,30 @@
             */
 
             function remove_course(ev) {
-              console.log("remove_course");
-              var id = (this)[0].id;
+              console.log("REMOVE")
+              ev.preventDefault();
+              // Get the id of the target and add the moved element to the target's DOM
+              // var data = ev.dataTransfer.getData("text");
+              // var data = ev.dataTransfer.getData("text");
+              var course = ev.target.id;
+              // var course = document.getElementById(data);
+              console.log(course);
+              // console.log(course.id);
+
               $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
-                    'id' : id
+                    // 'term': term,
+                    'course': course
                   },
                   dataType: 'json',
                   success: function(data) {
-                    dropped_course(id, data.reqs) // ???????
-                    configureRequirements(data.concreqs, data.degreereqs)
+                    console.log("js reloading");
+                    window.location.href="/home/scheduler";
+                    //configureRequirements(data.concreqs, data.degreereqs)
+                    //TO DO: ACTUALLY REMOVE COURSE
                   }
                 });
-              console.log(id);
             }  
 
             function dropped_course(id, term) {
@@ -290,13 +371,17 @@
                     data: {
                       'id' : id,
                       'term': term
-                      // console.log("dropped id")
                     },
                     dataType: 'json',
-                    // console.log("dropped json")
                     success: function(data) {
-                      configureRequirements(data.concreqs, data.degreereqs)
-                      //console.log("dropped SUCCESS")
+                      if (data.allowed == false) {
+                        alert("This course is not offered that semester.")
+                        // TO DO: don't allow drop!!!
+                      }
+                      else {
+                        configureRequirements(data.concreqs, data.degreereqs)
+                        // TO DO: repopulate course list
+                      }
                     }
                   });
                 console.log("dropped END");
@@ -305,7 +390,8 @@
 
     </head>  
 
-   <body>
+   <body onload="onLoad();">
+
         <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top" id="mainNav">
             <div class="container">
@@ -358,10 +444,13 @@
 
          <!--Remaining requirements-->
          <div class="requirements">
+          <br>
+          <br>
             <h2>Major <br/> Requirements</h2>
             <div id="maj_reqs">  
               <br/>            
-            </div>  
+            </div> 
+            <br>
 
             <h2>Degree <br/> Requirements</h2>
             <div id="deg_reqs">
