@@ -57,8 +57,9 @@
           function drop_handler(ev) {
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
-            var data = ev.dataTransfer.getData("text");
+            // var data = ev.dataTransfer.getData("text");
             var term = ev.target.id;
+            console.log(term)
             var course = document.getElementById(data);
             console.log(course);
             // console.log(course.id);
@@ -296,20 +297,28 @@
             */
 
             function remove_course(ev) {
-              console.log("remove_course");
-              var id = (this)[0].id;
+              console.log("REMOVE")
+              ev.preventDefault();
+              // Get the id of the target and add the moved element to the target's DOM
+              // var data = ev.dataTransfer.getData("text");
+              // var data = ev.dataTransfer.getData("text");
+              var course = ev.target.id;
+              // var course = document.getElementById(data);
+              console.log(course);
+              // console.log(course.id);
+
               $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
-                    'id' : id
+                    // 'term': term,
+                    'course': course
                   },
                   dataType: 'json',
                   success: function(data) {
-                    dropped_course(id, data.reqs) // ???????
                     configureRequirements(data.concreqs, data.degreereqs)
+                    //TO DO: ACTUALLY REMOVE COURSE
                   }
                 });
-              console.log(id);
             }  
 
             function dropped_course(id, term) {

@@ -208,11 +208,28 @@ def dropped_course(request):
 
 @login_required
 def remove_course(request):
-	course = request.GET.get('removedcourse', None)
+	cid = request.GET.get('course', None)
+	course = Course.objects.get(courseid=cid)
 
-	# return new updated plan
-	# return new course list to populate on the side with removed course added
+	cnetid = request.user.username
+	user = User.objects.get(netid=cnetid)
+	plan = user.plan
 
+	# remove course from plan
+	for c in plan.saved_courses.all():
+		if c.course.courseid == cid:
+			plan.saved_courses.remove(c)
+
+	# remove plan courses from all courses
+	plan_courses = plan.return_courses()
+	all_courses = Course.objects.all_info()
+
+	for course in plan_courses:
+		if course.courseid in all_courses:
+			del all_courses[course.courseid]
+
+	data = {"all_courses": all_courses, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 'degreqs': Concentration.objects.get(name=plan.degree).get_reqs()}
+	return JsonResponse(data)
 
 @login_required
 def sampleschedules(request):
