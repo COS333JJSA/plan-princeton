@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from home.models import Concentration
@@ -19,7 +20,7 @@ from home.models import Department
 def index(request):
 	return render(
    	    request,
-        'index.html',
+        'home.html',
     )
 
 def login(request):
@@ -40,14 +41,6 @@ def scheduler(request):
 	cnetid = request.user.username
 	first_info = {}
 
-	#ignore 'none' courses
-	# all_courses = []
-	# for springcourse in Course.objects.filter(season='s').all():
-	# 	all_courses.append(springcourse)
-	# for fallcourse in Course.objects.filter(season='f').all():
-	# 	all_courses.append(fallcourse)
-	# for bothcourse in Course.objects.filter(season='b').all():
-	# 	all_courses.append(bothcourse)
 	all_courses = Course.objects.all_info()
 
 	# User already exists
@@ -58,22 +51,15 @@ def scheduler(request):
 		if userplan is None:
 			first_info = {'saved': False, 'courses': all_courses}
 		elif userplan.conc is None:
-			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs()}
+			first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree}
 		elif userplan.saved_courses.count() == 0:
 			print ("no saved courses")
 			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree, 'conc': userplan.conc, 'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'concreqs': Concentration.objects.get(name=userplan.conc).get_reqs()}
 		else:
 			print ("everthing")
-			plan_courses = user.plan.return_courses()
 			courses_by_sem = user.plan.return_by_sem()
-			print (plan_courses)
 
-			for course in plan_courses:
-				if course.courseid in all_courses:
-					del all_courses[course.courseid]
-
-			first_info = {'saved': True, 'deg': userplan.degree, 'conc': userplan.conc, 'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
-			'degreqs': Concentration.objects.get(name=userplan.degree).get_reqs(), 'courses': all_courses}
+			first_info = {'saved': "all", 'deg': userplan.degree, 'conc': userplan.conc, 'courses': all_courses}
 			first_info.update(courses_by_sem)
 	# # New user
 	else:
@@ -93,6 +79,26 @@ def choose_season(request):
 	for c in Course.objects.filter(season=season):
 		courses.append(c.title)
 	data = {'coursesbyseason': courses}
+	return JsonResponse(data)
+
+@login_required
+def on_load(request):
+	num = int(request.GET.get('num', None))
+	userplan = User.objects.get(netid=request.user.username).plan
+	plan_courses = userplan.return_courses()
+	all_courses = Course.objects.all_info()
+
+	for course in plan_courses:
+		if course.courseid in all_courses:
+			del all_courses[course.courseid]
+
+	if num == 1:
+		degreqs = []
+	else:
+		degreqs = Concentration.objects.get(name=userplan.degree).get_reqs()
+
+	data = {'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
+			'degreqs': degreqs}
 	return JsonResponse(data)
 
 @login_required
@@ -146,9 +152,6 @@ def choose_deg(request):
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
 		concs.append(c.code_and_name())
-
-	print("concs handler")
-	print(concs)
 	data = {'concs': concs}
 
 	return JsonResponse(data)
