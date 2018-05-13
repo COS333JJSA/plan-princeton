@@ -231,15 +231,14 @@
 
               function onLoad() {
                 var saved = "{{saved}}";
-                var ddl1 = document.getElementById('ddl1')
-                var ddl2 = document.getElementById('ddl2')
+                var ddl1 = document.getElementById('ddl1');
+                var ddl2 = document.getElementById('ddl2');
+                ddl2.style.display = "none";
                 if (saved == "first") {
                   //TO DO: create alert explaining how to use the interactive scheduler. 
-                  alert("Welcome! Here's how you use it...")
-                  
+                  alert("Welcome! Here's how you use it...");
                 }
                 else if (saved == "degree") {
-                  console.log("{{degre}}")
                   // Populate degree.
                   configureDegreeSpecific(ddl1, "{{degree}}");
                   //Send degreqs only
@@ -269,7 +268,7 @@
                     dataType: 'json',
                     success: function(data) {
                       console.log("ajax success");
-                      var ddl2 = document.getElementById('ddl2');
+                      document.getElementById('ddl2').style.display = "block";
                       configureRequirements(data.concreqs, data.degreqs);
                       configureConcsLists(ddl2, data.concs);
                       if (num == 2) {
@@ -290,6 +289,7 @@
                             dataType: 'json',
                             success: function(data) {
                               console.log("SelectDegree");
+                              document.getElementById('ddl2').style.display = "block";
                               // unhide concentration bar
                               // populate the concentration bar
                               configureConcsLists(ddl2, data.concs)
