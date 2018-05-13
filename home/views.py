@@ -15,6 +15,8 @@ from home.models import Department
 # from signal import signal, SIGPIPE, SIG_DFL
 # signal(SIGPIPE, SIG_DFL)
 
+
+all_courses = Course.objects.all_info()
 # Create your views here.
 @login_required
 def index(request):
@@ -41,7 +43,7 @@ def scheduler(request):
 	cnetid = request.user.username
 	first_info = {}
 
-	all_courses = Course.objects.all_info()
+	# all_courses = Course.objects.all_info()
 
 	# User already exists
 	if User.objects.filter(netid=cnetid).exists():
@@ -58,7 +60,14 @@ def scheduler(request):
 		else:
 			print ("everthing")
 			courses_by_sem = user.plan.return_by_sem()
-			first_info = {'saved': "all", 'degree': userplan.degree, 'courses': all_courses}
+			plan_courses = userplan.return_courses()
+			a_courses = all_courses.copy()
+
+			for course in plan_courses:
+				if course.courseid in a_courses:
+					del a_courses[course.courseid]
+
+			first_info = {'saved': "all", 'degree': userplan.degree, 'courses': a_courses}
 			first_info.update(courses_by_sem)
 	# # New user
 	else:
@@ -86,11 +95,6 @@ def on_load(request):
 	num = int(request.GET.get('num', None))
 	userplan = User.objects.get(netid=request.user.username).plan
 	plan_courses = userplan.return_courses()
-	all_courses = Course.objects.all_info()
-
-	for course in plan_courses:
-		if course.courseid in all_courses:
-			del all_courses[course.courseid]
 
 	if num == 1:
 		concreqs = []
@@ -248,15 +252,15 @@ def remove_course(request):
 			plan.saved_courses.remove(c)
 
 	# remove plan courses from all courses
-	plan_courses = plan.return_courses()
-	all_courses = Course.objects.all_info()
+	# plan_courses = plan.return_courses()
+	# a_courses = all_courses.copy()
 
-	for course in plan_courses:
-		if course.courseid in all_courses:
-			del all_courses[course.courseid]
+	# for course in plan_courses:
+	# 	if course.courseid in a_courses:
+	# 		del a_courses[course.courseid]
 
-	data = {"all_courses": all_courses, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 'degreqs': Concentration.objects.get(name=plan.degree).update_reqs(plan_courses)}
-	return JsonResponse(data)
+	# data = {"courses": a_courses, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 'degreqs': Concentration.objects.get(name=plan.degree).update_reqs(plan_courses)}
+	return JsonResponse(data = {"msg": "hi"})
 
 @login_required
 def sampleschedules(request):
