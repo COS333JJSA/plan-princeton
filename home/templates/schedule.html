@@ -81,39 +81,38 @@
                 evt.currentTarget.className += "active";
              }
 
-             function createOption(ddl, text) {
-                var select = document.getElementById(ddl);
-                console.log(ddl);
-                if (select != null) {
-                  var length = select.options.length;
-                  console.log(length);
-                  for (i = 0; i < length; i++) {
-                    select.remove(i);
-                  }
+              function configureConcsLists(ddl2, concs) {
+                print("configuring")
+                //clear list
+                for (i = 0; i < ddl2.options.length; i++) {
+                  print("removing")
+                  print(i)
+                  ddl2.remove(i);
                 }
-                var opt = document.createElement('option');
-                opt.text = text;
-                ddl.options.add(opt);
-                console.log("createOption");
-             }
-
-              function configureDegreeLists(ddl1, ddl2, concs) {
-                console.log("ONE configureDegreeLists");
-                var select = ['Select Concentration'];
-                console.log(concs);
+                //create new options
                 for (i = 0; i < concs.length; i++) {
-                  createOption(ddl2, concs[i])
+                  var opt = document.createElement('option');
+                  opt.text = concs[i];
+                  ddl2.options.add(opt);
                 }
-                console.log("configureDegreeLists");
+              }
+              function configureDegreeSpecific(ddl1, chosen) {
+                ddl1.options[0].selected = false;
+                //fill list
+                if (chosen == "AB") {
+                  ddl1.options[1].selected = true;
+                }
+                else {
+                  ddl1.options[2].selected = true;
+                }
+
               }
 
               function configureRequirements(concreqs, degreereqs) {
-                if (degreereqs.length != 0) {
-                  document.getElementById("deg_reqs").innerHTML = req_html(degreereqs)
+                if (typeof degreereqs != 'undefined') {
+                  document.getElementById("deg_reqs").innerHTML = req_html(degreereqs);
                 }
-                if (concreqs.len != 0) {
-                  document.getElementById("maj_reqs").innerHTML = req_html(concreqs)
-                }               
+                document.getElementById("maj_reqs").innerHTML = req_html(concreqs);            
               }
 
               function req_html(reqs) {
@@ -214,26 +213,28 @@
 
               function onLoad() {
                 var saved = "{{saved}}";
+                var ddl1 = document.getElementById('ddl1')
+                var ddl2 = document.getElementById('ddl2')
                 if (saved == "first") {
                   //TO DO: create alert explaining how to use the interactive scheduler. 
                   
                 }
                 else if (saved == "degree") {
-                  // Populate degree. TO DO. Note: do not call select degree! that does not set the dropdown, it sends the dropdown value to backend
-
+                  console.log("{{degre}}")
+                  // Populate degree.
+                  configureDegreeSpecific(ddl1, "{{degree}}");
                   //Send degreqs only
-                  loadReqs(1)
+                  loadReqs(1);
                 } else if (saved == "conc") {
                   //  Populate degree and conc. TO DO
-
+                  configureDegreeSpecific(ddl1, "{{degree}}");
                   //Send reqs. Don’t populate schedule
-                  loadReqs(2)
+                  loadReqs(2);
                 } else if (saved == "all") {
                   //  Populate degree and conc TO DO
-
-
+                  configureDegreeSpecific(ddl1, "{{degree}}");
                   //configure requirements
-                  loadReqs(2)
+                  loadReqs(2);
                     
                 }
               }
@@ -246,12 +247,12 @@
                     },
                     dataType: 'json',
                     success: function(data) {
+                      var ddl2 = document.getElementById('ddl2')
                       configureRequirements(data.concreqs, data.degreqs);
+                      configureConcsLists(ddl2, data.concs);
+                      ddl2.options[data.concs.indexOf(data.conc)].selected = true;
                     }
                   });
-              }
-              function loadDegReqs() {
-
               }
 
               function onSelectDegree(ddl1, ddl2) {
@@ -267,8 +268,7 @@
                               console.log("SelectDegree");
                               // unhide concentration bar
                               // populate the concentration bar
-                              // configureDegreeLists(ddl1, ddl2, data.concs)
-                              configureDegreeLists(ddl1, ddl2, data.concs)
+                              configureConcsLists(ddl2, data.concs)
 
                             }
                     });
