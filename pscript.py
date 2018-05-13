@@ -203,7 +203,7 @@ for a in areas:
 	outp += """{{"model": "home.area", "pk": {0}, "fields": {{"code": "{1}", "name": "{2}"}}}}, """.format(acounter, a, areas[a])
 	acounter += 1
 
-courses = json.load(open("scrape.json", "rb"))
+courses = json.load(open("finalcourses.json", "rb"))
 
 #serialize courses
 for i in range(0, len(courses)):
@@ -239,13 +239,17 @@ for i in range(0, len(courses)):
 		ccounter += 1
 	for s in course["term"]:
 		scurr.append(sems[s])
+	if len(scurr) > 1:
+		season = 'b'
+	else:
+		season =  course["term"][0][0]
 	#check for area
 	if course["area"] == "":
 		area = "null"
 	else:
 		area = list(areas.keys()).index(course["area"])
 	outp += """{{"model": "home.course", "pk": {0}, "fields": {{"title": "{1}", "courseid": "{2}", "area": {3}, "descrip": "{4}", "professor": {5}, "listings": {6}, "prereqs": [], "classes": {7}, "semesters": {8}, "season": "{9}"}}}}, """.format(i, 
-		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr, scurr, course["term"][0][0])
+		escape(course["title"]), course["courseid"], area, escape(course["descrip"]), pcurr, lcurr, ccurr, scurr, season)
 
 
 #CONCENTRATIONS

@@ -193,7 +193,7 @@ def dropped_course(request):
 	#determine if course is allowed in this semester
 	allcourses = Course.objects.all_info()
 	allowed = False
-	if (course.season == season): # Probably have to modify
+	if (course.season == season) or (course.season == 'b'): # Probably have to modify
 		allowed = True
 
 	print(course.title)
@@ -235,6 +235,17 @@ def dropped_course(request):
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
 	return JsonResponse(data)
+
+@login_required
+def send_sample(request):
+	plans = Concentration.objects.get(conc_code="CHM").sample_plans
+	
+	if len(plans) == 0:
+		return
+
+	return plans[0].return_by_sem()
+
+
 
 @login_required
 def remove_course(request):

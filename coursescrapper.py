@@ -237,5 +237,5 @@ if __name__ == "__main__":
       print('[')
     else:
       print(',')
-    json.dump(result[c["courseid"]], sys.stdout)
+    json.dump(result[c], sys.stdout)
   print(']')

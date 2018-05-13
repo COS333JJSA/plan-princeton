@@ -49,7 +49,7 @@ class Concentration(models.Model):
 	urls = models.ManyToManyField(URL)
 	contacts = models.ManyToManyField(Contact)
 	req_lists = models.ManyToManyField(Req_List)
-	# sample_plans = models.ManyToManyField('Plan')
+	sample_plans = models.ManyToManyField('Plan')
 
 	def __str__(self):
 		return str(self.name)
