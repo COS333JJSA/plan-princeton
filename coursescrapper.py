@@ -42,9 +42,8 @@ import ssl
 
 # TERM_CODES = {1152: "fall 2014", 1154: "spring 2015", 1162: "fall 2015", 1164: "spring 2016", 1172: "fall 2016", 1174: "spring 2017", 1182: "fall 2017", 1184: "spring 2018", 1192: "fall 2018"}
 
-TERM_CODES = {1192: "fall 2018", 1184: "spring 2018", 1182: "fall 2017", 1174: "spring 2017"}
+TERM_CODES = {1192: "fall 2018", 1184: "spring 2018"}
 
-#TERM_CODES = {1182: "fall 2017", 1174: "spring 2017"}
 
 
 currentTerm = 0
@@ -209,7 +208,6 @@ if __name__ == "__main__":
   first = True
   for term in TERM_CODES:
     print ("TERM: " + str(term))
-    oneterm = []
     oneterm_ids = []
     TERM_CODE = term
 
@@ -218,15 +216,13 @@ if __name__ == "__main__":
         if (course["courseid"] in result):
           result.get(course["courseid"])["term"].append(TERM_CODES[term])
           # json.dump(course["courseid"], sys.stdout)
-        course["term"].append(TERM_CODES[term])
-        oneterm.append(course)
+        else:
+          course["term"].append(TERM_CODES[term])
+          result[course["courseid"]] = course
+        
         oneterm_ids.append(course["courseid"])
+
         json.dump(course["courseid"], sys.stdout)
-
-        # json.dump(course["courseid"], sys.stdout)
-
-    for c in oneterm:
-      result[c] = c
 
 
 # printing
