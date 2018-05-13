@@ -93,6 +93,8 @@ class Concentration(models.Model):
 
 
 	def update_reqs(self, courses):
+		if len(courses) == 0:
+			return self.get_reqs()
 		new_courses = []
 		for i in courses:
 			new_courses.append(Course.objects.get(courseid=i.courseid).codes())
@@ -103,11 +105,8 @@ class Concentration(models.Model):
 
 	def reqing(self, courses, arr):
 		new_courses = courses
-
 		
 		for c0 in range(0, len(arr)):
-			# print("top")
-			# print(arr)
 			r = arr[c0]
 			if type(r) == list:
 				for c1 in range(0, len(r)):
@@ -141,7 +140,7 @@ class Concentration(models.Model):
 											arr.remove(r)
 										
 										if temp4b == 0:
-											return arr.remove(arr[c0-1])
+											arr.remove(arr[c0-1])
 										else:
 											arr[c0-1] = str(arr[c0-1][0:len(arr[c0-1])-2] + str(temp4b) + ")")
 										return self.reqing(new_courses, arr)
@@ -169,8 +168,7 @@ class Concentration(models.Model):
 						r.remove(r2)
 						temp2 = int(arr[c0-1][len(arr[c0-1])-2]) - 1
 						if len(r) == 0 or temp2 == 0:
-							return None
-						
+							arr.remove(r)
 						if temp2 == 0:
 							arr.remove(arr[c0-1])
 						else:

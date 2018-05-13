@@ -82,6 +82,7 @@ def choose_season(request):
 
 @login_required
 def on_load(request):
+	print("backend load func")
 	num = int(request.GET.get('num', None))
 	userplan = User.objects.get(netid=request.user.username).plan
 	plan_courses = userplan.return_courses()
@@ -92,41 +93,44 @@ def on_load(request):
 			del all_courses[course.courseid]
 
 	if num == 1:
-		degreqs = []
+		concreqs = []
+		conc = ""
 	else:
-		degreqs = Concentration.objects.get(name=userplan.degree).get_reqs()
+		concreqs = Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses)
+		conc = userplan.conc.code_and_name()
 
 	concs = []
 	for c in Concentration.objects.filter(degree=userplan.degree):
-		if c.name != "AB":
+		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 
-	data = {'concreqs': Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses), 
-			'degreqs': degreqs, 'concs': concs, 'conc': userplan.conc.code_and_name()}
+	print(Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses))
+	print(Concentration.objects.get(name=userplan.degree))
+
+	data = {'concreqs': concreqs, 'degreqs': Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses), 
+	'concs': concs, 'conc': conc}
 	return JsonResponse(data)
 
 @login_required
 def choose_conc(request):
-	#also need AB/BSE reqs
-
+	#parse conc title
 	conc_code = request.GET.get('conc', None)
-	conc = conc_code[5:len(conc_code)-1]
+	paren = conc_code.index('(')
+	conc = conc_code[paren+1:len(conc_code)-1]
 
-
-	# save deg to associated user plan if user has saved plan
+	# save deg to associated user plan
 	cnetid = request.user.username
 	userplan = User.objects.get(netid=cnetid).plan
-	# print (userplan)
 	userplan.conc = Concentration.objects.get(name=conc)
 	userplan.save()
 
-	degreereqs = userplan.conc.get_reqs()
+	#calculate reqs
+	plan_courses = plan.return_courses()
+	degreereqs = userplan.degree.update_reqs(plan_courses)
+	concreqs = userplan.conc.update_reqs(plan_courses)
 
+	data = {'concreqs': concreqs, 'degreereqs': degreereqs}
 
-
-	data = {'concreqs': Concentration.objects.get(name=conc).get_reqs(),
-			'degreereqs': degreereqs
-	}
 	return JsonResponse(data)
 
 @login_required
@@ -154,7 +158,7 @@ def choose_deg(request):
 	#send frontend list of concs associated with deg	
 	concs = []
 	for c in Concentration.objects.filter(degree=deg):
-		if c.name != "AB":
+		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 	data = {'concs': concs}
 
@@ -162,6 +166,7 @@ def choose_deg(request):
 
 @login_required
 def dropped_course(request):
+
 	#get and parse data from front end
 	cid = request.GET.get('id', None)
 	term = request.GET.get('term', None)
@@ -179,9 +184,6 @@ def dropped_course(request):
 
 	print(course.title)
 	data = {'allowed': allowed}
-	for sem in course.semesters.all():
-		print ("sem")
-		print(sem.season)
 	print (course.season)
 	print (allowed)
 	#if course is allowed in the semester, update plan and recalculate reqs
@@ -201,7 +203,7 @@ def dropped_course(request):
 			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
-			degreereqs = Concentration.objects.get(name=degree).get_reqs()
+			degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
 			#save plan
 			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
@@ -213,6 +215,8 @@ def dropped_course(request):
 			for c in plan_courses:
 				if c in allcourses:
 					allcourses.remove(c)
+
+			print("returning")
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
@@ -240,7 +244,7 @@ def remove_course(request):
 		if course.courseid in all_courses:
 			del all_courses[course.courseid]
 
-	data = {"all_courses": all_courses, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 'degreqs': Concentration.objects.get(name=plan.degree).get_reqs()}
+	data = {"all_courses": all_courses, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 'degreqs': Concentration.objects.get(name=plan.degree).update_reqs(plan_courses)}
 	return JsonResponse(data)
 
 @login_required

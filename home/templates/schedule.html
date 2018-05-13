@@ -82,10 +82,12 @@
              }
 
               function configureConcsLists(ddl2, concs) {
+                console.log("in configure");
                 //clear list
                 for (i = 0; i < ddl2.options.length; i++) {
-                  ddl2.remove(i);
+                  ddl2.options[i] = null;
                 }
+                ddl2.options.length = 0;
                 //create new options
                 for (i = 0; i < concs.length; i++) {
                   var opt = document.createElement('option');
@@ -182,6 +184,7 @@
               function onSelectConcentration(ddl2) {
                 console.log("CONC 1");
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
+                console.log(conc);
                 // var deg = ddl1.value; // check this reference
                 console.log("Conc before ajax");
                 $.ajax({
@@ -228,6 +231,7 @@
                   //Send reqs. Don’t populate schedule
                   loadReqs(2);
                 } else if (saved == "all") {
+                  console.log("in all")
                   //  Populate degree and conc TO DO
                   configureDegreeSpecific(ddl1, "{{degree}}");
                   //configure requirements
@@ -237,6 +241,7 @@
               }
 
               function loadReqs(num) {
+                console.log("sending ajax")
                 $.ajax({
                     url:'/home/ajax/load/',
                     data:{
@@ -244,10 +249,13 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                      var ddl2 = document.getElementById('ddl2')
+                      console.log("ajax success");
+                      var ddl2 = document.getElementById('ddl2');
                       configureRequirements(data.concreqs, data.degreqs);
                       configureConcsLists(ddl2, data.concs);
-                      ddl2.options[data.concs.indexOf(data.conc)].selected = true;
+                      if (num == 2) {
+                        ddl2.options[data.concs.indexOf(data.conc)].selected = true;
+                      }
                     }
                   });
               }
