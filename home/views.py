@@ -169,11 +169,17 @@ def dropped_course(request):
 
 	#determine if course is allowed in this semester
 	allcourses = Course.objects.all_info()
-	allowed = True
-	# if (course.season == season): # Probably have to modify
-	#  	allowed = True
+	allowed = False
+	if (course.season == season): # Probably have to modify
+		allowed = True
 
+	print(course.title)
 	data = {'allowed': allowed}
+	for sem in course.semesters.all():
+		print ("sem")
+		print(sem.season)
+	print (course.season)
+	print (allowed)
 	#if course is allowed in the semester, update plan and recalculate reqs
 	if allowed:
 		#if user already has a plan. NOTE: THIS SHOULD ALWAYS BE TRUE
