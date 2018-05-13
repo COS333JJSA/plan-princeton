@@ -104,8 +104,7 @@ def on_load(request):
 		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 
-	print(Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses))
-	print(Concentration.objects.get(name=userplan.degree))
+	print(conc)
 
 	data = {'concreqs': concreqs, 'degreqs': Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses), 
 	'concs': concs, 'conc': conc}
@@ -125,9 +124,9 @@ def choose_conc(request):
 	userplan.save()
 
 	#calculate reqs
-	plan_courses = plan.return_courses()
-	degreereqs = userplan.degree.update_reqs(plan_courses)
-	concreqs = userplan.conc.update_reqs(plan_courses)
+	plan_courses = userplan.return_courses()
+	degreereqs = Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses)
+	concreqs = Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses)
 
 	data = {'concreqs': concreqs, 'degreereqs': degreereqs}
 

@@ -89,6 +89,10 @@
                 }
                 ddl2.options.length = 0;
                 //create new options
+                var opt = document.createElement('option');
+                opt.text = "Select Concentration:";
+                opt.selected = true
+                ddl2.options.add(opt);
                 for (i = 0; i < concs.length; i++) {
                   var opt = document.createElement('option');
                   opt.text = concs[i];

@@ -2104,22 +2104,6 @@
       ]
     },
     {
-      "name": "Foreign Language",
-      "max_counted": 1,
-      "min_needed": 1,
-      "description": "Foreign Language — one to four terms to complete, depending on the language students study and the level at which they start",
-      "explanation": "When you become proficient in a foreign language, you acquire more than a communication skill; you become literate in another culture and gain another perspective on the world. All candidates for the A.B. degree at Princeton must demonstrate proficiency in a foreign language before graduation. Many undergraduates satisfy the foreign language requirement by demonstrating proficiency when they enter the University. In order to fulfill the language requirement through coursework, we expect successful completion of courses normally numbered through 107/108. ",
-      "double_counting_allowed": false,
-      "course_list": [
-        "LANG 107",
-        "LANG 108",
-        "LANG 2**",
-        "LANG 3**",
-        "LANG 4**",
-        "LANG 5**"
-      ]
-    },
-    {
       "name": "Epistemology and Cognition",
       "max_counted": 1,
       "min_needed": 1,
@@ -2182,6 +2166,22 @@
       "description": "Science and Technology without Lab (STN)",
       "explanation": null,
       "dist_req": "STN"
+    },
+    {
+      "name": "Foreign Language",
+      "max_counted": 1,
+      "min_needed": 1,
+      "description": "Foreign Language — one to four terms to complete, depending on the language students study and the level at which they start",
+      "explanation": "When you become proficient in a foreign language, you acquire more than a communication skill; you become literate in another culture and gain another perspective on the world. All candidates for the A.B. degree at Princeton must demonstrate proficiency in a foreign language before graduation. Many undergraduates satisfy the foreign language requirement by demonstrating proficiency when they enter the University. In order to fulfill the language requirement through coursework, we expect successful completion of courses normally numbered through 107/108. ",
+      "double_counting_allowed": false,
+      "course_list": [
+        "LANG 107",
+        "LANG 108",
+        "LANG 2**",
+        "LANG 3**",
+        "LANG 4**",
+        "LANG 5**"
+      ]
     }
   ]
 },
