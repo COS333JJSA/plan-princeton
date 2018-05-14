@@ -102,6 +102,8 @@ def on_load(request):
 		conc = ""
 	else:
 		concreqs = Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses)
+		if len(concreqs) == 0:
+			concreqs = ["complete"]
 		conc = userplan.conc.code_and_name()
 
 	concs = []
@@ -109,10 +111,14 @@ def on_load(request):
 		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 
-	print ("userplan.degree")
-	print(userplan.degree)
-	data = {'concreqs': concreqs, 'degreqs': Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses), 
-	'concs': concs, 'conc': conc}
+
+
+	degreqs = Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses)
+	if len(degreqs) == 0:
+		degreqs = ["complete"]
+
+	data = {'concreqs': concreqs, 'degreqs': degreqs, 'concs': concs, 'conc': conc}
+
 	return JsonResponse(data)
 
 @login_required
@@ -137,12 +143,16 @@ def choose_conc(request):
 		# set conc
 		userplan.conc = Concentration.objects.get(name=conc)
 		concreqs = Concentration.objects.get(name=userplan.conc).update_reqs(plan_courses)
+		if len(concreqs) == 0:
+			concreqs = ["complete"]
 
 	# save plan
 	userplan.save()
 
 	#calculate degreqs
 	degreereqs = Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses)
+	if len(degreereqs) == 0:
+		degreereqs = ["complete"]
 
 	data = {'concreqs': concreqs, 'degreereqs': degreereqs}
 
@@ -241,8 +251,12 @@ def dropped_course(request):
 			conc = User.objects.get(netid=request.user.username).plan.conc
 			degree = User.objects.get(netid=request.user.username).plan.degree
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
-			# degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
+			if len(concreqs) == 0:
+				concreqs = ["complete"]
+			print("calling degreqs")
 			degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
+			if len(degreereqs) == 0:
+				degreereqs = ["complete"]
 			#save plan
 			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
@@ -274,7 +288,6 @@ def send_sample(request):
 
 @login_required
 def remove_course(request):
-	print("hi")
 	cid = request.GET.get('course', None)
 	course = Course.objects.get(courseid=cid)
 
@@ -287,15 +300,6 @@ def remove_course(request):
 		if c.course.courseid == cid:
 			plan.saved_courses.remove(c)
 
-	# remove plan courses from all courses
-	# plan_courses = plan.return_courses()
-	# a_courses = all_courses.copy()
-
-	# for course in plan_courses:
-	# 	if course.courseid in a_courses:
-	# 		del a_courses[course.courseid]
-
-	# data = {"courses": a_courses, 'concreqs': Concentration.objects.get(name=plan.conc).update_reqs(plan_courses), 'degreqs': Concentration.objects.get(name=plan.degree).update_reqs(plan_courses)}
 	return JsonResponse(data = {"msg": "hi"})
 
 @login_required
