@@ -279,6 +279,7 @@ def sampleschedules(request):
 		request,
 		'sampleschedules.html',
 	)
+
 @login_required
 def aas(request):
 	return render(
