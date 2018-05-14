@@ -165,6 +165,7 @@ img::-moz-selection {
     -moz-transition: all 0.3s;
     transition: all 0.3s;
   }
+
   #mainNav .navbar-nav .nav-item .nav-link {
     padding: 1.1em 1em !important;
   }
@@ -197,6 +198,7 @@ header.masthead .intro-text {
 }
 
 header.masthead .intro-text .intro-lead-in {
+  color: white;
   font-size: 22px;
   font-style: italic;
   line-height: 22px;
@@ -205,6 +207,7 @@ header.masthead .intro-text .intro-lead-in {
 }
 
 header.masthead .intro-text .intro-heading {
+  color: white;
   font-size: 50px;
   font-weight: 700;
   line-height: 50px;
