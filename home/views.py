@@ -236,6 +236,7 @@ def dropped_course(request):
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			if len(concreqs) == 0:
 				concreqs = ["complete"]
+			print("calling degreqs")
 			degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
 			if len(degreereqs) == 0:
 				degreereqs = ["complete"]
