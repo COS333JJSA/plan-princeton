@@ -168,8 +168,7 @@ def choose_deg(request):
 	user = User.objects.get(netid=cnetid)
 
 		# if deg is default
-	print ("deg")
-	print (deg)
+
 	if deg == "SELECT":
 		user.plan = None
 		user.save()
@@ -198,8 +197,7 @@ def choose_deg(request):
 			if c.name != "AB" and c.name != "BSE":
 				concs.append(c.code_and_name())
 	data = {'concs': concs}
-	print ("first")
-	print (first)
+
 	if (first == True and default == False):
 		data.update({'first': True})
 		first = False
