@@ -1,1 +1,1 @@
-web: gunicorn planprinceton.wsgi --timeout 40 --keep-alive 5 --log-level debug
+web: gunicorn planprinceton.wsgi --timeout 80 --keep-alive 5 --log-level debug
