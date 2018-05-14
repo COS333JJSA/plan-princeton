@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Afrian American Studies</title>
+    <title>African American Studies</title>
 
     <!-- Bootstrap core CSS -->
     {% load static %}
@@ -25,6 +25,7 @@
     <!-- Custom styles for this template -->
     {% load static %}
     <link href="{% static 'css/clean-blog.css' %}" rel="stylesheet">
+    <link href="{% static 'css/aas.css' %}" rel="stylesheet">
 
   </head>
 
@@ -33,7 +34,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index">Plan Princeton</a>
+        <a class="navbar-brand js-scroll-trigger" href="/home">Plan Princeton</a>
         
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
@@ -43,13 +44,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index">Home</a>
+              <a class="nav-link" href="/home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="scheduler">Interactive Scheduler</a>
+              <a class="nav-link" href="/home/scheduler">Interactive Scheduler</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="sampleschedules">Sample Schedules</a>
+              <a class="nav-link" href="/home/sampleschedules">Sample Schedules</a>
             </li>
           </ul>
         </div>
@@ -57,8 +58,7 @@
     </nav>
 
     <!-- Page Header -->
-        {% load static %}
-    <header class="masthead" style="background-image: url('..img/aas.jpg');">
+    <header class="masthead">
 
       <div class="overlay"></div>
       <div class="container">
@@ -87,10 +87,6 @@
             <h2 class="section-heading">Example Schedules </h2>
 
             <p>Explore the schedules of real students below </p>
-
-            <a href="#">
-              <img class="img-fluid" src="img/com_anna.png" alt="">
-            </a>
             <span class="caption text-muted">Example Schedule</span>
 
             <h2 class="section-heading">Still curious? </h2>
@@ -121,13 +117,6 @@
         </div>
     </footer>
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
 
   </body>
 

@@ -59,12 +59,11 @@
             // Get the id of the target and add the moved element to the target's DOM
             var data = ev.dataTransfer.getData("text");
             var term = ev.target.id;
-            console.log(term)
             var course = document.getElementById(data);
-            console.log(course);
             // console.log(course.id);
-            ev.target.appendChild(course);
-            dropped_course(course.id, term);
+            if (dropped_course(course.id, term) != false) {
+              ev.target.appendChild(course);
+            }
           }
 
             function openPlan(evt, name) {
@@ -82,7 +81,6 @@
              }
 
               function configureConcsLists(ddl2, concs) {
-                console.log("in configure");
                 //clear list
                 for (i = 0; i < ddl2.options.length; i++) {
                   ddl2.options[i] = null;
@@ -200,31 +198,18 @@
               }
 
               function onSelectConcentration(ddl2) {
-                console.log("CONC 1");
                 var conc = ddl2.options[ddl2.selectedIndex].value; 
-                console.log(conc);
-                // var deg = ddl1.value; // check this reference
-                console.log("Conc before ajax");
                 $.ajax({
                         url: '/home/ajax/choose_conc/', // HEROKU LINK TO DATABASE
                         data: {
-                          'conc': conc, // 3 letter CONC... comma or nah
-                          // 'd' : deg // degree
+                          'conc': conc, 
                         },
                         dataType: 'json',
                         // send back reqlist
                         success: function (data) { // backend sends fields of data prob JSON/dict 
                           // process json data 
                           // can prob take the next if statement out
-                          // console.log($(this).val());
-
-                          console.log(data.concreqs);
                           configureRequirements(data.concreqs, data.degreereqs)
-                          /*
-                          if (data.is_taken) {
-                            alert("A user with this username already exists.");
-                          }
-                          */
                         }
                       });
               }
@@ -249,7 +234,6 @@
                   //Send reqs. Don’t populate schedule
                   loadReqs(2);
                 } else if (saved == "all") {
-                  console.log("in all")
                   //  Populate degree and conc TO DO
                   configureDegreeSpecific(ddl1, "{{degree}}");
                   //configure requirements
@@ -259,7 +243,6 @@
               }
 
               function loadReqs(num) {
-                console.log("sending ajax")
                 $.ajax({
                     url:'/home/ajax/load/',
                     data:{
@@ -267,7 +250,6 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                      console.log("ajax success");
                       document.getElementById('ddl2').style.display = "block";
                       configureRequirements(data.concreqs, data.degreqs);
                       configureConcsLists(ddl2, data.concs);
@@ -280,8 +262,6 @@
 
               function onSelectDegree(ddl1, ddl2) {
                     var deg = ddl1.value; // check this reference
-                    console.log("START SelectDegree");
-
                     $.ajax({
                             url: '/home/ajax/choose_deg/', // HEROKU LINK TO DATABASE
                             data: {
@@ -289,7 +269,6 @@
                             },
                             dataType: 'json',
                             success: function(data) {
-                              console.log("SelectDegree");
                               document.getElementById('ddl2').style.display = "block";
                               // unhide concentration bar
                               // populate the concentration bar
@@ -320,55 +299,26 @@
                    }
                 }
              }
-        /*     function show_course_info(ev) {
-              var id = ev.target.id;
-              alert("{{key}}");
-              if (tag.style.display === "none") {
-                tag.style.display = "table";
-              }
-              else {
-                tag.style.display = "none";
-              }
-             }
-
-            $(document).ready(function() {
-              $("#btn1").click(function() {
-                  $("h3").toggle();
-                  $("h4").toggle()
-              });
-            });
-            */
 
             function remove_course(ev) {
               console.log("REMOVE")
               ev.preventDefault();
               // Get the id of the target and add the moved element to the target's DOM
-              // var data = ev.dataTransfer.getData("text");
-              // var data = ev.dataTransfer.getData("text");
               var course = ev.target.id;
-              // var course = document.getElementById(data);
-              console.log(course);
-              // console.log(course.id);
 
               $.ajax({
                   url: '/home/ajax/remove_course/', // HEROKU LINK TO DATABASE
                   data: {
-                    // 'term': term,
                     'course': course
                   },
                   dataType: 'json',
                   success: function(data) {
-                    console.log("js reloading");
                     window.location.href="/home/scheduler";
-                    //configureRequirements(data.concreqs, data.degreereqs)
-                    //TO DO: ACTUALLY REMOVE COURSE
                   }
                 });
             }  
 
             function dropped_course(id, term) {
-                console.log(id);
-                console.log(term);
                   $.ajax({
                     url: '/home/ajax/dropped_course/', // HEROKU LINK TO DATABASE
                     data: {
@@ -379,15 +329,13 @@
                     success: function(data) {
                       if (data.allowed == false) {
                         alert("This course is not offered that semester.")
-                        // TO DO: don't allow drop!!!
+                        return false
                       }
                       else {
                         configureRequirements(data.concreqs, data.degreereqs)
-                        // TO DO: repopulate course list
                       }
                     }
                   });
-                console.log("dropped END");
                 }
        </script>
 
@@ -415,7 +363,7 @@
         <div class="tab-pane" id="plan1">
          <!-- Drag and Drop  Menu for Concentration and Certificates-->
          <div class="selectDegree">
-            <select id="ddl1" onchange="onSelectDegree(this, document.getElementById('ddl2'))">               
+            <select id="ddl1" onchange="onSelectDegree(this, document.getElementById('ddl2'));">               
               <option value="select">Select Degree:</option>
               <option value="ab">A.B.</option>
               <option value="bse">B.S.E.</option>
@@ -429,15 +377,15 @@
       
          <!--Search Courses-->
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Start searching for courses!</button>
+            <button onclick="myFunction();" class="dropbtn">Start searching for courses!</button>
             <div id="myDropdown" class="dropdown-content">
-               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction()"> 
+               <input type="text" placeholder="Search courses..." id="myInput" onkeyup="filterFunction();"> 
                <ul id="myUL" class="dropdown-courses">
 
                 {% for key, value in courses.items %}
-                  <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{value.coursename}} 
-                      <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                    <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event)"></button>
+                  <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{value.coursename}} 
+                      <button id="{{key}}" class="fa fa-times" onclick="remove_course(event);"></button>
+                    <button id="{{key}}" class="fa fa-caret-down" onclick="getCourseInfo(event);"></button>
                   </li>         
                 {% endfor %}
 
@@ -463,49 +411,49 @@
 
          <!--Schedule-->
 
-         <div id="fall18" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="fall18" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Freshman Fall 2018</h1>
             <ul>
               {% for key, value in fall18.items %}
-                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} 
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event);"></button>
                 <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="spring19" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring19" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Freshman Spring 2019</h1>
             <ul>
               {% for key, value in spring19.items %}
-                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} 
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event);"></button>
                 <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="fall19" ondrop="drop_handler(event)" ondragover="dragover_handler(event);" class="schedule">
+         <div id="fall19" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Fall 2019</h1>
             <ul>
               {% for key, value in fall19.items %}
-                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} 
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event);"></button>
                 <button id="{{key}}" class="fa fa-caret-down"></button>
                 </li>
               {% endfor %}
             </ul>
          </div>
          
-         <div id="spring20" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" class="schedule">
+         <div id="spring20" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" class="schedule">
             <h1>Sophomore Spring 2020</h1>
             <ul>
               {% for key, value in spring20.items %}
-                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event)"> {{ value.coursename }} 
-                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event)"></button>
-                <button id="{{key}}" class="fa fa-caret-down" onclick="show_course_info(event)"></button>
+                <li id="{{key}}" class="dragCourse" draggable="true" ondragstart="dragstart_handler(event);"> {{ value.coursename }} 
+                <button id="{{key}}" class="fa fa-times" onclick="remove_course(event);"></button>
+                <button id="{{key}}" class="fa fa-caret-down" onclick="show_course_info(event);"></button>
                 </li>
               {% endfor %}
             </ul>

@@ -2,7 +2,6 @@ body {
   font-size: 20px;
   color: #212529;
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-image: url("../img/nassau1.jpg");
 }
 
 p {
@@ -12,10 +11,6 @@ p {
 
 p a {
   text-decoration: underline;
-}
-
-.masthead {
-  background-image: url("../img/nassau1.jpg");
 }
 
 h1,
@@ -83,125 +78,110 @@ img::-moz-selection {
   background: transparent;
 }
 
-#mainNav {
-  position: absolute;
-  border-bottom: 1px solid #e9ecef;
-  background-color: white;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
 #mainNav .navbar-brand {
   font-weight: 800;
   color: #343a40;
 }
 
+
+#mainNav {
+  background-color: white;
+}
+
 #mainNav .navbar-toggler {
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 18px;
+  right: 0;
   padding: 13px;
   text-transform: uppercase;
-  color: #343a40;
+  color: #212529;
+  border: 0;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
-#mainNav .navbar-nav > li.nav-item > a {
-  font-size: 12px;
+#mainNav .navbar-brand {
+  color: #ffa12e;
+  font-size: 32px;
+  font-weight: 800px;
+  font-family: 'Aclonica', cursive;
+}
+
+#mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+  color: #ffa12e;
+  font-size: 32px;
+  font-weight: 800px;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+  font-size: 18px;
   font-weight: 800;
+  padding: 0.75em 0;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  color: #212529;
+  font-family: 'Montserrat', sans-serif;
 }
 
-@media only screen and (min-width: 992px) {
+
+#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+  color: #ffa12e;
+}
+
+@media (min-width: 992px) {
   #mainNav {
-    border-bottom: 1px solid transparent;
-    background: transparent;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -webkit-transition: padding-top 0.1s, padding-bottom 0.1s;
+    -moz-transition: padding-top 0.1s, padding-bottom 0.1s;
+    transition: padding-top 0.1s, padding-bottom 0.1s;
+    border: none;
+    background-color: white;
   }
   #mainNav .navbar-brand {
-    padding: 10px 20px;
-    color: #fff;
+    font-size: 1.75em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
   }
-  #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-    color: rgba(255, 255, 255, 0.8);
+  #mainNav .navbar-nav .nav-item .nav-link {
+    padding: 1.1em 1em !important;
   }
-  #mainNav .navbar-nav > li.nav-item > a {
-    padding: 10px 20px;
-    color: #fff;
+  #mainNav.navbar-shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white;
   }
-  #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
-    color: rgba(255, 255, 255, 0.8);
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  #mainNav {
-    -webkit-transition: background-color 0.2s;
-    -moz-transition: background-color 0.2s;
-    transition: background-color 0.2s;
-    /* Force Hardware Acceleration in WebKit */
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-  }
-  #mainNav.is-fixed {
-    /* when the user scrolls down, we hide the header right above the viewport */
-    position: fixed;
-    top: -67px;
-    -webkit-transition: -webkit-transform 0.2s;
-    -moz-transition: -moz-transform 0.2s;
-    transition: transform 0.2s;
-    border-bottom: 1px solid white;
-    background-color: rgba(255, 255, 255, 0.9);
-  }
-  #mainNav.is-fixed .navbar-brand {
-    color: #212529;
-  }
-  #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
-    color: #0085A1;
-  }
-  #mainNav.is-fixed .navbar-nav > li.nav-item > a {
-    color: #212529;
-  }
-  #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus, #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover {
-    color: #0085A1;
-  }
-  #mainNav.is-visible {
-    /* if the user changes the scrolling direction, we show the header */
-    -webkit-transform: translate3d(0, 100%, 0);
-    -moz-transform: translate3d(0, 100%, 0);
-    -ms-transform: translate3d(0, 100%, 0);
-    -o-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+  #mainNav.navbar-shrink .navbar-brand {
+    font-size: 1.25em;
+    padding: 12px 0;
   }
 }
 
 header.masthead {
-  margin-bottom: 50px;
-  background: no-repeat center center;
-  background-color: #868e96;
+  text-align: center;
+  background-image: url("../img/nassau1.jpg");
+  background-repeat: no-repeat;
   background-attachment: scroll;
-  position: relative;
+  background-position: center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
+
 header.masthead .overlay {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: auto;
   width: 100%;
   background-color: #212529;
-  opacity: 0.5;
 }
 
 header.masthead .page-heading,
 header.masthead .post-heading,
 header.masthead .site-heading {
-  padding: 200px 0 150px;
+  padding: 300px 0 300px;
   color: white;
 }
 
@@ -209,7 +189,7 @@ header.masthead .site-heading {
   header.masthead .page-heading,
   header.masthead .post-heading,
   header.masthead .site-heading {
-    padding: 200px 0;
+    padding: 300px 0;
   }
 }
 
