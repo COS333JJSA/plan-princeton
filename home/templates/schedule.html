@@ -281,6 +281,7 @@
               function onSelectDegree(ddl1, ddl2) {
                     var deg = ddl1.value; // check this reference
                     console.log("START SelectDegree");
+
                     $.ajax({
                             url: '/home/ajax/choose_deg/', // HEROKU LINK TO DATABASE
                             data: {
@@ -293,7 +294,9 @@
                               // unhide concentration bar
                               // populate the concentration bar
                               configureConcsLists(ddl2, data.concs)
-
+                              if (data.first == false) {
+                                window.location.href="/home/scheduler";
+                              }
                             }
                     });
               }

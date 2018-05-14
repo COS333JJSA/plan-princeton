@@ -17,6 +17,7 @@ from home.models import Department
 
 
 all_courses = Course.objects.all_info()
+
 # Create your views here.
 @login_required
 def index(request):
@@ -108,7 +109,7 @@ def on_load(request):
 		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 
-	print(conc)
+	print(userplan.degree)
 
 	data = {'concreqs': concreqs, 'degreqs': Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses), 
 	'concs': concs, 'conc': conc}
@@ -147,9 +148,11 @@ def choose_conc(request):
 
 	return JsonResponse(data)
 
+
 @login_required
 def choose_deg(request):
-
+	first = True
+	print ("choose degree")
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
@@ -163,8 +166,10 @@ def choose_deg(request):
 		user.plan = plan
 		user.save()
 	else:
+		first = False
 		plan = user.plan
 		plan.degree = deg
+		plan.conc = None
 		user.plan = plan
 		plan.save()
 	
@@ -175,6 +180,12 @@ def choose_deg(request):
 		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 	data = {'concs': concs}
+
+	if (first == True):
+		data.update({'first': True})
+		first = False
+	else:
+		data.update({'first': False})
 
 	return JsonResponse(data)
 
