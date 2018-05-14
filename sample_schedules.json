@@ -34,8 +34,8 @@
     "Sophomore Fall": ["EEB 211","GER 101","NEU 201","MOL 345","AMS 306"],
     "Sophomore Spring": ["MOL 342","GER 102","NEU 202","MOL 348"]
   },
-  "COS": {
-    "Concentration": "COS",
+  "COS-BSE": {
+    "Concentration": "COS-BSE",
     "Freshman Fall": ["MAT 201", "CHM 207", "PHI 202", "SPA 105"],
     "Freshman Spring": ["COS 126","MAT 202","FRS 124","POL 380","WRI 132"],
     "Sophomore Fall": ["COS 226","COS 217","GER 207","EGR 201"],
@@ -43,45 +43,39 @@
   },
   "ECO": {
     "Concentration": "ECO",
-    "Freshman Fall": ["SPA 108", "POL 230", "FRS 143", "COS 126"],
-    "Freshman Spring": ["WRI 199","MOL 214","ECO 100","HIS 280"],
-    "Sophomore Fall": ["ART 213","ECO 101","CHI 101","SOC 345","MAT 175"],
+    "Freshman Fall": ["SPA 108", "POL 230", "FRS 144", "COS 126"],
+    "Freshman Spring": ["WRI 198","MOL 214","ECO 100","HIS 280"],
+    "Sophomore Fall": ["ART 212","ECO 101","CHI 101","SOC 345","MAT 175"],
     "Sophomore Spring": ["EGR 201","ECO 310","ECO 202","CHI 102"]
   },
-  "ELE": {
-    "Concentration": "ELE",
-    "Freshman Fall": ["COS 126", "MAT 104", "PHY 103", "FRS 111"],
-    "Freshman Spring": ["MAT 201","PHY 104","ECO 101","WRI 138","EGR 392"],
-    "Sophomore Fall": ["MAT 202","ELE 206","ELE 208","CBE 260","ENG 312"],
-    "Sophomore Spring": ["ORF 309","ELE 201","ELE 203","LIN 201"]
-  },
+
   "ENG": {
     "Concentration": "ENG",
-    "Freshman Fall": ["HUM 225", "HIS 211", "CWR 212", "GER 101"],
-    "Freshman Spring": ["GER 102","WRI 182","FRS 152","CWR 216","ENG 350"],
-    "Sophomore Fall": ["PSY 101","GER 105","ENG 206","CWR 303","ANT 326"],
+    "Freshman Fall": ["HUM 227", "HIS 211", "CWR 211", "GER 101"],
+    "Freshman Spring": ["GER 102","WRI 182","FRS 152","CWR 215","ENG 352"],
+    "Sophomore Fall": ["PSY 101","GER 105","ENG 207","CWR 303","ANT 323"],
     "Sophomore Spring": ["PHI 202","GER 107","ENG 200","AMS 310","JRN 240"]
   },
-  "FRE": {
-    "Concentration": "FRE",
-    "Freshman Fall": ["FRE 207", "HIS 303", "WRI 180", "MAT 103"],
-    "Freshman Spring": ["FRE 224","HIS 364","DAN 316","DAN 432","FRS 124"],
+  "FIT": {
+    "Concentration": "FIT",
+    "Freshman Fall": ["FRE 207", "HIS 210", "WRI 180", "MAT 103"],
+    "Freshman Spring": ["FRE 224","HIS 387","DAN 316","DAN 431","FRS 124"],
     "Sophomore Fall": ["FRE 215","HIS 376","ECO 101","GER 101","DAN 319"],
     "Sophomore Spring": ["FRE 307","GER 102","DAN 320","POL 316"]
   },
   "GER": {
     "Concentration": "GER",
-    "Freshman Fall": ["HIS 211", "MUS 234", "SPA 209", "GER 101"],
-    "Freshman Spring": ["GER 102","WRI 102","HUM 345","SPA 301","CLA 310"],
-    "Sophomore Fall": ["HUM 227","MUS 213","COS 109","GER 209","COM 310"],
+    "Freshman Fall": ["HIS 211", "MUS 230", "SPA 209", "GER 101"],
+    "Freshman Spring": ["GER 102","WRI 102","HUM 311","SPA 307","CLA 340"],
+    "Sophomore Fall": ["HUM 227","MUS 213","COS 109","GER 209","COM 319"],
     "Sophomore Spring": ["MUS 213","SLA 310","GER 407","GER 307","CEE 262","LAT 103"]
   },
   "HIS": {
     "Concentration": "HIS",
-    "Freshman Fall": ["MAT 103", "CEE 102", "GER 107", "FRS 185"],
-    "Freshman Spring": ["MAT 104","COS 126","ECO 100","WRI 176"],
-    "Sophomore Fall": ["COS 226","MAT 201","PHI 203","ART 233","CLA 333"],
-    "Sophomore Spring": ["MAT 202","COS 217","ART 353","HIS 210"]
+    "Freshman Fall": ["MAT 103", "CEE 102", "GER 107", "FRS 108"],
+    "Freshman Spring": ["MAT 104","COS 126","ECO 100","WRI 189"],
+    "Sophomore Fall": ["COS 226","MAT 201","PHI 201","ART 233","CLA 335"],
+    "Sophomore Spring": ["MAT 202","COS 217","ART 225","HIS 210"]
   },
   "MOL": {
     "Concentration": "MOL",
@@ -99,7 +93,7 @@
   },
   "ORF": {
     "Concentration": "ORF",
-    "Freshman Fall": ["CHM 207", "MAT 201", "PHY 103", "WRI 176"],
+    "Freshman Fall": ["CHM 207", "MAT 201", "PHY 103", "WRI 189"],
     "Freshman Spring": ["COS 126","FRS 150","MAT 202","PHI 203","PHY 104"],
     "Sophomore Fall": ["AAS 274","AST 205","ORF 245","ORF 309","SAS 325"],
     "Sophomore Spring": ["CEE 262","CEE 306","ORF 307","ORF 418","REL 251"]
