@@ -110,7 +110,7 @@
               }
 
               function configureRequirements(concreqs, degreereqs) {
-                if (degreereqs == "complete") {
+                if (degreereqs[0] == "complete") {
                   document.getElementById("deg_reqs").innerHTML = "COMPLETED!";
                 }
                 else if ((typeof degreereqs != 'undefined') && (degreereqs.length != 0)) {
@@ -119,7 +119,7 @@
                 else {
                   document.getElementById("deg_reqs").innerHTML = "Please choose a degree";
                 }
-                if (concreqs == "complete") {
+                if (concreqs[0] == "complete") {
                   document.getElementById("maj_reqs").innerHTML = "COMPLETED!";
                 }
                 else if ((typeof degreereqs != 'undefined') && (concreqs.length != 0)) {
