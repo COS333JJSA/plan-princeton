@@ -108,29 +108,23 @@
   "POL": {
     "Concentration": "POL",
     "Freshman Fall": ["WRI 158", "MAT 103", "ECO 101", "KOR 103"],
-    "Freshman Spring": ["SOC 224","KOR 108","COS 126"],
-    "Sophomore Fall": ["POL 362","KOR 303","EAS 216","GEO 102","ENG 215"],
+    "Freshman Spring": ["SOC 227","KOR 108","COS 126"],
+    "Sophomore Fall": ["POL 362","KOR 303","EAS 214","GEO 102","ENG 230"],
     "Sophomore Spring": ["POL 303","POL 394","EAS 208","KOR 308","ENG 385"]
   },
   "SLA": {
     "Concentration": "SLA",
     "Freshman Fall": ["HUM 216", "HUM 217", "RUS 101", "CWR 203"],
-    "Freshman Spring": ["ART 209","EEB 311","HIS 454","RUS 102","WRI 173"],
-    "Sophomore Fall": ["AAS 201","ART 429","GER 101","RUS 207","SLA 219"],
+    "Freshman Spring": ["ART 209","EEB 311","HIS 452","RUS 102","WRI 170"],
+    "Sophomore Fall": ["AAS 201","ART 425","GER 101","RUS 207","SLA 219"],
     "Sophomore Spring": ["COM 415","GER 102","MOL 101","RUS 208"]
   },
-  "SPA ": {
-    "Concentration": "SPA",
+  "SPO": {
+    "Concentration": "SPO",
     "Freshman Fall": ["COS 126", "CEE 102", "SPA 108", "WRI 155"],
     "Freshman Spring": ["AAS 235","COS 226","MAT 202","SPA 209"],
-    "Sophomore Fall": ["DAN 304","POR 108","SPA 231"],
-    "Sophomore Spring": ["AAS 342","AAS 368","GEO 103","POR 109","SPA 307"]
-  },
-  "WWS": {
-    "Concentration": "WWS",
-    "Freshman Fall": ["EEB 211", "FRS 109", "ARA 101", "WRI 108"],
-    "Freshman Spring": ["ECO 100","ANT 206","ARA 102","POL 380","POL 313"],
-    "Sophomore Fall": ["ARA 105","ECO 101","HIS 241","POL 345"],
-    "Sophomore Spring": ["AMS 101","ARA 107","POL 240","WWS 353"]
+    "Sophomore Fall": ["DAN 307","POR 108","SPA 239"],
+    "Sophomore Spring": ["AAS 336","AAS 367","GEO 103","POR 109","SPA 307"]
   }
+
 }]
