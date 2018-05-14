@@ -108,11 +108,14 @@ def on_load(request):
 		if c.name != "AB" and c.name != "BSE":
 			concs.append(c.code_and_name())
 
+
+
 	degreqs = Concentration.objects.get(name=userplan.degree).update_reqs(plan_courses)
 	if len(degreqs) == 0:
 		degreqs = ["complete"]
 
 	data = {'concreqs': concreqs, 'degreqs': degreqs, 'concs': concs, 'conc': conc}
+
 	return JsonResponse(data)
 
 @login_required
@@ -155,6 +158,7 @@ def choose_conc(request):
 @login_required
 def choose_deg(request):
 	first = True
+	default = False
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
@@ -162,28 +166,41 @@ def choose_deg(request):
 
 	# if user.plan is null, create plan
 	user = User.objects.get(netid=cnetid)
-	if user.plan is None:
-		plan = Plan(degree=deg)
-		plan.save()
-		user.plan = plan
+
+		# if deg is default
+	print ("deg")
+	print (deg)
+	if deg == "SELECT":
+		user.plan = None
 		user.save()
+		concs = []
+		default = True
+
+
 	else:
-		first = False
-		plan = user.plan
-		plan.degree = deg
-		plan.conc = None
-		user.plan = plan
-		plan.save()
-	
 
-	#send frontend list of concs associated with deg	
-	concs = []
-	for c in Concentration.objects.filter(degree=deg):
-		if c.name != "AB" and c.name != "BSE":
-			concs.append(c.code_and_name())
+		if user.plan is None:
+			plan = Plan(degree=deg)
+			plan.save()
+			user.plan = plan
+			user.save()
+		else:
+			first = False
+			plan = user.plan
+			plan.degree = deg
+			plan.conc = None
+			user.plan = plan
+			plan.save()
+
+		#send frontend list of concs associated with deg	
+		concs = []
+		for c in Concentration.objects.filter(degree=deg):
+			if c.name != "AB" and c.name != "BSE":
+				concs.append(c.code_and_name())
 	data = {'concs': concs}
-
-	if (first == True):
+	print ("first")
+	print (first)
+	if (first == True and default == False):
 		data.update({'first': True})
 		first = False
 	else:
