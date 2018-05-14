@@ -56,10 +56,8 @@ def scheduler(request):
 		elif userplan.conc is None:
 				first_info = {'saved': "degree", 'courses': all_courses, 'degree': userplan.degree}
 		elif userplan.saved_courses.count() == 0:
-			print ("no saved courses")
 			first_info = {'saved': "conc", 'courses': all_courses, 'degree': userplan.degree}
 		else:
-			print ("everthing")
 			courses_by_sem = user.plan.return_by_sem()
 			plan_courses = userplan.return_courses()
 			a_courses = all_courses.copy()
@@ -92,7 +90,6 @@ def choose_season(request):
 
 @login_required
 def on_load(request):
-	print("backend load func")
 	num = int(request.GET.get('num', None))
 	userplan = User.objects.get(netid=request.user.username).plan
 	plan_courses = userplan.return_courses()
@@ -122,7 +119,6 @@ def on_load(request):
 def choose_conc(request):
 	# get argument
 	conc_code = request.GET.get('conc', None)
-	print(conc_code)
 
 	# get user plan
 	cnetid = request.user.username
@@ -159,7 +155,6 @@ def choose_conc(request):
 @login_required
 def choose_deg(request):
 	first = True
-	print ("choose degree")
 	#get data from frontend
 	deg = request.GET.get('deg', None).upper()
 
@@ -214,10 +209,7 @@ def dropped_course(request):
 	if (course.season == season) or (course.season == 'b'): # Probably have to modify
 		allowed = True
 
-	print(course.title)
 	data = {'allowed': allowed}
-	print (course.season)
-	print (allowed)
 	#if course is allowed in the semester, update plan and recalculate reqs
 	if allowed:
 		#if user already has a plan. NOTE: THIS SHOULD ALWAYS BE TRUE
@@ -236,7 +228,6 @@ def dropped_course(request):
 			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
 			if len(concreqs) == 0:
 				concreqs = ["complete"]
-			print("calling degreqs")
 			degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
 			if len(degreereqs) == 0:
 				degreereqs = ["complete"]
@@ -251,8 +242,6 @@ def dropped_course(request):
 			for c in plan_courses:
 				if c in allcourses:
 					allcourses.remove(c)
-
-			print("returning")
 
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
