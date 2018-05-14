@@ -39,7 +39,6 @@ class Req_List(models.Model):
 		return str(self.name)
 
 
-
 class Concentration(models.Model):
 	tipe = models.CharField(max_length=15)
 	name = models.CharField(max_length=200)
