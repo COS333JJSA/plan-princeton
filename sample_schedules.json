@@ -81,28 +81,28 @@
     "Concentration": "MOL",
     "Freshman Fall": ["ECO 101", "PHI 202", "ISC 231", "ISC 232"],
     "Freshman Spring": ["CHV 333","WRI 189","ISC 233","ISC 234"],
-    "Sophomore Fall": ["CHM 303","ECS 373","FRE 211","LIN 201","QCB 455"],
+    "Sophomore Fall": ["CHM 301","ECS 326","FRE 211","LIN 201","QCB 455"],
     "Sophomore Spring": ["CHM 304","MOL 342","PHI 318","POL 313","THR 334"]
   },
   "NEU": {
     "Concentration": "NEU",
     "Freshman Fall": ["ISC 231", "ISC 232", "MAT 201", "SPA 105"],
     "Freshman Spring": ["ISC 233","ISC 234","WRI 159","NEU 202","SPA 108"],
-    "Sophomore Fall": ["MAT 202","NEU 201","SML 201","LIN 309","CWR 203"],
+    "Sophomore Fall": ["MAT 202","NEU 201","SML 201","LIN 301","CWR 203"],
     "Sophomore Spring": ["COS 226","LIN 201","NEU 427","EAS 314"]
   },
   "ORF": {
     "Concentration": "ORF",
     "Freshman Fall": ["CHM 207", "MAT 201", "PHY 103", "WRI 189"],
-    "Freshman Spring": ["COS 126","FRS 150","MAT 202","PHI 203","PHY 104"],
-    "Sophomore Fall": ["AAS 274","AST 205","ORF 245","ORF 309","SAS 325"],
-    "Sophomore Spring": ["CEE 262","CEE 306","ORF 307","ORF 418","REL 251"]
+    "Freshman Spring": ["COS 126","FRS 150","MAT 202","PHI 201","PHY 104"],
+    "Sophomore Fall": ["AAS 262","AST 205","ORF 245","ORF 309","SAS 328"],
+    "Sophomore Spring": ["CEE 262","CEE 302","ORF 307","ORF 418","REL 251"]
   },
   "PHY": {
     "Concentration": "PHY",
     "Freshman Fall": ["PHY 103", "MAT 215", "ECO 100", "FRE 103"],
     "Freshman Spring": ["WRI 196","MAT 204","PHY 104","FRE 107"],
-    "Sophomore Fall": ["MAT 335","LIN 201","PHY 207","NES 251","COS 126"],
+    "Sophomore Fall": ["MAT 335","LIN 201","PHY 209","NES 251","COS 126"],
     "Sophomore Spring": ["PHY 208","MAT 378","ORF 309","COM 335"]
   },
   "POL": {
