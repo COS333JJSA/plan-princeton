@@ -105,7 +105,6 @@ class Concentration(models.Model):
 
 	def reqing(self, courses, arr):
 		new_courses = courses
-		
 		for c0 in range(0, len(arr)):
 			r = arr[c0]
 			if type(r) == list:
@@ -167,12 +166,13 @@ class Concentration(models.Model):
 					elif r2 in new_courses:
 						r.remove(r2)
 						temp2 = int(arr[c0-1][len(arr[c0-1])-2]) - 1
+						print(temp2)
 						if len(r) == 0 or temp2 == 0:
 							arr.remove(r)
 						if temp2 == 0:
 							arr.remove(arr[c0-1])
 						else:
-							arr[c0-1] = str(arr[c0-1][len(arr[c0-1])-2] + str(temp2) + ")")
+							arr[c0-1] = str(arr[c0-1][0:len(arr[c0-1])-2] + str(temp2) + ")")
 						return self.reqing(new_courses, arr)
 		return arr
 
