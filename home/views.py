@@ -219,7 +219,6 @@ def dropped_course(request):
 
 
 	#determine if course is allowed in this semester
-	allcourses = Course.objects.all_info()
 	allowed = False
 	if (course.season == season) or (course.season == 'b'): # Probably have to modify
 		allowed = True
@@ -232,33 +231,18 @@ def dropped_course(request):
 			plan = user.plan
 
 			#add course to plan
-			sem = Semester.objects.create(season=season, year=year)
-			sem.save()
-			s_course = SavedCourse.objects.create(course=course, semester=sem)
-			s_course.save()
+			sem, _ = Semester.objects.get_or_create(season=season, year=year)
+			s_course, _ = SavedCourse.objects.get_or_create(course=course, semester=sem)
 			plan.saved_courses.add(s_course)
+			saved_courses = plan.return_courses()
 			#recalculate reqs
-			conc = User.objects.get(netid=request.user.username).plan.conc
-			degree = User.objects.get(netid=request.user.username).plan.degree
-			concreqs = Concentration.objects.get(name=conc).update_reqs(plan.return_courses())
+			concreqs = Concentration.objects.get(name=plan.conc).update_reqs(saved_courses)
 			if len(concreqs) == 0:
 				concreqs = ["complete"]
-			degreereqs = Concentration.objects.get(name=degree).update_reqs(plan.return_courses())
+			degreereqs = Concentration.objects.get(name=plan.degree).update_reqs(saved_courses)
 			if len(degreereqs) == 0:
 				degreereqs = ["complete"]
-			#save plan
-			plan.save()
 			data.update({'concreqs': concreqs, 'degreereqs': degreereqs})
-
-
-			plan_courses = plan.return_courses()
-			courses_by_sem = user.plan.return_by_sem()
-
-			for c in plan_courses:
-				if c in allcourses:
-					allcourses.remove(c)
-
-			data.update({'concreqs': concreqs, 'degreereqs': degreereqs, 'allcourses': allcourses})
 
 	return JsonResponse(data)
 
