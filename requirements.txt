@@ -20,6 +20,6 @@ pytz==2018.3
 requests==2.18.4
 requests-oauthlib==0.8.0
 six==1.11.0
-urllib3==1.22
+urllib3==1.26.5
 whitenoise==3.3.1
 django_cas_ng==3.5.9
